@@ -51,7 +51,6 @@ public class WaveManager : MonoBehaviour
     void SpawnWave()
     {
         ++wave;
-<<<<<<< HEAD
         SpawnNormalEnemies();
         SpawnTanks();
         GameManager.Instance.UIManager.UpdateUI();
@@ -59,15 +58,6 @@ public class WaveManager : MonoBehaviour
 
     void SpawnNormalEnemies()
     {
-=======
-        if (wave > 5){
-            if (Random.Range(0.0f, 1.0f) <= tankRate){
-                SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, 4)];
-                GameObject tankEnemy = Instantiate(tank); 
-                tankEnemy.transform.position = randomSpawnPoint.transform.position;
-            }
-        }
->>>>>>> 093bbbf (fix)
         foreach (SpawnPoint sp in spawnPoints)
         {
             sp.SpawnEnemy(Random.Range(0.0f, maxSpawnDelay), wave, difficulty);
