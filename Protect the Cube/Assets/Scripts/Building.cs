@@ -21,4 +21,9 @@ public class Building : MonoBehaviour
     {
 
     }
+
+    public virtual bool CanPlace()
+    {
+        return true;
+    }
 }

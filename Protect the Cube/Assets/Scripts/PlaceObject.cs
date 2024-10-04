@@ -50,6 +50,7 @@ public class PlaceObject : MonoBehaviour
 
                     string bName = placeableObjectPrefabs[i].GetComponent<Building>().buildingName;
                     bool canPlace = GameManager.Instance.InventoryManager.CanPlacebuilding(bName);
+            
                     if (canPlace)
                     {
                         currentPlaceableObject = Instantiate(placeableObjectPrefabs[i]);
@@ -90,6 +91,10 @@ public class PlaceObject : MonoBehaviour
     {
         Building b = currentPlaceableObject.GetComponent<Building>();
         bool canPlace = GameManager.Instance.InventoryManager.CanPlacebuilding(b.buildingName);
+        if (b.gameObject.GetComponent<Harvester>() != null)
+        {
+            canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
+        }
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
             GameManager.Instance.InventoryManager.TryPlaceBuilding(b.buildingName);
