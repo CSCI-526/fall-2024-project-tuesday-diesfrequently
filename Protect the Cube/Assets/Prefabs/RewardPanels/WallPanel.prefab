@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2377211544244884704, guid: 492327a60057db245973fc6b5aeb32f1, type: 3}
       propertyPath: m_Name
-      value: WallPannel
+      value: WallPanel
       objectReference: {fileID: 0}
     - target: {fileID: 3346992498680603140, guid: 492327a60057db245973fc6b5aeb32f1, type: 3}
       propertyPath: m_text
