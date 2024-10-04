@@ -149,9 +149,9 @@ GameObject:
   - component: {fileID: 2852900044490730741}
   - component: {fileID: 829479616741584721}
   - component: {fileID: 831108058407699104}
-  - component: {fileID: 8375766490867417729}
+  - component: {fileID: 8457574962055490782}
   m_Layer: 0
-  m_Name: Nexus
+  m_Name: Harvester
   m_TagString: Nexus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 415337832395152133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.27, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 2.4378, y: 0.99172133, z: 2.4378}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -201,7 +201,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 082eb2b88d25ce548a1c564aca5e4a9e, type: 2}
+  - {fileID: 2100000, guid: 8343ec736b3b3304284ceaafcd7dd746, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,7 +240,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.7761438}
   m_Center: {x: 0, y: 0, z: 0.111927904}
@@ -257,12 +257,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnXP: 1
-  health: 20
-  maxHealth: 20
+  health: 10
+  maxHealth: 10
   xpSpawnInterval: 5
   XP: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
---- !u!114 &8375766490867417729
+--- !u!114 &8457574962055490782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,9 +274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93004cc93334f4ea8a364dc987d50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placed: 1
-  buildingName: Nexus
-  buildingDesc: Protect this at all costs
+  placed: 0
+  buildingName: Harvester
+  buildingDesc: Generates EXP over time. Can be destroyed
   radius: 6
 --- !u!1 &1501241086206586852
 GameObject:

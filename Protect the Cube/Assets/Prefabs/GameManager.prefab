@@ -107,5 +107,7 @@ MonoBehaviour:
   - {fileID: 3732443334033032084, guid: 1be928d46a8b6db478a64830a4364934, type: 3}
   - {fileID: 6191134258547235123, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
   - {fileID: 1272256851593019809, guid: 88d92cc50b4e783408df66e4ec9fe34d, type: 3}
+  - {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
+  - {fileID: 415337832395152133, guid: f6edc88301e129b4aaed9c842bbdd0fe, type: 3}
   buildingCount: 
   buildingNames: []
