@@ -259,6 +259,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 900616778451132341, guid: 69a596a331299454d9cd37c839c96894, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1470131126291901014, guid: 69a596a331299454d9cd37c839c96894, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (3)
@@ -762,6 +766,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 900616778451132341, guid: 69a596a331299454d9cd37c839c96894, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1470131126291901014, guid: 69a596a331299454d9cd37c839c96894, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (2)
@@ -1153,6 +1161,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 900616778451132341, guid: 69a596a331299454d9cd37c839c96894, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1470131126291901014, guid: 69a596a331299454d9cd37c839c96894, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (1)
@@ -1357,6 +1369,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 900616778451132341, guid: 69a596a331299454d9cd37c839c96894, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1470131126291901014, guid: 69a596a331299454d9cd37c839c96894, type: 3}
       propertyPath: m_Name
       value: SpawnPoint
@@ -1531,6 +1547,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 6887637219174050903, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 9119464077508629886, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.15
