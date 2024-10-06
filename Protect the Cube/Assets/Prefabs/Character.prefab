@@ -403,6 +403,7 @@ MonoBehaviour:
   gunBarrel: {fileID: 2143742393447370335}
   wall: {fileID: 1356194520742884125, guid: 3122d44ab508044c6bb60bd1e220411b, type: 3}
   turret: {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+  rangeIndicator: {fileID: 0}
 --- !u!114 &1267738778565106773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,6 +439,7 @@ MonoBehaviour:
   - {fileID: 1272256851593019809, guid: 88d92cc50b4e783408df66e4ec9fe34d, type: 3}
   - {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
   - {fileID: 415337832395152133, guid: f6edc88301e129b4aaed9c842bbdd0fe, type: 3}
+  rangeIndicator: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
   currentPlaceableObject: {fileID: 0}
   rotateIncrement: 15
 --- !u!114 &1443082488595280278

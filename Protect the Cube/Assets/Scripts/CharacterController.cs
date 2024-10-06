@@ -19,6 +19,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] GameObject gunBarrel;
     [SerializeField] GameObject wall;
     [SerializeField] GameObject turret;
+    [SerializeField] GameObject rangeIndicator;
     private float timeSinceLastShot = 0.0f;
 
 
@@ -41,6 +42,29 @@ public class CharacterController : MonoBehaviour
             GameManager.Instance.QuitGame();
         }
 
+        // detecting turrets
+        if (gameObject.GetComponent<PlaceObject>().currentPlaceableObject == null) // only hover when not currently placing a turret
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.tag == "Turret")
+                {
+                    GameObject currTurret = hit.collider.gameObject.transform.root.gameObject; // gets root parent me thinks
+                    rangeIndicator.SetActive(true);
+                    rangeIndicator.transform.position = currTurret.transform.root.position;
+                    rangeIndicator.transform.localScale = new UnityEngine.Vector3(currTurret.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currTurret.GetComponent<turretShoot>().maxRange);
+                }
+                else
+                {
+                    if (rangeIndicator.activeSelf)
+                    {
+                        rangeIndicator.SetActive(false);
+                    }
+                }
+            }
+        }
     }
 
 

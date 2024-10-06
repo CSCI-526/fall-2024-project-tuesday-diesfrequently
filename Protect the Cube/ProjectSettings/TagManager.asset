@@ -9,6 +9,7 @@ TagManager:
   - Nexus
   - Wall
   - Tank
+  - Turret
   layers:
   - Default
   - TransparentFX
