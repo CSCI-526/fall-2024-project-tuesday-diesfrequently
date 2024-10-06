@@ -1655,22 +1655,6 @@ PrefabInstance:
       propertyPath: gameOverScreen
       value: 
       objectReference: {fileID: 1359509860}
-    - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: prefabs.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: prefabs.Array.data[5]
-      value: 
-      objectReference: {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
-    - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: prefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
-    - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: prefabs.Array.data[7]
-      value: 
-      objectReference: {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
