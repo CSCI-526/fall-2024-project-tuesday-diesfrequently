@@ -17,8 +17,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField] float fireRate = 5.0f;
     [SerializeField] GameObject projectile;
     [SerializeField] GameObject gunBarrel;
-    [SerializeField] GameObject wall;
-    [SerializeField] GameObject turret;
     [SerializeField] GameObject rangeIndicator;
     private float timeSinceLastShot = 0.0f;
 

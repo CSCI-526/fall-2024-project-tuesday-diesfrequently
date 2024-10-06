@@ -1580,6 +1580,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4147723846594889038, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
+      propertyPath: rangeIndicator
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: f877dedd917b7fb44ac0fc46d7f22f10, type: 3}
     - target: {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_Name
       value: Character
