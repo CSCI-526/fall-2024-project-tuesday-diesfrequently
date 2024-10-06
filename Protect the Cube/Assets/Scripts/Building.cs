@@ -15,6 +15,10 @@ public class Building : MonoBehaviour
         {
             c.enabled = true;
         }
+        if(GetComponent<RangeIndicator>() != null)
+        {
+            GetComponent<RangeIndicator>().HideIndicator();
+        }
     }
 
     public virtual void Boost()
