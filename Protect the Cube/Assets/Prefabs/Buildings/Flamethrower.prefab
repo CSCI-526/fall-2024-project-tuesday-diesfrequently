@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flamethrower
       objectReference: {fileID: 0}
+    - target: {fileID: 2130665220319076271, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_TagString
+      value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 3850269594215648005, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_TagString
+      value: Turret
+      objectReference: {fileID: 0}
     - target: {fileID: 4739192330666534134, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -87,6 +95,14 @@ PrefabInstance:
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingName
       value: Flamethrower Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 8238119884321818877, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_TagString
+      value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709489139720211401, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_TagString
+      value: Turret
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

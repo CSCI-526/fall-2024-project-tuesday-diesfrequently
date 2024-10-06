@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 public class turretShoot : Building
 {   
     private float timeSinceLastShot = 0.0f;
     [SerializeField] float fireRate = 5.0f;
-    [SerializeField] float maxRange = 50.0f;
+    public float maxRange = 50.0f;
     [SerializeField] float turnSpeed = 15.0f;
 
     [SerializeField] GameObject projectile;
@@ -104,5 +105,4 @@ public class turretShoot : Building
             }
         }
     }
-
 }
