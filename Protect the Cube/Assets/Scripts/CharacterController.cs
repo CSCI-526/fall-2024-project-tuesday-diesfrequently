@@ -53,6 +53,7 @@ public class CharacterController : MonoBehaviour
                     rangeIndicator.SetActive(true);
                     rangeIndicator.transform.position = currTurret.transform.root.position;
                     rangeIndicator.transform.localScale = new UnityEngine.Vector3(currTurret.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currTurret.GetComponent<turretShoot>().maxRange);
+                    rangeIndicator.transform.rotation = UnityEngine.Quaternion.identity;
                 }
                 else
                 {
