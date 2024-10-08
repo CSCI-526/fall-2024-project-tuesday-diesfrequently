@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5721283078563959621}
   - component: {fileID: 3922522323856123814}
   - component: {fileID: 1677332616392144054}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Low-Caliber Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}

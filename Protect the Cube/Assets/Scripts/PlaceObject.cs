@@ -7,8 +7,8 @@ public class PlaceObject : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private GameObject[] placeableObjectPrefabs;
-    [SerializeField]
-    private GameObject currentPlaceableObject;
+    [SerializeField] private GameObject rangeIndicator;
+    public GameObject currentPlaceableObject;
     private float buildingRotation;
     private int currentPrefabIndex = -1;
     [SerializeField] protected float rotateIncrement = 10.0f;
@@ -20,6 +20,8 @@ public class PlaceObject : MonoBehaviour
 
         if (currentPlaceableObject != null)
         {
+            //rangeIndicator.SetActive(true);
+            //rangeIndicator.transform.localScale = new Vector3(currentPlaceableObject.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currentPlaceableObject.GetComponent<turretShoot>().maxRange);
             MoveCurrentObjectToMouse();
             RotateFromMouseWheel();
             RotateFromQE();
@@ -50,6 +52,7 @@ public class PlaceObject : MonoBehaviour
 
                     string bName = placeableObjectPrefabs[i].GetComponent<Building>().buildingName;
                     bool canPlace = GameManager.Instance.InventoryManager.CanPlacebuilding(bName);
+            
                     if (canPlace)
                     {
                         currentPlaceableObject = Instantiate(placeableObjectPrefabs[i]);
@@ -76,6 +79,7 @@ public class PlaceObject : MonoBehaviour
         {
             currentPlaceableObject.transform.position = hitInfo.point;
             currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+            //rangeIndicator.transform.position = currentPlaceableObject.transform.root.position;
         }
     }
 
@@ -90,11 +94,16 @@ public class PlaceObject : MonoBehaviour
     {
         Building b = currentPlaceableObject.GetComponent<Building>();
         bool canPlace = GameManager.Instance.InventoryManager.CanPlacebuilding(b.buildingName);
+        if (b.gameObject.GetComponent<Harvester>() != null)
+        {
+            canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
+        }
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
             GameManager.Instance.InventoryManager.TryPlaceBuilding(b.buildingName);
             b.OnPlace();
             currentPlaceableObject = null;
+            //rangeIndicator.SetActive(false);
         }
     }
 

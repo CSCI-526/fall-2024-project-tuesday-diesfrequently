@@ -15,10 +15,19 @@ public class Building : MonoBehaviour
         {
             c.enabled = true;
         }
+        if(GetComponent<RangeIndicator>() != null)
+        {
+            GetComponent<RangeIndicator>().HideIndicator();
+        }
     }
 
     public virtual void Boost()
     {
 
+    }
+
+    public virtual bool CanPlace()
+    {
+        return true;
     }
 }
