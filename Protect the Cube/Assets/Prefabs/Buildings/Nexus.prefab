@@ -262,6 +262,7 @@ MonoBehaviour:
   xpSpawnInterval: 4
   XP: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
+  triggerGameOver: 1
 --- !u!114 &8375766490867417729
 MonoBehaviour:
   m_ObjectHideFlags: 0

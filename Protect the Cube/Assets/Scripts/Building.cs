@@ -32,7 +32,7 @@ public class Building : MonoBehaviour
         return true;
     }
 
-    public void ShowIndicators(float duration = -1)
+    public void ShowIndicators(float duration = -1) //-1 will toggle permanently
     {
         RangeIndicator[] indicators = GetComponents<RangeIndicator>();
         foreach (RangeIndicator i in indicators)
