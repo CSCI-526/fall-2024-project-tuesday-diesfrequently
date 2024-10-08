@@ -6,8 +6,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] public float speed;
     [SerializeField] public float maxLifetime;
-
     [SerializeField] public float damage;
+
     float lifetime = 0.0f;
 
     private void Start()
@@ -24,7 +24,9 @@ public class Bullet : MonoBehaviour
         lifetime += Time.fixedDeltaTime;
         if (lifetime > maxLifetime)
         {
-            Destroy(gameObject);
+            //lifetime = 0.0f;
+            BulletPool.Instance.ReturnBullet(gameObject);
+            //Destroy(gameObject);
         }
 
     }
@@ -32,9 +34,21 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter (Collider other) {
         if (other.CompareTag("Enemy")){
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
-            Destroy(gameObject);   
+            BulletPool.Instance.ReturnBullet(gameObject);
+             //Destroy(gameObject);   
         }
 
+        if (other.CompareTag("Wall"))
+        {
+            BulletPool.Instance.ReturnBullet(gameObject);
+            //Destroy(gameObject); // when bullet hits wall, destroy bullet
+        }
+
+    }
+
+    public void ResetBullet()
+    {
+        lifetime = 0.0f; // Reset lifetime whenever bullet is reused
     }
 
 }

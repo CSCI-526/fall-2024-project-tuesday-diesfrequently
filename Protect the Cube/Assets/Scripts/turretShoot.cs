@@ -37,6 +37,7 @@ public class turretShoot : Building
         placed = true;
         GetComponent<Collider>().enabled = true;
         CheckForBoost();
+        GetComponent<RangeIndicator>().HideIndicator();
     }
 
     void FixedUpdate()
@@ -51,7 +52,19 @@ public class turretShoot : Building
             Vector3 toTarget = (target.transform.position - transform.position).normalized;
             if(Vector3.Dot(toTarget,transform.forward) > 0.9)
             {
-                var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+                //var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+
+                var bullet = BulletPool.Instance.GetBullet();
+
+                if (bullet == null)
+                {
+                    Debug.Log("All Bullets are Currently Being Used");
+                    //Time.timeScale = 0; // pauses the game
+                    return; // return early to indicate "stop shooting"
+                }
+                bullet.transform.position = gunBarrel.transform.position;
+                bullet.transform.rotation = gunBarrel.transform.rotation;
+
                 timeSinceLastShot = 0;
             }
         }
