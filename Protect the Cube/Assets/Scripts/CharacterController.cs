@@ -91,7 +91,19 @@ public class CharacterController : MonoBehaviour
     {
         if ((timeSinceLastShot > 1 / fireRate) && projectile && gunBarrel)
         {
-            var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+
+            var bullet = BulletPool.Instance.GetBullet();
+
+            //var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+            if (bullet == null)
+            {
+                Debug.Log("All Bullets are Currently Being Used");
+                //Time.timeScale = 0; // pauses the game
+                return; // return early to indicate "stop shooting"
+            }
+            bullet.transform.position = gunBarrel.transform.position;
+            bullet.transform.rotation = gunBarrel.transform.rotation;
+
             timeSinceLastShot = 0;
         }
     }
