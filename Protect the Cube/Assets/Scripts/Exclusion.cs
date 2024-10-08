@@ -29,11 +29,19 @@ public class Exclusion : MonoBehaviour
         Vector3 position = placeableObject.transform.position;
         LayerMask objectLayer = 1 << placeableObject.layer;
 
-        Collider[] colliders = Physics.OverlapBox(position, boxSize, Quaternion.identity, objectLayer);
+        //Collider[] colliders = Physics.OverlapBox(position, boxSize, Quaternion.identity, objectLayer);
+        Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude, objectLayer);
         if (colliders.Length > 1)
         {
-            Debug.Log("Cannot place object here; space is already occupied.");
-            return false;
+            foreach (var other in colliders)
+            {
+                if (other.gameObject.GetComponent<Building>() != null)
+                {
+                    other.gameObject.GetComponent<Building>().ShowIndicators(1.0f);
+                    Debug.Log("Invalid Placement: too close to existing building");
+                    return false;
+                }
+            }
         }
         return true;
     }

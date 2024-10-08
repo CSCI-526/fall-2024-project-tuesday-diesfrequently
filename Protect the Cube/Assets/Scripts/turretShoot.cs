@@ -37,7 +37,12 @@ public class turretShoot : Building
         placed = true;
         GetComponent<Collider>().enabled = true;
         CheckForBoost();
-        GetComponent<RangeIndicator>().HideIndicator();
+
+        RangeIndicator[] indicators = GetComponents<RangeIndicator>();
+        foreach (RangeIndicator i in indicators)
+        {
+            i.HideIndicator();
+        }
     }
 
     void FixedUpdate()
