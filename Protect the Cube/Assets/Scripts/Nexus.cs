@@ -10,7 +10,9 @@ public class Nexus : MonoBehaviour
     [SerializeField] public float xpSpawnInterval;
     
     [SerializeField] protected GameObject XP;
-    [SerializeField] public Vector3 xpSpawnOffset; 
+    [SerializeField] public Vector3 xpSpawnOffset;
+
+    [SerializeField] public bool triggerGameOver = false;
 
     private float timeSinceLastSpawn = 0.0f;
 
@@ -26,7 +28,10 @@ public class Nexus : MonoBehaviour
         GameManager.Instance.UIManager.UpdateUI();
         if (health < 0)
         { 
-            GameManager.Instance.TriggerGameOver();
+            if(triggerGameOver)
+            {
+                GameManager.Instance.TriggerGameOver();
+            }
             gameObject.SetActive(false);
         }
     }
