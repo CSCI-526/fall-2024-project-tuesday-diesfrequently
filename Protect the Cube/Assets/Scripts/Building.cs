@@ -23,7 +23,7 @@ public class Building : MonoBehaviour
 
     public virtual void Boost()
     {
-
+        
     }
 
     public virtual bool CanPlace()

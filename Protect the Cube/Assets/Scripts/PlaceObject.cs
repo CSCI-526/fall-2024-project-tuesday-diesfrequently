@@ -100,7 +100,7 @@ public class PlaceObject : MonoBehaviour
         }
 
         canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
-        
+
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
             GameManager.Instance.InventoryManager.TryPlaceBuilding(b.buildingName);
@@ -108,6 +108,7 @@ public class PlaceObject : MonoBehaviour
             currentPlaceableObject = null;
             //rangeIndicator.SetActive(false);
         }
+
     }
 
     private void RotateFromQE()
