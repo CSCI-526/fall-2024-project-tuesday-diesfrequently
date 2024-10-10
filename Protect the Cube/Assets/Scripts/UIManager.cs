@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI inventoryUI;
     [SerializeField] protected GameObject gameOverScreen;
     [SerializeField] protected GameObject rewardMenu;
-
+    [SerializeField] protected GameObject upgradePanel;
     private Nexus nexus;
     private PlayerHealth playerHP;
     private PlayerLevels playerLevels;
@@ -31,7 +33,7 @@ public class UIManager : MonoBehaviour
         UpdatePlayerXPUI();
         UpdateInventoryUI();
     }
-    
+
     public void ShowGameOverScreen()
     {
         gameOverScreen.SetActive(true);
@@ -48,7 +50,17 @@ public class UIManager : MonoBehaviour
         rewardMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }
+    public void ShowUpgradeScreen()
+    {
+        upgradePanel.SetActive(true);
+        Invoke("HideUpgradeScreen", 2.0f);
+        
+    }
 
+    public void HideUpgradeScreen()
+    {
+        upgradePanel.SetActive(false);
+    }
 
     public void UpdateWaveUI()
     {
@@ -90,4 +102,9 @@ public class UIManager : MonoBehaviour
 
         inventoryUI.text = txt;
     }
+    public void updateUpgradeUI(string buildingName, int materialNum, int id)
+    {
+        upgradePanel.GetComponent<upgradeUI>().updateText(buildingName, materialNum, id);
+    }
+
 }

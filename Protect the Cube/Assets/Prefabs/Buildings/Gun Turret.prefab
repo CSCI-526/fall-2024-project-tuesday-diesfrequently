@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1399077278889937836}
   - component: {fileID: 661809259321775432}
   - component: {fileID: 5538984475188787401}
+  - component: {fileID: 3598094888286799798}
   m_Layer: 0
   m_Name: Gun Turret
   m_TagString: Turret
@@ -52,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placed: 0
+  rotatable: 1
   buildingName: Gun Turret
   buildingDesc: A turret with decent range, accuracy, and damage
   fireRate: 2
@@ -79,8 +81,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.21279308, y: 0.1496009, z: 0.23104334}
-  m_Center: {x: -0.0003183484, y: 0.15652575, z: -0.005397886}
+  m_Size: {x: 0.63034713, y: 1.6429518, z: 1.5252142}
+  m_Center: {x: -0.20909542, y: 0.90320116, z: 0.098226756}
 --- !u!114 &661809259321775432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +113,21 @@ MonoBehaviour:
   indicator: {fileID: 1171666324581652156}
   radius: 1
   useTurretRange: 0
+--- !u!114 &3598094888286799798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272256851593019809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef32e84b59ee8438f9ffd1c836f3540b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialNum: 2
+  buildingName: Gun Turret
+  indicator: {fileID: 5432939863929631517, guid: 693069057d8394f489a20f9e909b3c04, type: 3}
 --- !u!1 &2130665220319076271
 GameObject:
   m_ObjectHideFlags: 0
