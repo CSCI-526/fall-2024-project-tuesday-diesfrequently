@@ -99,16 +99,11 @@ public class PlaceObject : MonoBehaviour
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
         }
 
-<<<<<<< HEAD
-        canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
-
-=======
         if(currentPlaceableObject.GetComponent<turretShoot>() != null) //make exclusion only apply for turrets
         {
             canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
         }
         
->>>>>>> main
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
             GameManager.Instance.InventoryManager.TryPlaceBuilding(b.buildingName);
