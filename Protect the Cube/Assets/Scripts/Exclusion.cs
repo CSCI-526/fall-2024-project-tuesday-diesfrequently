@@ -37,7 +37,7 @@ public class Exclusion : MonoBehaviour
             {
                 if (other.gameObject.GetComponent<turretShoot>() != null)
                 {
-                    other.gameObject.GetComponent<Building>().ShowIndicators(1.0f);
+                    other.gameObject.GetComponent<Building>().ShowIndicators(0.1f);
                     Debug.Log("Invalid Placement: too close to existing building");
                     return false;
                 }
