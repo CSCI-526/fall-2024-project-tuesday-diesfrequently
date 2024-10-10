@@ -87,7 +87,7 @@ public class PlaceObject : MonoBehaviour
     {
         //Debug.Log(Input.mouseScrollDelta);
         buildingRotation += Input.mouseScrollDelta.y;
-        currentPlaceableObject.transform.Rotate(Vector3.up, buildingRotation * 10f);
+        RotateBuilding();
     }
 
     private void ReleaseIfClicked()
@@ -99,8 +99,11 @@ public class PlaceObject : MonoBehaviour
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
         }
 
+<<<<<<< HEAD
         canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
 
+=======
+>>>>>>> main
         if(currentPlaceableObject.GetComponent<turretShoot>() != null) //make exclusion only apply for turrets
         {
             canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
@@ -126,7 +129,19 @@ public class PlaceObject : MonoBehaviour
         {
             buildingRotation += 1;
         }
-        currentPlaceableObject.transform.Rotate(Vector3.up, buildingRotation * rotateIncrement);
+        RotateBuilding() ;
+    }
+
+    private void RotateBuilding()
+    {
+        if (currentPlaceableObject.GetComponent<Building>().rotatable)
+        {
+            currentPlaceableObject.transform.Rotate(Vector3.up, buildingRotation * rotateIncrement);
+        }
+        else
+        {
+            currentPlaceableObject.transform.rotation = Quaternion.identity;
+        }
     }
 
 }

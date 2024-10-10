@@ -264,6 +264,7 @@ MonoBehaviour:
   xpSpawnInterval: 5
   XP: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
+  triggerGameOver: 0
 --- !u!114 &8457574962055490782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placed: 0
+  rotatable: 0
   buildingName: Harvester
   buildingDesc: Generates EXP over time. Can be destroyed
   radius: 6
@@ -294,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 4978915526652792867}
   radius: 3
+  useTurretRange: 1
 --- !u!1 &1501241086206586852
 GameObject:
   m_ObjectHideFlags: 0

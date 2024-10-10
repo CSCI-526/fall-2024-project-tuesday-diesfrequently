@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class Building : MonoBehaviour
 {
     [SerializeField] public bool placed = false;
+    [SerializeField] public bool rotatable = true;
     [SerializeField] public string buildingName = "missing name";
     [SerializeField] public string buildingDesc = "missing description";
 
