@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sniper 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2559735644027809604, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: buildingName
+      value: Sniper Turret
+      objectReference: {fileID: 0}
     - target: {fileID: 4809673224787670642, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
