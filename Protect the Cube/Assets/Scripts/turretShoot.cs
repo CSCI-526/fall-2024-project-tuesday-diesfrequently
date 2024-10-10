@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -123,12 +122,5 @@ public class turretShoot : Building
                 //Debug.Log("Boosted by other Turret!");
             }
         }
-    }
-
-    internal void upgrade()
-    {
-        turnSpeed *= 2;
-        fireRate *= 2;
-        maxRange *= 2;
     }
 }

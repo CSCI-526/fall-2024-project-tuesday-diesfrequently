@@ -16,26 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flamethrower
       objectReference: {fileID: 0}
-    - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2130665220319076271, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
       value: Turret
       objectReference: {fileID: 0}
-    - target: {fileID: 2559735644027809604, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-      propertyPath: buildingName
-      value: Flamethrower Turret
-      objectReference: {fileID: 0}
-    - target: {fileID: 2559735644027809604, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-      propertyPath: upgradePanel
-      value: 
-      objectReference: {fileID: 1414604143077002620, guid: a73f077d6ffc4458d94ad83bb205b38c, type: 3}
     - target: {fileID: 3850269594215648005, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
       value: Turret

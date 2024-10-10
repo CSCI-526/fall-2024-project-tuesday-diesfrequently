@@ -335,14 +335,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Turret
       objectReference: {fileID: 0}
-    - target: {fileID: 2559735644027809604, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-      propertyPath: indicator
-      value: 
-      objectReference: {fileID: 5432939863929631517, guid: 693069057d8394f489a20f9e909b3c04, type: 3}
-    - target: {fileID: 2559735644027809604, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-      propertyPath: buildingName
-      value: Gatling Turret
-      objectReference: {fileID: 0}
     - target: {fileID: 3850269594215648005, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
       value: Turret
@@ -395,10 +387,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: fireRate
       value: 12
