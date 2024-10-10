@@ -87,7 +87,14 @@ public class PlaceObject : MonoBehaviour
     {
         //Debug.Log(Input.mouseScrollDelta);
         buildingRotation += Input.mouseScrollDelta.y;
-        currentPlaceableObject.transform.Rotate(Vector3.up, buildingRotation * 10f);
+        if (currentPlaceableObject.GetComponent<Building>().rotatable)
+        {
+            currentPlaceableObject.transform.Rotate(Vector3.up, buildingRotation * rotateIncrement);
+        }
+        else
+        {
+            currentPlaceableObject.transform.rotation = Quaternion.identity;
+        }
     }
 
     private void ReleaseIfClicked()
@@ -124,7 +131,14 @@ public class PlaceObject : MonoBehaviour
         {
             buildingRotation += 1;
         }
-        currentPlaceableObject.transform.Rotate(Vector3.up, buildingRotation * rotateIncrement);
+        if(currentPlaceableObject.GetComponent<Building>().rotatable)
+        {
+            currentPlaceableObject.transform.Rotate(Vector3.up, buildingRotation * rotateIncrement);
+        }
+        else
+        {
+            currentPlaceableObject.transform.rotation = Quaternion.identity;
+        }
     }
 
 }
