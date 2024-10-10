@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1399077278889937836}
   - component: {fileID: 661809259321775432}
   - component: {fileID: 5538984475188787401}
+  - component: {fileID: 2559735644027809604}
   m_Layer: 0
   m_Name: Gun Turret
   m_TagString: Turret
@@ -59,7 +60,7 @@ MonoBehaviour:
   turnSpeed: 2
   projectile: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
   gunBarrel: {fileID: 2130665220319076271}
-  target: {fileID: 0}
+  target: {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
 --- !u!65 &1399077278889937836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79,8 +80,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.21279308, y: 0.1496009, z: 0.23104334}
-  m_Center: {x: -0.0003183484, y: 0.15652575, z: -0.005397886}
+  m_Size: {x: 0.5567074, y: 1.452337, z: 1.3696296}
+  m_Center: {x: -0.017953217, y: 0.8078939, z: 0.09660125}
 --- !u!114 &661809259321775432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +111,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 1171666324581652156}
   radius: 1
-  useTurretRange: 0
+  useTurretRange: 1
+--- !u!114 &2559735644027809604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272256851593019809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef32e84b59ee8438f9ffd1c836f3540b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialNum: 2
+  buildingName: Gun Turret
+  indicator: {fileID: 5432939863929631517, guid: 693069057d8394f489a20f9e909b3c04, type: 3}
 --- !u!1 &2130665220319076271
 GameObject:
   m_ObjectHideFlags: 0
