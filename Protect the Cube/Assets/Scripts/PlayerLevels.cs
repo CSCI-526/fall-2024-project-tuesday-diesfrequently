@@ -13,6 +13,9 @@ public class PlayerLevels : MonoBehaviour
 
     [SerializeField] public int currentXP = 0;
     [SerializeField] public int currentLevel = 0;
+
+    [SerializeField] public int gold = 0;
+
     private int levels_to_process = 0;
 
     private bool isSelectingTurret = false;
@@ -48,20 +51,27 @@ public class PlayerLevels : MonoBehaviour
         
     }
 
-    public void add_exp(int xp_gained){
-        currentXP += xp_gained;
-        if(currentXP >= xpNeededForLevel)
-        {
-            while (currentXP >= xpNeededForLevel)
+    public void add_exp(int resource_gained, GameObject Orb){
+        if (Orb.tag == "ExperienceOrb"){
+            currentXP += resource_gained;
+            if(currentXP >= xpNeededForLevel)
             {
-                currentLevel += 1;
-                currentXP -= xpNeededForLevel;
-                levels_to_process += 1;
-                xpNeededForLevel++;
+                while (currentXP >= xpNeededForLevel)
+                {
+                    currentLevel += 1;
+                    currentXP -= xpNeededForLevel;
+                    levels_to_process += 1;
+                    xpNeededForLevel++;
+                }
+                GameManager.Instance.UIManager.ShowRewardScreen();
+                GameManager.Instance.InventoryManager.GenerateRewards();
             }
-            GameManager.Instance.UIManager.ShowRewardScreen();
-            GameManager.Instance.InventoryManager.GenerateRewards();
+        }
+        else if (Orb.tag == "GoldOrb"){
+            gold += resource_gained;
         }
         GameManager.Instance.UIManager.UpdateUI();
+
+        
     }
 }

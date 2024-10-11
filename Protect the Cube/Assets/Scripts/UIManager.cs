@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
     [SerializeField] protected TextMeshProUGUI inventoryUI;
+    [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
     [SerializeField] protected GameObject rewardMenu;
     [SerializeField] protected GameObject upgradePanel;
@@ -32,6 +33,7 @@ public class UIManager : MonoBehaviour
         UpdateWaveUI();
         UpdatePlayerXPUI();
         UpdateInventoryUI();
+        UpdateGoldUI();
     }
 
     public void ShowGameOverScreen()
@@ -79,6 +81,11 @@ public class UIManager : MonoBehaviour
             expUI.text = "Player Level: " + playerLevels.currentLevel +
                 "\r\nExp: " + playerLevels.currentXP + "/" + playerLevels.xpNeededForLevel;
         }
+    }
+    public void UpdateGoldUI()
+    {
+        goldUI.text = "Gold: " + playerLevels.gold;
+        
     }
 
     public void UpdateRewardsUI(Building b1, Building b2, Building b3)

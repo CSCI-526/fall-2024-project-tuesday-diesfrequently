@@ -33,7 +33,7 @@ public class ExperiencePickup : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player"){
-            other.GetComponent<PlayerLevels>().add_exp(exp_value);
+            other.GetComponent<PlayerLevels>().add_exp(exp_value, gameObject);
             Destroy(gameObject);
             
         }
