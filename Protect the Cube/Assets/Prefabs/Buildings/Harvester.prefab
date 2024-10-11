@@ -263,7 +263,7 @@ MonoBehaviour:
   health: 10
   maxHealth: 10
   xpSpawnInterval: 5
-  XP: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
+  XP: {fileID: 6435648702068270667, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
   triggerGameOver: 0
 --- !u!114 &8457574962055490782

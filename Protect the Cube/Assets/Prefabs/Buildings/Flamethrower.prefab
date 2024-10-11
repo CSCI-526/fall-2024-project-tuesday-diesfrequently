@@ -45,6 +45,10 @@ PrefabInstance:
       value: Turret
       objectReference: {fileID: 0}
     - target: {fileID: 3598094888286799798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3598094888286799798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingName
       value: Flamethrower Turret
       objectReference: {fileID: 0}

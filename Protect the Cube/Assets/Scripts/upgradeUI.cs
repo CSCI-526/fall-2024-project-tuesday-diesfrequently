@@ -15,7 +15,7 @@ public class upgradeUI : MonoBehaviour
 
     public void updateText(string buildingName, int materialNum, int id)
     {
-        upgradeInfo.text = buildingName + ":\tX1\nMaterial:\tX" + materialNum;
+        upgradeInfo.text = "building required: " + buildingName + ":\t1\ngold required:\t" + materialNum;
         btn = upgradeBtn.GetComponent<upgradeBtn>();
         btn.id = id;
     }
