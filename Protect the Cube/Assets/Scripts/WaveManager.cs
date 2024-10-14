@@ -54,6 +54,9 @@ public class WaveManager : MonoBehaviour
         SpawnNormalEnemies();
         SpawnTanks();
         GameManager.Instance.UIManager.UpdateUI();
+        Debug.Log("Updating Wave... Wave " + wave + " starting");
+        GameManager.Instance.AnalyticsManager.LogUpdatedWaveStart(wave);// Send wave number to analytics
+
     }
 
     void SpawnNormalEnemies()
