@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public WaveManager WaveManager { get; private set; }
     public UIManager UIManager { get; private set; }
+    public AnalyticsManager AnalyticsManager { get; private set; }
 
     public InventoryManager InventoryManager { get; private set; }
     public GameObject Player {  get; private set; }
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         Instance.WaveManager = GetComponent<WaveManager>();
         Instance.UIManager = GetComponent<UIManager>();
         Instance.InventoryManager = GetComponent<InventoryManager>();
+        Instance.AnalyticsManager = GetComponent<AnalyticsManager>();
     }
 
     void Start()
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void TriggerGameOver()
     {
+        Instance.AnalyticsManager.PlayerDied(); // send analytics of player stats on game end
         Instance.UIManager.ShowGameOverScreen();
     }
 
