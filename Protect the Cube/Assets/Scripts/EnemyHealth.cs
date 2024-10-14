@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public int minXpDrop = 5;
     private float currentHealth;
     private bool isInvincible = false;
+    private Animator animator;
 
 
     void Start()
@@ -21,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
         GameManager.Instance.WaveManager.enemyCount++;
         GameManager.Instance.WaveManager.enemies.Add(this.gameObject);
+        animator = GetComponent<Animator>();    
         //Debug.Log(GameManager.Instance.WaveManager.enemyCount);
     }
 
@@ -34,7 +36,11 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!isInvincible) // Only take damage if not currently invincible
         {
-            currentHealth-= damage;
+            if (animator != null)
+            {
+                animator.SetTrigger("Damage");
+            }
+            currentHealth -= damage;
             if (currentHealth <= 0)
             {
                 Die();
