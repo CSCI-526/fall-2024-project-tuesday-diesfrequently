@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] protected GameObject gameOverScreen;
     [SerializeField] protected GameObject rewardMenu;
     [SerializeField] protected GameObject upgradePanel;
+    [SerializeField] protected GameObject pauseUI;
     private Nexus nexus;
     private PlayerHealth playerHP;
     private PlayerLevels playerLevels;
@@ -42,6 +43,18 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
+    public void ShowPauseScreen()
+    {
+        pauseUI.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+
+    public void HidePauseScreen()
+    {
+        pauseUI.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
+
     public void ShowRewardScreen()
     {
         rewardMenu.SetActive(true);
@@ -55,10 +68,8 @@ public class UIManager : MonoBehaviour
     public void ShowUpgradeScreen()
     {
         upgradePanel.SetActive(true);
-        Invoke("HideUpgradeScreen", 2.0f);
-        
+        Invoke("HideUpgradeScreen", 2.0f);   
     }
-
     public void HideUpgradeScreen()
     {
         upgradePanel.SetActive(false);
