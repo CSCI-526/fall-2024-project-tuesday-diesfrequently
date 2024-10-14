@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -41,10 +42,15 @@ public class EnemyMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!_target)
+        if (!_target)
         {
             SetTarget(targetList);
             // Debug.Log("target: "+_target.name);
+        }
+        if (_target.IsDestroyed() || !_target.activeSelf)
+        {
+            targetList.Remove(_target);
+            SetTarget(targetList);
         }
 
         Vector3 dirToTarget = _target.transform.position - _rb.transform.position;

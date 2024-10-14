@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: -3978978509010604329}
   m_Layer: 0
   m_Name: ExperienceOrb
-  m_TagString: Untagged
+  m_TagString: ExperienceOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

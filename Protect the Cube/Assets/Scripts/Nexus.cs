@@ -10,9 +10,13 @@ public class Nexus : MonoBehaviour
     [SerializeField] public float xpSpawnInterval;
     
     [SerializeField] protected GameObject XP;
-    [SerializeField] public Vector3 xpSpawnOffset; 
+    [SerializeField] public Vector3 xpSpawnOffset;
+
+    [SerializeField] public bool triggerGameOver = false;
 
     private float timeSinceLastSpawn = 0.0f;
+    public delegate void NexusEvent();
+    public event NexusEvent OnTakeDamage;
 
     // Start is called before the first frame update
     private void Start()
@@ -24,9 +28,16 @@ public class Nexus : MonoBehaviour
     {
         health -= amount;
         GameManager.Instance.UIManager.UpdateUI();
-        if (health < 0)
+        if(OnTakeDamage != null)
+        {
+            OnTakeDamage();
+        }
+        if (health <= 0)
         { 
-            GameManager.Instance.TriggerGameOver();
+            if(triggerGameOver)
+            {
+                GameManager.Instance.TriggerGameOver();
+            }
             gameObject.SetActive(false);
         }
     }

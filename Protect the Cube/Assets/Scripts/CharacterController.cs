@@ -17,8 +17,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField] float fireRate = 5.0f;
     [SerializeField] GameObject projectile;
     [SerializeField] GameObject gunBarrel;
-    [SerializeField] GameObject wall;
-    [SerializeField] GameObject turret;
     [SerializeField] GameObject rangeIndicator;
     private float timeSinceLastShot = 0.0f;
 
@@ -55,6 +53,7 @@ public class CharacterController : MonoBehaviour
                     rangeIndicator.SetActive(true);
                     rangeIndicator.transform.position = currTurret.transform.root.position;
                     rangeIndicator.transform.localScale = new UnityEngine.Vector3(currTurret.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currTurret.GetComponent<turretShoot>().maxRange);
+                    rangeIndicator.transform.rotation = UnityEngine.Quaternion.identity;
                 }
                 else
                 {
@@ -92,7 +91,19 @@ public class CharacterController : MonoBehaviour
     {
         if ((timeSinceLastShot > 1 / fireRate) && projectile && gunBarrel)
         {
-            var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+
+            var bullet = BulletPool.Instance.GetBullet();
+
+            //var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+            if (bullet == null)
+            {
+                Debug.Log("All Bullets are Currently Being Used");
+                //Time.timeScale = 0; // pauses the game
+                return; // return early to indicate "stop shooting"
+            }
+            bullet.transform.position = gunBarrel.transform.position;
+            bullet.transform.rotation = gunBarrel.transform.rotation;
+
             timeSinceLastShot = 0;
         }
     }
