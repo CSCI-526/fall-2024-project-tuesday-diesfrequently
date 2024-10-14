@@ -28,5 +28,6 @@ public class Harvester : Building
     {
         base.OnPlace();
         GetComponent<Collider>().enabled = true;
+        GetComponent<RangeIndicator>().HideIndicator();
     }
 }

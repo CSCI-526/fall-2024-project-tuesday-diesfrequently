@@ -6,6 +6,7 @@ public class RangeIndicator : MonoBehaviour
 {
     [SerializeField] public MeshRenderer indicator;
     [SerializeField] public float radius = 12.0f;
+    [SerializeField] public bool useTurretRange = true;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class RangeIndicator : MonoBehaviour
     public void ShowIndicator()
     {
         indicator.enabled = true;
-        if(GetComponent<turretShoot>() != null )
+        if(GetComponent<turretShoot>() != null && useTurretRange)
         {
             SetRadius(GetComponent<turretShoot>().maxRange );
         }
@@ -33,5 +34,10 @@ public class RangeIndicator : MonoBehaviour
     public void HideIndicator()
     {
         indicator.enabled = false;
+    }
+
+    private void Update()
+    {
+        indicator.gameObject.transform.rotation = Quaternion.identity;
     }
 }

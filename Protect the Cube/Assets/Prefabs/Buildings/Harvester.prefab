@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 831108058407699104}
   - component: {fileID: 8457574962055490782}
   - component: {fileID: 6488971438371175472}
+  - component: {fileID: 1453563995351358942}
   m_Layer: 0
   m_Name: Harvester
   m_TagString: Nexus
@@ -262,8 +263,9 @@ MonoBehaviour:
   health: 10
   maxHealth: 10
   xpSpawnInterval: 5
-  XP: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
+  XP: {fileID: 6435648702068270667, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
+  triggerGameOver: 0
 --- !u!114 &8457574962055490782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placed: 0
+  rotatable: 0
   buildingName: Harvester
   buildingDesc: Generates EXP over time. Can be destroyed
   radius: 6
@@ -294,6 +297,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 4978915526652792867}
   radius: 3
+  useTurretRange: 1
+--- !u!114 &1453563995351358942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415337832395152133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec47a0954e25c164e99d6c5c63396dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmp: {fileID: 702937390676432428}
+  title: Harvester
 --- !u!1 &1501241086206586852
 GameObject:
   m_ObjectHideFlags: 0

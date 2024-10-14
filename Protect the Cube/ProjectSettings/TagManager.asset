@@ -10,6 +10,8 @@ TagManager:
   - Wall
   - Tank
   - Turret
+  - ExperienceOrb
+  - GoldOrb
   layers:
   - Default
   - TransparentFX

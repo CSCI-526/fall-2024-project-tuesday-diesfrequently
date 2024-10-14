@@ -16,9 +16,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flamethrower
       objectReference: {fileID: 0}
+    - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0313652
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5104655
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Size.z
+      value: 1.4115214
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Center.x
+      value: 0.015369415
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Center.y
+      value: 0.8369581
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Center.z
+      value: 0.09688404
+      objectReference: {fileID: 0}
     - target: {fileID: 2130665220319076271, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
       value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 3598094888286799798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3598094888286799798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: buildingName
+      value: Flamethrower Turret
       objectReference: {fileID: 0}
     - target: {fileID: 3850269594215648005, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
