@@ -8,6 +8,9 @@ public class PlayerLevels : MonoBehaviour
     // Start is called before the first frame update
 
     [SerializeField] public int xpNeededForLevel = 2;
+    [SerializeField] public int xpNeededBase = 2;
+    [SerializeField] public int xpLinearScaler = 2;
+
 
     [SerializeField] public List<GameObject> turretOptions = new List<GameObject>();
 
@@ -61,7 +64,8 @@ public class PlayerLevels : MonoBehaviour
                     currentLevel += 1;
                     currentXP -= xpNeededForLevel;
                     levels_to_process += 1;
-                    xpNeededForLevel++;
+                    //xpNeededForLevel++;
+                    xpNeededForLevel = xpLinearScaler * currentLevel + xpNeededBase;
                 }
                 GameManager.Instance.UIManager.ShowRewardScreen();
                 GameManager.Instance.InventoryManager.GenerateRewards();
