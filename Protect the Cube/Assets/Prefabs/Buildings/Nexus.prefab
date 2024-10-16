@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 831108058407699104}
   - component: {fileID: 8375766490867417729}
   - component: {fileID: 4194215232517746498}
+  - component: {fileID: 1702812880498901224}
   m_Layer: 0
   m_Name: Nexus
   m_TagString: Nexus
@@ -295,6 +296,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmp: {fileID: 702937390676432428}
   title: Nexus
+--- !u!95 &1702812880498901224
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415337832395152133}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d50d74f8d474220439f4a8798f2822ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1501241086206586852
 GameObject:
   m_ObjectHideFlags: 0

@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 1267738778565106773}
   - component: {fileID: 8531904022790211960}
   - component: {fileID: 1443082488595280278}
+  - component: {fileID: 6535186658134325154}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -417,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   invincibilityDuration: 1
+  animator: {fileID: 0}
   currentHealth: 0
 --- !u!114 &8531904022790211960
 MonoBehaviour:
@@ -454,11 +456,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xpNeededForLevel: 2
+  xpNeededBase: 2
+  xpLinearScaler: 2
   turretOptions:
   - {fileID: 6852214484739291977, guid: 5c6dcd31d3038d64e853cefcb9d02f05, type: 3}
   - {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
   currentXP: 0
   currentLevel: 0
+  gold: 0
+--- !u!95 &6535186658134325154
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880232203954208577}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d50d74f8d474220439f4a8798f2822ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7782645869315754156
 GameObject:
   m_ObjectHideFlags: 0

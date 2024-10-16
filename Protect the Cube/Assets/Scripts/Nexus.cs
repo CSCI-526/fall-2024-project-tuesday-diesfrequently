@@ -13,6 +13,7 @@ public class Nexus : MonoBehaviour
     [SerializeField] public Vector3 xpSpawnOffset;
 
     [SerializeField] public bool triggerGameOver = false;
+    [SerializeField] private Animator animator;
 
     private float timeSinceLastSpawn = 0.0f;
     public delegate void NexusEvent();
@@ -23,9 +24,11 @@ public class Nexus : MonoBehaviour
     {
         GameManager.Instance.Nexus = this.gameObject;
         health = maxHealth;
+        animator = GetComponent<Animator>();
     }
     public void TakeDamage(int amount = 1)
     {
+        animator.SetTrigger("Damage");
         health -= amount;
         GameManager.Instance.UIManager.UpdateUI();
         if(OnTakeDamage != null)
