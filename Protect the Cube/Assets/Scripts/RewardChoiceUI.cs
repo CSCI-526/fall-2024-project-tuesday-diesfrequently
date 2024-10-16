@@ -7,7 +7,7 @@ public class RewardChoiceUI : MonoBehaviour
     [SerializeField] protected RewardPanel panel1;
     [SerializeField] protected RewardPanel panel2;
     [SerializeField] protected RewardPanel panel3;
-    public void UpdateRewardChoices(Building b1, Building b2, Building b3)
+    public void UpdateRewardChoices(GameObject b1, GameObject b2, GameObject b3)
     {
         panel1.UpdateRewardPanel(b1);
         panel2.UpdateRewardPanel(b2);

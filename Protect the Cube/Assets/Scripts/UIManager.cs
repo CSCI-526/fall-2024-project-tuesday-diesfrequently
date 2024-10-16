@@ -99,7 +99,7 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void UpdateRewardsUI(Building b1, Building b2, Building b3)
+    public void UpdateRewardsUI(GameObject b1, GameObject b2, GameObject b3)
     {
         rewardMenu.GetComponent<RewardChoiceUI>().UpdateRewardChoices(b1, b2, b3);
     }

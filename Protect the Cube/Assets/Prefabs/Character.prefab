@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 8531904022790211960}
   - component: {fileID: 1443082488595280278}
   - component: {fileID: 6535186658134325154}
+  - component: {fileID: 6495880757436677835}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -485,6 +486,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6495880757436677835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880232203954208577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7764170669242f44ba63a92ba3cb1e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Player HP
+  desc: Regain 2 Player HP. Cannot go over Max HP.
 --- !u!1 &7782645869315754156
 GameObject:
   m_ObjectHideFlags: 0

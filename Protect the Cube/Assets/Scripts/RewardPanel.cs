@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +10,22 @@ public class RewardPanel : MonoBehaviour
     [SerializeField] protected Image rewardImage;
     [SerializeField] protected TextMeshProUGUI rewardName;
     [SerializeField] protected TextMeshProUGUI rewardDescription;
-    public void UpdateRewardPanel(Building reward)
+    public void UpdateRewardPanel(GameObject reward)
     {
         if(reward != null)
         {
-            rewardName.text = reward.buildingName;
-            rewardDescription.text = reward.buildingDesc;
+            Building building = reward.GetComponent<Building>();
+            Info info = reward.GetComponent<Info>();
+            if (info != null)
+            {
+                rewardName.text = info.name;
+                rewardDescription.text = info.desc;
+            }
+            else if (building != null)
+            {
+                rewardName.text = building.buildingName;
+                rewardDescription.text = building.buildingDesc;
+            }
         }
         else
         {

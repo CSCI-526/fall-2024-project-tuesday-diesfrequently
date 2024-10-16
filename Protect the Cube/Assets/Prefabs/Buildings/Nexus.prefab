@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 8375766490867417729}
   - component: {fileID: 4194215232517746498}
   - component: {fileID: 1702812880498901224}
+  - component: {fileID: 3594844298877099021}
   m_Layer: 0
   m_Name: Nexus
   m_TagString: Nexus
@@ -265,6 +266,7 @@ MonoBehaviour:
   XP: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
   triggerGameOver: 1
+  animator: {fileID: 0}
 --- !u!114 &8375766490867417729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +319,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3594844298877099021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415337832395152133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7764170669242f44ba63a92ba3cb1e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Nexus HP
+  desc: Regain 2 Nexus HP. Cannot go over Max HP.
 --- !u!1 &1501241086206586852
 GameObject:
   m_ObjectHideFlags: 0
