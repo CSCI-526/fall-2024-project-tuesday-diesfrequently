@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placed: 0
+  rotatable: 1
   buildingName: Turret Booster
   buildingDesc: Greatly improves the fire rate, turn rate, and tracking of nearby
     turrets.
@@ -412,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 71639038946376711}
   radius: 3
+  useTurretRange: 1
 --- !u!1 &6931359815143944211
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +578,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7040379881658409380}
+    - targetCorrespondingSourceObject: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6188934928621807553}
+    - targetCorrespondingSourceObject: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3807020316435092657}
   m_SourcePrefab: {fileID: 100100000, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
 --- !u!23 &71639038946376711 stripped
 MeshRenderer:
@@ -588,3 +599,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4689674860701062492, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
   m_PrefabInstance: {fileID: 5881910018278134324}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2017189474544213458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
+  m_PrefabInstance: {fileID: 5881910018278134324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &7040379881658409380
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017189474544213458}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.0000002
+  m_Center: {x: 0.00000011920929, y: 0, z: -0.00000017881393}
+--- !u!114 &6188934928621807553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017189474544213458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4e14894292e794d942d662bea96f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &3807020316435092657
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017189474544213458}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
