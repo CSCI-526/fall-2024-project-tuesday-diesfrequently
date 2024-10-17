@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Nexus : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Nexus : MonoBehaviour
     public delegate void NexusEvent();
     public event NexusEvent OnTakeDamage;
 
+    public GameObject indicator = null;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -31,7 +34,24 @@ public class Nexus : MonoBehaviour
         animator.SetTrigger("Damage");
         health -= amount;
         GameManager.Instance.UIManager.UpdateUI();
-        if(OnTakeDamage != null)
+        if (indicator == null)
+        {
+            Vector3 screenpos = Camera.main.WorldToScreenPoint(transform.position);
+
+            if (!(screenpos.z > 0 && screenpos.x > 0 && screenpos.y > 0 && screenpos.x < Screen.width && screenpos.y < Screen.height)) // on screen
+            {
+                OffScreenIndicator.Instance.GetIndicator(gameObject);
+                Debug.Log("Indicator Assigned");
+            }
+        }
+        else
+        {
+            Indicator ind = indicator.GetComponent<Indicator>();
+            ind.timeLeft += ind.revealTime;
+            Debug.Log("Indicator Already Assigned");
+        }
+
+        if (OnTakeDamage != null)
         {
             OnTakeDamage();
         }
@@ -41,7 +61,8 @@ public class Nexus : MonoBehaviour
             {
                 GameManager.Instance.TriggerGameOver();
             }
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
