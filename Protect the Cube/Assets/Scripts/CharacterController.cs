@@ -31,10 +31,10 @@ public class CharacterController : MonoBehaviour
         {
             Shoot();
         }
-        if (Input.GetButtonDown("Jump"))
-        {
-            Jump();
-        }
+        // if (Input.GetButtonDown("Jump"))
+        // {
+        //     Jump();
+        // }
         if(Input.GetButton("Cancel"))
         {
             GameManager.Instance.QuitGame();
@@ -79,13 +79,13 @@ public class CharacterController : MonoBehaviour
         //update shot time
         timeSinceLastShot += Time.fixedDeltaTime;
     }
-    private void Jump()
-    {
-        if (transform.position.y < 1.01)
-        {
-            rb.AddForce(new UnityEngine.Vector3(0.0f, jumpForce, 0.0f));
-        }
-    }
+    // private void Jump()
+    // {
+    //     if (transform.position.y < 1.01)
+    //     {
+    //         rb.AddForce(new UnityEngine.Vector3(0.0f, jumpForce, 0.0f));
+    //     }
+    // }
 
     private void Shoot()
     {

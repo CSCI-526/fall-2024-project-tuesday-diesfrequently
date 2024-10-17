@@ -283,7 +283,7 @@ MonoBehaviour:
   placed: 0
   rotatable: 0
   buildingName: Harvester
-  buildingDesc: Generates EXP over time. Can be destroyed
+  buildingDesc: Generates gold over time. Use gold to upgrade turrets.
   radius: 6
 --- !u!114 &6488971438371175472
 MonoBehaviour:
