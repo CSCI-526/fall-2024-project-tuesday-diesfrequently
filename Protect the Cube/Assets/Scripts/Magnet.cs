@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperiencePickup : MonoBehaviour
+public class Magnet : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] protected int exp_value = 1;
     [SerializeField] protected float period = 1.0f;
     [SerializeField] protected float amplitude = 1.0f;
     [SerializeField] protected float lifetime = 20.0f;
-
-    [SerializeField] protected float moveSpeed = 8.0f;
-
-    private bool isMoveToPlayer = false; 
 
     private float counter = 0;
     float dir = 1.0f;
@@ -32,13 +27,12 @@ public class ExperiencePickup : MonoBehaviour
             dir *= -1.0f;
         }
         transform.position = transform.position + new Vector3(0, dir * amplitude * Time.deltaTime, 0);
-        MoveToPlayer();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player"){
-            other.GetComponent<PlayerLevels>().add_exp(exp_value, gameObject);
+            suckExp();
             Destroy(gameObject);
             
         }
@@ -49,25 +43,28 @@ public class ExperiencePickup : MonoBehaviour
         yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
     }
+    private void suckExp(){
+                // Find all game objects with the "ExperienceOrb" and "GoldOrb" tags
+        GameObject[] experienceOrbs = GameObject.FindGameObjectsWithTag("ExperienceOrb");
+        GameObject[] goldOrbs = GameObject.FindGameObjectsWithTag("GoldOrb");
 
-    public void StartMoveToPlayer(){
-        isMoveToPlayer= true;
-    }
+        // Combine the two arrays into a list
+        List<GameObject> allOrbs = new List<GameObject>();
+        allOrbs.AddRange(experienceOrbs);
+        allOrbs.AddRange(goldOrbs);
 
-    private void MoveToPlayer()
-    {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        Transform player = playerObject.transform;
-        if (isMoveToPlayer && player != null)
+        // Loop over each object and call StartMoveToPlayer on its ExperiencePickup component
+        foreach (GameObject experienceObject in allOrbs)
         {
-            // Move the orb towards the player
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            ExperiencePickup pickup = experienceObject.GetComponent<ExperiencePickup>();
 
-            // Optionally, stop moving when very close to the player
-            if (Vector3.Distance(transform.position, player.position) < 0.1f)
+            if (pickup != null)
             {
-                isMoveToPlayer = false;  // Stop moving when very close
+                pickup.StartMoveToPlayer();
+            }
+            else
+            {
+                Debug.LogWarning("ExperiencePickup component not found on " + experienceObject.name);
             }
         }
     }

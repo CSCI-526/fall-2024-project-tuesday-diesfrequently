@@ -16,6 +16,9 @@ public class EnemyMove : MonoBehaviour
 
     public float moveSpeed = 0.1f;
 
+    private float slowDebufTimer = 0;
+    private float slowAmount = 0;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -38,6 +41,11 @@ public class EnemyMove : MonoBehaviour
     {   
         SetTarget(targetList);
         // Debug.Log("target list: "+_target.name);
+        slowDebufTimer -= Time.deltaTime;
+        if (slowDebufTimer <= 0){
+            slowAmount = 0;
+        }
+
     }
 
     void FixedUpdate()
@@ -56,7 +64,7 @@ public class EnemyMove : MonoBehaviour
         Vector3 dirToTarget = _target.transform.position - _rb.transform.position;
         dirToTarget.y = 0.0f;
         dirToTarget.Normalize();
-        _rb.MovePosition(transform.position + dirToTarget * moveSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(transform.position + dirToTarget * (moveSpeed *(1-slowAmount)) * Time.fixedDeltaTime);
 
         transform.rotation = UnityEngine.Quaternion.LookRotation(dirToTarget, Vector3.up);
     }
@@ -93,5 +101,10 @@ public class EnemyMove : MonoBehaviour
             collision.gameObject.GetComponent<DefensiveWallHealth>().TakeDamage();
             GetComponent<EnemyHealth>().Die();
         }
+    }
+    public void GetSlowed(float slowRate){
+
+        slowAmount = Mathf.Max(slowAmount, slowRate);
+        slowDebufTimer = 0.1f;
     }
 }

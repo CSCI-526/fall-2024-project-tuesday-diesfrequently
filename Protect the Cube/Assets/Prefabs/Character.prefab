@@ -440,6 +440,7 @@ MonoBehaviour:
   - {fileID: 3021881062986590767, guid: 940d5808eee60aa44aebb9b0a13e38d0, type: 3}
   - {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
   - {fileID: 415337832395152133, guid: f6edc88301e129b4aaed9c842bbdd0fe, type: 3}
+  - {fileID: 6852214484739291977, guid: 2543412762f80df449e7edae5b5abbe3, type: 3}
   rangeIndicator: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
   currentPlaceableObject: {fileID: 0}
   rotateIncrement: 15
