@@ -8,6 +8,7 @@ public class InventoryManager : MonoBehaviour
     //stores turret prefabs
     [SerializeField] public List<GameObject> prefabs = new List<GameObject>();
     //stores how many of each type of turret
+    [SerializeField] public List<GameObject> gunList = new List<GameObject>();
     [SerializeField] public List<int> buildingCount = new List<int>();
     //stores the names of each type of turret
     [SerializeField] public List<string> buildingNames = new List<string>();
@@ -15,6 +16,8 @@ public class InventoryManager : MonoBehaviour
     public PlayerHealth player;
     public Nexus nexus;
     public int healthIncrease = 2;
+
+    private bool firstReward = true;
 
     private void Start()
     {
@@ -33,17 +36,39 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
+    public List<GameObject> Get3UniqueRewards(List<GameObject> prefab_list){
+        List<int> chosen_indexes = new List<int>();
+        List<GameObject> chosen_rewards = new List<GameObject>();
+        for (int i = 0; i<3; i++){
+            do {
+                int cur_ind = Random.Range(0, prefab_list.Count);
+                if (!chosen_indexes.Contains(cur_ind)){
+                    chosen_indexes.Add(cur_ind);
+                    chosen_rewards.Add(prefab_list[cur_ind]);
+                    break;
+                }
+                
+            } while(true);
+        }
+        return chosen_rewards;
+    }
     public void GenerateRewards()
     {
-        int i1 = Random.Range(0, prefabs.Count);
-        int i2 = Random.Range(0, prefabs.Count);
-        int i3 = Random.Range(0, prefabs.Count);
+        List<GameObject> chosen_rewards;
+        if (firstReward == true){
+            chosen_rewards = Get3UniqueRewards(gunList);
+            firstReward = false;
 
-        //Building b1 = prefabs[i1].GetComponent<Building>();
-        //Building b2 = prefabs[i2].GetComponent<Building>();
-        //Building b3 = prefabs[i3].GetComponent<Building>();
+        }
+        else{
+            chosen_rewards = Get3UniqueRewards(prefabs);
 
-        UpdateRewardDisplay(prefabs[i1], prefabs[i2], prefabs[i3]);
+
+        }
+        UpdateRewardDisplay(chosen_rewards[0], chosen_rewards[1], chosen_rewards[2]);
+
+
     }
 
     public void PickReward(string name)
