@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
     public void ShowUpgradeScreen()
     {
         upgradePanel.SetActive(true);
-        Invoke("HideUpgradeScreen", 2.0f);   
+        Invoke("HideUpgradeScreen", 5.0f);   
     }
     public void HideUpgradeScreen()
     {

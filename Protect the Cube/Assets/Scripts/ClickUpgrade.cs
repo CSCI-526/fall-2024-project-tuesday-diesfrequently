@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class ClickUpgrade : MonoBehaviour
 {   
-    [SerializeField] public int goldRequired = 2;
+    [SerializeField] public int goldRequired = 4;
     [SerializeField] public string buildingName;
     [SerializeField] public GameObject indicator;
     private int id;
     private bool upgradeable = true;
     private PlayerLevels playerLevelObject;
+
+    private int level = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +36,8 @@ public class ClickUpgrade : MonoBehaviour
         }
     }
 
-    public bool PayCostIfPossible(){
-        bool haveInventory = GameManager.Instance.InventoryManager.CanPlacebuilding(buildingName);
-
-        if (haveInventory && playerLevelObject.gold >= goldRequired){
-            GameManager.Instance.InventoryManager.TryPlaceBuilding(buildingName);
+    public bool PayCostIfPossible(int gold){
+        if (playerLevelObject.gold >= goldRequired){
             playerLevelObject.gold -= goldRequired;
             return true;
         }
@@ -46,12 +46,16 @@ public class ClickUpgrade : MonoBehaviour
     }
 
     public void upgrade(){
-        if(PayCostIfPossible()){
+        if(PayCostIfPossible(goldRequired)){
+            level++;
+            goldRequired += level*3;
             GameObject indicate = Instantiate(indicator);
-            indicate.transform.position = new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z);
-            gameObject.GetComponent<turretShoot>().upgrade();
-            upgradeable = false;
-
+            indicate.transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f + level/5.0f, transform.position.z);
+            
+            gameObject.GetComponent<turretShoot>().upgrade(level, buildingName);
+            if(level == 3){
+                upgradeable = false;
+            }
             GameManager.Instance.UIManager.HideUpgradeScreen();
         }else{
             Debug.Log("No enough resources");

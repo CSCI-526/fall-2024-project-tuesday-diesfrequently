@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3219165170178985459}
   - component: {fileID: 4294626265519601485}
   m_Layer: 0
-  m_Name: Level UP Indicator
+  m_Name: Level Up indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -46,6 +46,11 @@ public class EnemyMove : MonoBehaviour
             slowAmount = 0;
         }
 
+        if (transform.position.y < -5)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     void FixedUpdate()

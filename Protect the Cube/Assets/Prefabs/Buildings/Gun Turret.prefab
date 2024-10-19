@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef32e84b59ee8438f9ffd1c836f3540b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldRequired: 2
+  goldRequired: 5
   buildingName: Gun Turret
   indicator: {fileID: 5432939863929631517, guid: 693069057d8394f489a20f9e909b3c04, type: 3}
 --- !u!199 &4545694227343427290

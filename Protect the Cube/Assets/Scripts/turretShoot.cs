@@ -125,10 +125,18 @@ public class turretShoot : Building
         }
     }
 
-    internal void upgrade()
+    internal void upgrade(int level, string buildingName)
     {
-        turnSpeed *= 2;
-        fireRate *= 2;
-        maxRange *= 2;
+        if (buildingName == "Flamethrower Turret"){
+            maxRange += maxRange/5; 
+        }else if (buildingName == "Gatling Turret"){
+            turnSpeed += turnSpeed; 
+        }else if (buildingName == "Gun Turret"){
+            fireRate += 3;
+            turnSpeed += 3; 
+        }else if (buildingName == "Sniper Turret"){
+            fireRate *= level;
+            turnSpeed += 3;
+        }
     }
 }
