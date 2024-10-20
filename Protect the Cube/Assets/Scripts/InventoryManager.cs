@@ -42,6 +42,15 @@ public class InventoryManager : MonoBehaviour
         List<GameObject> chosen_rewards = new List<GameObject>();
         for (int i = 0; i<3; i++){
             do {
+                int playerLevel = GameManager.Instance.Player.GetComponent<PlayerLevels>().currentLevel;
+                if (playerLevel > 0 && playerLevel % 5 == 0) //guarantees harvester every 5 levels
+                {
+                    int harvesterIndex = buildingNames.IndexOf("Harvester");
+                    chosen_indexes.Add(harvesterIndex);
+                    chosen_rewards.Add(prefab_list[harvesterIndex]);
+                    break;
+                }
+
                 int cur_ind = Random.Range(0, prefab_list.Count);
                 if (!chosen_indexes.Contains(cur_ind)){
                     chosen_indexes.Add(cur_ind);
@@ -49,14 +58,14 @@ public class InventoryManager : MonoBehaviour
                     break;
                 }
                 
-            } while(true);
+            } while(chosen_rewards.Count < 3);
         }
         return chosen_rewards;
     }
     public void GenerateRewards()
     {
         List<GameObject> chosen_rewards;
-        if (firstReward == true){
+        if (firstReward == true){ //guarantees that the first reward is always a turret
             chosen_rewards = Get3UniqueRewards(gunList);
             firstReward = false;
 
