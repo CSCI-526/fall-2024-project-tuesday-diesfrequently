@@ -7,6 +7,7 @@ public class Harvester : Building
     [SerializeField] public float radius = 6.0f;
     bool IsValidPlacement(float radius = 6.0f)
     {
+        Debug.Log("Checking for harvestor exclusion");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);//, -1, QueryTriggerInteraction.Collide);
         foreach (var other in hitColliders)
         {

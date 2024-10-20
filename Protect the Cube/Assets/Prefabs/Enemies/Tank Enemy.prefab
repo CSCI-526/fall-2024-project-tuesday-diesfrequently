@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6751013467225393485}
   - component: {fileID: 1070887328571738145}
   - component: {fileID: 2541449515617873050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1139330064262291029}
   - component: {fileID: 8803482667701268275}
   - component: {fileID: 1963565173388153342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tank Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 7383719891037047056}
   - component: {fileID: 7604632372791639187}
   - component: {fileID: 4359828820656787711}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Enemy
   m_Icon: {fileID: 0}
