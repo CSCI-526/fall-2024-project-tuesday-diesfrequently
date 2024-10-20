@@ -102,7 +102,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public bool CanPlacebuilding(string name)
+    public bool HasBuilding(string name)
     {
         int i = buildingNames.IndexOf(name);
         if (buildingCount[i] > 0)
@@ -117,7 +117,7 @@ public class InventoryManager : MonoBehaviour
 
     public bool TryPlaceBuilding(string name)
     {
-        if(CanPlacebuilding(name))
+        if(HasBuilding(name))
         {
             int i = buildingNames.IndexOf(name);
             buildingCount[i]--;

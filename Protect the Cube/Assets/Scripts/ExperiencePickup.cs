@@ -12,7 +12,8 @@ public class ExperiencePickup : MonoBehaviour
 
     [SerializeField] protected float moveSpeed = 8.0f;
 
-    private bool isMoveToPlayer = false; 
+    [SerializeField] public bool moveToPlayer = false;
+    [SerializeField] public float attractionRange = 4.0f;
 
     private float counter = 0;
     float dir = 1.0f;
@@ -51,23 +52,28 @@ public class ExperiencePickup : MonoBehaviour
     }
 
     public void StartMoveToPlayer(){
-        isMoveToPlayer= true;
+        moveToPlayer= true;
     }
 
     private void MoveToPlayer()
     {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerObject = GameManager.Instance.Player;
         Transform player = playerObject.transform;
-        if (isMoveToPlayer && player != null)
+        if (moveToPlayer && player != null)
         {
-            // Move the orb towards the player
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            if(distanceToPlayer <= attractionRange)
+            {
+                // Move the orb towards the player
+                Vector3 direction = (player.position - transform.position).normalized;
+                transform.position += direction * moveSpeed * Time.deltaTime;
+            }
 
             // Optionally, stop moving when very close to the player
             if (Vector3.Distance(transform.position, player.position) < 0.1f)
             {
-                isMoveToPlayer = false;  // Stop moving when very close
+                moveToPlayer = false;  // Stop moving when very close
             }
         }
     }

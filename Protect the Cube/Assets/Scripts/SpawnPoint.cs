@@ -18,6 +18,7 @@ public class SpawnPoint : MonoBehaviour
         {
             SpawnEnemy();
         }
+        enemyPrefabs = GameManager.Instance.WaveManager.enemyPrefabs;
     }
 
     public void SpawnEnemy(float delay = 1.0f, int wave = 1, float difficulty = 1.0f)
