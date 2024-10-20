@@ -12,7 +12,10 @@ public class Indicator : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
         {
-            target.GetComponent<Nexus>().indicator = null;
+            if(target.GetComponent<Nexus>() != null)
+            {
+                target.GetComponent<Nexus>().indicator = null;
+            }
             OffScreenIndicator.Instance.ReturnIndicator(gameObject);
             return;
         }

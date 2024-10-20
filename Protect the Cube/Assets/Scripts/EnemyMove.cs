@@ -80,12 +80,15 @@ public class EnemyMove : MonoBehaviour
         GameObject closestObject = null;
         for (int i = 0; i < targetList.Count(); i++)  //list of gameObjects to search through
         {
-          float dist = Vector3.Distance(targetList[ i ].transform.position, transform.position);
-          if (dist < closest)
-          {
-            closest = dist;
-            closestObject = targetList[ i ];
-          }
+            if (targetList[i] && !targetList[i].IsDestroyed())
+            {
+                float dist = Vector3.Distance(targetList[i].transform.position, transform.position);
+                if (dist < closest)
+                {
+                    closest = dist;
+                    closestObject = targetList[i];
+                }
+            }
         }
         // Debug.Log("closest: "+closestObject.name);
         _target = closestObject; 
