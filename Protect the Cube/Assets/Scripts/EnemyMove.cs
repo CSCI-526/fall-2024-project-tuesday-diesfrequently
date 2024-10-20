@@ -18,6 +18,7 @@ public class EnemyMove : MonoBehaviour
 
     private float slowDebufTimer = 0;
     private float slowAmount = 0;
+    [SerializeField] int damage = 1;
 
     void Awake()
     {
@@ -98,7 +99,7 @@ public class EnemyMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Nexus"))
         {
-            collision.gameObject.GetComponent<Nexus>().TakeDamage();
+            collision.gameObject.GetComponent<Nexus>().TakeDamage(damage);
             GetComponent<EnemyHealth>().Die();
         }
         else if(collision.gameObject.CompareTag("Player"))
