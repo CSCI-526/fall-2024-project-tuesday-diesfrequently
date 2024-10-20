@@ -285,7 +285,7 @@ MonoBehaviour:
   rotatable: 0
   buildingName: Harvester
   buildingDesc: Generates gold over time. Use gold to upgrade turrets.
-  radius: 6
+  radius: 4
 --- !u!114 &6488971438371175472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 4978915526652792867}
-  radius: 3
+  radius: 2
   useTurretRange: 1
 --- !u!114 &1453563995351358942
 MonoBehaviour:
