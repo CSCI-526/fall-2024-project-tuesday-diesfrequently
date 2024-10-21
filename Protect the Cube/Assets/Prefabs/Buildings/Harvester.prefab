@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7621499326211407630}
   - component: {fileID: 8334467754464610948}
   - component: {fileID: 702937390676432428}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 8457574962055490782}
   - component: {fileID: 6488971438371175472}
   - component: {fileID: 1453563995351358942}
+  - component: {fileID: 3552359513229429613}
   m_Layer: 0
   m_Name: Harvester
   m_TagString: Nexus
@@ -266,6 +267,8 @@ MonoBehaviour:
   XP: {fileID: 6435648702068270667, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
   triggerGameOver: 0
+  animator: {fileID: 0}
+  indicator: {fileID: 0}
 --- !u!114 &8457574962055490782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,8 +284,8 @@ MonoBehaviour:
   placed: 0
   rotatable: 0
   buildingName: Harvester
-  buildingDesc: Generates EXP over time. Can be destroyed
-  radius: 6
+  buildingDesc: Generates gold over time. Use gold to upgrade turrets.
+  radius: 4
 --- !u!114 &6488971438371175472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 4978915526652792867}
-  radius: 3
+  radius: 2
   useTurretRange: 1
 --- !u!114 &1453563995351358942
 MonoBehaviour:
@@ -312,6 +315,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmp: {fileID: 702937390676432428}
   title: Harvester
+--- !u!95 &3552359513229429613
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415337832395152133}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6c60a2b8ec4409b48936ea0c6be76a8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1501241086206586852
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +348,7 @@ GameObject:
   - component: {fileID: 2923070117054755249}
   - component: {fileID: 4276577533681180912}
   - component: {fileID: 7197626331094595831}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,6 +497,14 @@ PrefabInstance:
     - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_Name
       value: RangeIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

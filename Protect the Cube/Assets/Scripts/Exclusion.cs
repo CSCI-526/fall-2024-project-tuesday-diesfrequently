@@ -28,9 +28,7 @@ public class Exclusion : MonoBehaviour
         Vector3 boxSize = placeableObject.transform.localScale;
         Vector3 position = placeableObject.transform.position;
         LayerMask objectLayer = 1 << placeableObject.layer;
-
-        //Collider[] colliders = Physics.OverlapBox(position, boxSize, Quaternion.identity, objectLayer);
-        Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude, objectLayer);
+        Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude/2, objectLayer);
         if (colliders.Length > 1)
         {
             foreach (var other in colliders)
@@ -39,6 +37,16 @@ public class Exclusion : MonoBehaviour
                 {
                     other.gameObject.GetComponent<Building>().ShowIndicators(0.1f);
                     Debug.Log("Invalid Placement: too close to existing building");
+                    return false;
+                } else if (other.gameObject.GetComponent<Nexus>() != null)
+                {
+                    other.gameObject.GetComponent<Building>().ShowIndicators(0.1f);
+                    Debug.Log("Invalid Placement: cannot place on Nexus");
+                    return false;
+                } else if (other.gameObject.GetComponent<Harvester>() != null)
+                {
+                    other.gameObject.GetComponent<Building>().ShowIndicators(0.1f);
+                    Debug.Log("Invalid Placement: too close to existing harvester");
                     return false;
                 }
             }

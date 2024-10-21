@@ -212,8 +212,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.0232341
-  m_Center: {x: 0.00095534325, y: 0, z: 0}
+  m_Radius: 0.17840779
+  m_Center: {x: 0.00057291985, y: -0.014694452, z: -0.0022945404}
 --- !u!108 &2843425515664909191
 Light:
   m_ObjectHideFlags: 0
@@ -226,8 +226,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 1, b: 0.08624554, a: 1}
-  m_Intensity: 4
-  m_Range: 0.6
+  m_Intensity: 2
+  m_Range: 2
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -292,6 +292,9 @@ MonoBehaviour:
   period: 1
   amplitude: 0.5
   lifetime: 15
+  moveSpeed: 8
+  moveToPlayer: 1
+  attractionRange: 4
 --- !u!114 &-3978978509010604329
 MonoBehaviour:
   m_ObjectHideFlags: 0

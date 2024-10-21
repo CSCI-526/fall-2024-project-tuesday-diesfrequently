@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 811320972712195945, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Name
       value: Sniper 1
@@ -35,6 +39,10 @@ PrefabInstance:
     - target: {fileID: 1399077278889937836, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Center.z
       value: 0.077008486
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471998326924655349, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3598094888286799798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingName

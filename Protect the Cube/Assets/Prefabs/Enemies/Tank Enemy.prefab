@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6751013467225393485}
   - component: {fileID: 1070887328571738145}
   - component: {fileID: 2541449515617873050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1139330064262291029}
   - component: {fileID: 8803482667701268275}
   - component: {fileID: 1963565173388153342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tank Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6013629208632606210}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -213,10 +213,10 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
+  damage: 3
 --- !u!114 &1139330064262291029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +312,7 @@ GameObject:
   - component: {fileID: 7383719891037047056}
   - component: {fileID: 7604632372791639187}
   - component: {fileID: 4359828820656787711}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Enemy
   m_Icon: {fileID: 0}

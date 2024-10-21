@@ -16,6 +16,10 @@ public class EnemyMove : MonoBehaviour
 
     public float moveSpeed = 0.1f;
 
+    private float slowDebufTimer = 0;
+    private float slowAmount = 0;
+    [SerializeField] int damage = 1;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -38,6 +42,16 @@ public class EnemyMove : MonoBehaviour
     {   
         SetTarget(targetList);
         // Debug.Log("target list: "+_target.name);
+        slowDebufTimer -= Time.deltaTime;
+        if (slowDebufTimer <= 0){
+            slowAmount = 0;
+        }
+
+        if (transform.position.y < -5)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     void FixedUpdate()
@@ -56,7 +70,7 @@ public class EnemyMove : MonoBehaviour
         Vector3 dirToTarget = _target.transform.position - _rb.transform.position;
         dirToTarget.y = 0.0f;
         dirToTarget.Normalize();
-        _rb.MovePosition(transform.position + dirToTarget * moveSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(transform.position + dirToTarget * (moveSpeed *(1-slowAmount)) * Time.fixedDeltaTime);
 
         transform.rotation = UnityEngine.Quaternion.LookRotation(dirToTarget, Vector3.up);
     }
@@ -67,12 +81,15 @@ public class EnemyMove : MonoBehaviour
         GameObject closestObject = null;
         for (int i = 0; i < targetList.Count(); i++)  //list of gameObjects to search through
         {
-          float dist = Vector3.Distance(targetList[ i ].transform.position, transform.position);
-          if (dist < closest)
-          {
-            closest = dist;
-            closestObject = targetList[ i ];
-          }
+            if (targetList[i] && !targetList[i].IsDestroyed())
+            {
+                float dist = Vector3.Distance(targetList[i].transform.position, transform.position);
+                if (dist < closest)
+                {
+                    closest = dist;
+                    closestObject = targetList[i];
+                }
+            }
         }
         // Debug.Log("closest: "+closestObject.name);
         _target = closestObject; 
@@ -82,7 +99,7 @@ public class EnemyMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Nexus"))
         {
-            collision.gameObject.GetComponent<Nexus>().TakeDamage();
+            collision.gameObject.GetComponent<Nexus>().TakeDamage(damage);
             GetComponent<EnemyHealth>().Die();
         }
         else if(collision.gameObject.CompareTag("Player"))
@@ -93,5 +110,10 @@ public class EnemyMove : MonoBehaviour
             collision.gameObject.GetComponent<DefensiveWallHealth>().TakeDamage();
             GetComponent<EnemyHealth>().Die();
         }
+    }
+    public void GetSlowed(float slowRate){
+
+        slowAmount = Mathf.Max(slowAmount, slowRate);
+        slowDebufTimer = 0.1f;
     }
 }

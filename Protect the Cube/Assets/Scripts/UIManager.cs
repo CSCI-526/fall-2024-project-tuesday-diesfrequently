@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
-    [SerializeField] protected TextMeshProUGUI inventoryUI;
+    [SerializeField] public List<TextMeshProUGUI> inventoryCount = new List<TextMeshProUGUI>();
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
     [SerializeField] protected GameObject rewardMenu;
@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
     public void ShowUpgradeScreen()
     {
         upgradePanel.SetActive(true);
-        Invoke("HideUpgradeScreen", 2.0f);   
+        Invoke("HideUpgradeScreen", 5.0f);   
     }
     public void HideUpgradeScreen()
     {
@@ -99,26 +99,20 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void UpdateRewardsUI(Building b1, Building b2, Building b3)
+    public void UpdateRewardsUI(GameObject b1, GameObject b2, GameObject b3)
     {
         rewardMenu.GetComponent<RewardChoiceUI>().UpdateRewardChoices(b1, b2, b3);
     }
 
     public void UpdateInventoryUI()
     {
-        string txt = "Buildings:\n";
         InventoryManager inv = GameManager.Instance.InventoryManager;
 
         for(int i = 0; i < inv.buildingCount.Count; i++)
         {
-            if (inv.buildingCount[i] != 0)
-            {
-                int j = i + 1;
-                txt += "\n" + j + ": " + inv.buildingNames[i] + " x" + inv.buildingCount[i];
-            }
+            inventoryCount[i].text = "x" + inv.buildingCount[i];
         }
 
-        inventoryUI.text = txt;
     }
     public void updateUpgradeUI(string buildingName, int materialNum, int id)
     {

@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] public int maxHealth = 5;
     [SerializeField] public float invincibilityDuration = 0.01f;
+    [SerializeField] private Animator animator;
 
     public int currentHealth;
     private bool isInvincible = false;
@@ -13,12 +14,14 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage()
     {
         if (!isInvincible) // Only take damage if not currently invincible
         {
+            animator.SetTrigger("Damage");
             currentHealth--;
             GameManager.Instance.UIManager.UpdateUI();
             if (currentHealth <= 0)

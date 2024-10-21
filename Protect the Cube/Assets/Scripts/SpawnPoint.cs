@@ -9,7 +9,7 @@ public class SpawnPoint : MonoBehaviour
 {
     [SerializeField] protected bool spawnAtStart = true;
     [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>();
-    public float spawnRange = 1.0f;
+    public float spawnRange = 5.0f;
 
     void Start()
     {
@@ -18,9 +18,10 @@ public class SpawnPoint : MonoBehaviour
         {
             SpawnEnemy();
         }
+        enemyPrefabs = GameManager.Instance.WaveManager.enemyPrefabs;
     }
 
-    public void SpawnEnemy(float delay = 0f, int wave = 1, float difficulty = 1.0f)
+    public void SpawnEnemy(float delay = 1.0f, int wave = 1, float difficulty = 1.0f)
     {   
         
         int enemyNum = Random.Range(Math.Max(1,wave-3), Math.Max((int)Math.Round(difficulty * wave), 2));
