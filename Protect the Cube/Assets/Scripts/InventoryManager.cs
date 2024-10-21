@@ -46,9 +46,12 @@ public class InventoryManager : MonoBehaviour
                 if (playerLevel > 0 && playerLevel % 5 == 0) //guarantees harvester every 5 levels
                 {
                     int harvesterIndex = buildingNames.IndexOf("Harvester");
-                    chosen_indexes.Add(harvesterIndex);
-                    chosen_rewards.Add(prefab_list[harvesterIndex]);
-                    break;
+                    if (!chosen_indexes.Contains(harvesterIndex))
+                    {
+                        chosen_indexes.Add(harvesterIndex);
+                        chosen_rewards.Add(prefab_list[harvesterIndex]);
+                        break;
+                    }
                 }
 
                 int cur_ind = Random.Range(0, prefab_list.Count);

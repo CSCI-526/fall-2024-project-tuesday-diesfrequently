@@ -105,10 +105,6 @@ public class EnemyMove : MonoBehaviour
         else if(collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage();
-        }else if (collision.gameObject.CompareTag("Wall"))
-        {
-            collision.gameObject.GetComponent<DefensiveWallHealth>().TakeDamage();
-            GetComponent<EnemyHealth>().Die();
         }
     }
     public void GetSlowed(float slowRate){
