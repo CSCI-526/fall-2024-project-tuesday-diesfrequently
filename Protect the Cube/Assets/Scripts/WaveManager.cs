@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-
-    [SerializeField] protected int maxEnemies = 10;
     [SerializeField] protected float waveInterval = 5.0f;
     [SerializeField] protected float maxSpawnDelay = 2.0f;
 
@@ -19,6 +17,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public int tankSpawnStartWave = 5;
 
     [SerializeField] public GameObject spawnerBoss;
+    [SerializeField] public int spawnerBossStartWave = 10;
 
     [SerializeField] public List<GameObject> enemyPrefabs = new List<GameObject>();
     [SerializeField] public List<GameObject> enemies = new List<GameObject>();
@@ -72,7 +71,7 @@ public class WaveManager : MonoBehaviour
 
     void SpawnTanks()
     {
-        for (int i = wave; i > tankSpawnStartWave; --i)
+        for (int i = wave; i >= tankSpawnStartWave; --i)
         {
             SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
             if (Random.Range(0.0f, 1.0f) <= tankRate)
@@ -85,11 +84,14 @@ public class WaveManager : MonoBehaviour
 
     void SpawnSpawnerBoss()
     {
-        if(true)
+        if(wave >= spawnerBossStartWave)
         {
-            SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-            GameObject spawnerEnemy = Instantiate(spawnerBoss);
-            spawnerEnemy.transform.position = randomSpawnPoint.transform.position;
+            for(int i = wave / spawnerBossStartWave; i > 0; --i)
+            {
+                SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+                GameObject spawnerEnemy = Instantiate(spawnerBoss);
+                spawnerEnemy.transform.position = randomSpawnPoint.transform.position;
+            }
         }
     }
 }
