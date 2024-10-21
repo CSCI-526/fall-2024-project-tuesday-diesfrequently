@@ -103,11 +103,14 @@ public class turretShoot : Building
         float minRange = maxRange;
         foreach (GameObject enemy in GameManager.Instance.WaveManager.enemies)
         {
-            float dist = (enemy.transform.position - transform.position).magnitude;
-            if (dist < minRange)
+            if(enemy != null && !enemy.IsDestroyed())
             {
-                target = enemy;
-                minRange = dist;
+                float dist = (enemy.transform.position - transform.position).magnitude;
+                if (dist < minRange)
+                {
+                    target = enemy;
+                    minRange = dist;
+                }
             }
         }
     }
