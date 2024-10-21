@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
     [SerializeField] protected GameObject rewardMenu;
+    //[SerializeField] protected GameObject miniRewardMenu;
     [SerializeField] protected GameObject upgradePanel;
     [SerializeField] protected GameObject pauseUI;
     private Nexus nexus;
@@ -60,16 +61,20 @@ public class UIManager : MonoBehaviour
         rewardMenu.SetActive(true);
         Time.timeScale = 0.0f;
     }
+
     public void HideRewardScreen()
     {
         rewardMenu.SetActive(false);
         Time.timeScale = 1.0f;
+            
     }
+
     public void ShowUpgradeScreen()
     {
         upgradePanel.SetActive(true);
-        Invoke("HideUpgradeScreen", 5.0f);   
+        Invoke("HideUpgradeScreen", 5.0f);
     }
+
     public void HideUpgradeScreen()
     {
         upgradePanel.SetActive(false);
@@ -95,7 +100,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateGoldUI()
     {
-        goldUI.text = "Gold: " + playerLevels.gold;
+        goldUI.text = "Gold: " + playerLevels.currentGold;
         
     }
 
@@ -103,6 +108,7 @@ public class UIManager : MonoBehaviour
     {
         rewardMenu.GetComponent<RewardChoiceUI>().UpdateRewardChoices(b1, b2, b3);
     }
+
 
     public void UpdateInventoryUI()
     {

@@ -12,5 +12,6 @@ public class RewardChoiceUI : MonoBehaviour
         panel1.UpdateRewardPanel(b1);
         panel2.UpdateRewardPanel(b2);
         panel3.UpdateRewardPanel(b3);
+
     }
 }

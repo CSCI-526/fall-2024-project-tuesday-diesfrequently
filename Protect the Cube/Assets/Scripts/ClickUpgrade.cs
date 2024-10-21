@@ -37,8 +37,9 @@ public class ClickUpgrade : MonoBehaviour
     }
 
     public bool PayCostIfPossible(int gold){
-        if (playerLevelObject.gold >= goldRequired){
-            playerLevelObject.gold -= goldRequired;
+        if (playerLevelObject.currentGold >= goldRequired){
+            playerLevelObject.currentGold -= goldRequired;
+            GameManager.Instance.AnalyticsManager.UpdatePlayerSpentGold(goldRequired);
             return true;
         }
         return false;

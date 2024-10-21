@@ -1,3 +1,6 @@
+// character movement via WASD
+// instantiating player bullets (via bullet pool) given timeSinceLastShot
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

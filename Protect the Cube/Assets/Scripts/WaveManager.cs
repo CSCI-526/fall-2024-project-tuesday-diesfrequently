@@ -57,7 +57,7 @@ public class WaveManager : MonoBehaviour
         SpawnSpawnerBoss();
         GameManager.Instance.UIManager.UpdateUI();
         Debug.Log("Updating Wave... Wave " + wave + " starting");
-        GameManager.Instance.AnalyticsManager.LogUpdatedWaveStart(wave);// Send wave number to analytics
+        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave);// Send wave number to analytics
 
     }
 

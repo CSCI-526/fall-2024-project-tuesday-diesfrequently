@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void TriggerGameOver()
     {
-        Instance.AnalyticsManager.PlayerDied(); // send analytics of player stats on game end
+        Instance.AnalyticsManager.SendSessionEndAnalytics(); // Send Analytics of Game End
         Instance.UIManager.ShowGameOverScreen();
     }
 
