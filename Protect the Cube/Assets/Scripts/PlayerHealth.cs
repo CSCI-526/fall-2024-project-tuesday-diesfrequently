@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] public int maxHealth = 5;
     [SerializeField] public float invincibilityDuration = 0.01f;
     [SerializeField] private Animator animator;
+    [SerializeField] public Slider hpBar;
+    [SerializeField] private Canvas hpCanvas;
 
     public int currentHealth;
     private bool isInvincible = false;
@@ -15,6 +20,16 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+
+        if (hpCanvas)
+        {
+            ConstraintSource cs = new ConstraintSource();
+            cs.weight = 1.0f;
+            cs.sourceTransform = Camera.main.transform;
+
+            hpCanvas.GetComponent<RotationConstraint>().AddSource(cs);
+            UpdateHPBar();
+        }
     }
 
     public void TakeDamage()
@@ -23,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
         {
             animator.SetTrigger("Damage");
             currentHealth--;
+            UpdateHPBar();
             GameManager.Instance.UIManager.UpdateUI();
             if (currentHealth <= 0)
             {
@@ -46,5 +62,12 @@ public class PlayerHealth : MonoBehaviour
     {
         GameManager.Instance.TriggerGameOver();
         gameObject.SetActive(false);
+    }
+    public void UpdateHPBar()
+    {
+        if (hpBar)
+        {
+            hpBar.value = (float)currentHealth / maxHealth;
+        }
     }
 }

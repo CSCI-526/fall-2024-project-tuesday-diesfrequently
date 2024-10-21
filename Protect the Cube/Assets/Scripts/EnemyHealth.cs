@@ -1,6 +1,8 @@
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -12,10 +14,14 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public float xpDropRate = 0.5f;  
     [SerializeField] public int maxXpDrop = 3;
     [SerializeField] public int minXpDrop = 5;
-    private float currentHealth;
+    [SerializeField] public float currentHealth;
     private bool isInvincible = false;
     private Animator animator;
 
+    [SerializeField] public bool showHPBar = true;
+    [SerializeField] public GameObject hpCanvas;
+    [SerializeField] public Slider hpBar;
+    [SerializeField] public Vector3 hpBarOffset = new Vector3(0.0f,3.0f,0.0f);
 
     void Start()
     {
@@ -23,13 +29,27 @@ public class EnemyHealth : MonoBehaviour
         GameManager.Instance.WaveManager.enemyCount++;
         GameManager.Instance.WaveManager.enemies.Add(this.gameObject);
         animator = GetComponent<Animator>();    
-        //Debug.Log(GameManager.Instance.WaveManager.enemyCount);
+        
+        if(hpCanvas)
+        {
+            hpCanvas.SetActive(showHPBar);
+
+            ConstraintSource cs = new ConstraintSource();
+            cs.weight = 1.0f;
+            cs.sourceTransform = Camera.main.transform;
+
+            hpCanvas.GetComponent<RotationConstraint>().AddSource(cs);
+            UpdateHPBar();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(hpCanvas)
+        {
+            UpdateHPBarTransform();
+        }
     }
 
     public void TakeDamage(float damage)
@@ -41,6 +61,7 @@ public class EnemyHealth : MonoBehaviour
                 animator.SetTrigger("Damage");
             }
             currentHealth -= damage;
+            UpdateHPBar();
             if (currentHealth <= 0)
             {
                 Die();
@@ -76,5 +97,20 @@ public class EnemyHealth : MonoBehaviour
                 xp.transform.position = new Vector3(transform.position.x+Random.Range(-1*1, 1), transform.position.y, transform.position.z+Random.Range(-1*1, 1));;
             }
         }
+    }
+
+    public void UpdateHPBar()
+    {
+        if(hpBar)
+        {
+            hpBar.value = currentHealth / maxHealth;
+        }
+    }
+    private void UpdateHPBarTransform()
+    {
+        Vector3 fromCamera = (transform.position - Camera.main.transform.position).normalized;
+        hpCanvas.transform.position = transform.position + hpBarOffset + fromCamera * 0.5f; 
+
+        //hpCanvas.transform.LookAt(Camera.main.transform.position);
     }
 }

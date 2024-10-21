@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class Nexus : MonoBehaviour
@@ -20,6 +21,8 @@ public class Nexus : MonoBehaviour
     public delegate void NexusEvent();
     public event NexusEvent OnTakeDamage;
 
+    [SerializeField] public Slider hpBar;
+
     public GameObject indicator = null;
 
     // Start is called before the first frame update
@@ -28,6 +31,11 @@ public class Nexus : MonoBehaviour
         GameManager.Instance.Nexus = this.gameObject;
         health = maxHealth;
         animator = GetComponent<Animator>();
+
+        if(hpBar)
+        {
+            //hpBar.value = 1;
+        }
     }
     public void TakeDamage(int amount = 1)
     {
@@ -77,6 +85,9 @@ public class Nexus : MonoBehaviour
                 Instantiate(XP, transform.position + xpSpawnOffset, Quaternion.identity);
             }
         }
+        if (hpBar)
+        {
+            hpBar.value = (float)health / maxHealth;
+        }
     }
-
 }
