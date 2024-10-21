@@ -19,7 +19,19 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] public List<string> buildingNames = new List<string>();
 
     // stores a progressive expansion of which rewards the player has access too
-    private HashSet<GameObject> available_rewards = new HashSet<GameObject>(); 
+    private HashSet<GameObject> available_rewards = new HashSet<GameObject>();
+
+    // Dictionary for String - Int Mapping of Buildings
+    private Dictionary<string, int> buildingMapping = new Dictionary<string, int>()
+    {
+        { "Gun Turret", 1 },
+        { "Gatling Turret", 2 },
+        { "Flamethrower Turret", 3 },
+        { "Sniper Turret", 4 },
+        { "Turret Booster", 5 },
+        { "Harvester", 6 },
+        { "Slow Tower", 7 }
+    };
 
     public PlayerHealth player;
     public Nexus nexus;
@@ -44,6 +56,20 @@ public class InventoryManager : MonoBehaviour
                 buildingCount.Add(0);
                 buildingNames.Add(all_reward_prefabs[i].GetComponent<Building>().buildingName);
             }
+        }
+    }
+
+    public int ConvertBuildingNameToIndex(string buildingName)
+    {
+        // Check if the building name exists in the dictionary
+        if (buildingMapping.TryGetValue(buildingName, out int index))
+        {
+            return index; // Return the associated index
+        }
+        else
+        {
+            Debug.LogWarning($"Building name '{buildingName}' not found in the mapping.");
+            return -1; // Return -1 or any other default value to indicate not found
         }
     }
 
@@ -143,6 +169,13 @@ public class InventoryManager : MonoBehaviour
             forceGameObjectCount = 1;
             available_rewards.Add(all_reward_prefabs[slowTowerIdx]);
         }
+        else if (playerLevel == 8) // Level 8: Player gets Turret Booster
+        {
+            int turretBoosterIdx = buildingNames.IndexOf("Turret Booster");
+            forcedGameObject = all_reward_prefabs[turretBoosterIdx];
+            forceGameObjectCount = 1;
+            available_rewards.Add(all_reward_prefabs[turretBoosterIdx]);
+        }
 
         // other building names: Sniper Turret, Turret Booster
 
@@ -167,21 +200,24 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.Log(" Chosen 2 is NULL");
         }
-        Debug.Log("Chosen Reward 0: " + chosen_rewards[0].GetComponent<Building>().buildingName);
-        Debug.Log("Chosen Reward 1: " + chosen_rewards[1].GetComponent<Building>().buildingName);
-        Debug.Log("Chosen Reward 2: " + chosen_rewards[2].GetComponent<Building>().buildingName);
 
-        // Order: Gun Turret, Gatling Turret, Flamethrower Turret, Sniper Turret, Turret Booster, Harvester, Slow Tower
+        string reward_name_0 = chosen_rewards[0].GetComponent<Building>().buildingName;
+        string reward_name_1 = chosen_rewards[1].GetComponent<Building>().buildingName;
+        string reward_name_2 = chosen_rewards[2].GetComponent<Building>().buildingName;
+
+        Debug.Log("Chosen Reward 0: " + reward_name_0);
+        Debug.Log("Chosen Reward 1: " + reward_name_1);
+        Debug.Log("Chosen Reward 2: " + reward_name_2);
+
+        int rewardIDX0 = ConvertBuildingNameToIndex(reward_name_0);
+        int rewardIDX1 = ConvertBuildingNameToIndex(reward_name_1);
+        int rewardIDX2 = ConvertBuildingNameToIndex(reward_name_2);
+
         // Analytics Update
-        //foreach (GameObject reward in chosen_rewards) {
-        //    Building building = reward.GetComponent<Building>();
-        //    Debug.Log("Chosen Reward Name: " + building.buildingName);
-        //    //GameManager.Instance.AnalyticsManager.UpdateRewardsOffered()
-        //}
+        // Order: Gun Turret, Gatling Turret, Flamethrower Turret, Sniper Turret, Turret Booster, Harvester, Slow Tower
+        GameManager.Instance.AnalyticsManager.UpdateRewardsOffered(rewardIDX0, rewardIDX1, rewardIDX2);
 
         UpdateRewardDisplay(chosen_rewards[0], chosen_rewards[1], chosen_rewards[2]);
-
-
     }
 
     public void PickReward(string name)
@@ -210,7 +246,8 @@ public class InventoryManager : MonoBehaviour
         {
             int i = buildingNames.IndexOf(name);
             buildingCount[i]++;
-            //Debug.Log("Picked " + name);
+            int turretIDX0 = ConvertBuildingNameToIndex(name);
+            GameManager.Instance.AnalyticsManager.UpdateTotalPlacedTurrets(turretIDX0);
             GameManager.Instance.UIManager.UpdateInventoryUI();
         }
     }
@@ -235,6 +272,8 @@ public class InventoryManager : MonoBehaviour
             int i = buildingNames.IndexOf(name);
             buildingCount[i]--;
             GameManager.Instance.UIManager.UpdateInventoryUI();
+            int turretIDX0 = ConvertBuildingNameToIndex(name);
+            GameManager.Instance.AnalyticsManager.UpdateTotalPlacedTurrets(turretIDX0);
             return true;
         }
         return false;
@@ -244,9 +283,4 @@ public class InventoryManager : MonoBehaviour
     {
         GameManager.Instance.UIManager.UpdateRewardsUI(b1, b2, b3);
     }
-
-    //public void UpdateMiniRewardDisplay(GameObject m1)
-    //{
-    //    GameManager.Instance.UIManager.UpdateMiniRewardsUI(m1);
-    //}
 }

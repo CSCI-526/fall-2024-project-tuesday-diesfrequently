@@ -58,43 +58,17 @@ public class UIManager : MonoBehaviour
 
     public void ShowRewardScreen()
     {
-        //Debug.Log("Entering ShowRewardsSceen()... ");
-
-        //if (playerLevels.currentLevel == 1)
-        //{
-            //Debug.Log("Setting miniRewardsMenu to active... ");
-            //miniRewardMenu.SetActive(true);
-            //Debug.Log("Setting miniRewardsMenu to deactive... ");
-            //Time.timeScale = 0.0f;
-            ////Debug.Log("Exiting ofr free miniRewardsMenu to deactive... ");
-        //}
-        //else
-        //{
-            //Debug.Log("Setting MEGA Rewareds screen() to active... ");
         rewardMenu.SetActive(true);
-            //Debug.Log("Setting MEGA rewards to deactive... ");
         Time.timeScale = 0.0f;
-            //Debug.Log("Exiting ofr free miniRewardsMenu to deactive... ");
-        //}
-        
     }
+
     public void HideRewardScreen()
     {
-        //Debug.Log("Leaving ShowRewardsSceen()... ");
-        //if (playerLevels.currentLevel == 1)
-        //{
-        //    Debug.Log("Setting miniRewardsMenu to deactivaate... ");
-        //    miniRewardMenu.SetActive(false);
-        //    Time.timeScale = 1.0f;
-        //}
-        //else
-        //{
-        //    Debug.Log("Hiding miniRewardsMenu to active... ");
         rewardMenu.SetActive(false);
         Time.timeScale = 1.0f;
-        //}
             
     }
+
     public void ShowUpgradeScreen()
     {
         upgradePanel.SetActive(true);

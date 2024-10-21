@@ -31,7 +31,7 @@ public class AnalyticsManager : MonoBehaviour
     private long _timestamp;
 
     // analytics tracked variables (metric #1)
-    private List<int> _playerHitpointLossWaves; // make this a list
+    private List<string> _playerHitpointLossWaves; // make this a list
     private int _waveDeathNum;
 
     // analytics tracked variables (metric #2)
@@ -57,7 +57,7 @@ public class AnalyticsManager : MonoBehaviour
         InitializeSessionAnalyticsVariables();          // Initialize all analytics stat variables
 
          //[DEBUG] Send Session Start Analytics Report
-         SendSessionStartAnalytics();
+         //SendSessionStartAnalytics();
     }
 
     // Description: Generates a random 4-digit session ID.
@@ -74,8 +74,8 @@ public class AnalyticsManager : MonoBehaviour
         {
             // Metric #1
             _waveDeathNum = 0;
-            _playerHitpointLossWaves = new List<int>(new int[1]); // dynamic list (size will grow)
-            _playerHitpointLossWaves[0] = 0;
+            _playerHitpointLossWaves = new List<string>(new string[1]); // dynamic list (size will grow)
+            _playerHitpointLossWaves[0] = "";
 
             // Metric #2
             _playerLevel = 1;
@@ -107,11 +107,18 @@ public class AnalyticsManager : MonoBehaviour
 
     // Description: Appends the given wave number to the list of hitpoint loss waves.
     // Parameters: waveNumber - The wave number where a player has lost hitpoints.
-    public void UpdateHitpointLossWave()
-    {
+    public void UpdateHitpointLossWave(int lossType)
+    { // 0 is nexus dmg, 1 is player dmg
         lock (_lockObject)
         {
-            _playerHitpointLossWaves.Add(_waveDeathNum);  // Append the current wave number to the list
+            if (lossType == 10) // nexus dmg
+            {
+                _playerHitpointLossWaves.Add("N" + _waveDeathNum.ToString());  // Append the current wave number 
+            } else if (lossType == 20) // player dmg
+            {
+                _playerHitpointLossWaves.Add("P" + _waveDeathNum.ToString());  // Append the current wave number
+            }
+            
             
         }
     }
@@ -163,6 +170,7 @@ public class AnalyticsManager : MonoBehaviour
     // Parameters: playerSpentGold - The total gold spent by the player
     public void UpdatePlayerSpentGold(int playerSpentGold)
     {
+        Debug.Log("[Analytics] UpdatePlayerSpentGold: " + playerSpentGold);
         lock (_lockObject)
         {
             _playerSpentGold = playerSpentGold;
@@ -178,6 +186,7 @@ public class AnalyticsManager : MonoBehaviour
     // Parameters: turretIDX - The index of the turret type acquired
     public void UpdateTotalAcquiredTurrets(int turretIDX)
     {
+        Debug.Log("[Analytics] UpdateTotalAcquiredTurrets: " + turretIDX);
         lock (_lockObject)
         {
             _totalAcquiredTurrets[turretIDX] += 1;      // indicate which specific turret type was obtained
@@ -200,6 +209,7 @@ public class AnalyticsManager : MonoBehaviour
     // Parameters: turretIDX - The index of the turret type upgraded
     public void UpdateTurretLevels(int level, int turretIDX)
     {
+        Debug.Log("[Analytics] UpdateTurretLevels Level " + level + " && Turret IDX " + turretIDX);
         lock (_lockObject)
         {
             if (level == 2)
@@ -222,6 +232,7 @@ public class AnalyticsManager : MonoBehaviour
 
     // Description: Increments the count of rewards offered for the given reward IDX
     // Parameters: rewardIDX - The index of the reward type offered
+    // Rewards Array: [total rewards (0), Gun Turret (1), Gatling Turret (2), Flamethrower Turret (3), Sniper Turret (4), Turret Booster (5), Harvestor (6), Slow Tower (7)]
     public void UpdateRewardsOffered(int rewardIDX1, int rewardIDX2, int rewardIDX3)
     {
         lock (_lockObject)

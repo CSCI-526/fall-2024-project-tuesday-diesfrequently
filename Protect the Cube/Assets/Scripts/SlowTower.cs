@@ -13,6 +13,7 @@ public class SlowTower : Building
     {
         placed = true;
         GetComponent<Collider>().enabled = true;
+        HideIndicators();
     }
 
     private void Update()

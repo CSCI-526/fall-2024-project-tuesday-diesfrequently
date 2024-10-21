@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth--;
             UpdateHPBar();
             GameManager.Instance.UIManager.UpdateUI();
-            GameManager.Instance.AnalyticsManager.UpdateHitpointLossWave();
+            GameManager.Instance.AnalyticsManager.UpdateHitpointLossWave(20);
             if (currentHealth <= 0)
             {
                 Die();

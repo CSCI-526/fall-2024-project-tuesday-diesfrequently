@@ -77,7 +77,7 @@ public class PlayerLevels : MonoBehaviour
         }
         else if (Orb.tag == "GoldOrb"){
             currentGold += resource_gained;
-            GameManager.Instance.AnalyticsManager.UpdatePlayerAcquiredGold(currentGold);
+            GameManager.Instance.AnalyticsManager.UpdatePlayerAcquiredGold(resource_gained);
         }
         GameManager.Instance.UIManager.UpdateUI();
 

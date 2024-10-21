@@ -41,6 +41,7 @@ public class Nexus : MonoBehaviour
     {
         animator.SetTrigger("Damage");
         health -= amount;
+        GameManager.Instance.AnalyticsManager.UpdateHitpointLossWave(10);
         GameManager.Instance.UIManager.UpdateUI();
         if (indicator == null)
         {
