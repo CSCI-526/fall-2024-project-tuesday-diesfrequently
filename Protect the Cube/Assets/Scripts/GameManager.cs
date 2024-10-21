@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
 
     public InventoryManager InventoryManager { get; private set; }
     public GameObject Player {  get; private set; }
-    public GameObject Nexus {  get; set; }  
+    public GameObject Nexus {  get; set; }
+
+    public bool useBulletPool = false;
 
     void Awake()
     {

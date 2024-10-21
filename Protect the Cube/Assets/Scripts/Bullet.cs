@@ -25,8 +25,14 @@ public class Bullet : MonoBehaviour
         if (lifetime > maxLifetime)
         {
             //lifetime = 0.0f;
-            BulletPool.Instance.ReturnBullet(gameObject);
-            //Destroy(gameObject);
+            if(GameManager.Instance.useBulletPool)
+            {
+                BulletPool.Instance.ReturnBullet(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
     }
@@ -34,14 +40,26 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter (Collider other) {
         if (other.CompareTag("Enemy")){
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
-            BulletPool.Instance.ReturnBullet(gameObject);
-             //Destroy(gameObject);   
+            if (GameManager.Instance.useBulletPool)
+            {
+                BulletPool.Instance.ReturnBullet(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (other.CompareTag("Wall"))
         {
-            BulletPool.Instance.ReturnBullet(gameObject);
-            //Destroy(gameObject); // when bullet hits wall, destroy bullet
+            if (GameManager.Instance.useBulletPool)
+            {
+                BulletPool.Instance.ReturnBullet(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
     }
