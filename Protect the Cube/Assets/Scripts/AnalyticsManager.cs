@@ -75,6 +75,7 @@ public class AnalyticsManager : MonoBehaviour
             // Metric #1
             _waveDeathNum = 0;
             _playerHitpointLossWaves = new List<int>(new int[1]); // dynamic list (size will grow)
+            _playerHitpointLossWaves[0] = 0;
 
             // Metric #2
             _playerLevel = 1;
@@ -106,11 +107,11 @@ public class AnalyticsManager : MonoBehaviour
 
     // Description: Appends the given wave number to the list of hitpoint loss waves.
     // Parameters: waveNumber - The wave number where a player has lost hitpoints.
-    public void UpdateHitpointLossWave(int waveNumber)
+    public void UpdateHitpointLossWave()
     {
         lock (_lockObject)
         {
-            _playerHitpointLossWaves.Add(waveNumber);  // Append the wave number to the list
+            _playerHitpointLossWaves.Add(_waveDeathNum);  // Append the current wave number to the list
             
         }
     }
@@ -195,25 +196,23 @@ public class AnalyticsManager : MonoBehaviour
         }
     }
 
-    // Description: Increments the count of turrets upgraded to level 2 for the given turret index
+    // Description: Increments the count of turrets upgraded to level 2 or 3 for the given turret index
     // Parameters: turretIDX - The index of the turret type upgraded
-    public void UpdateLvl2Turrets(int turretIDX)
+    public void UpdateTurretLevels(int level, int turretIDX)
     {
         lock (_lockObject)
         {
-            _lvl2Turrets[turretIDX] += 1;      // indicate which specific turret type was upgraded to lvl 2
-            _lvl2Turrets[0] += 1;              // increase total # of turrets upgraded to lvl 2
-        }
-    }
-
-    // Description: Increments the count of turrets upgraded to level 3 for the given turret index
-    // Parameters: turretIDX - The index of the turret type upgraded
-    public void UpdateLvl3Turrets(int turretIDX)
-    {
-        lock (_lockObject)
-        {
-            _lvl3Turrets[turretIDX] += 1;      // indicate which specific turret type was upgraded to lvl 3
-            _lvl3Turrets[0] += 1;              // increase total # of turrets upgraded to lvl 3
+            if (level == 2)
+            {
+                _lvl2Turrets[turretIDX] += 1;      // indicate which specific turret type was upgraded to lvl 2
+                _lvl2Turrets[0] += 1;              // increase total # of turrets upgraded to lvl 2
+            }
+            else if (level == 3)
+            {
+                _lvl3Turrets[turretIDX] += 1;      // indicate which specific turret type was upgraded to lvl 3
+                _lvl3Turrets[0] += 1;              // increase total # of turrets upgraded to lvl 3
+            }
+            
         }
     }
 

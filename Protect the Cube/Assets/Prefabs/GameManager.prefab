@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1656624d7395c54ea66bf0f4c1952a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 10
   waveInterval: 5
   maxSpawnDelay: 3
   enemyCount: 0
@@ -68,6 +67,8 @@ MonoBehaviour:
   tankRate: 1
   tank: {fileID: 6013629208632606210, guid: 2f4b90fa476cd40549e7d9dc2d55c7b9, type: 3}
   tankSpawnStartWave: 5
+  spawnerBoss: {fileID: 0}
+  spawnerBossStartWave: 10
   enemyPrefabs:
   - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
   enemies: []
@@ -86,10 +87,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreBoard: {fileID: 0}
   expUI: {fileID: 0}
-  inventoryUI: {fileID: 0}
+  inventoryCount: []
   goldUI: {fileID: 0}
   gameOverScreen: {fileID: 0}
   rewardMenu: {fileID: 0}
+  miniRewardMenu: {fileID: 0}
   upgradePanel: {fileID: 0}
   pauseUI: {fileID: 0}
 --- !u!114 &6683548619100361680
@@ -104,7 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a297ec0e09cea247afe5bd845279954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
+  lvl1_reward_options:
+  - {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+  - {fileID: 3732443334033032084, guid: 1be928d46a8b6db478a64830a4364934, type: 3}
+  - {fileID: 6191134258547235123, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
+  all_reward_prefabs:
   - {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
   - {fileID: 3732443334033032084, guid: 1be928d46a8b6db478a64830a4364934, type: 3}
   - {fileID: 6191134258547235123, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
@@ -112,11 +118,6 @@ MonoBehaviour:
   - {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
   - {fileID: 415337832395152133, guid: f6edc88301e129b4aaed9c842bbdd0fe, type: 3}
   - {fileID: 6852214484739291977, guid: 2543412762f80df449e7edae5b5abbe3, type: 3}
-  gunList:
-  - {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-  - {fileID: 3732443334033032084, guid: 1be928d46a8b6db478a64830a4364934, type: 3}
-  - {fileID: 6191134258547235123, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-  - {fileID: 1272256851593019809, guid: 88d92cc50b4e783408df66e4ec9fe34d, type: 3}
   buildingCount: 
   buildingNames: []
   player: {fileID: 0}
