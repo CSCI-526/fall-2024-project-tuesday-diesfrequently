@@ -162,7 +162,7 @@ public class AnalyticsManager : MonoBehaviour
     {
         lock (_lockObject)
         {
-            _playerAcquiredGold = playerAcquiredGold;
+            _playerAcquiredGold += playerAcquiredGold;
         }
     }
 
@@ -173,7 +173,7 @@ public class AnalyticsManager : MonoBehaviour
         Debug.Log("[Analytics] UpdatePlayerSpentGold: " + playerSpentGold);
         lock (_lockObject)
         {
-            _playerSpentGold = playerSpentGold;
+            _playerSpentGold += playerSpentGold;
         }
     }
 
@@ -212,12 +212,12 @@ public class AnalyticsManager : MonoBehaviour
         Debug.Log("[Analytics] UpdateTurretLevels Level " + level + " && Turret IDX " + turretIDX);
         lock (_lockObject)
         {
-            if (level == 2)
+            if (level == 1) // upgrading to lvl 2
             {
                 _lvl2Turrets[turretIDX] += 1;      // indicate which specific turret type was upgraded to lvl 2
                 _lvl2Turrets[0] += 1;              // increase total # of turrets upgraded to lvl 2
             }
-            else if (level == 3)
+            else if (level == 2) // upgrading to lvl 3
             {
                 _lvl3Turrets[turretIDX] += 1;      // indicate which specific turret type was upgraded to lvl 3
                 _lvl3Turrets[0] += 1;              // increase total # of turrets upgraded to lvl 3

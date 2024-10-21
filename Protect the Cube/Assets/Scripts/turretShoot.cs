@@ -127,6 +127,7 @@ public class turretShoot : Building
 
     internal void upgrade(int level, string buildingName)
     {
+        Debug.Log("[Analytics][Prio] Level: " + level + " and buildingName: " + buildingName);
         if (buildingName == "Flamethrower Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 3);
             maxRange += maxRange/5; 

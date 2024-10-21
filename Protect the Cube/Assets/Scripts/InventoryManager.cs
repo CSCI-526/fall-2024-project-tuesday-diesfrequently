@@ -48,7 +48,6 @@ public class InventoryManager : MonoBehaviour
             if (building != null)
             {
                 name = building.buildingName;
-                Debug.Log(building.buildingName);
             }
 
             if (name != "" && name != "Nexus")
@@ -117,8 +116,6 @@ public class InventoryManager : MonoBehaviour
         }
 
         // return the 3 randomly picked / shuffled rewards as a list
-        Debug.Log("Size of final Rewards: " + finalRewards.Count());
-
         return finalRewards.ToList();
     }
 
@@ -179,35 +176,35 @@ public class InventoryManager : MonoBehaviour
 
         // other building names: Sniper Turret, Turret Booster
 
-        Debug.Log("Size of Available_Rewards: " + available_rewards.ToList().Count());
-        Debug.Log("forcedGameObject: " + forcedGameObject);
-        Debug.Log("forceGameObjectCount: " + forceGameObjectCount);
+        //Debug.Log("Size of Available_Rewards: " + available_rewards.ToList().Count());
+        //Debug.Log("forcedGameObject: " + forcedGameObject);
+        //Debug.Log("forceGameObjectCount: " + forceGameObjectCount);
 
 
         // pick 3 random rewards from what is available and display
         List<GameObject> chosen_rewards = GenerateUniqueRewards(available_rewards.ToList(), forcedGameObject, forceGameObjectCount);
 
-        Debug.Log("Size of Chosen Items: " + chosen_rewards.Count);
-        if (chosen_rewards[0] == null)
-        {
-            Debug.Log(" Chosen 0 is NULL");
-        }
-        if (chosen_rewards[1] == null)
-        {
-            Debug.Log(" Chosen 1 is NULL");
-        }
-        if (chosen_rewards[2] == null)
-        {
-            Debug.Log(" Chosen 2 is NULL");
-        }
+        //Debug.Log("Size of Chosen Items: " + chosen_rewards.Count);
+        //if (chosen_rewards[0] == null)
+        //{
+        //    Debug.Log(" Chosen 0 is NULL");
+        //}
+        //if (chosen_rewards[1] == null)
+        //{
+        //    Debug.Log(" Chosen 1 is NULL");
+        //}
+        //if (chosen_rewards[2] == null)
+        //{
+        //    Debug.Log(" Chosen 2 is NULL");
+        //}
 
         string reward_name_0 = chosen_rewards[0].GetComponent<Building>().buildingName;
         string reward_name_1 = chosen_rewards[1].GetComponent<Building>().buildingName;
         string reward_name_2 = chosen_rewards[2].GetComponent<Building>().buildingName;
 
-        Debug.Log("Chosen Reward 0: " + reward_name_0);
-        Debug.Log("Chosen Reward 1: " + reward_name_1);
-        Debug.Log("Chosen Reward 2: " + reward_name_2);
+        //Debug.Log("Chosen Reward 0: " + reward_name_0);
+        //Debug.Log("Chosen Reward 1: " + reward_name_1);
+        //Debug.Log("Chosen Reward 2: " + reward_name_2);
 
         int rewardIDX0 = ConvertBuildingNameToIndex(reward_name_0);
         int rewardIDX1 = ConvertBuildingNameToIndex(reward_name_1);
@@ -247,7 +244,7 @@ public class InventoryManager : MonoBehaviour
             int i = buildingNames.IndexOf(name);
             buildingCount[i]++;
             int turretIDX0 = ConvertBuildingNameToIndex(name);
-            GameManager.Instance.AnalyticsManager.UpdateTotalPlacedTurrets(turretIDX0);
+            GameManager.Instance.AnalyticsManager.UpdateTotalAcquiredTurrets(turretIDX0);
             GameManager.Instance.UIManager.UpdateInventoryUI();
         }
     }
