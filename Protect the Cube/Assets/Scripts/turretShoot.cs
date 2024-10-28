@@ -58,20 +58,26 @@ public class turretShoot : Building
             Vector3 toTarget = (target.transform.position - transform.position).normalized;
             if(Vector3.Dot(toTarget,transform.forward) > 0.9)
             {
-                //var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
-
-                var bullet = BulletPool.Instance.GetBullet();
-
-                if (bullet == null)
+                if(GameManager.Instance.useBulletPool)
                 {
-                    Debug.Log("All Bullets are Currently Being Used");
-                    //Time.timeScale = 0; // pauses the game
-                    return; // return early to indicate "stop shooting"
-                }
-                bullet.transform.position = gunBarrel.transform.position;
-                bullet.transform.rotation = gunBarrel.transform.rotation;
+                    var bullet = BulletPool.Instance.GetBullet();
 
-                timeSinceLastShot = 0;
+                    if (bullet == null)
+                    {
+                        Debug.Log("All Bullets are Currently Being Used");
+                        return; // return early to indicate "stop shooting"
+                    }
+                    bullet.transform.position = gunBarrel.transform.position;
+                    bullet.transform.rotation = gunBarrel.transform.rotation;
+                    timeSinceLastShot = 0;
+                }
+                else
+                {
+                    var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+                    bullet.transform.position = gunBarrel.transform.position;
+                    bullet.transform.rotation = gunBarrel.transform.rotation;
+                    timeSinceLastShot = 0;
+                }
             }
         }
     }
@@ -97,11 +103,14 @@ public class turretShoot : Building
         float minRange = maxRange;
         foreach (GameObject enemy in GameManager.Instance.WaveManager.enemies)
         {
-            float dist = (enemy.transform.position - transform.position).magnitude;
-            if (dist < minRange)
+            if(enemy != null && !enemy.IsDestroyed())
             {
-                target = enemy;
-                minRange = dist;
+                float dist = (enemy.transform.position - transform.position).magnitude;
+                if (dist < minRange)
+                {
+                    target = enemy;
+                    minRange = dist;
+                }
             }
         }
     }
