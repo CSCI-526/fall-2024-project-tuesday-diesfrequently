@@ -36,6 +36,7 @@ public class InventoryManager : MonoBehaviour
     public PlayerHealth player;
     public Nexus nexus;
     public int healthIncrease = 2;
+    private int rewardsPicked = 0;
 
     private void Start()
     {
@@ -246,6 +247,10 @@ public class InventoryManager : MonoBehaviour
             int turretIDX0 = ConvertBuildingNameToIndex(name);
             GameManager.Instance.AnalyticsManager.UpdateTotalAcquiredTurrets(turretIDX0);
             GameManager.Instance.UIManager.UpdateInventoryUI();
+        }
+        if (rewardsPicked == 0){
+            GameManager.Instance.UIManager.ShowSelectGunTutorial();
+            rewardsPicked += 1;
         }
     }
 

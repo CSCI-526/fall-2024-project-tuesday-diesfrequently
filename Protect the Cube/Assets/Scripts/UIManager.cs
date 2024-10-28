@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour
     //[SerializeField] protected GameObject miniRewardMenu;
     [SerializeField] protected GameObject upgradePanel;
     [SerializeField] protected GameObject pauseUI;
+    [SerializeField] protected GameObject SelectGunTutorialUI;
+    // [SerializeField] protected GameObject HarvesterTutorialUI;
+
     private Nexus nexus;
     private PlayerHealth playerHP;
     private PlayerLevels playerLevels;
@@ -79,6 +82,33 @@ public class UIManager : MonoBehaviour
     {
         upgradePanel.SetActive(false);
     }
+
+    public void ShowSelectGunTutorial()
+    {
+        SelectGunTutorialUI.SetActive(true);
+        
+    }
+
+    public void HideSelectGunTutorial()
+    {
+        SelectGunTutorialUI.SetActive(false);
+    }
+
+    // public void ShowHarvesterTutorial()
+    // {
+    //     HarvesterTutorialUI.SetActive(true);
+        
+    // }
+    // public void HideHarvesterTutorial()
+    // {
+    //     HarvesterTutorialUI.SetActive(false);
+    // }
+    public void ShowXPTutorial()
+    {
+        SelectGunTutorialUI.SetActive(true);
+        
+    }
+    
 
     public void UpdateWaveUI()
     {

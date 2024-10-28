@@ -7,6 +7,7 @@ public class RangeIndicator : MonoBehaviour
     [SerializeField] public MeshRenderer indicator;
     [SerializeField] public float radius = 12.0f;
     [SerializeField] public bool useTurretRange = true;
+    [SerializeField] public bool alwaysShow = false;
 
     private void Start()
     {
@@ -33,7 +34,10 @@ public class RangeIndicator : MonoBehaviour
 
     public void HideIndicator()
     {
-        indicator.enabled = false;
+        if (!alwaysShow){
+            indicator.enabled = false;
+
+        }
     }
 
     private void Update()

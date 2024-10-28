@@ -12,6 +12,8 @@ public class PlaceObject : MonoBehaviour
     private float buildingRotation;
     private int currentPrefabIndex = -1;
     [SerializeField] protected float rotateIncrement = 10.0f;
+    private bool placedFirstTurret = false;
+
 
     private void Update()
     {
@@ -57,6 +59,12 @@ public class PlaceObject : MonoBehaviour
                     {
                         currentPlaceableObject = Instantiate(placeableObjectPrefabs[i]);
                         currentPrefabIndex = i;
+
+                        if (placedFirstTurret == false){
+                            placedFirstTurret = true;
+                            GameManager.Instance.UIManager.HideSelectGunTutorial();
+                            
+                        }
                     }
                 }
 
