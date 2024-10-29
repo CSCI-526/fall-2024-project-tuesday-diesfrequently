@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
+    [SerializeField] protected Slider expSlider;
     [SerializeField] public List<TextMeshProUGUI> inventoryCount = new List<TextMeshProUGUI>();
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
@@ -124,8 +125,11 @@ public class UIManager : MonoBehaviour
     {
         if (playerLevels)
         {
-            expUI.text = "Player Level: " + playerLevels.currentLevel +
-                "\r\nExp: " + playerLevels.currentXP + "/" + playerLevels.xpNeededForLevel;
+            /*expUI.text = "Player Level: " + playerLevels.currentLevel +
+                "\r\nExp: " + playerLevels.currentXP + "/" + playerLevels.xpNeededForLevel;*/
+            expUI.text = playerLevels.currentLevel.ToString();
+            expSlider.value = playerLevels.currentXP;
+            expSlider.maxValue = playerLevels.xpNeededForLevel;
         }
     }
     public void UpdateGoldUI()
