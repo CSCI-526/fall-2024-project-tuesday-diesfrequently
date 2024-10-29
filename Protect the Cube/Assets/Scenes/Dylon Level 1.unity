@@ -3585,7 +3585,7 @@ PrefabInstance:
       objectReference: {fileID: 5021235089233810948}
     - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: all_reward_prefabs.Array.size
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: lvl1_reward_prefabs.Array.size
@@ -3619,6 +3619,14 @@ PrefabInstance:
       propertyPath: all_reward_prefabs.Array.data[6]
       value: 
       objectReference: {fileID: 6852214484739291977, guid: 2543412762f80df449e7edae5b5abbe3, type: 3}
+    - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: all_reward_prefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 415337832395152133, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
+    - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: all_reward_prefabs.Array.data[8]
+      value: 
+      objectReference: {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
     - target: {fileID: 6683548619100361680, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: lvl1_reward_prefabs.Array.data[0]
       value: 
