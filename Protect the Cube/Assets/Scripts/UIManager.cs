@@ -130,7 +130,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateGoldUI()
     {
-        goldUI.text = "Gold: " + playerLevels.currentGold;
+        goldUI.text = ": " + playerLevels.currentGold;
         
     }
 
