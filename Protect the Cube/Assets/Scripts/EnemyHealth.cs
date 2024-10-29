@@ -26,17 +26,18 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        GameManager.Instance.WaveManager.enemyCount++;
-        GameManager.Instance.WaveManager.enemies.Add(this.gameObject);
+        //GameManager.Instance.WaveManager.enemyCount++;
+        //GameManager.Instance.WaveManager.enemies.Add(this.gameObject);
         animator = GetComponent<Animator>();    
         
         if(hpCanvas)
         {
             hpCanvas.SetActive(showHPBar);
 
-            ConstraintSource cs = new ConstraintSource();
-            cs.weight = 1.0f;
-            cs.sourceTransform = Camera.main.transform;
+            ConstraintSource cs = new ConstraintSource { weight = 1.0f, sourceTransform = Camera.main.transform };
+            //ConstraintSource cs = new ConstraintSource();
+            //cs.weight = 1.0f;
+            //cs.sourceTransform = Camera.main.transform;
 
             hpCanvas.GetComponent<RotationConstraint>().AddSource(cs);
             UpdateHPBar();
@@ -56,10 +57,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!isInvincible) // Only take damage if not currently invincible
         {
-            if (animator != null)
-            {
-                animator.SetTrigger("Damage");
-            }
+            animator?.SetTrigger("Damage");
             currentHealth -= damage;
             UpdateHPBar();
             if (currentHealth <= 0)
@@ -82,8 +80,9 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
-        GameManager.Instance.WaveManager.enemyCount--;
-        GameManager.Instance.WaveManager.enemies.Remove(this.gameObject);
+        GameManager.Instance.WaveManager.OnEnemyDeath(this.gameObject);
+        //GameManager.Instance.WaveManager.enemyCount--;
+        //GameManager.Instance.WaveManager.enemies.Remove(this.gameObject);
         DropExp();
         //Debug.Log(GameManager.Instance.WaveManager.enemyCount);
         Destroy(gameObject);
@@ -94,7 +93,10 @@ public class EnemyHealth : MonoBehaviour
         if (Random.Range(0.0f, 1.0f) <= xpDropRate){
             for (int i = 0; i < xpDrop; i++){
                 GameObject xp = Instantiate(exp);
-                xp.transform.position = new Vector3(transform.position.x+Random.Range(-1*1, 1), transform.position.y, transform.position.z+Random.Range(-1*1, 1));;
+                xp.transform.position = new Vector3(
+                    transform.position.x + Random.Range(-1*1, 1),
+                    transform.position.y,
+                    transform.position.z + Random.Range(-1*1, 1));;
             }
         }
     }
@@ -106,11 +108,10 @@ public class EnemyHealth : MonoBehaviour
             hpBar.value = currentHealth / maxHealth;
         }
     }
+
     private void UpdateHPBarTransform()
     {
         Vector3 fromCamera = (transform.position - Camera.main.transform.position).normalized;
         hpCanvas.transform.position = transform.position + hpBarOffset + fromCamera * 0.5f; 
-
-        //hpCanvas.transform.LookAt(Camera.main.transform.position);
     }
 }
