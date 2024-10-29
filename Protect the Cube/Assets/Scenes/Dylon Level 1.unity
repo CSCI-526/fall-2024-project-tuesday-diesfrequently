@@ -708,6 +708,17 @@ Transform:
   - {fileID: 1659128575}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &377961293 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5982045830447754177, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+  m_PrefabInstance: {fileID: 5021235089233810946}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &422351836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3520,6 +3531,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1307450435}
     - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: expSlider
+      value: 
+      objectReference: {fileID: 377961293}
+    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: pausePanel
       value: 
       objectReference: {fileID: 1359509860}
@@ -3797,10 +3812,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1394260028}
-    - target: {fileID: 918239487416305411, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -36.399902
-      objectReference: {fileID: 0}
     - target: {fileID: 1014778623032001132, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3893,10 +3904,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2002915414420117871, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 32
-      objectReference: {fileID: 0}
     - target: {fileID: 2392664201584677010, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_text
       value: '<- press [1] on your keyboard to select the gun turret
@@ -3907,6 +3914,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1394260025}
+    - target: {fileID: 4173156817336489669, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5042874968167784113, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_IsActive
       value: 0
