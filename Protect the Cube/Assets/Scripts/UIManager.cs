@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
         UpdateWaveUI();
         UpdatePlayerXPUI();
         UpdateInventoryUI();
-        if(playerLevels.currentLevel > 0){
+        if(playerLevels.currentLevel > 9){
             // only show gold count when the player have a harvester
             UpdateGoldUI(1);
         }
