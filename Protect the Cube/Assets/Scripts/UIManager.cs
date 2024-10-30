@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     private Nexus nexus;
     private PlayerHealth playerHP;
     private PlayerLevels playerLevels;
+    private Image goldImage;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class UIManager : MonoBehaviour
         nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         playerLevels = GameManager.Instance.Player.GetComponent<PlayerLevels>();
+        goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
         UpdateUI();
     }
 
@@ -39,7 +41,10 @@ public class UIManager : MonoBehaviour
         UpdateWaveUI();
         UpdatePlayerXPUI();
         UpdateInventoryUI();
-        UpdateGoldUI();
+        if(playerLevels.currentLevel > 0){
+            // only show gold count when the player have a harvester
+            UpdateGoldUI(1);
+        }
     }
 
     public void ShowGameOverScreen()
@@ -132,10 +137,13 @@ public class UIManager : MonoBehaviour
             expSlider.maxValue = playerLevels.xpNeededForLevel;
         }
     }
-    public void UpdateGoldUI()
+    public void UpdateGoldUI(int amount)
     {
         goldUI.text = ": " + playerLevels.currentGold;
-        
+        if (goldImage != null)
+        {
+            goldImage.fillAmount = Mathf.Clamp01(amount); // Ensures fill amount stays between 0 and 1
+        }
     }
 
     public void UpdateRewardsUI(GameObject b1, GameObject b2, GameObject b3)
