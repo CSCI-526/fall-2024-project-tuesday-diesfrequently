@@ -416,6 +416,7 @@ MonoBehaviour:
   indicator: {fileID: 71639038946376711}
   radius: 3
   useTurretRange: 1
+  alwaysShow: 0
 --- !u!114 &-4580235002880686246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,6 +432,7 @@ MonoBehaviour:
   indicator: {fileID: 1817991311786990925}
   radius: 1
   useTurretRange: 0
+  alwaysShow: 0
 --- !u!1 &6931359815143944211
 GameObject:
   m_ObjectHideFlags: 0

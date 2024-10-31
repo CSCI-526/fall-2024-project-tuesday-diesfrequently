@@ -7,13 +7,13 @@ public class Harvester : Building
     [SerializeField] public float radius = 4.0f;
     bool IsValidPlacement(float radius = 4.0f)
     {
-        Debug.Log("Checking for harvestor exclusion");
+        //Debug.Log("Checking for harvestor exclusion");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);//, -1, QueryTriggerInteraction.Collide);
         foreach (var other in hitColliders)
         {
             if (other.gameObject.GetComponent<Harvester>() != null)
             {
-                Debug.Log("Invalid Placement: too close to existing harvester");
+                //Debug.Log("Invalid Placement: too close to existing harvester");
                 return false;
             }
         }
