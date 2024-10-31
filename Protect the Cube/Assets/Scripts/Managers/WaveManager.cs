@@ -24,7 +24,7 @@ public class WaveManager : MonoBehaviour
     public int enemyCount = 0;  // Track enemy count
 
     private List<Wave> waveList = new List<Wave>();
-    private int currentWaveIndex = 0;
+    public int currentWaveIndex { get; private set; } // represents current wave #
     private float timeSinceLastWave;
     public List<GameObject> targetList = new List<GameObject>(); // List of all targets
 
@@ -51,6 +51,7 @@ public class WaveManager : MonoBehaviour
     // called before first frame update
     private void Start()
     {
+        InitializeWaveManager();
         InitializeCustomWaves();
         InitializeTargets();
     }
@@ -69,6 +70,11 @@ public class WaveManager : MonoBehaviour
     private bool ShouldSpawnNextWave()
     {
         return timeSinceLastWave > waveSpawnInterval && AllEnemiesDefeated();
+    }
+
+    private void InitializeWaveManager()
+    {
+        currentWaveIndex = 0;
     }
 
     private void InitializeCustomWaves()

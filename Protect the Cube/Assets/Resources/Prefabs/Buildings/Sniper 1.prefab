@@ -112,8 +112,33 @@ PrefabInstance:
       propertyPath: buildingName
       value: Sniper Turret
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1296341469584425672, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8709841145891625586}
   m_SourcePrefab: {fileID: 100100000, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+--- !u!1 &3021881062986590767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+  m_PrefabInstance: {fileID: 4055515710989396878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8709841145891625586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021881062986590767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6955ef01f9ddd4c89807ad41115398f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Turret
+  - Building
+  - Reward

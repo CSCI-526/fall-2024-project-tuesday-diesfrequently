@@ -26,7 +26,7 @@ public class SpawnPoint : MonoBehaviour
         GameObject enemyPrefab = GameManager.Instance.WaveManager.enemyPrefabs[Random.Range(0, GameManager.Instance.WaveManager.enemyPrefabs.Count)];
         SpawnEnemyOfType(enemyPrefab);
     }
-
+    
     public void SpawnEnemyOfType(GameObject prefab)
     {
         GameObject enemy = Instantiate(prefab);

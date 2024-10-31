@@ -1,0 +1,349 @@
+Script: Building
+    - Dependencies for Building:
+        - RangeIndicator
+    - No Explicit GameObjects/Prefabs referenced in Building
+
+Script: Bullet
+    - Dependencies for Bullet:
+        - GameManager
+        - BulletPool
+        - EnemyHealth
+        - Wall
+    - No Explicit GameObjects/Prefabs referenced in Bullet
+
+Script: BulletPool
+    - Dependencies for BulletPool:
+        - Bullet
+    - GameObjects/Prefabs referenced in BulletPool:
+        - bulletPrefab
+
+Script: CameraFollow
+    - No dependencies found for CameraFollow
+    - GameObjects/Prefabs referenced in CameraFollow:
+        - target
+
+Script: CharacterController
+    - Dependencies for CharacterController:
+        - GameManager
+        - PlaceObject
+        - BulletPool
+    - GameObjects/Prefabs referenced in CharacterController:
+        - projectile
+        - gunBarrel
+        - rangeIndicator
+        - rotation
+
+Script: ClickUpgrade
+    - Dependencies for ClickUpgrade:
+        - PlayerLevels
+        - GameManager
+        - UIManager
+        - AnalyticsManager
+    - GameObjects/Prefabs referenced in ClickUpgrade:
+        - indicator
+
+Script: DefensiveWallHealth
+    - No dependencies found for DefensiveWallHealth
+    - No Explicit GameObjects/Prefabs referenced in DefensiveWallHealth
+
+Script: EnemyHealth
+    - Dependencies for EnemyHealth:
+        - WaveManager
+        - GameManager
+    - GameObjects/Prefabs referenced in EnemyHealth:
+        - exp
+        - hpCanvas
+
+Script: EnemyMove
+    - Dependencies for EnemyMove:
+        - Nexus
+        - EnemyHealth
+        - GameManager
+        - WaveManager
+        - PlayerHealth
+    - GameObjects/Prefabs referenced in EnemyMove:
+        - _target
+
+Script: EnemySpawnInfo
+    - Dependencies for EnemySpawnInfo:
+        - SpawnPoint
+    - No Explicit GameObjects/Prefabs referenced in EnemySpawnInfo
+
+Script: Exclusion
+    - Dependencies for Exclusion:
+        - Building
+        - Nexus
+        - Harvester
+    - No Explicit GameObjects/Prefabs referenced in Exclusion
+
+Script: ExperiencePickup
+    - Dependencies for ExperiencePickup:
+        - PlayerLevels
+        - GameManager
+    - No Explicit GameObjects/Prefabs referenced in ExperiencePickup
+
+Script: GameSummaryUI
+    - Dependencies for GameSummaryUI:
+        - Wave
+        - GameManager
+        - WaveManager
+    - No Explicit GameObjects/Prefabs referenced in GameSummaryUI
+
+Script: Harvester
+    - Dependencies for Harvester:
+        - Building
+        - RangeIndicator
+    - No Explicit GameObjects/Prefabs referenced in Harvester
+
+Script: HarvesterUI
+    - Dependencies for HarvesterUI:
+        - Harvester
+        - Nexus
+    - No Explicit GameObjects/Prefabs referenced in HarvesterUI
+
+Script: Indicator
+    - Dependencies for Indicator:
+        - Nexus
+        - OffScreenIndicator
+    - GameObjects/Prefabs referenced in Indicator:
+        - target
+
+Script: Info
+    - No dependencies found for Info
+    - No Explicit GameObjects/Prefabs referenced in Info
+
+Script: LockPlayerCircle
+    - No dependencies found for LockPlayerCircle
+    - No Explicit GameObjects/Prefabs referenced in LockPlayerCircle
+
+Script: LookAtEnemy
+    - No dependencies found for LookAtEnemy
+    - GameObjects/Prefabs referenced in LookAtEnemy:
+        - enemy
+        - fovStartPoint
+
+Script: Magnet
+    - Dependencies for Magnet:
+        - ExperiencePickup
+    - No Explicit GameObjects/Prefabs referenced in Magnet
+
+Script: MainMenu
+    - No dependencies found for MainMenu
+    - No Explicit GameObjects/Prefabs referenced in MainMenu
+
+Script: MiniRewardChoiceUI
+    - Dependencies for MiniRewardChoiceUI:
+        - RewardPanel
+    - No Explicit GameObjects/Prefabs referenced in MiniRewardChoiceUI
+
+Script: MinimapCameraMove
+    - No dependencies found for MinimapCameraMove
+    - GameObjects/Prefabs referenced in MinimapCameraMove:
+        - player
+
+Script: Nexus
+    - Dependencies for Nexus:
+        - GameManager
+        - AnalyticsManager
+        - UIManager
+        - OffScreenIndicator
+        - Indicator
+    - GameObjects/Prefabs referenced in Nexus:
+        - XP
+        - identity
+
+Script: OffScreenIndicator
+    - Dependencies for OffScreenIndicator:
+        - Indicator
+    - GameObjects/Prefabs referenced in OffScreenIndicator:
+        - indicatorPrefab
+
+Script: PauseBtn
+    - Dependencies for PauseBtn:
+        - GameManager
+        - UIManager
+    - No Explicit GameObjects/Prefabs referenced in PauseBtn
+
+Script: PlaceObject
+    - Dependencies for PlaceObject:
+        - Building
+        - GameManager
+        - InventoryManager
+        - Harvester
+        - Exclusion
+    - GameObjects/Prefabs referenced in PlaceObject:
+        - rangeIndicator
+        - currentPlaceableObject
+
+Script: PlayerHealth
+    - Dependencies for PlayerHealth:
+        - GameManager
+        - UIManager
+        - AnalyticsManager
+    - No Explicit GameObjects/Prefabs referenced in PlayerHealth
+
+Script: PlayerLevels
+    - Dependencies for PlayerLevels:
+        - GameManager
+        - AnalyticsManager
+        - UIManager
+        - InventoryManager
+    - No Explicit GameObjects/Prefabs referenced in PlayerLevels
+
+Script: RangeIndicator
+    - No dependencies found for RangeIndicator
+    - No Explicit GameObjects/Prefabs referenced in RangeIndicator
+
+Script: ResumeBtn
+    - Dependencies for ResumeBtn:
+        - GameManager
+        - UIManager
+    - No Explicit GameObjects/Prefabs referenced in ResumeBtn
+
+Script: RewardChoiceUI
+    - Dependencies for RewardChoiceUI:
+        - RewardPanel
+    - No Explicit GameObjects/Prefabs referenced in RewardChoiceUI
+
+Script: RewardPanel
+    - Dependencies for RewardPanel:
+        - Building
+        - Info
+        - GameManager
+        - InventoryManager
+    - No Explicit GameObjects/Prefabs referenced in RewardPanel
+
+Script: SlowTower
+    - Dependencies for SlowTower:
+        - Building
+        - EnemyMove
+    - No Explicit GameObjects/Prefabs referenced in SlowTower
+
+Script: SpawnPoint
+    - Dependencies for SpawnPoint:
+        - GameManager
+        - WaveManager
+    - GameObjects/Prefabs referenced in SpawnPoint:
+        - prefab
+
+Script: SpawnerEnemy
+    - No dependencies found for SpawnerEnemy
+    - GameObjects/Prefabs referenced in SpawnerEnemy:
+        - enemyPrefab
+        - rotation
+
+Script: TankEnemyMove
+    - Dependencies for TankEnemyMove:
+        - GameManager
+        - Nexus
+        - EnemyHealth
+        - PlayerHealth
+        - Wall
+        - DefensiveWallHealth
+    - GameObjects/Prefabs referenced in TankEnemyMove:
+        - _target
+
+Script: TurretBooster
+    - Dependencies for TurretBooster:
+        - Building
+    - GameObjects/Prefabs referenced in TurretBooster:
+        - antenna
+
+Script: TurretBoosterVisual
+    - No dependencies found for TurretBoosterVisual
+    - No Explicit GameObjects/Prefabs referenced in TurretBoosterVisual
+
+Script: Wall
+    - Dependencies for Wall:
+        - Building
+    - No Explicit GameObjects/Prefabs referenced in Wall
+
+Script: Wave
+    - Dependencies for Wave:
+        - EnemySpawnInfo
+    - No Explicit GameObjects/Prefabs referenced in Wave
+
+Script: turretShoot
+    - Dependencies for turretShoot:
+        - Building
+        - RangeIndicator
+        - GameManager
+        - BulletPool
+        - WaveManager
+        - TurretBooster
+        - AnalyticsManager
+    - GameObjects/Prefabs referenced in turretShoot:
+        - projectile
+        - gunBarrel
+        - target
+        - rotation
+
+Script: upgradeBtn
+    - Dependencies for upgradeBtn:
+        - ClickUpgrade
+    - No Explicit GameObjects/Prefabs referenced in upgradeBtn
+
+Script: upgradeUI
+    - No dependencies found for upgradeUI
+    - No Explicit GameObjects/Prefabs referenced in upgradeUI
+
+Script: AnalyticsManager
+    - Dependencies for AnalyticsManager:
+        - Wave
+    - No Explicit GameObjects/Prefabs referenced in AnalyticsManager
+
+Script: GameManager
+    - Dependencies for GameManager:
+        - WaveManager
+        - UIManager
+        - AnalyticsManager
+        - InventoryManager
+        - Nexus
+    - No Explicit GameObjects/Prefabs referenced in GameManager
+
+Script: InventoryManager
+    - Dependencies for InventoryManager:
+        - Harvester
+        - PlayerHealth
+        - Nexus
+        - Building
+        - GameManager
+        - PlayerLevels
+        - AnalyticsManager
+        - UIManager
+    - No Explicit GameObjects/Prefabs referenced in InventoryManager
+
+Script: UIManager
+    - Dependencies for UIManager:
+        - Nexus
+        - PlayerHealth
+        - PlayerLevels
+        - GameManager
+        - Wave
+        - WaveManager
+        - RewardChoiceUI
+        - InventoryManager
+    - GameObjects/Prefabs referenced in UIManager:
+        - gameOverScreen
+        - rewardMenu
+        - miniRewardMenu
+        - upgradePanel
+        - pauseUI
+
+Script: WaveManager
+    - Dependencies for WaveManager:
+        - SpawnPoint
+        - Nexus
+        - Wave
+        - EnemySpawnInfo
+        - EnemyHealth
+        - GameManager
+        - UIManager
+        - AnalyticsManager
+    - GameObjects/Prefabs referenced in WaveManager:
+        - tank
+        - spawnerBoss
+        - nexus
+        - player
+        - identity
+

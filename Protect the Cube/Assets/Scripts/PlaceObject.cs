@@ -51,7 +51,7 @@ public class PlaceObject : MonoBehaviour
                     }
 
                     string bName = placeableObjectPrefabs[i].GetComponent<Building>().buildingName;
-                    bool canPlace = GameManager.Instance.InventoryManager.HasBuilding(bName);
+                    bool canPlace = GameManager.Instance.InventoryManager.isInventoryAvailable(bName);
             
                     if (canPlace)
                     {
@@ -93,7 +93,7 @@ public class PlaceObject : MonoBehaviour
     private void ReleaseIfClicked()
     {
         Building b = currentPlaceableObject.GetComponent<Building>();
-        bool canPlace = GameManager.Instance.InventoryManager.HasBuilding(b.buildingName);
+        bool canPlace = GameManager.Instance.InventoryManager.isInventoryAvailable(b.buildingName);
         if (b.gameObject.GetComponent<Harvester>() != null)
         {
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
@@ -108,7 +108,7 @@ public class PlaceObject : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
-            GameManager.Instance.InventoryManager.TryPlaceBuilding(b.buildingName);
+            GameManager.Instance.InventoryManager.TryUseInventoryItem(b.buildingName);
             b.OnPlace();
             currentPlaceableObject = null;
             //rangeIndicator.SetActive(false);

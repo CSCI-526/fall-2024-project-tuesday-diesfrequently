@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3598094888286799798}
   - component: {fileID: 4545694227343427290}
   - component: {fileID: 8219079333807218751}
+  - component: {fileID: 1296341469584425672}
   m_Layer: 9
   m_Name: Gun Turret
   m_TagString: Turret
@@ -4927,6 +4928,22 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1296341469584425672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272256851593019809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6955ef01f9ddd4c89807ad41115398f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Turret
+  - Building
+  - Reward
 --- !u!1 &2130665220319076271
 GameObject:
   m_ObjectHideFlags: 0

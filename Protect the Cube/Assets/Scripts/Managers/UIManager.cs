@@ -84,7 +84,7 @@ public class UIManager : MonoBehaviour
     {
         if (nexus && playerHP)
         {
-            scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave +
+            scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.currentWaveIndex +
             "\r\nNexus: " + nexus.health + "/" + nexus.maxHealth +
             "\r\nHP: " + playerHP.currentHealth + "/" + playerHP.maxHealth;
         }

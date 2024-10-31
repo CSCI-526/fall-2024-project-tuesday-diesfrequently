@@ -4,6 +4,16 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.UI;
 
+// tracks enemy health (current, max)
+// handles dmg taken for an enemy
+// implements invincibility logic to prevent enemy from taking dmg right after
+// triggers Animation (when dmg taken) - visual UI hp bar
+// calls die() on death ... dropping XP, updating WaveManager
+// handles all logic with enemies dropping XP (randomness, xp instantiating)
+// manages Health Bar UI (updates based on enemy health), visual bar displayed on top of enemy
+
+// EnemyController, EnemyStats, HealthManager
+
 public class EnemyHealth : MonoBehaviour
 {
 
