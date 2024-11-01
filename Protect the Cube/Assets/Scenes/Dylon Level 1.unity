@@ -650,7 +650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &367942146
 Transform:
   m_ObjectHideFlags: 0
@@ -3734,6 +3734,10 @@ PrefabInstance:
       propertyPath: lvl1_reward_prefabs.Array.data[2]
       value: 
       objectReference: {fileID: 6191134258547235123, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
+    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: shieldBoss
+      value: 
+      objectReference: {fileID: 6013629208632606210, guid: 043c26fd723417644bb1ff73a471e0e4, type: 3}
     - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: spawnerBoss
       value: 
