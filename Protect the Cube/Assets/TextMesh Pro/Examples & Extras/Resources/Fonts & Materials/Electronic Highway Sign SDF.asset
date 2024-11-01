@@ -511,6 +511,66 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+  - m_Index: 92
+    m_Metrics:
+      m_Width: 76.53125
+      m_Height: 107.6875
+      m_HorizontalBearingX: 7.40625
+      m_HorizontalBearingY: 115.203125
+      m_HorizontalAdvance: 88.15625
+    m_GlyphRect:
+      m_X: 109
+      m_Y: 661
+      m_Width: 77
+      m_Height: 109
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 10
+    m_Metrics:
+      m_Width: 14.09375
+      m_Height: 45.359375
+      m_HorizontalBearingX: 37.03125
+      m_HorizontalBearingY: 115.203125
+      m_HorizontalAdvance: 88.15625
+    m_GlyphRect:
+      m_X: 11
+      m_Y: 957
+      m_Width: 15
+      m_Height: 47
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 71
+    m_Metrics:
+      m_Width: 76.53125
+      m_Height: 107.6875
+      m_HorizontalBearingX: 7.40625
+      m_HorizontalBearingY: 115.203125
+      m_HorizontalAdvance: 88.15625
+    m_GlyphRect:
+      m_X: 109
+      m_Y: 791
+      m_Width: 77
+      m_Height: 109
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 37
+    m_Metrics:
+      m_Width: 76.53125
+      m_Height: 107.6875
+      m_HorizontalBearingX: 7.40625
+      m_HorizontalBearingY: 115.203125
+      m_HorizontalAdvance: 88.15625
+    m_GlyphRect:
+      m_X: 207
+      m_Y: 141
+      m_Width: 77
+      m_Height: 109
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 95
@@ -607,6 +667,22 @@ MonoBehaviour:
   - m_ElementType: 1
     m_Unicode: 33
     m_GlyphIndex: 4
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 121
+    m_GlyphIndex: 92
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 39
+    m_GlyphIndex: 10
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 100
+    m_GlyphIndex: 71
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 66
+    m_GlyphIndex: 37
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: 28981121099961358}
@@ -706,34 +782,58 @@ MonoBehaviour:
     m_Y: 83
     m_Width: 36
     m_Height: 130
-  m_FreeGlyphRects:
+  - m_X: 98
+    m_Y: 650
+    m_Width: 98
+    m_Height: 130
   - m_X: 0
     m_Y: 946
-    m_Width: 1023
-    m_Height: 77
+    m_Width: 36
+    m_Height: 68
+  - m_X: 98
+    m_Y: 780
+    m_Width: 98
+    m_Height: 130
+  - m_X: 196
+    m_Y: 130
+    m_Width: 98
+    m_Height: 130
+  m_FreeGlyphRects:
   - m_X: 1000
     m_Y: 0
     m_Width: 23
     m_Height: 1023
-  - m_X: 98
-    m_Y: 650
-    m_Width: 925
-    m_Height: 373
   - m_X: 624
     m_Y: 83
     m_Width: 15
     m_Height: 940
-  - m_X: 196
-    m_Y: 213
-    m_Width: 827
-    m_Height: 810
-  - m_X: 196
-    m_Y: 130
-    m_Width: 392
-    m_Height: 893
   - m_X: 624
     m_Y: 130
     m_Width: 399
+    m_Height: 893
+  - m_X: 0
+    m_Y: 1014
+    m_Width: 1023
+    m_Height: 9
+  - m_X: 36
+    m_Y: 946
+    m_Width: 987
+    m_Height: 77
+  - m_X: 98
+    m_Y: 910
+    m_Width: 925
+    m_Height: 113
+  - m_X: 196
+    m_Y: 260
+    m_Width: 827
+    m_Height: 763
+  - m_X: 294
+    m_Y: 213
+    m_Width: 729
+    m_Height: 810
+  - m_X: 294
+    m_Y: 130
+    m_Width: 294
     m_Height: 893
   m_fontInfo:
     Name: Electronic Highway Sign

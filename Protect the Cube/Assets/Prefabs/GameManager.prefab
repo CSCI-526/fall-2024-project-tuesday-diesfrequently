@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32a5cb388e5f2a40bd74c32f60e23b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useBulletPool: 0
 --- !u!114 &8626850916652475655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,13 +88,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreBoard: {fileID: 0}
   expUI: {fileID: 0}
+  expSlider: {fileID: 0}
   inventoryCount: []
   goldUI: {fileID: 0}
   gameOverScreen: {fileID: 0}
   rewardMenu: {fileID: 0}
-  miniRewardMenu: {fileID: 0}
   upgradePanel: {fileID: 0}
   pauseUI: {fileID: 0}
+  SelectGunTutorialUI: {fileID: 0}
+  crosshairTexture: {fileID: 2800000, guid: 6bb4e046bf9666047ba42a3c0d25d34f, type: 3}
+  crossHotspot: {x: 0, y: 0}
+  HandTexture: {fileID: 2800000, guid: 1ec13b17ff61f9a44a8028a9d4479143, type: 3}
+  handHotspot: {x: 10, y: 0}
 --- !u!114 &6683548619100361680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,10 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a297ec0e09cea247afe5bd845279954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lvl1_reward_options:
-  - {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-  - {fileID: 3732443334033032084, guid: 1be928d46a8b6db478a64830a4364934, type: 3}
-  - {fileID: 6191134258547235123, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
   all_reward_prefabs:
   - {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
   - {fileID: 3732443334033032084, guid: 1be928d46a8b6db478a64830a4364934, type: 3}
