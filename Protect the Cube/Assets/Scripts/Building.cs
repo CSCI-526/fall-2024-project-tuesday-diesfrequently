@@ -11,17 +11,27 @@ public class Building : MonoBehaviour
     [SerializeField] public string buildingName = "missing name";
     [SerializeField] public string buildingDesc = "missing description";
 
+    [SerializeField] public float colorDiffAfterPlace = 50f;
     private bool coroutineRunning = false;
     public virtual void OnPlace()
     {
+
+        // foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+        // {
+        //     Color originalColor = renderer.material.color;
+        //     Color color = new Color(originalColor.r + colorDiffAfterPlace / 255f, originalColor.g + colorDiffAfterPlace / 255f, originalColor.b + colorDiffAfterPlace / 255f);
+        //     renderer.material.color = color;
+        // }
         placed = true;
         foreach(Collider c in GetComponentsInChildren<Collider>())
         {
             c.enabled = true;
         }
 
+
         ShowIndicators();
     }
+
 
     public virtual void Boost()
     {

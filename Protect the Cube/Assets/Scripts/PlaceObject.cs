@@ -84,6 +84,8 @@ public class PlaceObject : MonoBehaviour
         }
     }
 
+
+
     private bool PressedKeyOfCurrentPrefab(int i)
     {
         return currentPlaceableObject != null && currentPrefabIndex == i;
