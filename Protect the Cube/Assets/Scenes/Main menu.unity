@@ -598,18 +598,18 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Movement: [W,A,S,D]
 
-    Place building: [1,2,3,4,5,6,7,8,9] + [LMB]
+    Place building: Left click on item to select;
+    Left click on map again to place
 
-    Aim:
-    Mouse
+    Aim: Mouse
 
     Shoot: Left Mouse Button
 
-    Upgrade Turret: Left click on turret
+    Upgrade
+    Turret: Left click on turret
 
 
-    HINT:
-    Pause game if you forget game control'
+    HINT: Pause game if you forget game control'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.2
+  m_fontSize: 34.3
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1118,7 +1118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1435113407
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1171,7 +1171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1467259502
 RectTransform:
   m_ObjectHideFlags: 0
