@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI expUI;
     [SerializeField] protected Slider expSlider;
     [SerializeField] public List<TextMeshProUGUI> inventoryCount = new List<TextMeshProUGUI>();
+    [SerializeField] public List<Image> inventoryGbox = new List<Image>();
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
     [SerializeField] public GameObject rewardMenu;
@@ -181,6 +182,11 @@ public class UIManager : MonoBehaviour
         for(int i = 0; i < inv.buildingCount.Count; i++)
         {
             inventoryCount[i].text = "x" + inv.buildingCount[i];
+            if (inv.buildingCount[i] > 0){
+                inventoryGbox[i].enabled = false;
+            }else{
+                 inventoryGbox[i].enabled = true;
+            }
         }
 
     }
