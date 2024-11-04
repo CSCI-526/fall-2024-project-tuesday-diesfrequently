@@ -347,6 +347,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1296341469584425672, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: tags.Array.data[2]
+      value: Inventory
+      objectReference: {fileID: 0}
     - target: {fileID: 2130665220319076271, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Layer
       value: 9

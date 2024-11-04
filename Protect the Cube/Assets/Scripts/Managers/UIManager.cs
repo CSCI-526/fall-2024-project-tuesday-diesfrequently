@@ -16,17 +16,39 @@ public class UIManager : MonoBehaviour
     //[SerializeField] protected GameObject miniRewardMenu;
     [SerializeField] protected GameObject upgradePanel;
     [SerializeField] protected GameObject pauseUI;
+
+    // references to gameobject + components
     private Nexus nexus;
     private PlayerHealth playerHP;
     private PlayerLevels playerLevels;
 
+    // references to managers
+    private InventoryManager inventoryManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        // References to Components
         nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         playerLevels = GameManager.Instance.Player.GetComponent<PlayerLevels>();
+
+        // References to Managers
+        inventoryManager = GameManager.Instance.InventoryManager;
+
         UpdateUI();
+    }
+
+    private void OnEnable()
+    {
+        inventoryManager.UI_OnInventoryUpdated += UpdateInventoryUI;
+        inventoryManager.UI_OnRewardsUpdated += UpdateRewardsUI;
+    }
+
+    private void OnDisable()
+    {
+        inventoryManager.UI_OnInventoryUpdated -= UpdateInventoryUI;
+        inventoryManager.UI_OnRewardsUpdated -= UpdateRewardsUI;
     }
 
     // Update is called once per frame
@@ -104,21 +126,27 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void UpdateRewardsUI(GameObject b1, GameObject b2, GameObject b3)
-    {
-        rewardMenu.GetComponent<RewardChoiceUI>().UpdateRewardChoices(b1, b2, b3);
-    }
+    //public void UpdateRewardsUI(GameObject b1, GameObject b2, GameObject b3)
+    //{
+    //    rewardMenu.GetComponent<RewardChoiceUI>().UpdateRewardChoices(b1, b2, b3);
+    //}
 
+    // chosenRewards contains the top 3 rewards generated
+    public void UpdateRewardsUI(List<GameObject> chosenRewards)
+    {
+        // Call the method to update the reward choices with the new rewards
+        rewardMenu.GetComponent<RewardChoiceUI>().UpdateRewardChoices(chosenRewards[0], chosenRewards[1], chosenRewards[2]);
+    }
 
     public void UpdateInventoryUI()
     {
-        InventoryManager inv = GameManager.Instance.InventoryManager;
+        // take snapshot of updated inventory item count
+        List<int> inventoryItemCountSnapshot = inventoryManager.InventoryItemCount;
 
-        for(int i = 0; i < inv.buildingCount.Count; i++)
+        for(int i = 0; i < inventoryItemCountSnapshot.Count; i++)
         {
-            inventoryCount[i].text = "x" + inv.buildingCount[i];
+            inventoryCount[i].text = "x" + inventoryItemCountSnapshot[i];
         }
-
     }
     public void updateUpgradeUI(string buildingName, int materialNum, int id)
     {

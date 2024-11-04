@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Info : MonoBehaviour
 {
-    [SerializeField] public string name = "missing name";
-    [SerializeField] public string desc = "missing description";
+    [SerializeField] public string InfoName = "missing name";
+    [SerializeField] public string Description = "missing description";
+
+    // MATCHA ... hand add InfoName, Description based on events in each building component on spawn i think....
 }

@@ -20,7 +20,7 @@ public class AnalyticsManager : MonoBehaviour
     // Metadata: Timestamp, Session ID (same for each session)
     // Metric #1: [Wave Stats] Player Hitpoint Loss Wave, Player Death Wave
     // Metric #2: [Player Stats] Player Level, Player Accumulated XP, Player Acquired Gold, Player Spent Gold
-    // Metric #3: [Turret Stats] {Total} {By Turret Type} # of Acquired Turrets, # of Placed Turrets, # of Level 2 Turrets, # of Level 3 Turrets
+    // Metric #3: [Inventory Stats] {Total} {By Inventory Split} # of Acquired Inventory, # of Inventory Used, # of Level 2 Inventory Slots (buildings), # of Level 3 Inventory Slots (buildings)
     // Metric #4: [Reward Stats] {By Reward Type} Options Offered
 
     // Lock Object for Thread Safety //
@@ -41,14 +41,16 @@ public class AnalyticsManager : MonoBehaviour
     private int _playerSpentGold;
 
     // analytics tracked variabels (metric #3)
-    private List<int> _totalAcquiredTurrets; // list of [0] is total, [x] is by turret type
-    private List<int> _totalPlacedTurrets; // list of [0] is total, [x] is by turret type
+    private List<int> _totalAcquiredInventory; // list of [0] is total, [x] is by inventory type
+    private List<int> _totalPlacedInventory; // list of [0] is total, [x] is by inventory type
     private List<int> _lvl2Turrets; // list of [0] is total, [x] is by turret type
     private List<int> _lvl3Turrets; // list of [0] is total, [x] is by turret type
 
     // analytics tracked variabels (metric #4)
     private List<int> _rewardsOffered; // list of [0] is total rewards offered, [x] is how much of each reward
 
+    // references to managers
+    private InventoryManager inventoryManager;
 
     private void Awake()
     {
@@ -58,6 +60,20 @@ public class AnalyticsManager : MonoBehaviour
 
          //[DEBUG] Send Session Start Analytics Report
          //SendSessionStartAnalytics();
+    }
+
+    private void OnEnable()
+    {
+        // MATCHA: does the param still get passed even though we dont specify the "param" or its type in the subscription?
+        inventoryManager.Analytics_OnInventoryAdded += UpdateTotalAcquiredInventory;
+        inventoryManager.Analytics_OnInventoryUsed += UpdateTotalPlacedInventory;
+    }
+
+    private void OnDisable()
+    {
+        inventoryManager.Analytics_OnInventoryAdded -= UpdateTotalAcquiredInventory;
+        inventoryManager.Analytics_OnInventoryUsed -= UpdateTotalPlacedInventory;
+
     }
 
     // Description: Generates a random 4-digit session ID.
@@ -84,8 +100,8 @@ public class AnalyticsManager : MonoBehaviour
             _playerSpentGold = 0;
 
             // Metric #3
-            _totalAcquiredTurrets = new List<int>(new int[8]); // [All Turrets (0), Gun Turret (1), Gatling Turret (2), Flamethrower (3), Sniper Turret (4), Turret Booster (5), Harvestor (6), Slow Turret (7)]
-            _totalPlacedTurrets = new List<int>(new int[8]); // [All Turrets (0), Gun Turret (1), Gatling Turret (2), Flamethrower (3), Sniper Turret (4), Turret Booster (5), Harvestor (6), Slow Turret (7)]
+            _totalAcquiredInventory = new List<int>(new int[8]); // [All Turrets (0), Gun Turret (1), Gatling Turret (2), Flamethrower (3), Sniper Turret (4), Turret Booster (5), Harvestor (6), Slow Turret (7)]
+            _totalPlacedInventory = new List<int>(new int[8]); // [All Turrets (0), Gun Turret (1), Gatling Turret (2), Flamethrower (3), Sniper Turret (4), Turret Booster (5), Harvestor (6), Slow Turret (7)]
             _lvl2Turrets = new List<int>(new int[8]); // [All Turrets (0), Gun Turret (1), Gatling Turret (2), Flamethrower (3), Sniper Turret (4), Turret Booster (5), Harvestor (6), Slow Turret (7)]
             _lvl3Turrets = new List<int>(new int[8]); // [All Turrets (0), Gun Turret (1), Gatling Turret (2), Flamethrower (3), Sniper Turret (4), Turret Booster (5), Harvestor (6), Slow Turret (7)]
 
@@ -182,26 +198,26 @@ public class AnalyticsManager : MonoBehaviour
     /************/
     // [All Turrets (0), Gun Turret (1), Gatling Turret (2), Flamethrower (3), Sniper Turret (4), Turret Booster (5), Harvestor (6), Slow Turret (7)]
 
-    // Description: Increments the count of acquired turrets for the given turret index
-    // Parameters: turretIDX - The index of the turret type acquired
-    public void UpdateTotalAcquiredTurrets(int turretIDX)
+    // Description: Increments the count of acquired inventory for the given item index
+    // Parameters: itemIDX - The index of the inventory acquired
+    public void UpdateTotalAcquiredInventory(int itemIDX)
     {
-        Debug.Log("[Analytics] UpdateTotalAcquiredTurrets: " + turretIDX);
+        Debug.Log("[Analytics] UpdateTotalAcquiredInventory: " + itemIDX);
         lock (_lockObject)
         {
-            _totalAcquiredTurrets[turretIDX] += 1;      // indicate which specific turret type was obtained
-            _totalAcquiredTurrets[0] += 1;              // increase total # of turrets acquired
+            _totalAcquiredInventory[itemIDX] += 1;      // indicate which specific inventory was obtained
+            _totalAcquiredInventory[0] += 1;              // increase total # of inventory items acquired
         }
     }
 
-    // Description: Increments the count of placed turrets for the given turret index
-    // Parameters: turretIDX - The index of the turret type placed
-    public void UpdateTotalPlacedTurrets(int turretIDX)
+    // Description: Increments the count of placed inventory for the given item index
+    // Parameters: itemIDX - The index of the inventory type placed
+    public void UpdateTotalPlacedInventory(int itemIDX)
     {
         lock (_lockObject)
         {
-            _totalPlacedTurrets[turretIDX] += 1;      // indicate which specific turret type was placed
-            _totalPlacedTurrets[0] += 1;              // increase total # of turrets placed
+            _totalPlacedInventory[itemIDX] += 1;      // indicate which specific inventory type was placed
+            _totalPlacedInventory[0] += 1;              // increase total # of items placed
         }
     }
 
@@ -267,8 +283,8 @@ public class AnalyticsManager : MonoBehaviour
                 _playerXP.ToString(),                       // [Metric 2] 
                 _playerAcquiredGold.ToString(),             // [Metric 2] 
                 _playerSpentGold.ToString(),                // [Metric 2] 
-                string.Join("_", _totalAcquiredTurrets),    // [Metric 3] list values sep by '_'
-                string.Join("_", _totalPlacedTurrets),      // [Metric 3] list values sep by '_'
+                string.Join("_", _totalAcquiredInventory),    // [Metric 3] list values sep by '_'
+                string.Join("_", _totalPlacedInventory),      // [Metric 3] list values sep by '_'
                 string.Join("_", _lvl2Turrets),             // [Metric 3] list values sep by '_'
                 string.Join("_", _lvl3Turrets),             // [Metric 3] list values sep by '_'
                 string.Join("_", _rewardsOffered)           // [Metric 4] list values sep by '_'

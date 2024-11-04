@@ -19,7 +19,7 @@ public class RewardPanel : MonoBehaviour
             if (info != null)
             {
                 rewardName.text = info.name;
-                rewardDescription.text = info.desc;
+                rewardDescription.text = info.Description;
             }
             else if (building != null)
             {

@@ -478,7 +478,7 @@ MonoBehaviour:
   tags:
   - Turret
   - Building
-  - Reward
+  - Inventory
 --- !u!1 &1501241086206586852
 GameObject:
   m_ObjectHideFlags: 0
