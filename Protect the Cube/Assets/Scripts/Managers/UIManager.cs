@@ -25,6 +25,12 @@ public class UIManager : MonoBehaviour
     // references to managers
     private InventoryManager inventoryManager;
 
+    private void Awake()
+    {
+        // References to Managers
+        inventoryManager = GameManager.Instance.InventoryManager;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +38,6 @@ public class UIManager : MonoBehaviour
         nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         playerLevels = GameManager.Instance.Player.GetComponent<PlayerLevels>();
-
-        // References to Managers
-        inventoryManager = GameManager.Instance.InventoryManager;
 
         UpdateUI();
     }
@@ -143,7 +146,7 @@ public class UIManager : MonoBehaviour
         // take snapshot of updated inventory item count
         List<int> inventoryItemCountSnapshot = inventoryManager.InventoryItemCount;
 
-        for(int i = 0; i < inventoryItemCountSnapshot.Count; i++)
+        for(int i = 0; i < InventoryManager.NUM_PLACEABLE_ITEMS; i++)
         {
             inventoryCount[i].text = "x" + inventoryItemCountSnapshot[i];
         }

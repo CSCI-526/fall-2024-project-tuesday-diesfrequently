@@ -2,9 +2,6 @@
 // reward generation
 // update player health + player ui
 
-// MATCHA: check analytics indices, check prefab (order it loads in) indices
-// MATCHA: change the rewardMapping to inventoryMapping .. and InventoryItemCount to inventoryCounts
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +10,12 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     // contant variables
-    private const int _HEALTH_INCREASE = 2;
-    private const int _NUM_REWARD_CHOICES = 3; 
+    private const int _PLAYER_HEALTH_INCREASE = 2;
+    private const int _NEXUS_HEALTH_INCREASE = 5;
+    private const int _NUM_REWARD_CHOICES = 3;
+    public const int TOTAL_NUM_INVENTORY = 9;
+    public const int NUM_PLACEABLE_ITEMS = 7;
+    public const int NUM_NON_PLACEABLE_ITEMS = 2;
 
     // references to GameObjects 
     private Nexus _nexus;
@@ -23,7 +24,7 @@ public class InventoryManager : MonoBehaviour
 
     // stores reward-related and inventory-related information
     private Dictionary<string, int> _inventoryMapping; // Dictionary for Rewards String - Int Mapping
-    private HashSet<GameObject> _availableRewards; // stores (increasing) list of valid rewards player can choose from
+    private HashSet<GameObject> _potentialRewards; // stores (increasing) list of valid rewards player can choose from
     public List<int> InventoryItemCount { get; private set; } // old: buildingCount, stores # of reward in inventory
 
     // store item prefabs
@@ -38,26 +39,36 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        _availableRewards = new HashSet<GameObject>();
+        _potentialRewards = new HashSet<GameObject>();
         _inventoryMapping = new Dictionary<string, int>()
         {
-            { "Gun Turret", 1 },
-            { "Gatling Turret", 2 },
-            { "Flamethrower Turret", 3 },
-            { "Sniper Turret", 4 },
-            { "Turret Booster", 5 },
-            { "Harvester", 6 },
-            { "Slow Tower", 7 }
+            { "Gun Turret", 0 },
+            { "Gatling Turret", 1 },
+            { "Flamethrower Turret", 2 },
+            { "Sniper Turret", 3 },
+            { "Turret Booster", 4 },
+            { "Harvester", 5 },
+            { "Slow Turret", 6 },
+            { "Player HP", 7 },
+            { "Nexus HP", 8 }
         };
 
+        // size of the potential number of dropped inventory items
         inventoryPrefabs = new List<GameObject>();
         InventoryItemCount = new List<int>();
+
+        // setup inventory list && count
+        for (int idx = 0; idx < TOTAL_NUM_INVENTORY; idx++)
+        {
+            // add placeholders for upcoming inventory storage
+            inventoryPrefabs.Add(null);
+            InventoryItemCount.Add(0);
+        }
 
     }
 
     private void Start()
     {
-        // MATCHA: replace these with events?
         _nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         _playerLevel = GameManager.Instance.Player.GetComponent<PlayerLevels>();
@@ -66,8 +77,6 @@ public class InventoryManager : MonoBehaviour
 
     private void InitializeInventoryPrefabs()
     {
-        inventoryPrefabs.Clear(); // Clear the existing list of inventory prefabs
-
         // Load all prefabs from Resources/Prefabs/ into GameObject Array
         // MATCHA: should be able to specify deeper into folders in the prefabs, do this once we organize prefabs into folders properly
         GameObject[] allPrefabs = Resources.LoadAll<GameObject>("Prefabs");
@@ -79,15 +88,19 @@ public class InventoryManager : MonoBehaviour
 
             MultiTag prefabMultiTag = prefab.GetComponent<MultiTag>(); // get prefab MultiTag
 
-            if (prefabMultiTag == null) continue; // skip if prefabMultiTag is invalid
+            if (prefabMultiTag == null || !prefabMultiTag.HasTag("Inventory")) continue; // skip if prefabMultiTag is invalid or no inventory tag
 
-            if (prefabMultiTag.HasTag("Inventory")) // if prefab tagged "Inventory"
+            // handle non-building prefabs / rewards here
+            int inventoryIDX = getItemIDX(prefab.name); // Use prefab name or another identifier
+
+            Debug.Log("Inventory Item Name: " + prefab.name + " with IDX of inventory: " + inventoryIDX);
+
+            if (inventoryIDX >= 0 && inventoryIDX < TOTAL_NUM_INVENTORY)
             {
-                inventoryPrefabs.Add(prefab); // add ACTUAL inventory prefab
-                InventoryItemCount.Add(0); // add inventory slot for inventory prefab with count 0
+                inventoryPrefabs[inventoryIDX] = prefab;
+                InventoryItemCount[inventoryIDX] = 0;
             }
         }
-
         Debug.Log($"Initialized {inventoryPrefabs.Count} reward prefabs with the 'Inventory' tag.");
     }
 
@@ -95,46 +108,74 @@ public class InventoryManager : MonoBehaviour
     {
         GameObject forcedReward = null;
         int playerLevelSnapshot = _playerLevel.currentLevel; // get player current XP level
+        int playerHealthSnapshot = _playerHP.currentHealth; // get player current HP level
+        int nexusHealthSnapshot = _nexus.health; // get nexus current HP level
         int forcedRewardCount = 0; // how many times a specific reward is forced as choice
 
+        // add "Player HP" reward if the player has less than max health
+        if (playerHealthSnapshot < _playerHP.maxHealth) { AddPotentialReward("Player HP", ref forcedReward, ref forcedRewardCount); }
+        else { RemovePotentialReward("Player HP"); }
+        // post level 10, give nexus health regen as an option for players
+        if (nexusHealthSnapshot < _nexus.maxHealth && playerLevelSnapshot >= 1) { AddPotentialReward("Nexus HP", ref forcedReward, ref forcedRewardCount); }
+        else { RemovePotentialReward("Nexus HP"); }
+
         // Level 1: Add "Gun Turret" as Valid Reward Choice
-        if (playerLevelSnapshot == 1) { UpdateAvailableRewards("Gun Turret", ref forcedReward, ref forcedRewardCount); }
+        if (playerLevelSnapshot == 1) { AddPotentialReward("Gun Turret", ref forcedReward, ref forcedRewardCount); }
         // Level 2: Add "Gatling Turret" as Valid Reward Choice
-        else if (playerLevelSnapshot == 2) { UpdateAvailableRewards("Gatling Turret", ref forcedReward, ref forcedRewardCount); }
+        else if (playerLevelSnapshot == 2) { AddPotentialReward("Gatling Turret", ref forcedReward, ref forcedRewardCount); }
         // Level 3: Add "FlameThrower Turret" as Valid Reward Choice
-        else if (playerLevelSnapshot == 3) { UpdateAvailableRewards("Flamethrower Turret", ref forcedReward, ref forcedRewardCount); }
+        else if (playerLevelSnapshot == 3) { AddPotentialReward("Flamethrower Turret", ref forcedReward, ref forcedRewardCount); }
         // Level of Multiple 5: Force Harvestor on Levels of Multiple 5
         // Level 5: Force ONLY Harvestor Reward
-        else if (playerLevelSnapshot % 5 == 0) { UpdateAvailableRewards("Harvester", ref forcedReward, ref forcedRewardCount, playerLevelSnapshot == 5 ? 3 : 0); }
+        else if (playerLevelSnapshot % 5 == 0) { AddPotentialReward("Harvester", ref forcedReward, ref forcedRewardCount, playerLevelSnapshot == 5 ? 3 : 0); }
         // Level 7: Add "Slow Tower" as Valid Reward Choice
-        else if (playerLevelSnapshot == 7) { UpdateAvailableRewards("Slow Tower", ref forcedReward, ref forcedRewardCount); }
+        else if (playerLevelSnapshot == 7) { AddPotentialReward("Slow Tower", ref forcedReward, ref forcedRewardCount); }
         // Level 7: Add "Turret Booster" as Valid Reward Choice
-        else if (playerLevelSnapshot == 8) { UpdateAvailableRewards("Turret Booster", ref forcedReward, ref forcedRewardCount); }
+        else if (playerLevelSnapshot == 8) { AddPotentialReward("Turret Booster", ref forcedReward, ref forcedRewardCount); }
 
         // MATCHA: other building names: Sniper Turret, Turret Booster
 
         // Pick 3 Random Rewards from Available Rewards
-        var chosenRewards = GenerateUniqueRewards(_availableRewards.ToList(), forcedReward, forcedRewardCount);
+        var chosenRewards = GenerateUniqueRewards(_potentialRewards.ToList(), forcedReward, forcedRewardCount);
 
         UpdateRewardDisplay(chosenRewards); // Updates Reward Display
 
         // MATCHA: THIS DOES NOT WORK FOR NON-BUILDING REWARDS ... fix later!
 
         // generate reward indexes for analytics
-        int[] rewardIndices = chosenRewards.Select(reward => getItemIDX(reward.GetComponent<Building>().buildingName)).ToArray();
+        int[] rewardIndices = chosenRewards.Select(reward => getItemIDX(reward.name)).ToArray();
 
         // Analytics Update
         // Order: Gun Turret, Gatling Turret, Flamethrower Turret, Sniper Turret, Turret Booster, Harvester, Slow Tower
         Analytics_OnRewardsUpdated?.Invoke(rewardIndices[0], rewardIndices[1], rewardIndices[2]);
-        //GameManager.Instance.AnalyticsManager.UpdateRewardsOffered(rewardIndices[0], rewardIndices[1], rewardIndices[2]);
     }
 
-    private void UpdateAvailableRewards(string reward_name, ref GameObject forced_reward, ref int forced_reward_count, int force_count = 1)
+    private void AddPotentialReward(string reward_name, ref GameObject forced_reward, ref int forced_reward_count, int force_count = 1)
     {
         int rewardIndex = getItemIDX(reward_name); // get index of reward prefab
         forced_reward = inventoryPrefabs[rewardIndex]; // get inventory prefab
         forced_reward_count = force_count > 0 ? force_count : 1; // set the # of times reward is forced as a choice
-        _availableRewards.Add(forced_reward); // current reward becomes "available" as a choice
+        _potentialRewards.Add(forced_reward); // current reward becomes "available" as a choice
+    }
+
+    private void RemovePotentialReward(string reward_name)
+    {
+        // Use a temporary list to collect items to remove
+        List<GameObject> rewardsToRemove = new List<GameObject>();
+
+        // iterate through potential rewards, identify rewards to remove
+        foreach (var reward in _potentialRewards)
+        {
+            if (reward.name == reward_name) rewardsToRemove.Add(reward); // add all rewards to remove
+        }
+
+        // remove rewards as needed
+        foreach (var reward in rewardsToRemove)
+        {
+            _potentialRewards.Remove(reward); // Remove from available rewards
+        }
+
+        Debug.Log($"Removed {rewardsToRemove.Count} instances of {reward_name} from available rewards.");
     }
 
     public List<GameObject> GenerateUniqueRewards(List<GameObject> rewards_list, GameObject forced_reward = null, int forced_reward_count = 0)
@@ -167,7 +208,7 @@ public class InventoryManager : MonoBehaviour
 
     // How to handle which "reward" is picked
     // MATCHA: should rename to HandlePickedReward
-    public void PickReward(string reward_name)
+    public void HandlePickedReward(string reward_name)
     {
         // Update Health if the reward is health-based
         // MATCHA: maybe handle this in another file? not rly inventory related
@@ -184,12 +225,14 @@ public class InventoryManager : MonoBehaviour
         if (reward_name == "Player HP") // update player current health by HEALTH_INCREASE (if you can)
         {
             // do NOT do this here, send an event to "playerHP component"
-            _playerHP.currentHealth = Mathf.Min(_playerHP.currentHealth + _HEALTH_INCREASE, _playerHP.maxHealth);
+            _playerHP.currentHealth = Mathf.Min(_playerHP.currentHealth + _PLAYER_HEALTH_INCREASE, _playerHP.maxHealth);
+            Debug.Log("PLAYER HP HAS BEEN UPGRADED BY " + _PLAYER_HEALTH_INCREASE);
         }
         else if (reward_name == "Nexus HP") // update nexus current health by HEALTH_INCREASE (if you can)
         {
             // MATCHA: do not do this here, send an event to "nexus component" 
-            _nexus.health = Mathf.Min(_nexus.health + _HEALTH_INCREASE, _nexus.maxHealth);
+            _nexus.health = Mathf.Min(_nexus.health + _NEXUS_HEALTH_INCREASE, _nexus.maxHealth);
+            Debug.Log("NEXUS HP HAS BEEN UPGRADED BY " + _NEXUS_HEALTH_INCREASE);
         }
     }
 
@@ -197,17 +240,17 @@ public class InventoryManager : MonoBehaviour
     private void UpdateInventoryCount(string item_name)
     {
         int itemIDX = getItemIDX(item_name);
+        Debug.Log("Item_name " + item_name + "is at ItemIDX: " + itemIDX);
         if (itemIDX < 0) Debug.Log("[InventoryManager] Cannot Find Item IDX to store in Inventory");
 
-        InventoryItemCount[itemIDX]++; // add reward to "inventory"
+        // add reward to "inventory"
+        InventoryItemCount[itemIDX]++; 
 
         // Update Inventory UI
         UI_OnInventoryUpdated?.Invoke();
-        //GameManager.Instance.UIManager.UpdateInventoryUI(); // MATCHA: is it good practice to call function from another manager?
 
-        // MATCHA: only run this if reward is a "building" reward, new analytics for non-building rewards
+        // Update Inventory Analytics
         Analytics_OnInventoryAdded.Invoke(itemIDX);
-        //GameManager.Instance.AnalyticsManager.UpdateTotalAcquiredTurrets(itemIDX);
     }
 
     // try to use an inventory item, use if item is available
@@ -222,20 +265,16 @@ public class InventoryManager : MonoBehaviour
 
         // Update Inventory UI
         UI_OnInventoryUpdated?.Invoke();
-        //GameManager.Instance.UIManager.UpdateInventoryUI();
 
-        // MATCHA: diff logic for non-building inventory items
+        // Update Analytics UI
         Analytics_OnInventoryUsed.Invoke(itemIDX);
-        //GameManager.Instance.AnalyticsManager.UpdateTotalPlacedTurrets(turretIDX0);
 
         return true; // item has been used
-
     }
 
     private void UpdateRewardDisplay(List<GameObject> chosenRewards)
     {
         UI_OnRewardsUpdated?.Invoke(chosenRewards);
-        //GameManager.Instance.UIManager.UpdateRewardsUI(chosenRewards[0], chosenRewards[1], chosenRewards[2]);
     }
 
     // function that returns whether there is inventory of a particular reward available

@@ -206,8 +206,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] protected float maxSpawnDelay = 2.0f;
 
     [SerializeField] public int enemyCount = 0;
-    [SerializeField] public int wave = 0;
     [SerializeField] public float difficulty = 1.2f;
+    [SerializeField] public int currentWaveIndex { get; private set;  }
 
     [SerializeField] public float tankRate = 0.8f;
     [SerializeField] public GameObject tank;
@@ -225,7 +225,7 @@ public class WaveManager : MonoBehaviour
         enemies = new List<GameObject>();
         spawnPoints = new List<SpawnPoint>();
         enemyCount = 0;
-        wave = 0;
+        currentWaveIndex = 0;
     }
 
 
@@ -248,13 +248,13 @@ public class WaveManager : MonoBehaviour
 
     void SpawnWave()
     {
-        ++wave;
+        ++currentWaveIndex;
         SpawnNormalEnemies();
         SpawnTanks();
         SpawnSpawnerBoss();
         GameManager.Instance.UIManager.UpdateUI();
-        Debug.Log("Updating Wave... Wave " + wave + " starting");
-        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave);// Send wave number to analytics
+        Debug.Log("Updating Wave... Wave " + currentWaveIndex + " starting");
+        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(currentWaveIndex);// Send wave number to analytics
 
     }
 
@@ -262,13 +262,13 @@ public class WaveManager : MonoBehaviour
     {
         foreach (SpawnPoint sp in spawnPoints)
         {
-            sp.SpawnEnemy(Random.Range(0.0f, maxSpawnDelay), wave, difficulty);
+            sp.SpawnEnemy(Random.Range(0.0f, maxSpawnDelay), currentWaveIndex, difficulty);
         }
     }
 
     void SpawnTanks()
     {
-        for (int i = wave; i >= tankSpawnStartWave; --i)
+        for (int i = currentWaveIndex; i >= tankSpawnStartWave; --i)
         {
             SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
             if (Random.Range(0.0f, 1.0f) <= tankRate)
@@ -281,9 +281,9 @@ public class WaveManager : MonoBehaviour
 
     void SpawnSpawnerBoss()
     {
-        if (wave >= spawnerBossStartWave)
+        if (currentWaveIndex >= spawnerBossStartWave)
         {
-            for (int i = wave / spawnerBossStartWave; i > 0; --i)
+            for (int i = currentWaveIndex / spawnerBossStartWave; i > 0; --i)
             {
                 SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
                 GameObject spawnerEnemy = Instantiate(spawnerBoss);

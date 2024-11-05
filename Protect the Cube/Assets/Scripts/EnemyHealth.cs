@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -90,9 +90,9 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
-        GameManager.Instance.WaveManager.OnEnemyDeath(this.gameObject);
-        //GameManager.Instance.WaveManager.enemyCount--;
-        //GameManager.Instance.WaveManager.enemies.Remove(this.gameObject);
+        //GameManager.Instance.WaveManager.OnEnemyDeath(this.gameObject);
+        GameManager.Instance.WaveManager.enemyCount--;
+        GameManager.Instance.WaveManager.enemies.Remove(this.gameObject);
         DropExp();
         //Debug.Log(GameManager.Instance.WaveManager.enemyCount);
         Destroy(gameObject);

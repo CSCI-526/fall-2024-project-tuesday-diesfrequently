@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: -4580235002880686246}
   - component: {fileID: -7277972499313141211}
   m_Layer: 9
-  m_Name: TurretBooster
+  m_Name: Turret Booster
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

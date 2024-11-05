@@ -12,10 +12,13 @@ public class RewardPanel : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI rewardDescription;
     public void UpdateRewardPanel(GameObject reward)
     {
+        Debug.Log("In RewardPanel ... reward_name: " + reward.name);
         if(reward != null)
         {
             Building building = reward.GetComponent<Building>();
             Info info = reward.GetComponent<Info>();
+
+            // prioritize "INFO" before Building Info
             if (info != null)
             {
                 rewardName.text = info.name;
@@ -44,7 +47,7 @@ public class RewardPanel : MonoBehaviour
     {
         if (rewardName.text.Length > 0)
         {
-            GameManager.Instance.InventoryManager.PickReward(rewardName.text);
+            GameManager.Instance.InventoryManager.HandlePickedReward(rewardName.text);
         }
     }
 }

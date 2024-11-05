@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: -1701615287928845993}
   - component: {fileID: 5070619197879783305}
   m_Layer: 9
-  m_Name: SlowTower
+  m_Name: Slow Turret
   m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placed: 0
   rotatable: 0
-  buildingName: Slow Tower
+  buildingName: Slow Turret
   buildingDesc: Slows all enemies within range of the tower
   radius: 6
   slowRate: 0.4
