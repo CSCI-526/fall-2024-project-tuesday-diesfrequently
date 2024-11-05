@@ -35,8 +35,7 @@ public class turretShoot : Building
     }
     public override void OnPlace()
     {
-        placed = true;
-        GetComponent<Collider>().enabled = true;
+        base.OnPlace();
         CheckForBoost();
 
         RangeIndicator[] indicators = GetComponents<RangeIndicator>();

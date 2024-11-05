@@ -11,19 +11,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI expUI;
     [SerializeField] protected Slider expSlider;
     [SerializeField] public List<TextMeshProUGUI> inventoryCount = new List<TextMeshProUGUI>();
+    [SerializeField] public List<Image> inventoryGbox = new List<Image>();
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
-    [SerializeField] protected GameObject rewardMenu;
+    [SerializeField] public GameObject rewardMenu;
     //[SerializeField] protected GameObject miniRewardMenu;
-    [SerializeField] protected GameObject upgradePanel;
-    [SerializeField] protected GameObject pauseUI;
+    [SerializeField] public GameObject upgradePanel;
+    [SerializeField] public GameObject pauseUI;
     [SerializeField] protected GameObject SelectGunTutorialUI;
     // [SerializeField] protected GameObject HarvesterTutorialUI;
+
+    public Texture2D crosshairTexture;
+    public GameObject HandTexture;
 
     private Nexus nexus;
     private PlayerHealth playerHP;
     private PlayerLevels playerLevels;
     private Image goldImage;
+    
 
     public bool pauseMenuActive = false;
     public bool rewardMenuActive = false;
@@ -31,11 +36,14 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetCursorCrosshair();
         nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         playerLevels = GameManager.Instance.Player.GetComponent<PlayerLevels>();
         goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
         UpdateUI();
+
+        //set cursor to be a crosshair
     }
 
     // Update is called once per frame
@@ -49,6 +57,21 @@ public class UIManager : MonoBehaviour
             UpdateGoldUI(1);
         }
     }
+    public void SetCursorCrosshair(){
+        Vector2 crossHotspot = new Vector2(crosshairTexture.width/2, crosshairTexture.height/2);
+        Cursor.visible = true;
+        HandTexture.SetActive(false);
+        Cursor.SetCursor(crosshairTexture, crossHotspot, CursorMode.Auto);
+
+    }
+    public void SetCursorHand(){
+        HandTexture.transform.position = Input.mousePosition;
+        HandTexture.SetActive(true);
+        Cursor.visible = false;
+
+    }
+    
+
 
     public void ShowGameOverScreen()
     {
@@ -95,7 +118,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowUpgradeScreen()
     {
-        upgradePanel.SetActive(true);
+        upgradePanel.SetActive(true);        
         Invoke("HideUpgradeScreen", 5.0f);
     }
 
@@ -174,6 +197,11 @@ public class UIManager : MonoBehaviour
         for(int i = 0; i < inv.buildingCount.Count; i++)
         {
             inventoryCount[i].text = "x" + inv.buildingCount[i];
+            if (inv.buildingCount[i] > 0){
+                inventoryGbox[i].enabled = false;
+            }else{
+                 inventoryGbox[i].enabled = true;
+            }
         }
 
     }

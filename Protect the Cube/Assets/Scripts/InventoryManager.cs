@@ -214,7 +214,7 @@ public class InventoryManager : MonoBehaviour
         // Analytics Update
         // Order: Gun Turret, Gatling Turret, Flamethrower Turret, Sniper Turret, Turret Booster, Harvester, Slow Tower
         GameManager.Instance.AnalyticsManager.UpdateRewardsOffered(rewardIDX0, rewardIDX1, rewardIDX2);
-
+        GameManager.Instance.Player.GetComponent<PlaceObject>().CancelPlace();
         UpdateRewardDisplay(chosen_rewards[0], chosen_rewards[1], chosen_rewards[2]);
     }
 

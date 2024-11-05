@@ -19,6 +19,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public GameObject spawnerBoss;
     [SerializeField] public int spawnerBossStartWave = 10;
 
+    [SerializeField] public GameObject shieldBoss;
+
     [SerializeField] public List<GameObject> enemyPrefabs = new List<GameObject>();
     [SerializeField] public List<GameObject> enemies = new List<GameObject>();
     [SerializeField] public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
@@ -55,6 +57,7 @@ public class WaveManager : MonoBehaviour
         SpawnNormalEnemies();
         SpawnTanks();
         SpawnSpawnerBoss();
+        SpawnShieldEnemy();
         GameManager.Instance.UIManager.UpdateUI();
         Debug.Log("Updating Wave... Wave " + wave + " starting");
         GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave);// Send wave number to analytics
@@ -91,6 +94,19 @@ public class WaveManager : MonoBehaviour
                 SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
                 GameObject spawnerEnemy = Instantiate(spawnerBoss);
                 spawnerEnemy.transform.position = randomSpawnPoint.transform.position;
+            }
+        }
+    }
+
+    void SpawnShieldEnemy()
+    {
+        for (int i = wave; i >= tankSpawnStartWave; --i)
+        {
+            SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            if (Random.Range(0.0f, 1.0f) <= tankRate)
+            {
+                GameObject shieldEnemy = Instantiate(shieldBoss);
+                shieldEnemy.transform.position = randomSpawnPoint.transform.position;
             }
         }
     }

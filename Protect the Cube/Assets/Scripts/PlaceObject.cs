@@ -33,7 +33,16 @@ public class PlaceObject : MonoBehaviour
     }
     
     
+    public void CancelPlace(){
+        if (currentPlaceableObject == null)
+        {
+            return;
+        }
+        Destroy(currentPlaceableObject);
+        currentPrefabIndex = -1;
+        GameManager.Instance.UIManager.SetCursorCrosshair();
 
+    }
     private void HandleNewObjectHotkey()
     {
         for (int i = 0; i < placeableObjectPrefabs.Length; i++)
@@ -42,8 +51,7 @@ public class PlaceObject : MonoBehaviour
             {
                 if (PressedKeyOfCurrentPrefab(i))
                 {
-                    Destroy(currentPlaceableObject);
-                    currentPrefabIndex = -1;
+                    CancelPlace();
                 }
                 else
                 {
@@ -54,11 +62,14 @@ public class PlaceObject : MonoBehaviour
 
                     string bName = placeableObjectPrefabs[i].GetComponent<Building>().buildingName;
                     bool canPlace = GameManager.Instance.InventoryManager.HasBuilding(bName);
-            
+                    canPlace &= GameManager.Instance.UIManager.rewardMenu.activeSelf == false;
+                    canPlace &= GameManager.Instance.UIManager.pauseUI.activeSelf == false;
+
                     if (canPlace)
                     {
                         currentPlaceableObject = Instantiate(placeableObjectPrefabs[i]);
                         currentPrefabIndex = i;
+                        GameManager.Instance.UIManager.SetCursorHand();
 
                         if (placedFirstTurret == false){
                             placedFirstTurret = true;
@@ -72,6 +83,8 @@ public class PlaceObject : MonoBehaviour
             }
         }
     }
+
+
 
     private bool PressedKeyOfCurrentPrefab(int i)
     {
@@ -120,9 +133,14 @@ public class PlaceObject : MonoBehaviour
             GameManager.Instance.InventoryManager.TryPlaceBuilding(b.buildingName);
             b.OnPlace();
             currentPlaceableObject = null;
+            GameManager.Instance.UIManager.SetCursorCrosshair();
+
             //rangeIndicator.SetActive(false);
         }
+        else if (Input.GetMouseButtonDown(1)){
 
+        CancelPlace();
+        }
     }
 
     private void RotateFromQE()

@@ -19,6 +19,8 @@ public class EnemyMove : MonoBehaviour
     private float slowDebufTimer = 0;
     private float slowAmount = 0;
     [SerializeField] int damage = 1;
+    [SerializeField] bool targetPlayerOnly = false;
+    [SerializeField] bool targetBuildingsOnly = false;
 
     void Awake()
     {
@@ -32,9 +34,14 @@ public class EnemyMove : MonoBehaviour
 
     private void UpdateTargetList()
     {
-        targetList = GameObject.FindGameObjectsWithTag("Nexus").ToList();
-        targetList.Add(GameObject.FindWithTag("Player"));
-
+        if(!targetPlayerOnly)
+        {
+            targetList = GameObject.FindGameObjectsWithTag("Nexus").ToList();
+        }
+        if(!targetBuildingsOnly)
+        {
+            targetList.Add(GameObject.FindWithTag("Player"));
+        }
     }
 
     // Update is called once per frame

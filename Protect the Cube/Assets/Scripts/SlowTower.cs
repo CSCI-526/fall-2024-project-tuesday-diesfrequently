@@ -11,6 +11,8 @@ public class SlowTower : Building
 
     override public void OnPlace()
     {
+        base.OnPlace();
+
         placed = true;
         GetComponent<Collider>().enabled = true;
         HideIndicators();
