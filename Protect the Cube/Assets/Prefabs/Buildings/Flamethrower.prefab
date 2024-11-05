@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130665220319076271, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
-      value: Turret
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2471998326924655349, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Layer
@@ -80,13 +80,17 @@ PrefabInstance:
       propertyPath: goldRequired
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3598094888286799798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: upgradeArrow
+      value: 
+      objectReference: {fileID: 3907081904980417976, guid: aa655861ef8e34d94b991abe0801ea0c, type: 3}
     - target: {fileID: 3850269594215648005, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3850269594215648005, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
-      value: Turret
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4739192330666534134, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -166,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8238119884321818877, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
-      value: Turret
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8709489139720211401, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Layer
@@ -174,7 +178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8709489139720211401, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_TagString
-      value: Turret
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

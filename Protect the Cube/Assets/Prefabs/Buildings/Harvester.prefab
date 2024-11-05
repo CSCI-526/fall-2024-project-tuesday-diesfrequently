@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 6488971438371175472}
   - component: {fileID: 1453563995351358942}
   - component: {fileID: 3552359513229429613}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Harvester
   m_TagString: Nexus
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 0.7241739, z: 1.001163}
   m_Center: {x: 0, y: -0.13791154, z: -0.00058201206}
@@ -411,6 +411,7 @@ MonoBehaviour:
   rotatable: 0
   buildingName: Harvester
   buildingDesc: Generates gold over time. Use gold to upgrade turrets.
+  currentPlaceableObject: {fileID: 0}
   radius: 4
 --- !u!114 &6488971438371175472
 MonoBehaviour:
@@ -427,6 +428,7 @@ MonoBehaviour:
   indicator: {fileID: 4978915526652792867}
   radius: 2
   useTurretRange: 1
+  alwaysShow: 0
 --- !u!114 &1453563995351358942
 MonoBehaviour:
   m_ObjectHideFlags: 0

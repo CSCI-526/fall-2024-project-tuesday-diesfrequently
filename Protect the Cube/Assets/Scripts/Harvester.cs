@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class Harvester : Building
 {
+    public GameObject currentPlaceableObject;
     [SerializeField] public float radius = 4.0f;
     bool IsValidPlacement(float radius = 4.0f)
     {
-        //Debug.Log("Checking for harvestor exclusion");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);//, -1, QueryTriggerInteraction.Collide);
         foreach (var other in hitColliders)
         {
+            if(other.gameObject == this.gameObject)
+            {
+                continue;
+            }
+            GetComponent<RangeIndicator>().ShowIndicator();
             if (other.gameObject.GetComponent<Harvester>() != null)
             {
-                //Debug.Log("Invalid Placement: too close to existing harvester");
+                // other.gameObject.GetComponent<RangeIndicator>().ShowIndicator();
+                Debug.Log("Invalid Placement: too close to existing harvester");
                 return false;
-            }
+            } else if (other.gameObject.GetComponent<turretShoot>() != null)
+            {
+                // other.gameObject.GetComponent<RangeIndicator>().ShowIndicator();
+                Debug.Log("Invalid Placement: too close to turret");
+                return false;
+            } 
         }
         return true;
     }

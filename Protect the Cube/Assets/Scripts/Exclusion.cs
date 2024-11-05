@@ -11,6 +11,9 @@ public class Exclusion : MonoBehaviour
     public Vector3 boxSize = new Vector3(1, 1, 1);
     // layer to check for existing objects 
     public LayerMask objectLayer;
+
+    private static List<GameObject> previousColliders = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,38 +28,37 @@ public class Exclusion : MonoBehaviour
 
     public static bool CheckForExclusion(GameObject placeableObject)
     {
+        // always show the range indicator
+        placeableObject.GetComponent<RangeIndicator>().ShowIndicator();
         Vector3 boxSize = placeableObject.transform.localScale;
         Vector3 position = placeableObject.transform.position;
         LayerMask objectLayer = 1 << placeableObject.layer;
         Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude/2, objectLayer);
         if (colliders.Length > 1)
         {
-            foreach (var other in colliders)
+            // show exclusion indicator if there are colliding buildings
+            placeableObject.GetComponent<RangeIndicator>().ShowIndicator();
+            foreach (var collider in colliders)
             {
-                if (other.gameObject.GetComponent<turretShoot>() != null)
+                if ((collider.gameObject != placeableObject) && (collider.gameObject.GetComponent<RangeIndicator>() != null))
                 {
-                    other.gameObject.GetComponent<Building>().ShowIndicators(0.1f);
-                    Debug.Log("Invalid Placement: too close to existing building");
-                    return false;
-                } else if (other.gameObject.GetComponent<Nexus>() != null)
-                {
-                    other.gameObject.GetComponent<Building>().ShowIndicators(0.1f);
-                    Debug.Log("Invalid Placement: cannot place on Nexus");
-                    return false;
-                } else if (other.gameObject.GetComponent<Harvester>() != null)
-                {
-                    other.gameObject.GetComponent<Building>().ShowIndicators(0.1f);
-                    Debug.Log("Invalid Placement: too close to existing harvester");
-                    return false;
+                    collider.gameObject.GetComponent<RangeIndicator>().ShowIndicator();
+                    previousColliders.Add(collider.gameObject); 
                 }
-            }
-        }
-        return true;
-    }
+            } 
+            return false;
+        } else {
+            // hide exclusion indicator if there are no colliding buildings
+            placeableObject.GetComponent<RangeIndicator>().HideIndicator();
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, boxSize);
+            foreach (var obj in previousColliders)
+            {
+                obj.GetComponent<Building>().HideIndicators();
+            }
+            
+            // Clear the list since there are no more collisions
+            previousColliders.Clear();
+            return true;
+        }
     }
 }
