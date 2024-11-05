@@ -155,7 +155,7 @@ public class UIManager : MonoBehaviour
         {
             /*expUI.text = "Player Level: " + playerLevels.currentLevel +
                 "\r\nExp: " + playerLevels.currentXP + "/" + playerLevels.xpNeededForLevel;*/
-            expUI.text = playerLevels.currentLevel.ToString();
+            expUI.text = (playerLevels.currentLevel+1).ToString();
             expSlider.value = playerLevels.currentXP;
             expSlider.maxValue = playerLevels.xpNeededForLevel;
         }
