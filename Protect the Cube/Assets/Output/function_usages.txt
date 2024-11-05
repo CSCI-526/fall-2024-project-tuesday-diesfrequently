@@ -53,13 +53,14 @@ Defined In Classes: Building
     - Function 'hideAfterDelay' is called in: Assets/Scripts/Building.cs
 
 Function: WaitForSeconds
-Defined In Classes: Building, DefensiveWallHealth, EnemyHealth, ExperiencePickup, Magnet, PlayerHealth, WaveManager
+Defined In Classes: Building, EnemyHealth, ExperiencePickup, Magnet, PlayerHealth, SpawnPoint, DefensiveWallHealth, WaveManager
     - Function 'WaitForSeconds' is called in: Assets/Scripts/Building.cs
-    - Function 'WaitForSeconds' is called in: Assets/Scripts/DefensiveWallHealth.cs
     - Function 'WaitForSeconds' is called in: Assets/Scripts/EnemyHealth.cs
     - Function 'WaitForSeconds' is called in: Assets/Scripts/ExperiencePickup.cs
     - Function 'WaitForSeconds' is called in: Assets/Scripts/Magnet.cs
     - Function 'WaitForSeconds' is called in: Assets/Scripts/PlayerHealth.cs
+    - Function 'WaitForSeconds' is called in: Assets/Scripts/SpawnPoint.cs
+    - Function 'WaitForSeconds' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
     - Function 'WaitForSeconds' is called in: Assets/Scripts/Managers/WaveManager.cs
     - Function 'WaitForSeconds' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
     - Function 'WaitForSeconds' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs
@@ -73,12 +74,10 @@ Defined In Classes: Building, DefensiveWallHealth, EnemyHealth, ExperiencePickup
     - Function 'WaitForSeconds' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
 
 Function: Start
-Defined In Classes: Bullet, CameraFollow, ClickUpgrade, DefensiveWallHealth, EnemyHealth, EnemyMove, Exclusion, ExperiencePickup, HarvesterUI, Magnet, MinimapCameraMove, Nexus, PlayerHealth, PlayerLevels, RangeIndicator, SpawnPoint, TankEnemyMove, turretShoot, GameManager, InventoryManager, UIManager, WaveManager
+Defined In Classes: Bullet, ClickUpgrade, EnemyHealth, EnemyMove, Exclusion, ExperiencePickup, HarvesterUI, Magnet, MinimapCameraMove, Nexus, PlayerHealth, PlayerLevels, RangeIndicator, SpawnPoint, TankEnemyMove, turretShoot, CameraFollow, DefensiveWallHealth, GameManager, InventoryManager, UIManager, WaveManager
     - Function 'Start' is called in: Assets/Scripts/Building.cs
     - Function 'Start' is called in: Assets/Scripts/Bullet.cs
-    - Function 'Start' is called in: Assets/Scripts/CameraFollow.cs
     - Function 'Start' is called in: Assets/Scripts/ClickUpgrade.cs
-    - Function 'Start' is called in: Assets/Scripts/DefensiveWallHealth.cs
     - Function 'Start' is called in: Assets/Scripts/EnemyHealth.cs
     - Function 'Start' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'Start' is called in: Assets/Scripts/Exclusion.cs
@@ -95,6 +94,8 @@ Defined In Classes: Bullet, CameraFollow, ClickUpgrade, DefensiveWallHealth, Ene
     - Function 'Start' is called in: Assets/Scripts/SpawnPoint.cs
     - Function 'Start' is called in: Assets/Scripts/TankEnemyMove.cs
     - Function 'Start' is called in: Assets/Scripts/turretShoot.cs
+    - Function 'Start' is called in: Assets/Scripts/Camera/CameraFollow.cs
+    - Function 'Start' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
     - Function 'Start' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
     - Function 'Start' is called in: Assets/Scripts/Managers/GameManager.cs
     - Function 'Start' is called in: Assets/Scripts/Managers/InventoryManager.cs
@@ -125,13 +126,13 @@ Defined In Classes: Bullet, CameraFollow, ClickUpgrade, DefensiveWallHealth, Ene
     - Function 'Start' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
 
 Function: FixedUpdate
-Defined In Classes: Bullet, CameraFollow, CharacterController, EnemyMove, TankEnemyMove, turretShoot
+Defined In Classes: Bullet, CharacterController, EnemyMove, TankEnemyMove, turretShoot, CameraFollow
     - Function 'FixedUpdate' is called in: Assets/Scripts/Bullet.cs
-    - Function 'FixedUpdate' is called in: Assets/Scripts/CameraFollow.cs
     - Function 'FixedUpdate' is called in: Assets/Scripts/CharacterController.cs
     - Function 'FixedUpdate' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'FixedUpdate' is called in: Assets/Scripts/TankEnemyMove.cs
     - Function 'FixedUpdate' is called in: Assets/Scripts/turretShoot.cs
+    - Function 'FixedUpdate' is called in: Assets/Scripts/Camera/CameraFollow.cs
 
 Function: ReturnBullet
 Defined In Classes: Bullet, BulletPool
@@ -139,9 +140,8 @@ Defined In Classes: Bullet, BulletPool
     - Function 'ReturnBullet' is called in: Assets/Scripts/BulletPool.cs
 
 Function: Destroy
-Defined In Classes: Bullet, DefensiveWallHealth, EnemyHealth, EnemyMove, ExperiencePickup, Magnet, Nexus, PlaceObject, GameManager
+Defined In Classes: Bullet, EnemyHealth, EnemyMove, ExperiencePickup, Magnet, Nexus, PlaceObject, DefensiveWallHealth, GameManager
     - Function 'Destroy' is called in: Assets/Scripts/Bullet.cs
-    - Function 'Destroy' is called in: Assets/Scripts/DefensiveWallHealth.cs
     - Function 'Destroy' is called in: Assets/Scripts/EnemyHealth.cs
     - Function 'Destroy' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'Destroy' is called in: Assets/Scripts/ExperiencePickup.cs
@@ -149,6 +149,7 @@ Defined In Classes: Bullet, DefensiveWallHealth, EnemyHealth, EnemyMove, Experie
     - Function 'Destroy' is called in: Assets/Scripts/Nexus.cs
     - Function 'Destroy' is called in: Assets/Scripts/PlaceObject.cs
     - Function 'Destroy' is called in: Assets/Scripts/turretShoot.cs
+    - Function 'Destroy' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
     - Function 'Destroy' is called in: Assets/Scripts/Managers/GameManager.cs
 
 Function: OnTriggerEnter
@@ -159,15 +160,15 @@ Defined In Classes: Bullet, ExperiencePickup, Magnet, TurretBoosterVisual
     - Function 'OnTriggerEnter' is called in: Assets/Scripts/TurretBoosterVisual.cs
 
 Function: TakeDamage
-Defined In Classes: Bullet, DefensiveWallHealth, EnemyHealth, EnemyMove, Nexus, PlayerHealth, TankEnemyMove
+Defined In Classes: Bullet, EnemyHealth, EnemyMove, Nexus, PlayerHealth, TankEnemyMove, DefensiveWallHealth
     - Function 'TakeDamage' is called in: Assets/Scripts/Bullet.cs
-    - Function 'TakeDamage' is called in: Assets/Scripts/DefensiveWallHealth.cs
     - Function 'TakeDamage' is called in: Assets/Scripts/EnemyHealth.cs
     - Function 'TakeDamage' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'TakeDamage' is called in: Assets/Scripts/HarvesterUI.cs
     - Function 'TakeDamage' is called in: Assets/Scripts/Nexus.cs
     - Function 'TakeDamage' is called in: Assets/Scripts/PlayerHealth.cs
     - Function 'TakeDamage' is called in: Assets/Scripts/TankEnemyMove.cs
+    - Function 'TakeDamage' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
 
 Function: ResetBullet
 Defined In Classes: Bullet, BulletPool
@@ -175,7 +176,7 @@ Defined In Classes: Bullet, BulletPool
     - Function 'ResetBullet' is called in: Assets/Scripts/BulletPool.cs
 
 Function: Awake
-Defined In Classes: BulletPool, EnemyMove, LockPlayerCircle, OffScreenIndicator, TankEnemyMove, AnalyticsManager, GameManager
+Defined In Classes: BulletPool, EnemyMove, LockPlayerCircle, OffScreenIndicator, TankEnemyMove, AnalyticsManager, GameManager, InventoryManager, UIManager, WaveManager
     - Function 'Awake' is called in: Assets/Scripts/BulletPool.cs
     - Function 'Awake' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'Awake' is called in: Assets/Scripts/LockPlayerCircle.cs
@@ -183,6 +184,8 @@ Defined In Classes: BulletPool, EnemyMove, LockPlayerCircle, OffScreenIndicator,
     - Function 'Awake' is called in: Assets/Scripts/TankEnemyMove.cs
     - Function 'Awake' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
     - Function 'Awake' is called in: Assets/Scripts/Managers/GameManager.cs
+    - Function 'Awake' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'Awake' is called in: Assets/Scripts/Managers/UIManager.cs
     - Function 'Awake' is called in: Assets/Scripts/Managers/WaveManager.cs
     - Function 'Awake' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs
     - Function 'Awake' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
@@ -253,64 +256,11 @@ Defined In Classes: BulletPool, OffScreenIndicator
     - Function 'Dequeue' is called in: Assets/Scripts/BulletPool.cs
     - Function 'Dequeue' is called in: Assets/Scripts/OffScreenIndicator.cs
 
-Function: Vector3
-Defined In Classes: CameraFollow, ClickUpgrade, EnemyHealth, Exclusion, ExperiencePickup, Indicator, Magnet, MinimapCameraMove, RangeIndicator
-    - Function 'Vector3' is called in: Assets/Scripts/CameraFollow.cs
-    - Function 'Vector3' is called in: Assets/Scripts/CharacterController.cs
-    - Function 'Vector3' is called in: Assets/Scripts/ClickUpgrade.cs
-    - Function 'Vector3' is called in: Assets/Scripts/EnemyHealth.cs
-    - Function 'Vector3' is called in: Assets/Scripts/EnemyMove.cs
-    - Function 'Vector3' is called in: Assets/Scripts/Exclusion.cs
-    - Function 'Vector3' is called in: Assets/Scripts/ExperiencePickup.cs
-    - Function 'Vector3' is called in: Assets/Scripts/Indicator.cs
-    - Function 'Vector3' is called in: Assets/Scripts/LookAtEnemy.cs
-    - Function 'Vector3' is called in: Assets/Scripts/Magnet.cs
-    - Function 'Vector3' is called in: Assets/Scripts/MinimapCameraMove.cs
-    - Function 'Vector3' is called in: Assets/Scripts/Nexus.cs
-    - Function 'Vector3' is called in: Assets/Scripts/PlaceObject.cs
-    - Function 'Vector3' is called in: Assets/Scripts/RangeIndicator.cs
-    - Function 'Vector3' is called in: Assets/Scripts/SpawnPoint.cs
-    - Function 'Vector3' is called in: Assets/Scripts/TankEnemyMove.cs
-    - Function 'Vector3' is called in: Assets/Scripts/turretShoot.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/EnvMapAnimator.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/ObjectSpin.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshSpawner.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs
-    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
-
-Function: Lerp
-Defined In Classes: CameraFollow
-    - Function 'Lerp' is called in: Assets/Scripts/CameraFollow.cs
-    - Function 'Lerp' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
-
-Function: LookAt
-Defined In Classes: CameraFollow
-    - Function 'LookAt' is called in: Assets/Scripts/CameraFollow.cs
-    - Function 'LookAt' is called in: Assets/Scripts/CharacterController.cs
-    - Function 'LookAt' is called in: Assets/Scripts/LookAtEnemy.cs
-    - Function 'LookAt' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
-
 Function: Update
-Defined In Classes: CharacterController, ClickUpgrade, DefensiveWallHealth, EnemyHealth, EnemyMove, Exclusion, ExperiencePickup, Indicator, LockPlayerCircle, LookAtEnemy, Magnet, MinimapCameraMove, Nexus, PlaceObject, PlayerLevels, RangeIndicator, SlowTower, SpawnerEnemy, TankEnemyMove, TurretBooster, turretShoot, WaveManager
+Defined In Classes: CharacterController, ClickUpgrade, EnemyHealth, EnemyMove, Exclusion, ExperiencePickup, Indicator, LockPlayerCircle, LookAtEnemy, Magnet, MinimapCameraMove, Nexus, PlaceObject, PlayerLevels, RangeIndicator, SlowTower, SpawnerEnemy, TankEnemyMove, TurretBooster, turretShoot, DefensiveWallHealth, WaveManager
     - Function 'Update' is called in: Assets/Scripts/Bullet.cs
-    - Function 'Update' is called in: Assets/Scripts/CameraFollow.cs
     - Function 'Update' is called in: Assets/Scripts/CharacterController.cs
     - Function 'Update' is called in: Assets/Scripts/ClickUpgrade.cs
-    - Function 'Update' is called in: Assets/Scripts/DefensiveWallHealth.cs
     - Function 'Update' is called in: Assets/Scripts/EnemyHealth.cs
     - Function 'Update' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'Update' is called in: Assets/Scripts/Exclusion.cs
@@ -334,6 +284,8 @@ Defined In Classes: CharacterController, ClickUpgrade, DefensiveWallHealth, Enem
     - Function 'Update' is called in: Assets/Scripts/TankEnemyMove.cs
     - Function 'Update' is called in: Assets/Scripts/TurretBooster.cs
     - Function 'Update' is called in: Assets/Scripts/turretShoot.cs
+    - Function 'Update' is called in: Assets/Scripts/Camera/CameraFollow.cs
+    - Function 'Update' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
     - Function 'Update' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
     - Function 'Update' is called in: Assets/Scripts/Managers/InventoryManager.cs
     - Function 'Update' is called in: Assets/Scripts/Managers/UIManager.cs
@@ -400,12 +352,13 @@ Defined In Classes: CharacterController
     - Function 'LookAtMouse' is called in: Assets/Scripts/CharacterController.cs
 
 Function: Log
-Defined In Classes: CharacterController, ClickUpgrade, EnemyHealth, Exclusion, Harvester, Indicator, Nexus, PlaceObject, PlayerLevels, SlowTower, TankEnemyMove, TurretBooster, turretShoot, AnalyticsManager, InventoryManager, WaveManager
+Defined In Classes: CharacterController, ClickUpgrade, EnemyHealth, EnemyMove, Exclusion, Harvester, Indicator, Nexus, PlaceObject, PlayerLevels, RewardPanel, SlowTower, SpawnPoint, TankEnemyMove, TurretBooster, turretShoot, AnalyticsManager, InventoryManager, WaveManager
     - Function 'Log' is called in: Assets/Editor/DependencyScanner.cs
     - Function 'Log' is called in: Assets/Editor/ScriptDependencies.cs
     - Function 'Log' is called in: Assets/Scripts/CharacterController.cs
     - Function 'Log' is called in: Assets/Scripts/ClickUpgrade.cs
     - Function 'Log' is called in: Assets/Scripts/EnemyHealth.cs
+    - Function 'Log' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'Log' is called in: Assets/Scripts/Exclusion.cs
     - Function 'Log' is called in: Assets/Scripts/Harvester.cs
     - Function 'Log' is called in: Assets/Scripts/Indicator.cs
@@ -413,13 +366,16 @@ Defined In Classes: CharacterController, ClickUpgrade, EnemyHealth, Exclusion, H
     - Function 'Log' is called in: Assets/Scripts/Nexus.cs
     - Function 'Log' is called in: Assets/Scripts/PlaceObject.cs
     - Function 'Log' is called in: Assets/Scripts/PlayerLevels.cs
+    - Function 'Log' is called in: Assets/Scripts/RewardPanel.cs
     - Function 'Log' is called in: Assets/Scripts/SlowTower.cs
+    - Function 'Log' is called in: Assets/Scripts/SpawnPoint.cs
     - Function 'Log' is called in: Assets/Scripts/TankEnemyMove.cs
     - Function 'Log' is called in: Assets/Scripts/TurretBooster.cs
     - Function 'Log' is called in: Assets/Scripts/turretShoot.cs
     - Function 'Log' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
     - Function 'Log' is called in: Assets/Scripts/Managers/InventoryManager.cs
     - Function 'Log' is called in: Assets/Scripts/Managers/WaveManager.cs
+    - Function 'Log' is called in: Assets/Scripts/Utility/Helper.cs
     - Function 'Log' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/EnvMapAnimator.cs
     - Function 'Log' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs
     - Function 'Log' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_PhoneNumberValidator.cs
@@ -441,8 +397,9 @@ Defined In Classes: CharacterController, EnemyMove, LookAtEnemy, TankEnemyMove, 
     - Function 'LookRotation' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
 
 Function: Normalize
-Defined In Classes: CharacterController, TankEnemyMove
+Defined In Classes: CharacterController, EnemyMove, TankEnemyMove
     - Function 'Normalize' is called in: Assets/Scripts/CharacterController.cs
+    - Function 'Normalize' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'Normalize' is called in: Assets/Scripts/TankEnemyMove.cs
 
 Function: GetInstanceID
@@ -482,34 +439,58 @@ Defined In Classes: ClickUpgrade, turretShoot, upgradeBtn
     - Function 'upgrade' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
     - Function 'upgrade' is called in: Assets/Scripts/Managers/UIManager.cs
 
+Function: Vector3
+Defined In Classes: ClickUpgrade, EnemyHealth, Exclusion, ExperiencePickup, Indicator, Magnet, MinimapCameraMove, RangeIndicator, CameraFollow
+    - Function 'Vector3' is called in: Assets/Scripts/CharacterController.cs
+    - Function 'Vector3' is called in: Assets/Scripts/ClickUpgrade.cs
+    - Function 'Vector3' is called in: Assets/Scripts/EnemyHealth.cs
+    - Function 'Vector3' is called in: Assets/Scripts/EnemyMove.cs
+    - Function 'Vector3' is called in: Assets/Scripts/Exclusion.cs
+    - Function 'Vector3' is called in: Assets/Scripts/ExperiencePickup.cs
+    - Function 'Vector3' is called in: Assets/Scripts/Indicator.cs
+    - Function 'Vector3' is called in: Assets/Scripts/LookAtEnemy.cs
+    - Function 'Vector3' is called in: Assets/Scripts/Magnet.cs
+    - Function 'Vector3' is called in: Assets/Scripts/MinimapCameraMove.cs
+    - Function 'Vector3' is called in: Assets/Scripts/Nexus.cs
+    - Function 'Vector3' is called in: Assets/Scripts/PlaceObject.cs
+    - Function 'Vector3' is called in: Assets/Scripts/RangeIndicator.cs
+    - Function 'Vector3' is called in: Assets/Scripts/SpawnPoint.cs
+    - Function 'Vector3' is called in: Assets/Scripts/TankEnemyMove.cs
+    - Function 'Vector3' is called in: Assets/Scripts/turretShoot.cs
+    - Function 'Vector3' is called in: Assets/Scripts/Camera/CameraFollow.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/EnvMapAnimator.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/ObjectSpin.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshSpawner.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs
+    - Function 'Vector3' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
+
 Function: HideUpgradeScreen
 Defined In Classes: ClickUpgrade, UIManager
     - Function 'HideUpgradeScreen' is called in: Assets/Scripts/ClickUpgrade.cs
     - Function 'HideUpgradeScreen' is called in: Assets/Scripts/Managers/UIManager.cs
 
 Function: UpdateUI
-Defined In Classes: ClickUpgrade, Nexus, PlayerHealth, PlayerLevels, InventoryManager, UIManager, WaveManager
+Defined In Classes: ClickUpgrade, Nexus, PlayerHealth, PlayerLevels, UIManager, WaveManager
     - Function 'UpdateUI' is called in: Assets/Scripts/ClickUpgrade.cs
     - Function 'UpdateUI' is called in: Assets/Scripts/Nexus.cs
     - Function 'UpdateUI' is called in: Assets/Scripts/PlayerHealth.cs
     - Function 'UpdateUI' is called in: Assets/Scripts/PlayerLevels.cs
-    - Function 'UpdateUI' is called in: Assets/Scripts/Managers/InventoryManager.cs
     - Function 'UpdateUI' is called in: Assets/Scripts/Managers/UIManager.cs
     - Function 'UpdateUI' is called in: Assets/Scripts/Managers/WaveManager.cs
-
-Function: Die
-Defined In Classes: DefensiveWallHealth, EnemyHealth, EnemyMove, PlayerHealth, TankEnemyMove
-    - Function 'Die' is called in: Assets/Scripts/DefensiveWallHealth.cs
-    - Function 'Die' is called in: Assets/Scripts/EnemyHealth.cs
-    - Function 'Die' is called in: Assets/Scripts/EnemyMove.cs
-    - Function 'Die' is called in: Assets/Scripts/PlayerHealth.cs
-    - Function 'Die' is called in: Assets/Scripts/TankEnemyMove.cs
-
-Function: InvincibilityCoroutine
-Defined In Classes: DefensiveWallHealth, EnemyHealth, PlayerHealth
-    - Function 'InvincibilityCoroutine' is called in: Assets/Scripts/DefensiveWallHealth.cs
-    - Function 'InvincibilityCoroutine' is called in: Assets/Scripts/EnemyHealth.cs
-    - Function 'InvincibilityCoroutine' is called in: Assets/Scripts/PlayerHealth.cs
 
 Function: Add
 Defined In Classes: EnemyHealth, PlayerLevels, SpawnPoint, upgradeBtn, InventoryManager, WaveManager
@@ -573,17 +554,32 @@ Defined In Classes: EnemyHealth, Nexus, PlayerHealth
     - Function 'SetTrigger' is called in: Assets/Scripts/Nexus.cs
     - Function 'SetTrigger' is called in: Assets/Scripts/PlayerHealth.cs
 
+Function: Die
+Defined In Classes: EnemyHealth, EnemyMove, PlayerHealth, TankEnemyMove, DefensiveWallHealth
+    - Function 'Die' is called in: Assets/Scripts/EnemyHealth.cs
+    - Function 'Die' is called in: Assets/Scripts/EnemyMove.cs
+    - Function 'Die' is called in: Assets/Scripts/PlayerHealth.cs
+    - Function 'Die' is called in: Assets/Scripts/TankEnemyMove.cs
+    - Function 'Die' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
+
+Function: InvincibilityCoroutine
+Defined In Classes: EnemyHealth, PlayerHealth, DefensiveWallHealth
+    - Function 'InvincibilityCoroutine' is called in: Assets/Scripts/EnemyHealth.cs
+    - Function 'InvincibilityCoroutine' is called in: Assets/Scripts/PlayerHealth.cs
+    - Function 'InvincibilityCoroutine' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
+
 Function: OnEnemyDeath
-Defined In Classes: EnemyHealth, WaveManager
+Defined In Classes: EnemyHealth
     - Function 'OnEnemyDeath' is called in: Assets/Scripts/EnemyHealth.cs
     - Function 'OnEnemyDeath' is called in: Assets/Scripts/Managers/WaveManager.cs
 
 Function: Remove
-Defined In Classes: EnemyHealth, EnemyMove, PlayerLevels, WaveManager
+Defined In Classes: EnemyHealth, EnemyMove, PlayerLevels, InventoryManager, WaveManager
     - Function 'Remove' is called in: Assets/Editor/ScriptDependencies.cs
     - Function 'Remove' is called in: Assets/Scripts/EnemyHealth.cs
     - Function 'Remove' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'Remove' is called in: Assets/Scripts/PlayerLevels.cs
+    - Function 'Remove' is called in: Assets/Scripts/Managers/InventoryManager.cs
     - Function 'Remove' is called in: Assets/Scripts/Managers/WaveManager.cs
     - Function 'Remove' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs
     - Function 'Remove' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs
@@ -636,15 +632,16 @@ Defined In Classes: EnemyMove, TankEnemyMove
     - Function 'UpdateTargetList' is called in: Assets/Scripts/TankEnemyMove.cs
 
 Function: ToList
-Defined In Classes: EnemyMove, TankEnemyMove, InventoryManager
+Defined In Classes: EnemyMove, TankEnemyMove
     - Function 'ToList' is called in: Assets/Editor/ScriptDependencies.cs
     - Function 'ToList' is called in: Assets/Scripts/EnemyMove.cs
     - Function 'ToList' is called in: Assets/Scripts/TankEnemyMove.cs
     - Function 'ToList' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
 Function: SetTarget
-Defined In Classes: EnemyMove, TankEnemyMove
+Defined In Classes: EnemyMove, SpawnPoint, TankEnemyMove
     - Function 'SetTarget' is called in: Assets/Scripts/EnemyMove.cs
+    - Function 'SetTarget' is called in: Assets/Scripts/SpawnPoint.cs
     - Function 'SetTarget' is called in: Assets/Scripts/TankEnemyMove.cs
 
 Function: Distance
@@ -655,11 +652,6 @@ Defined In Classes: EnemyMove, ExperiencePickup, TankEnemyMove
     - Function 'Distance' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs
     - Function 'Distance' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
 
-Function: OnCollisionEnter
-Defined In Classes: EnemyMove, TankEnemyMove
-    - Function 'OnCollisionEnter' is called in: Assets/Scripts/EnemyMove.cs
-    - Function 'OnCollisionEnter' is called in: Assets/Scripts/TankEnemyMove.cs
-
 Function: GetSlowed
 Defined In Classes: EnemyMove, SlowTower
     - Function 'GetSlowed' is called in: Assets/Scripts/EnemyMove.cs
@@ -668,6 +660,7 @@ Defined In Classes: EnemyMove, SlowTower
 Function: Max
 Defined In Classes: EnemyMove
     - Function 'Max' is called in: Assets/Scripts/EnemyMove.cs
+    - Function 'Max' is called in: Assets/Scripts/SpawnPoint.cs
     - Function 'Max' is called in: Assets/Scripts/TankEnemyMove.cs
     - Function 'Max' is called in: Assets/Scripts/Managers/WaveManager.cs
     - Function 'Max' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs
@@ -677,6 +670,45 @@ Defined In Classes: EnemyMove
     - Function 'Max' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
     - Function 'Max' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs
     - Function 'Max' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
+
+Function: Count
+Defined In Classes: EnemyMove, TankEnemyMove
+    - Function 'Count' is called in: Assets/Editor/ScriptDependencies.cs
+    - Function 'Count' is called in: Assets/Scripts/BulletPool.cs
+    - Function 'Count' is called in: Assets/Scripts/EnemyHealth.cs
+    - Function 'Count' is called in: Assets/Scripts/EnemyMove.cs
+    - Function 'Count' is called in: Assets/Scripts/ExperiencePickup.cs
+    - Function 'Count' is called in: Assets/Scripts/Magnet.cs
+    - Function 'Count' is called in: Assets/Scripts/OffScreenIndicator.cs
+    - Function 'Count' is called in: Assets/Scripts/PlayerLevels.cs
+    - Function 'Count' is called in: Assets/Scripts/SpawnPoint.cs
+    - Function 'Count' is called in: Assets/Scripts/TankEnemyMove.cs
+    - Function 'Count' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'Count' is called in: Assets/Scripts/Managers/UIManager.cs
+    - Function 'Count' is called in: Assets/Scripts/Managers/WaveManager.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexColorCycler.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs
+    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
+
+Function: OnCollisionEnter
+Defined In Classes: EnemyMove, TankEnemyMove
+    - Function 'OnCollisionEnter' is called in: Assets/Scripts/EnemyMove.cs
+    - Function 'OnCollisionEnter' is called in: Assets/Scripts/TankEnemyMove.cs
 
 Function: EnemySpawnInfo
 Defined In Classes: EnemySpawnInfo
@@ -727,8 +759,10 @@ Defined In Classes: ExperiencePickup, Magnet
     - Function 'StartMoveToPlayer' is called in: Assets/Scripts/Magnet.cs
 
 Function: OnEnable
-Defined In Classes: GameSummaryUI
+Defined In Classes: GameSummaryUI, AnalyticsManager, UIManager
     - Function 'OnEnable' is called in: Assets/Scripts/GameSummaryUI.cs
+    - Function 'OnEnable' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
+    - Function 'OnEnable' is called in: Assets/Scripts/Managers/UIManager.cs
     - Function 'OnEnable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs
     - Function 'OnEnable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs
     - Function 'OnEnable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
@@ -851,9 +885,9 @@ Defined In Classes: Magnet, InventoryManager
     - Function 'AddRange' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
 Function: LogWarning
-Defined In Classes: Magnet, InventoryManager
+Defined In Classes: Magnet, Helper
     - Function 'LogWarning' is called in: Assets/Scripts/Magnet.cs
-    - Function 'LogWarning' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'LogWarning' is called in: Assets/Scripts/Utility/Helper.cs
 
 Function: startGame
 Defined In Classes: MainMenu
@@ -933,10 +967,10 @@ Function: ReleaseIfClicked
 Defined In Classes: PlaceObject
     - Function 'ReleaseIfClicked' is called in: Assets/Scripts/PlaceObject.cs
 
-Function: HasBuilding
-Defined In Classes: PlaceObject, InventoryManager
-    - Function 'HasBuilding' is called in: Assets/Scripts/PlaceObject.cs
-    - Function 'HasBuilding' is called in: Assets/Scripts/Managers/InventoryManager.cs
+Function: isInventoryAvailable
+Defined In Classes: PlaceObject
+    - Function 'isInventoryAvailable' is called in: Assets/Scripts/PlaceObject.cs
+    - Function 'isInventoryAvailable' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
 Function: PressedKeyOfCurrentPrefab
 Defined In Classes: PlaceObject
@@ -954,10 +988,10 @@ Function: RotateBuilding
 Defined In Classes: PlaceObject
     - Function 'RotateBuilding' is called in: Assets/Scripts/PlaceObject.cs
 
-Function: TryPlaceBuilding
+Function: TryUseInventoryItem
 Defined In Classes: PlaceObject, InventoryManager
-    - Function 'TryPlaceBuilding' is called in: Assets/Scripts/PlaceObject.cs
-    - Function 'TryPlaceBuilding' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'TryUseInventoryItem' is called in: Assets/Scripts/PlaceObject.cs
+    - Function 'TryUseInventoryItem' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
 Function: Rotate
 Defined In Classes: PlaceObject, TurretBooster
@@ -1020,10 +1054,10 @@ Function: OnPick
 Defined In Classes: RewardPanel
     - Function 'OnPick' is called in: Assets/Scripts/RewardPanel.cs
 
-Function: PickReward
+Function: HandlePickedReward
 Defined In Classes: RewardPanel, InventoryManager
-    - Function 'PickReward' is called in: Assets/Scripts/RewardPanel.cs
-    - Function 'PickReward' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'HandlePickedReward' is called in: Assets/Scripts/RewardPanel.cs
+    - Function 'HandlePickedReward' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
 Function: SlowEnemies
 Defined In Classes: SlowTower
@@ -1038,38 +1072,72 @@ Function: SpawnEnemyOfType
 Defined In Classes: SpawnPoint
     - Function 'SpawnEnemyOfType' is called in: Assets/Scripts/SpawnPoint.cs
 
-Function: Count
-Defined In Classes: TankEnemyMove
-    - Function 'Count' is called in: Assets/Editor/ScriptDependencies.cs
-    - Function 'Count' is called in: Assets/Scripts/BulletPool.cs
-    - Function 'Count' is called in: Assets/Scripts/EnemyHealth.cs
-    - Function 'Count' is called in: Assets/Scripts/ExperiencePickup.cs
-    - Function 'Count' is called in: Assets/Scripts/Magnet.cs
-    - Function 'Count' is called in: Assets/Scripts/OffScreenIndicator.cs
-    - Function 'Count' is called in: Assets/Scripts/PlayerLevels.cs
-    - Function 'Count' is called in: Assets/Scripts/SpawnPoint.cs
-    - Function 'Count' is called in: Assets/Scripts/TankEnemyMove.cs
-    - Function 'Count' is called in: Assets/Scripts/Managers/InventoryManager.cs
-    - Function 'Count' is called in: Assets/Scripts/Managers/UIManager.cs
-    - Function 'Count' is called in: Assets/Scripts/Managers/WaveManager.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexColorCycler.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs
-    - Function 'Count' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
+Function: DelayedSpawn
+Defined In Classes: SpawnPoint
+    - Function 'DelayedSpawn' is called in: Assets/Scripts/SpawnPoint.cs
+
+Function: int
+Defined In Classes: SpawnPoint
+    - Function 'int' is called in: Assets/Scripts/BulletPool.cs
+    - Function 'int' is called in: Assets/Scripts/CharacterController.cs
+    - Function 'int' is called in: Assets/Scripts/ClickUpgrade.cs
+    - Function 'int' is called in: Assets/Scripts/EnemyHealth.cs
+    - Function 'int' is called in: Assets/Scripts/EnemyMove.cs
+    - Function 'int' is called in: Assets/Scripts/EnemySpawnInfo.cs
+    - Function 'int' is called in: Assets/Scripts/ExperiencePickup.cs
+    - Function 'int' is called in: Assets/Scripts/Indicator.cs
+    - Function 'int' is called in: Assets/Scripts/LookAtEnemy.cs
+    - Function 'int' is called in: Assets/Scripts/Magnet.cs
+    - Function 'int' is called in: Assets/Scripts/Nexus.cs
+    - Function 'int' is called in: Assets/Scripts/OffScreenIndicator.cs
+    - Function 'int' is called in: Assets/Scripts/PlaceObject.cs
+    - Function 'int' is called in: Assets/Scripts/PlayerHealth.cs
+    - Function 'int' is called in: Assets/Scripts/PlayerLevels.cs
+    - Function 'int' is called in: Assets/Scripts/SpawnPoint.cs
+    - Function 'int' is called in: Assets/Scripts/SpawnerEnemy.cs
+    - Function 'int' is called in: Assets/Scripts/TankEnemyMove.cs
+    - Function 'int' is called in: Assets/Scripts/Wave.cs
+    - Function 'int' is called in: Assets/Scripts/turretShoot.cs
+    - Function 'int' is called in: Assets/Scripts/upgradeBtn.cs
+    - Function 'int' is called in: Assets/Scripts/upgradeUI.cs
+    - Function 'int' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
+    - Function 'int' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
+    - Function 'int' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'int' is called in: Assets/Scripts/Managers/UIManager.cs
+    - Function 'int' is called in: Assets/Scripts/Managers/WaveManager.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/ObjectSpin.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_DigitValidator.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_ExampleScript_01.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_PhoneNumberValidator.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshSpawner.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexColorCycler.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs
+    - Function 'int' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
+
+Function: NotImplementedException
+Defined In Classes: SpawnPoint
+    - Function 'NotImplementedException' is called in: Assets/Scripts/SpawnPoint.cs
 
 Function: BoostNeighbors
 Defined In Classes: TurretBooster
@@ -1084,6 +1152,7 @@ Defined In Classes: TurretBoosterVisual
     - Function 'Play' is called in: Assets/Scripts/Magnet.cs
     - Function 'Play' is called in: Assets/Scripts/PlayerHealth.cs
     - Function 'Play' is called in: Assets/Scripts/PlayerLevels.cs
+    - Function 'Play' is called in: Assets/Scripts/SpawnPoint.cs
     - Function 'Play' is called in: Assets/Scripts/TankEnemyMove.cs
     - Function 'Play' is called in: Assets/Scripts/TurretBoosterVisual.cs
     - Function 'Play' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
@@ -1165,12 +1234,25 @@ Defined In Classes: upgradeUI, UIManager
     - Function 'updateText' is called in: Assets/Scripts/upgradeUI.cs
     - Function 'updateText' is called in: Assets/Scripts/Managers/UIManager.cs
 
+Function: Lerp
+Defined In Classes: CameraFollow
+    - Function 'Lerp' is called in: Assets/Scripts/Camera/CameraFollow.cs
+    - Function 'Lerp' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
+
+Function: LookAt
+Defined In Classes: CameraFollow
+    - Function 'LookAt' is called in: Assets/Scripts/CharacterController.cs
+    - Function 'LookAt' is called in: Assets/Scripts/LookAtEnemy.cs
+    - Function 'LookAt' is called in: Assets/Scripts/Camera/CameraFollow.cs
+    - Function 'LookAt' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
+
 Function: object
 Defined In Classes: AnalyticsManager
     - Function 'object' is called in: Assets/Scripts/EnemySpawnInfo.cs
     - Function 'object' is called in: Assets/Scripts/Exclusion.cs
     - Function 'object' is called in: Assets/Scripts/Magnet.cs
     - Function 'object' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
+    - Function 'object' is called in: Assets/Scripts/Managers/UIManager.cs
     - Function 'object' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/ShaderPropAnimator.cs
     - Function 'object' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_ExampleScript_01.cs
     - Function 'object' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
@@ -1196,6 +1278,19 @@ Function: SendSessionStartAnalytics
 Defined In Classes: AnalyticsManager
     - Function 'SendSessionStartAnalytics' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
 
+Function: OnDisable
+Defined In Classes: AnalyticsManager, UIManager
+    - Function 'OnDisable' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
+    - Function 'OnDisable' is called in: Assets/Scripts/Managers/UIManager.cs
+    - Function 'OnDisable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs
+    - Function 'OnDisable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs
+    - Function 'OnDisable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
+    - Function 'OnDisable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs
+    - Function 'OnDisable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs
+    - Function 'OnDisable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs
+    - Function 'OnDisable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs
+    - Function 'OnDisable' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs
+
 Function: lock
 Defined In Classes: AnalyticsManager
     - Function 'lock' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
@@ -1209,20 +1304,17 @@ Defined In Classes: AnalyticsManager, WaveManager
     - Function 'UpdateWaveNumber' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
     - Function 'UpdateWaveNumber' is called in: Assets/Scripts/Managers/WaveManager.cs
 
-Function: UpdateTotalAcquiredTurrets
-Defined In Classes: AnalyticsManager, InventoryManager
-    - Function 'UpdateTotalAcquiredTurrets' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
-    - Function 'UpdateTotalAcquiredTurrets' is called in: Assets/Scripts/Managers/InventoryManager.cs
+Function: UpdateTotalAcquiredInventory
+Defined In Classes: AnalyticsManager
+    - Function 'UpdateTotalAcquiredInventory' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
 
-Function: UpdateTotalPlacedTurrets
-Defined In Classes: AnalyticsManager, InventoryManager
-    - Function 'UpdateTotalPlacedTurrets' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
-    - Function 'UpdateTotalPlacedTurrets' is called in: Assets/Scripts/Managers/InventoryManager.cs
+Function: UpdateTotalUsedInventory
+Defined In Classes: AnalyticsManager
+    - Function 'UpdateTotalUsedInventory' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
 
 Function: UpdateRewardsOffered
-Defined In Classes: AnalyticsManager, InventoryManager
+Defined In Classes: AnalyticsManager
     - Function 'UpdateRewardsOffered' is called in: Assets/Scripts/Managers/AnalyticsManager.cs
-    - Function 'UpdateRewardsOffered' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
 Function: SendSessionEndAnalytics
 Defined In Classes: AnalyticsManager, GameManager
@@ -1271,31 +1363,81 @@ Defined In Classes: GameManager
     - Function 'Quit' is called in: Assets/Scripts/CharacterController.cs
     - Function 'Quit' is called in: Assets/Scripts/Managers/GameManager.cs
 
-Function: ConvertBuildingNameToIndex
+Function: InitializeInventoryPrefabs
 Defined In Classes: InventoryManager
-    - Function 'ConvertBuildingNameToIndex' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'InitializeInventoryPrefabs' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
-Function: GenerateUniqueRewards
-Defined In Classes: InventoryManager
-    - Function 'GenerateUniqueRewards' is called in: Assets/Scripts/Managers/InventoryManager.cs
+Function: checkArrayLengthSafe
+Defined In Classes: InventoryManager, Helper
+    - Function 'checkArrayLengthSafe' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'checkArrayLengthSafe' is called in: Assets/Scripts/Utility/Helper.cs
 
-Function: IndexOf
+Function: getItemIDX
 Defined In Classes: InventoryManager
-    - Function 'IndexOf' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'getItemIDX' is called in: Assets/Scripts/Managers/InventoryManager.cs
+
+Function: AddPotentialReward
+Defined In Classes: InventoryManager
+    - Function 'AddPotentialReward' is called in: Assets/Scripts/Managers/InventoryManager.cs
+
+Function: RemovePotentialReward
+Defined In Classes: InventoryManager
+    - Function 'RemovePotentialReward' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
 Function: UpdateRewardDisplay
 Defined In Classes: InventoryManager
     - Function 'UpdateRewardDisplay' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
-Function: UpdateInventoryUI
-Defined In Classes: InventoryManager, UIManager
-    - Function 'UpdateInventoryUI' is called in: Assets/Scripts/Managers/InventoryManager.cs
-    - Function 'UpdateInventoryUI' is called in: Assets/Scripts/Managers/UIManager.cs
+Function: ToArray
+Defined In Classes: InventoryManager
+    - Function 'ToArray' is called in: Assets/Scripts/Managers/InventoryManager.cs
 
-Function: UpdateRewardsUI
+Function: Invoke
 Defined In Classes: InventoryManager, UIManager
-    - Function 'UpdateRewardsUI' is called in: Assets/Scripts/Managers/InventoryManager.cs
-    - Function 'UpdateRewardsUI' is called in: Assets/Scripts/Managers/UIManager.cs
+    - Function 'Invoke' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'Invoke' is called in: Assets/Scripts/Managers/UIManager.cs
+    - Function 'Invoke' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs
+
+Function: GenerateUniqueRewards
+Defined In Classes: InventoryManager
+    - Function 'GenerateUniqueRewards' is called in: Assets/Scripts/Managers/InventoryManager.cs
+
+Function: Take
+Defined In Classes: InventoryManager
+    - Function 'Take' is called in: Assets/Scripts/Bullet.cs
+    - Function 'Take' is called in: Assets/Scripts/EnemyHealth.cs
+    - Function 'Take' is called in: Assets/Scripts/EnemyMove.cs
+    - Function 'Take' is called in: Assets/Scripts/HarvesterUI.cs
+    - Function 'Take' is called in: Assets/Scripts/Nexus.cs
+    - Function 'Take' is called in: Assets/Scripts/PlayerHealth.cs
+    - Function 'Take' is called in: Assets/Scripts/TankEnemyMove.cs
+    - Function 'Take' is called in: Assets/Scripts/Deprecated/DefensiveWallHealth.cs
+    - Function 'Take' is called in: Assets/Scripts/Managers/InventoryManager.cs
+
+Function: UpdateHealth
+Defined In Classes: InventoryManager
+    - Function 'UpdateHealth' is called in: Assets/Scripts/Managers/InventoryManager.cs
+
+Function: UpdateInventoryCount
+Defined In Classes: InventoryManager
+    - Function 'UpdateInventoryCount' is called in: Assets/Scripts/Managers/InventoryManager.cs
+
+Function: HEALTH_INCREASE
+Defined In Classes: InventoryManager
+    - Function 'HEALTH_INCREASE' is called in: Assets/Scripts/Managers/InventoryManager.cs
+
+Function: Min
+Defined In Classes: InventoryManager
+    - Function 'Min' is called in: Assets/Scripts/MiniRewardChoiceUI.cs
+    - Function 'Min' is called in: Assets/Scripts/MinimapCameraMove.cs
+    - Function 'Min' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'Min' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs
+    - Function 'Min' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
+    - Function 'Min' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs
+    - Function 'Min' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
+    - Function 'Min' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
+    - Function 'Min' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs
+    - Function 'Min' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
 
 Function: UpdateWaveUI
 Defined In Classes: UIManager
@@ -1305,6 +1447,10 @@ Function: UpdatePlayerXPUI
 Defined In Classes: UIManager
     - Function 'UpdatePlayerXPUI' is called in: Assets/Scripts/Managers/UIManager.cs
 
+Function: UpdateInventoryUI
+Defined In Classes: UIManager
+    - Function 'UpdateInventoryUI' is called in: Assets/Scripts/Managers/UIManager.cs
+
 Function: UpdateGoldUI
 Defined In Classes: UIManager
     - Function 'UpdateGoldUI' is called in: Assets/Scripts/Managers/UIManager.cs
@@ -1313,10 +1459,9 @@ Function: HideRewardScreen
 Defined In Classes: UIManager
     - Function 'HideRewardScreen' is called in: Assets/Scripts/Managers/UIManager.cs
 
-Function: Invoke
+Function: UpdateRewardsUI
 Defined In Classes: UIManager
-    - Function 'Invoke' is called in: Assets/Scripts/Managers/UIManager.cs
-    - Function 'Invoke' is called in: Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs
+    - Function 'UpdateRewardsUI' is called in: Assets/Scripts/Managers/UIManager.cs
 
 Function: InitializeWaveManager
 Defined In Classes: WaveManager
@@ -1333,10 +1478,6 @@ Defined In Classes: WaveManager
 Function: SpawnWave
 Defined In Classes: WaveManager
     - Function 'SpawnWave' is called in: Assets/Scripts/Managers/WaveManager.cs
-
-Function: ShouldSpawnNextWave
-Defined In Classes: WaveManager
-    - Function 'ShouldSpawnNextWave' is called in: Assets/Scripts/Managers/WaveManager.cs
 
 Function: AllEnemiesDefeated
 Defined In Classes: WaveManager
@@ -1367,15 +1508,6 @@ Function: GetEnemyPrefabForDifficulty
 Defined In Classes: WaveManager
     - Function 'GetEnemyPrefabForDifficulty' is called in: Assets/Scripts/Managers/WaveManager.cs
 
-Function: SpawnEnemyWithDelay
-Defined In Classes: WaveManager
-    - Function 'SpawnEnemyWithDelay' is called in: Assets/Scripts/Managers/WaveManager.cs
-
-Function: GetTargetList
-Defined In Classes: WaveManager
-    - Function 'GetTargetList' is called in: Assets/Scripts/EnemyMove.cs
-    - Function 'GetTargetList' is called in: Assets/Scripts/Managers/WaveManager.cs
-
 Function: HandleWaveCompletion
 Defined In Classes: WaveManager
     - Function 'HandleWaveCompletion' is called in: Assets/Scripts/Managers/WaveManager.cs
@@ -1391,4 +1523,13 @@ Defined In Classes: WaveManager
 Function: SpawnSpawnerBoss
 Defined In Classes: WaveManager
     - Function 'SpawnSpawnerBoss' is called in: Assets/Scripts/Managers/WaveManager.cs
+
+Function: HasTag
+Defined In Classes: MultiTag
+    - Function 'HasTag' is called in: Assets/Scripts/Managers/InventoryManager.cs
+    - Function 'HasTag' is called in: Assets/Scripts/Utility/MultiTag.cs
+
+Function: GetTags
+Defined In Classes: MultiTag
+    - Function 'GetTags' is called in: Assets/Scripts/Utility/MultiTag.cs
 

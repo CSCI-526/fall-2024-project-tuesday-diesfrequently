@@ -17,11 +17,6 @@ Script: BulletPool
     - GameObjects/Prefabs referenced in BulletPool:
         - bulletPrefab
 
-Script: CameraFollow
-    - No dependencies found for CameraFollow
-    - GameObjects/Prefabs referenced in CameraFollow:
-        - target
-
 Script: CharacterController
     - Dependencies for CharacterController:
         - GameManager
@@ -41,10 +36,6 @@ Script: ClickUpgrade
         - AnalyticsManager
     - GameObjects/Prefabs referenced in ClickUpgrade:
         - indicator
-
-Script: DefensiveWallHealth
-    - No dependencies found for DefensiveWallHealth
-    - No Explicit GameObjects/Prefabs referenced in DefensiveWallHealth
 
 Script: EnemyHealth
     - Dependencies for EnemyHealth:
@@ -223,8 +214,10 @@ Script: SpawnPoint
     - Dependencies for SpawnPoint:
         - GameManager
         - WaveManager
+        - EnemyMove
     - GameObjects/Prefabs referenced in SpawnPoint:
         - prefab
+        - enemyToSpawn
 
 Script: SpawnerEnemy
     - No dependencies found for SpawnerEnemy
@@ -287,9 +280,21 @@ Script: upgradeUI
     - No dependencies found for upgradeUI
     - No Explicit GameObjects/Prefabs referenced in upgradeUI
 
+Script: CameraFollow
+    - No dependencies found for CameraFollow
+    - GameObjects/Prefabs referenced in CameraFollow:
+        - target
+
+Script: DefensiveWallHealth
+    - No dependencies found for DefensiveWallHealth
+    - No Explicit GameObjects/Prefabs referenced in DefensiveWallHealth
+
 Script: AnalyticsManager
     - Dependencies for AnalyticsManager:
         - Wave
+        - InventoryManager
+        - GameManager
+        - Nexus
     - No Explicit GameObjects/Prefabs referenced in AnalyticsManager
 
 Script: GameManager
@@ -303,14 +308,13 @@ Script: GameManager
 
 Script: InventoryManager
     - Dependencies for InventoryManager:
-        - Harvester
-        - PlayerHealth
         - Nexus
-        - Building
-        - GameManager
+        - PlayerHealth
         - PlayerLevels
-        - AnalyticsManager
-        - UIManager
+        - Harvester
+        - GameManager
+        - Helper
+        - MultiTag
     - No Explicit GameObjects/Prefabs referenced in InventoryManager
 
 Script: UIManager
@@ -318,11 +322,11 @@ Script: UIManager
         - Nexus
         - PlayerHealth
         - PlayerLevels
+        - InventoryManager
         - GameManager
         - Wave
         - WaveManager
         - RewardChoiceUI
-        - InventoryManager
     - GameObjects/Prefabs referenced in UIManager:
         - gameOverScreen
         - rewardMenu
@@ -336,7 +340,6 @@ Script: WaveManager
         - Nexus
         - Wave
         - EnemySpawnInfo
-        - EnemyHealth
         - GameManager
         - UIManager
         - AnalyticsManager
@@ -346,4 +349,12 @@ Script: WaveManager
         - nexus
         - player
         - identity
+
+Script: Helper
+    - No dependencies found for Helper
+    - No Explicit GameObjects/Prefabs referenced in Helper
+
+Script: MultiTag
+    - No dependencies found for MultiTag
+    - No Explicit GameObjects/Prefabs referenced in MultiTag
 

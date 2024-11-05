@@ -69,13 +69,13 @@ public class AnalyticsManager : MonoBehaviour
     {
         // MATCHA: does the param still get passed even though we dont specify the "param" or its type in the subscription?
         inventoryManager.Analytics_OnInventoryAdded += UpdateTotalAcquiredInventory;
-        inventoryManager.Analytics_OnInventoryUsed += UpdateTotalPlacedInventory;
+        inventoryManager.Analytics_OnInventoryUsed += UpdateTotalUsedInventory;
     }
 
     private void OnDisable()
     {
         inventoryManager.Analytics_OnInventoryAdded -= UpdateTotalAcquiredInventory;
-        inventoryManager.Analytics_OnInventoryUsed -= UpdateTotalPlacedInventory;
+        inventoryManager.Analytics_OnInventoryUsed -= UpdateTotalUsedInventory;
 
     }
 
@@ -215,7 +215,7 @@ public class AnalyticsManager : MonoBehaviour
 
     // Description: Increments the count of placed inventory for the given item index
     // Parameters: itemIDX - The index of the inventory type placed
-    public void UpdateTotalPlacedInventory(int itemIDX)
+    public void UpdateTotalUsedInventory(int itemIDX)
     {
         lock (_lockObject)
         {

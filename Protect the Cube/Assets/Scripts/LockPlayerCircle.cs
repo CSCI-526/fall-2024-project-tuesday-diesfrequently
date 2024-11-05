@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LockPlayerCircle : MonoBehaviour
 {
-private Quaternion  requiredLocalRot;
+private Quaternion requiredLocalRot;
 
 void Awake()
 {

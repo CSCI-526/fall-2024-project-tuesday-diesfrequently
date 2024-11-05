@@ -1,69 +1,3 @@
-Prefab: Sniper
-    - turretShoot
-
-Prefab: Wall
-    - Wall
-    - ProBuilderMesh
-    - ProBuilderShape
-    - DefensiveWallHealth
-
-Prefab: Flamethrower
-    - turretShoot
-    - RangeIndicator
-    - ClickUpgrade
-
-Prefab: Gatling Turret
-    - turretShoot
-    - RangeIndicator
-    - ClickUpgrade
-
-Prefab: Gun Turret
-    - turretShoot
-    - RangeIndicator
-    - ClickUpgrade
-
-Prefab: Harvester
-    - Nexus
-    - Harvester
-    - RangeIndicator
-    - HarvesterUI
-    - CanvasScaler
-    - GraphicRaycaster
-    - Slider
-    - Image
-    - TextMeshProUGUI
-
-Prefab: Level UP Indicator
-    - ProBuilderMesh
-    - ProBuilderShape
-
-Prefab: Nexus
-    - Nexus
-    - Harvester
-    - HarvesterUI
-    - Info
-    - CanvasScaler
-    - GraphicRaycaster
-    - Slider
-    - Image
-    - TextMeshProUGUI
-
-Prefab: SlowTower
-    - RangeIndicator
-    - SlowTower
-
-Prefab: Sniper 1
-    - turretShoot
-    - RangeIndicator
-    - ClickUpgrade
-
-Prefab: Turret upgrade indicator
-
-Prefab: TurretBooster
-    - TurretBooster
-    - RangeIndicator
-    - TurretBoosterVisual
-
 Prefab: BulletPool
     - BulletPool
 
@@ -77,6 +11,15 @@ Prefab: Character
     - GraphicRaycaster
     - Slider
     - Image
+
+Prefab: Sniper
+    - turretShoot
+
+Prefab: Wall
+    - Wall
+    - ProBuilderMesh
+    - ProBuilderShape
+    - DefensiveWallHealth
 
 Prefab: Enemy
     - EnemyMove
@@ -130,6 +73,10 @@ Prefab: Indicator
     - Indicator
     - TextMeshProUGUI
 
+Prefab: Level UP Indicator
+    - ProBuilderMesh
+    - ProBuilderShape
+
 Prefab: MinimapComponent
     - CanvasScaler
     - GraphicRaycaster
@@ -137,6 +84,92 @@ Prefab: MinimapComponent
     - RawImage
     - UniversalAdditionalCameraData
     - MinimapCameraMove
+
+Prefab: RangeIndicator
+
+Prefab: Turret upgrade indicator
+
+Prefab: UI
+    - CanvasScaler
+    - GraphicRaycaster
+    - TextMeshProUGUI
+    - Image
+    - Button
+    - ResumeBtn
+    - GameSummaryUI
+    - RewardChoiceUI
+    - RewardPanel
+    - upgradeUI
+    - upgradeBtn
+    - PauseBtn
+    - OffScreenIndicator
+    - Indicator
+
+Prefab: Flamethrower Turret
+    - turretShoot
+    - RangeIndicator
+    - ClickUpgrade
+    - MultiTag
+
+Prefab: Gatling Turret
+    - turretShoot
+    - RangeIndicator
+    - ClickUpgrade
+    - MultiTag
+
+Prefab: Gun Turret
+    - turretShoot
+    - RangeIndicator
+    - ClickUpgrade
+    - MultiTag
+
+Prefab: Harvester
+    - Nexus
+    - Harvester
+    - RangeIndicator
+    - HarvesterUI
+    - MultiTag
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+    - TextMeshProUGUI
+
+Prefab: Nexus HP
+    - MultiTag
+    - Info
+
+Prefab: Nexus
+    - Nexus
+    - Harvester
+    - HarvesterUI
+    - Info
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+    - TextMeshProUGUI
+
+Prefab: Player HP
+    - MultiTag
+    - Info
+
+Prefab: Slow Turret
+    - RangeIndicator
+    - SlowTower
+    - MultiTag
+
+Prefab: Sniper Turret
+    - turretShoot
+    - RangeIndicator
+    - ClickUpgrade
+    - MultiTag
+
+Prefab: Turret Booster
+    - TurretBooster
+    - RangeIndicator
+    - MultiTag
+    - TurretBoosterVisual
 
 Prefab: Bullet
     - Bullet
@@ -161,8 +194,6 @@ Prefab: Magnet
 
 Prefab: SniperBullet
     - Bullet
-
-Prefab: RangeIndicator
 
 Prefab: RewardMenu
     - RewardChoiceUI
@@ -221,22 +252,6 @@ Prefab: WallPanel
 
 Prefab: Terrain
     - UniversalAdditionalLightData
-
-Prefab: UI
-    - CanvasScaler
-    - GraphicRaycaster
-    - TextMeshProUGUI
-    - Image
-    - Button
-    - ResumeBtn
-    - GameSummaryUI
-    - RewardChoiceUI
-    - RewardPanel
-    - upgradeUI
-    - upgradeBtn
-    - PauseBtn
-    - OffScreenIndicator
-    - Indicator
 
 Prefab: Text Popup
     - Image
