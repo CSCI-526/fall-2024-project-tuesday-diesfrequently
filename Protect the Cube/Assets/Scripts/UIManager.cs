@@ -30,6 +30,9 @@ public class UIManager : MonoBehaviour
     private Image goldImage;
     
 
+    public bool pauseMenuActive = false;
+    public bool rewardMenuActive = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,24 +81,36 @@ public class UIManager : MonoBehaviour
 
     public void ShowPauseScreen()
     {
+        if(rewardMenuActive){
+            rewardMenu.SetActive(false);
+        }
+        pauseMenuActive = true;
         pauseUI.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void HidePauseScreen()
     {
+        if(rewardMenuActive){
+            rewardMenu.SetActive(true);
+        } else {
+            Time.timeScale = 1.0f;
+        }
+        pauseMenuActive = false;
         pauseUI.SetActive(false);
-        Time.timeScale = 1.0f;
+        
     }
 
     public void ShowRewardScreen()
     {
+        rewardMenuActive = true;
         rewardMenu.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void HideRewardScreen()
     {
+        rewardMenuActive = false;
         rewardMenu.SetActive(false);
         Time.timeScale = 1.0f;
             

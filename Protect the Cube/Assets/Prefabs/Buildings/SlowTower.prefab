@@ -223,9 +223,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3709974401263691978}
   - component: {fileID: 5651775863001095746}
+  - component: {fileID: -1701615287928845993}
   - component: {fileID: 890862980797676437}
   - component: {fileID: -8043922140130001780}
-  - component: {fileID: -1701615287928845993}
   m_Layer: 9
   m_Name: SlowTower
   m_TagString: Turret
@@ -273,6 +273,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.10027802, y: 0.37044966, z: 0.05062294}
   m_Center: {x: -0.023630321, y: -0.31477517, z: -0.011158466}
+--- !u!114 &-1701615287928845993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6852214484739291977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f0530667ca7ee429a3bcea978d4d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 1074434264474890273}
+  radius: 1
+  useTurretRange: 0
+  alwaysShow: 0
 --- !u!114 &890862980797676437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,22 +323,6 @@ MonoBehaviour:
   buildingDesc: Slows all enemies within range of the tower
   radius: 6
   slowRate: 0.4
---- !u!114 &-1701615287928845993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6852214484739291977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f0530667ca7ee429a3bcea978d4d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicator: {fileID: 1074434264474890273}
-  radius: 1
-  useTurretRange: 0
-  alwaysShow: 0
 --- !u!1 &6931359815143944211
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_IsActive

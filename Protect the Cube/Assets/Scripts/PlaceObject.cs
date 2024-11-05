@@ -115,6 +115,7 @@ public class PlaceObject : MonoBehaviour
     {
         Building b = currentPlaceableObject.GetComponent<Building>();
         bool canPlace = GameManager.Instance.InventoryManager.HasBuilding(b.buildingName);
+        // canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
         if (b.gameObject.GetComponent<Harvester>() != null)
         {
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();

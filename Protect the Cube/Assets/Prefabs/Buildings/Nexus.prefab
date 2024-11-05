@@ -285,6 +285,8 @@ MonoBehaviour:
   rotatable: 1
   buildingName: Nexus
   buildingDesc: Protect this at all costs
+  colorDiffAfterPlace: 50
+  currentPlaceableObject: {fileID: 0}
   radius: 6
 --- !u!114 &4194215232517746498
 MonoBehaviour:

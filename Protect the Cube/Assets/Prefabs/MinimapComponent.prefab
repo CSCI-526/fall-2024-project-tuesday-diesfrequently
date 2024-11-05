@@ -93,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2985178248983640358
 RectTransform:
   m_ObjectHideFlags: 0
@@ -221,11 +221,11 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 25
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 31
+    m_Bits: 991
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1cc54191da072ad45a02a6766b0e5571, type: 2}
   m_TargetDisplay: 0

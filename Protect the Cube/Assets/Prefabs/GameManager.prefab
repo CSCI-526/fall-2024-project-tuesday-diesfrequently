@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8626850916652475655}
   - component: {fileID: 4730567282749379631}
   - component: {fileID: 6683548619100361680}
+  - component: {fileID: 4076889085620958360}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -68,9 +69,12 @@ MonoBehaviour:
   tankRate: 1
   tank: {fileID: 6013629208632606210, guid: 2f4b90fa476cd40549e7d9dc2d55c7b9, type: 3}
   tankSpawnStartWave: 5
-  spawnerBoss: {fileID: 0}
+  spawnerBoss: {fileID: 6013629208632606210, guid: 3b5bba5c60f32c548af9ae3240374613, type: 3}
   spawnerBossStartWave: 10
+  shieldBoss: {fileID: 6013629208632606210, guid: 043c26fd723417644bb1ff73a471e0e4, type: 3}
   enemyPrefabs:
+  - {fileID: 6013629208632606210, guid: 4f8316f4c6dace64e8093e78c01ea5d1, type: 3}
+  - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
   - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
   enemies: []
   spawnPoints: []
@@ -89,7 +93,22 @@ MonoBehaviour:
   scoreBoard: {fileID: 0}
   expUI: {fileID: 0}
   expSlider: {fileID: 0}
-  inventoryCount: []
+  inventoryCount:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  inventoryGbox:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   goldUI: {fileID: 0}
   gameOverScreen: {fileID: 0}
   rewardMenu: {fileID: 0}
@@ -97,9 +116,7 @@ MonoBehaviour:
   pauseUI: {fileID: 0}
   SelectGunTutorialUI: {fileID: 0}
   crosshairTexture: {fileID: 2800000, guid: 6bb4e046bf9666047ba42a3c0d25d34f, type: 3}
-  crossHotspot: {x: 0, y: 0}
-  HandTexture: {fileID: 2800000, guid: 1ec13b17ff61f9a44a8028a9d4479143, type: 3}
-  handHotspot: {x: 10, y: 0}
+  HandTexture: {fileID: 5285177031238896781, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
 --- !u!114 &6683548619100361680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,8 +137,23 @@ MonoBehaviour:
   - {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
   - {fileID: 415337832395152133, guid: f6edc88301e129b4aaed9c842bbdd0fe, type: 3}
   - {fileID: 6852214484739291977, guid: 2543412762f80df449e7edae5b5abbe3, type: 3}
+  - {fileID: 415337832395152133, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
+  - {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
   buildingCount: 
   buildingNames: []
   player: {fileID: 0}
   nexus: {fileID: 0}
   healthIncrease: 2
+--- !u!114 &4076889085620958360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368259697453654843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031d10a98bc744b2c9c81a65c84679dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  URL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSfjtjHdsAHNgMOAG65EgsWcrUNn7YornePsiKmTTvlsB_SjRg/formResponse

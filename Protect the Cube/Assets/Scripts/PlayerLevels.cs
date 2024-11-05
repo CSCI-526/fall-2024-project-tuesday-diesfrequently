@@ -24,7 +24,7 @@ public class PlayerLevels : MonoBehaviour
     private bool isSelectingTurret = false;
     private List<GameObject> selectedTurrets = new List<GameObject>();
 
-    
+    public ClickUpgrade clickUpgrade;
     
     void Start()
     {
@@ -78,6 +78,10 @@ public class PlayerLevels : MonoBehaviour
         else if (Orb.tag == "GoldOrb"){
             currentGold += resource_gained;
             GameManager.Instance.AnalyticsManager.UpdatePlayerAcquiredGold(resource_gained);
+            if(currentGold > 4){
+                clickUpgrade = FindObjectOfType<ClickUpgrade>();
+                clickUpgrade.CheckForUpgradeableTurrets();
+            }
         }
         GameManager.Instance.UIManager.UpdateUI();
 

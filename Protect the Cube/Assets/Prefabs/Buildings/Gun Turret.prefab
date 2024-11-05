@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4813585925586114357}
   - component: {fileID: 5112603536194239189}
   - component: {fileID: 1399077278889937836}
-  - component: {fileID: 661809259321775432}
   - component: {fileID: 5538984475188787401}
+  - component: {fileID: 661809259321775432}
   - component: {fileID: 3598094888286799798}
   - component: {fileID: 4545694227343427290}
   - component: {fileID: 8219079333807218751}
@@ -38,8 +38,8 @@ Transform:
   m_Children:
   - {fileID: 7248467502963069330}
   - {fileID: 5266269406354168798}
-  - {fileID: 2955942234417291343}
   - {fileID: 2731791733878227}
+  - {fileID: 2955942234417291343}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5112603536194239189
@@ -85,21 +85,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.63034713, y: 1.6429518, z: 1.5252142}
   m_Center: {x: -0.20909542, y: 0.90320116, z: 0.098226756}
---- !u!114 &661809259321775432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272256851593019809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f0530667ca7ee429a3bcea978d4d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicator: {fileID: 4129432597721488160}
-  radius: 12
-  useTurretRange: 1
 --- !u!114 &5538984475188787401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +100,23 @@ MonoBehaviour:
   indicator: {fileID: 1171666324581652156}
   radius: 1
   useTurretRange: 0
+  alwaysShow: 0
+--- !u!114 &661809259321775432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272256851593019809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f0530667ca7ee429a3bcea978d4d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 4129432597721488160}
+  radius: 12
+  useTurretRange: 1
+  alwaysShow: 0
 --- !u!114 &3598094888286799798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +132,8 @@ MonoBehaviour:
   goldRequired: 5
   buildingName: Gun Turret
   indicator: {fileID: 5432939863929631517, guid: 693069057d8394f489a20f9e909b3c04, type: 3}
+  upgradeArrow: {fileID: 3907081904980417976, guid: aa655861ef8e34d94b991abe0801ea0c, type: 3}
+  turrets: []
 --- !u!199 &4545694227343427290
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -4938,7 +4942,7 @@ GameObject:
   - component: {fileID: 1206693487746880824}
   m_Layer: 9
   m_Name: Muzzle
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4972,7 +4976,7 @@ GameObject:
   - component: {fileID: 1696287059120475817}
   m_Layer: 9
   m_Name: Head
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5079,7 +5083,7 @@ GameObject:
   - component: {fileID: 5959782749462169885}
   m_Layer: 9
   m_Name: Barrel
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5184,7 +5188,7 @@ GameObject:
   - component: {fileID: 3019551565935316183}
   m_Layer: 9
   m_Name: Base
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5288,6 +5292,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4689674860701062492, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.31949997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689674860701062492, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
@@ -5309,7 +5317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4689674860701062492, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4689674860701062492, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_LocalRotation.y
