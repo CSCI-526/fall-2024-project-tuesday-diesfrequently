@@ -17,12 +17,6 @@ public class turretShoot : Building
     [SerializeField] GameObject gunBarrel;
     [SerializeField] GameObject target;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -97,11 +91,12 @@ public class turretShoot : Building
         }
     }
 
+    // parses through WaveManager's ActiveEnemyObjects
     private void FindTarget()
     {
         target = null;
         float minRange = maxRange;
-        foreach (GameObject enemy in GameManager.Instance.WaveManager.enemies)
+        foreach (GameObject enemy in GameManager.Instance.WaveManager.activeEnemyObjects)
         {
             if(enemy != null && !enemy.IsDestroyed())
             {
@@ -121,6 +116,7 @@ public class turretShoot : Building
         ++fireRate;
         ++maxRange;
     }
+
     void CheckForBoost(float radius = 3.0f)
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);// -1, QueryTriggerInteraction.Collide);

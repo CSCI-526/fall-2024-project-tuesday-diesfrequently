@@ -202,12 +202,16 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] protected float waveInterval = 5.0f;
-    [SerializeField] protected float maxSpawnDelay = 2.0f;
+    [SerializeField] public int currentWaveIndex { get; private set; }
+    [SerializeField] public float waveInterval { get; private set; } // OLD: 5.0
+    [SerializeField] public float maxDelayBetweenSpawnEvent { get; private set; } // OLD: 2.0
+    [SerializeField] public int numEnemiesAlive { get; private set; }
 
-    [SerializeField] public int enemyCount = 0;
+    [SerializeField] public List<GameObject> activeEnemyObjects = new List<GameObject>();
+
+    private float _waveDuration;
+
     [SerializeField] public float difficulty = 1.2f;
-    [SerializeField] public int currentWaveIndex { get; private set;  }
 
     [SerializeField] public float tankRate = 0.8f;
     [SerializeField] public GameObject tank;
@@ -217,52 +221,71 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public int spawnerBossStartWave = 10;
 
     [SerializeField] public List<GameObject> enemyPrefabs = new List<GameObject>();
-    [SerializeField] public List<GameObject> enemies = new List<GameObject>();
     [SerializeField] public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
-    float timeSinceLastWave;
+    
+
     private void Awake()
     {
-        enemies = new List<GameObject>();
+        InitializeWaveManager();
+    }
+
+    private void InitializeWaveManager()
+    {
+        // initialize balance variables
+        waveInterval = 20.0f;
+        maxDelayBetweenSpawnEvent = 2.0f;
+        numEnemiesAlive = 0;
+        _waveDuration = 0;
+        activeEnemyObjects = new List<GameObject>();
         spawnPoints = new List<SpawnPoint>();
-        enemyCount = 0;
         currentWaveIndex = 0;
     }
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //SpawnWave();
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (enemyCount <= 0 && timeSinceLastWave > waveInterval)
+        OnWaveCompletion(); // check for wave completion
+        _waveDuration += Time.deltaTime; // update waveDuration time
+    }
+
+    private void OnWaveCompletion()
+    {
+        if (AllEnemiesDead() && WaveTimerComplete())
         {
             SpawnWave();
-            timeSinceLastWave = 0.0f;
+            ResetWaveTimer();
         }
-        timeSinceLastWave += Time.deltaTime;
     }
 
     void SpawnWave()
     {
-        ++currentWaveIndex;
+        UpdateWaveNumber();
+
+        // MATCHA: change to new wave construction logic
         SpawnNormalEnemies();
         SpawnTanks();
         SpawnSpawnerBoss();
+
+        // MATCHA: change to event driven system
         GameManager.Instance.UIManager.UpdateUI();
         Debug.Log("Updating Wave... Wave " + currentWaveIndex + " starting");
-        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(currentWaveIndex);// Send wave number to analytics
 
+        // Send wave number to analytics (use events)
+        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(currentWaveIndex);
+
+    }
+
+    private void UpdateWaveNumber()
+    {
+        ++currentWaveIndex;
     }
 
     void SpawnNormalEnemies()
     {
         foreach (SpawnPoint sp in spawnPoints)
         {
-            sp.SpawnEnemy(Random.Range(0.0f, maxSpawnDelay), currentWaveIndex, difficulty);
+            sp.SpawnEnemy(Random.Range(0.0f, maxDelayBetweenSpawnEvent), currentWaveIndex, difficulty);
         }
     }
 
@@ -290,5 +313,42 @@ public class WaveManager : MonoBehaviour
                 spawnerEnemy.transform.position = randomSpawnPoint.transform.position;
             }
         }
+    }
+
+    public bool AllEnemiesDead()
+    {
+        if (numEnemiesAlive == 0) return true;
+        else if (numEnemiesAlive <= 0) { Debug.Log("[Wave Manager] Negative Enemy Count Detected. "); return false; }
+        return false; // return false if enemies still alive
+    }
+
+    private bool WaveTimerComplete()
+    {
+        return (_waveDuration > waveInterval);
+    }
+
+    private void ResetWaveTimer()
+    {
+        _waveDuration = 0.0f;
+    } 
+
+    // called by EnemyHealth when Enemy is "instantiated"
+    // MATCHA: do we need to move this somewhre else?
+    public void OnEnemyCreation(GameObject enemy)
+    {
+        numEnemiesAlive++;
+        activeEnemyObjects.Add(enemy);
+        return;
+    }
+
+    public void OnEnemyDeath(GameObject enemy)
+    {
+        // sanity check logic
+        if (numEnemiesAlive <= 0) { Debug.Log("[Wave Manager] Negative Amount of Enemies Alive"); return; }
+
+        // if valid, decrease number of enemies alive + stop tracking enemyObject
+        numEnemiesAlive--;
+        activeEnemyObjects.Remove(enemy);
+        return;
     }
 }
