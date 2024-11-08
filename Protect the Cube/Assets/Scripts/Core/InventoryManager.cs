@@ -147,7 +147,7 @@ public class InventoryManager : MonoBehaviour
         UpdateRewardDisplay(chosenRewards); // Updates Reward Display
 
         // cancel placing if rewards display activates
-        // MATCHA: changes
+        // MATCHA: change to event driven
         GameManager.Instance.Player.GetComponent<PlaceObject>().CancelPlace();
 
         // generate reward indexes for analytics
@@ -229,7 +229,6 @@ public class InventoryManager : MonoBehaviour
     public void HandlePickedReward(string reward_name)
     {
         // Update Health if the reward is health-based
-        // MATCHA: maybe handle this in another file? not rly inventory related
         if (reward_name.Contains("HP")) UpdateHealth(reward_name);
 
         // Update Inventory by Picked Reward
@@ -243,7 +242,6 @@ public class InventoryManager : MonoBehaviour
         else if (reward_name == "Nexus HP") Nexus_OnNexusHealthUpdate?.Invoke();
     }
 
-    // MATCHA (ADD TO INVENTORY) better function nam?
     private void UpdateInventoryCount(string item_name)
     {
         int itemIDX = getItemIDX(item_name);
@@ -260,7 +258,6 @@ public class InventoryManager : MonoBehaviour
     }
 
     // try to use an inventory item, use if item is available
-    // MATCHA (TAKE FROM INVENTORY) better function nam?
     public bool TryUseInventoryItem(string item_name)
     {
         // if there is no inventory, cannot use item
