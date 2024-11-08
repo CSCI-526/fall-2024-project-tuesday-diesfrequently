@@ -1,0 +1,437 @@
+Prefab: Sniper
+    - turretShoot
+
+Prefab: Wall
+    - Wall
+    - ProBuilderMesh
+    - ProBuilderShape
+    - DefensiveWallHealth
+
+Prefab: Enemy
+    - EnemyMove
+    - EnemyHealth
+    - CanvasScaler
+    - GraphicRaycaster
+    - Image
+    - Slider
+
+Prefab: FastEnemy
+    - EnemyMove
+    - EnemyHealth
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+
+Prefab: ShieldEnemy
+    - EnemyMove
+    - EnemyHealth
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+
+Prefab: SpawnerBossEnemy
+    - EnemyMove
+    - EnemyHealth
+    - SpawnerEnemy
+    - CanvasScaler
+    - GraphicRaycaster
+    - Image
+    - Slider
+
+Prefab: TankEnemy
+    - EnemyMove
+    - EnemyHealth
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+
+Prefab: GameManager
+    - GameManager
+    - WaveManager
+    - UIManager
+    - InventoryManager
+    - AnalyticsManager
+
+Prefab: Cursor
+    - FollowMouse
+    - RawImage
+
+Prefab: CursorCanvas
+    - CanvasScaler
+    - GraphicRaycaster
+    - FollowMouse
+    - RawImage
+
+Prefab: EnemySpawnPoint
+    - SpawnPoint
+
+Prefab: HP Bar Canvas
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+
+Prefab: NexusExclamationIndicator
+    - Indicator
+    - TextMeshProUGUI
+
+Prefab: TurretRangeIndicator
+
+Prefab: TutorialArrow
+    - Image
+
+Prefab: UpgradeArrow
+
+Prefab: MinimapComponent
+    - CanvasScaler
+    - GraphicRaycaster
+    - Image
+    - RawImage
+    - UniversalAdditionalCameraData
+    - MinimapCameraMove
+
+Prefab: RewardMenu
+    - RewardChoiceUI
+    - Image
+    - TextMeshProUGUI
+    - RewardPanel
+    - Button
+
+Prefab: RewardPanel
+    - Image
+    - RewardPanel
+    - Button
+    - TextMeshProUGUI
+
+Prefab: Terrain
+    - UniversalAdditionalLightData
+
+Prefab: UI
+    - CanvasScaler
+    - GraphicRaycaster
+    - Image
+    - TextMeshProUGUI
+    - Button
+    - ResumeBtn
+    - GameSummaryUI
+    - RewardChoiceUI
+    - RewardPanel
+    - Slider
+    - ClickAndDrop
+    - upgradeUI
+    - upgradeBtn
+    - PauseBtn
+    - OffScreenIndicator
+    - Indicator
+
+Prefab: Booster Turret
+    - TurretBooster
+    - RangeIndicator
+    - RewardInfo
+    - TurretBoosterVisual
+
+Prefab: Flamethrower Turret
+    - turretShoot
+    - RangeIndicator
+    - ClickUpgrade
+    - RewardInfo
+
+Prefab: Gatling Turret
+    - turretShoot
+    - RangeIndicator
+    - ClickUpgrade
+    - RewardInfo
+
+Prefab: Gun Turret
+    - turretShoot
+    - RangeIndicator
+    - ClickUpgrade
+    - RewardInfo
+
+Prefab: Harvester
+    - Nexus
+    - Harvester
+    - RangeIndicator
+    - HarvesterUI
+    - RewardInfo
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+    - TextMeshProUGUI
+
+Prefab: Level Up Indicator
+    - ProBuilderMesh
+    - ProBuilderShape
+
+Prefab: Slow Turret
+    - RangeIndicator
+    - SlowTower
+    - RewardInfo
+
+Prefab: Sniper Turret
+    - turretShoot
+    - RangeIndicator
+    - ClickUpgrade
+    - RewardInfo
+
+Prefab: Nexus
+    - Nexus
+    - Harvester
+    - HarvesterUI
+    - RewardInfo
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+    - TextMeshProUGUI
+
+Prefab: Player
+    - PlayerController
+    - PlayerHealth
+    - PlaceObject
+    - PlayerLevels
+    - RewardInfo
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+
+Prefab: Bullet
+    - Bullet
+
+Prefab: BulletPool
+    - BulletPool
+
+Prefab: FlamethrowerFire
+    - Bullet
+
+Prefab: Low-Caliber Bullet
+    - Bullet
+
+Prefab: SniperBullet
+    - Bullet
+
+Prefab: ExperienceOrb
+    - ExperiencePickup
+    - UniversalAdditionalLightData
+
+Prefab: ExpMagnet
+    - UniversalAdditionalLightData
+    - Magnet
+
+Prefab: GoldOrb
+    - ExperiencePickup
+    - UniversalAdditionalLightData
+
+Prefab: Text Popup
+    - Image
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - TextMeshProUGUI
+
+Prefab: TextMeshPro - Prefab 1
+    - TextMeshPro
+
+Prefab: TextMeshPro - Prefab 2
+    - TextMeshPro
+
+Prefab: DebugUICanvas
+    - CanvasScaler
+    - GraphicRaycaster
+    - DebugUIHandlerCanvas
+
+Prefab: DebugUIPersistentCanvas
+    - CanvasScaler
+    - GraphicRaycaster
+    - DebugUIHandlerPersistentCanvas
+    - Image
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+
+Prefab: DebugUIBitField
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerBitField
+    - UIFoldout
+    - Image
+    - Text
+    - DebugUIHandlerIndirectToggle
+    - Toggle
+
+Prefab: DebugUIButton
+    - Image
+    - Button
+    - DebugUIHandlerButton
+    - Text
+
+Prefab: DebugUIColor
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerColor
+    - DebugUIHandlerContainer
+    - UIFoldout
+    - Image
+    - Text
+    - DebugUIHandlerIndirectFloatField
+
+Prefab: DebugUIEnumField
+    - DebugUIHandlerEnumField
+    - Text
+    - Button
+
+Prefab: DebugUIEnumHistory
+    - DebugUIHandlerEnumHistory
+    - Text
+
+Prefab: DebugUIFloatField
+    - DebugUIHandlerFloatField
+    - Text
+    - Button
+
+Prefab: DebugUIFoldout
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerFoldout
+    - UIFoldout
+    - Image
+    - Text
+
+Prefab: DebugUIGroup
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerGroup
+    - Text
+    - Image
+
+Prefab: DebugUIHBox
+    - HorizontalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerHBox
+
+Prefab: DebugUIIntField
+    - DebugUIHandlerIntField
+    - Text
+    - Button
+
+Prefab: DebugUIMessageBox
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerMessageBox
+    - Image
+    - Text
+
+Prefab: DebugUIObject
+    - DebugUIHandlerObject
+    - Text
+
+Prefab: DebugUIObjectList
+    - DebugUIHandlerObjectList
+    - Text
+    - Button
+
+Prefab: DebugUIObjectPopupField
+    - DebugUIHandlerObjectPopupField
+    - Text
+    - Button
+
+Prefab: DebugUIPanel
+    - Image
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerPanel
+    - LayoutElement
+    - Button
+    - Text
+    - ScrollRect
+    - Mask
+    - Scrollbar
+    - EventTrigger
+
+Prefab: DebugUIProgressBar
+    - DebugUIHandlerProgressBar
+    - Text
+    - Image
+
+Prefab: DebugUIRow
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerRow
+    - UIFoldout
+    - Image
+    - Text
+
+Prefab: DebugUIToggle
+    - DebugUIHandlerToggle
+    - Text
+    - Toggle
+    - Image
+
+Prefab: DebugUIToggleHistory
+    - DebugUIHandlerToggleHistory
+    - Text
+    - Toggle
+    - Image
+
+Prefab: DebugUIUIntField
+    - DebugUIHandlerUIntField
+    - Text
+    - Button
+
+Prefab: DebugUIValue
+    - DebugUIHandlerValue
+    - Text
+
+Prefab: DebugUIValuePersistent
+    - DebugUIHandlerValue
+    - Text
+
+Prefab: DebugUIValueTuple
+    - DebugUIHandlerValueTuple
+    - Text
+
+Prefab: DebugUIVBox
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerVBox
+
+Prefab: DebugUIVector2
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerVector2
+    - UIFoldout
+    - Image
+    - Text
+    - DebugUIHandlerIndirectFloatField
+
+Prefab: DebugUIVector3
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerVector3
+    - UIFoldout
+    - Image
+    - Text
+    - DebugUIHandlerIndirectFloatField
+
+Prefab: DebugUIVector4
+    - VerticalLayoutGroup
+    - ContentSizeFitter
+    - DebugUIHandlerContainer
+    - DebugUIHandlerVector4
+    - UIFoldout
+    - Image
+    - Text
+    - DebugUIHandlerIndirectFloatField
+

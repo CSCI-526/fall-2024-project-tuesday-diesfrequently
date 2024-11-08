@@ -8,43 +8,47 @@ using UnityEngine.UI;
 public class RewardPanel : MonoBehaviour
 {
     [SerializeField] protected Image rewardImage;
-    [SerializeField] protected TextMeshProUGUI rewardName;
+    [SerializeField] protected TextMeshProUGUI displayedRewardName;
     [SerializeField] protected TextMeshProUGUI rewardDescription;
+
     public void UpdateRewardPanel(GameObject reward)
     {
-        if(reward != null)
+        if (reward != null)
         {
+            RewardInfo reward_info = reward.GetComponent<RewardInfo>();
             Building building = reward.GetComponent<Building>();
-            Info info = reward.GetComponent<Info>();
-            if (info != null)
+
+            // Prioritize "INFO" over BuildingInfo
+            if (reward_info != null)
             {
-                rewardName.text = info.name;
-                rewardDescription.text = info.desc;
+                displayedRewardName.text = reward_info.RewardName;
+                rewardDescription.text = reward_info.RewardDescription;
             }
             else if (building != null)
             {
-                rewardName.text = building.buildingName;
+                displayedRewardName.text = building.buildingName;
                 rewardDescription.text = building.buildingDesc;
             }
         }
         else
         {
-            rewardName.text = "Error: missing";
+            Debug.Log("In ERROR.cs");
+            displayedRewardName.text = "Error: missing";
             rewardDescription.text = "Error: missing";
         }
     }
 
     public void ClearRewardPanel()
     {
-        rewardName.text = "";
+        displayedRewardName.text = "";
         rewardDescription.text = "";
     }
 
     public void OnPick()
     {
-        if (rewardName.text.Length > 0)
+        if (displayedRewardName.text.Length > 0)
         {
-            GameManager.Instance.InventoryManager.PickReward(rewardName.text);
+            GameManager.Instance.InventoryManager.HandlePickedReward(displayedRewardName.text);
         }
     }
 }

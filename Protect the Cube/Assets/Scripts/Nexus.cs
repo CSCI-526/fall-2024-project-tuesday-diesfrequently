@@ -1,94 +1,147 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class Nexus : MonoBehaviour
 {
-    [SerializeField] public bool spawnXP;
-    [SerializeField] public int health;
-    [SerializeField] public int maxHealth;
-    [SerializeField] public float xpSpawnInterval;
-    
-    [SerializeField] protected GameObject XP;
-    [SerializeField] public Vector3 xpSpawnOffset;
+    public const int NEXUS_MAX_HEALTH = 20;
 
-    [SerializeField] public bool triggerGameOver = false;
-    [SerializeField] private Animator animator;
+    public int maxHealth { get; private set; }
+    public int currentHealth { get; private set; }
 
+    [Header("XP Settings")]
+    [SerializeField] private bool spawnXP = true;
+    [SerializeField] private float xpSpawnInterval = 5f;
+    [SerializeField] private GameObject xpPrefab;
+    [SerializeField] private Vector3 xpSpawnOffset;
+
+    [Header("UI References")]
+    [SerializeField] private Slider hpBar;
+
+    [Header("Game Over Settings")]
+    [SerializeField] private bool triggerGameOver = false;
+
+    private Animator animator;
     private float timeSinceLastSpawn = 0.0f;
+    private InventoryManager inventoryManager;
+    public event Action<int> Analytics_OnNexusHPLoss;
+
     public delegate void NexusEvent();
     public event NexusEvent OnTakeDamage;
-
-    [SerializeField] public Slider hpBar;
-
     public GameObject indicator = null;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        maxHealth = NEXUS_MAX_HEALTH;
+        currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
+    }
+
     private void Start()
     {
+        // set Nexus GameObject to this scripts object (same reference)
         GameManager.Instance.Nexus = this.gameObject;
-        health = maxHealth;
-        animator = GetComponent<Animator>();
 
-        if(hpBar)
-        {
-            //hpBar.value = 1;
-        }
+        Debug.Log(xpPrefab != null ? "XP Prefab is assigned." : "XP Prefab is missing!");
+
+        // initialize HP Bar
+        UpdateHPBar();
     }
-    public void TakeDamage(int amount = 1)
+
+    private void OnEnable() { StartCoroutine(DelayedSubscribeToEvents()); }
+
+    private void OnDisable()
     {
+        inventoryManager.Nexus_OnNexusHealthUpdate -= AddNexusHealth;
+    }
+
+    private IEnumerator DelayedSubscribeToEvents()
+    {
+        // Wait until GameManager instance and InventoryManager are initialized
+        // yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.InventoryManager != null);
+        yield return new WaitUntil(() => GameManager.Instance?.InventoryManager != null);
+
+        inventoryManager = GameManager.Instance.InventoryManager;
+        inventoryManager.Nexus_OnNexusHealthUpdate += AddNexusHealth;
+    }
+
+    private void Update() { HandleXPSpawn(); }
+
+    private void AddNexusHealth()
+    {
+        currentHealth = Mathf.Min(currentHealth + InventoryManager.NEXUS_HEALTH_INCREASE, maxHealth);
+        Debug.Log("[Nexus] Updated currentHealth to: " + currentHealth);
+        UpdateHPBar();
+    }
+
+    public void TakeDamage(int dmg_amount = 1)
+    {
+        // activate the animator
         animator.SetTrigger("Damage");
-        health -= amount;
-        GameManager.Instance.AnalyticsManager.UpdateHitpointLossWave(10);
+
+        // reduce currentHP nexus
+        currentHealth = Mathf.Max(currentHealth - dmg_amount, 0);
+
+        // Update HP Bar
+        UpdateHPBar();
+
+        // Update Analytics
+        Analytics_OnNexusHPLoss?.Invoke(AnalyticsManager.TYPE_NEXUS_LOSS_HP);
+        //GameManager.Instance.AnalyticsManager.UpdateHitpointLossWave(10);
+
+        HandleOffScreenIndicator();
+
+        OnTakeDamage?.Invoke();
+
+        if (currentHealth <= 0 && triggerGameOver)
+        {
+            GameManager.Instance.TriggerGameOver();
+            Destroy(gameObject);
+        }
+
         GameManager.Instance.UIManager.UpdateUI();
+    }
+
+    private void HandleOffScreenIndicator()
+    {
         if (indicator == null)
         {
-            Vector3 screenpos = Camera.main.WorldToScreenPoint(transform.position);
-
-            if (!(screenpos.z > 0 && screenpos.x > 0 && screenpos.y > 0 && screenpos.x < Screen.width && screenpos.y < Screen.height)) // on screen
+            if (!IsOnScreen())
             {
-                OffScreenIndicator.Instance.GetIndicator(gameObject);
+                indicator = OffScreenIndicator.Instance.GetIndicator(gameObject);
                 Debug.Log("Indicator Assigned");
             }
         }
         else
         {
-            Indicator ind = indicator.GetComponent<Indicator>();
+            var ind = indicator.GetComponent<Indicator>();
             ind.timeLeft += ind.revealTime;
             Debug.Log("Indicator Already Assigned");
         }
+    }
 
-        if (OnTakeDamage != null)
+    private bool IsOnScreen()
+    {
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        return screenPos.z > 0 && screenPos.x > 0 && screenPos.y > 0 && screenPos.x < Screen.width && screenPos.y < Screen.height;
+    }
+
+    private void HandleXPSpawn()
+    {
+        if (spawnXP)
         {
-            OnTakeDamage();
-        }
-        if (health <= 0)
-        { 
-            if(triggerGameOver)
+            timeSinceLastSpawn += Time.deltaTime;
+            if (timeSinceLastSpawn >= xpSpawnInterval)
             {
-                GameManager.Instance.TriggerGameOver();
+                timeSinceLastSpawn = 0.0f;
+                Instantiate(xpPrefab, transform.position + xpSpawnOffset, Quaternion.identity);
             }
-            //gameObject.SetActive(false);
-            Destroy(gameObject);
         }
     }
 
-    public void Update()
+    private void UpdateHPBar()
     {
-        if(spawnXP)
-        {
-            timeSinceLastSpawn += Time.deltaTime;
-            if (timeSinceLastSpawn > xpSpawnInterval)
-            {
-                timeSinceLastSpawn = 0.0f;
-                Instantiate(XP, transform.position + xpSpawnOffset, Quaternion.identity);
-            }
-        }
-        if (hpBar)
-        {
-            hpBar.value = (float)health / maxHealth;
-        }
+        if (hpBar != null) hpBar.value = (float)currentHealth / maxHealth;
     }
 }

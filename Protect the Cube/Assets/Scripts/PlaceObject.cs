@@ -10,7 +10,6 @@ public class PlaceObject : MonoBehaviour
     [SerializeField] private GameObject rangeIndicator;
     public GameObject currentPlaceableObject;
     private float buildingRotation;
-    private int currentPrefabIndex = -1;
     [SerializeField] protected float rotateIncrement = 10.0f;
     private bool placedFirstTurret = false;
 
@@ -31,15 +30,12 @@ public class PlaceObject : MonoBehaviour
         }
 
     }
-    
-    
-    public void CancelPlace(){
-        if (currentPlaceableObject == null)
-        {
-            return;
-        }
+
+
+    public void CancelPlace()
+    {
+        if (currentPlaceableObject == null) return;
         Destroy(currentPlaceableObject);
-        currentPrefabIndex = -1;
         GameManager.Instance.UIManager.SetCursorCrosshair();
 
     }
@@ -49,47 +45,44 @@ public class PlaceObject : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha0 + 1 + i))
             {
-                if (PressedKeyOfCurrentPrefab(i))
-                {
-                    CancelPlace();
-                }
-                else
-                {
-                    if (currentPlaceableObject != null)
-                    {
-                        Destroy(currentPlaceableObject);
-                    }
+                // don't interrupt another placing
+                if (currentPlaceableObject != null) Destroy(currentPlaceableObject);
 
-                    string bName = placeableObjectPrefabs[i].GetComponent<Building>().buildingName;
-                    bool canPlace = GameManager.Instance.InventoryManager.HasBuilding(bName);
-                    canPlace &= GameManager.Instance.UIManager.rewardMenu.activeSelf == false;
-                    canPlace &= GameManager.Instance.UIManager.pauseUI.activeSelf == false;
-
-                    if (canPlace)
-                    {
-                        currentPlaceableObject = Instantiate(placeableObjectPrefabs[i]);
-                        currentPrefabIndex = i;
-                        GameManager.Instance.UIManager.SetCursorHand();
-
-                        if (placedFirstTurret == false){
-                            placedFirstTurret = true;
-                            GameManager.Instance.UIManager.HideSelectGunTutorial();
-                            
-                        }
-                    }
-                }
-
+                string bName = placeableObjectPrefabs[i].GetComponent<Building>().buildingName;
+                StartPlacingIfPossible(placeableObjectPrefabs[i], bName);
                 break;
             }
         }
     }
-
-
-
-    private bool PressedKeyOfCurrentPrefab(int i)
+    public void StartPlacingIfPossible(GameObject turret, string bName)
     {
-        return currentPlaceableObject != null && currentPrefabIndex == i;
+        if (CanStartPlacing(bName))
+        {
+            SelectTurretPlace(turret);
+        }
     }
+    private bool CanStartPlacing(string bName)
+    {
+        bool canPlace = GameManager.Instance.InventoryManager.isInventoryAvailable(bName);
+        canPlace &= GameManager.Instance.UIManager.rewardMenu.activeSelf == false;
+        canPlace &= GameManager.Instance.UIManager.pauseUI.activeSelf == false;
+        return canPlace; // if true, returns 1 and removed item from inventory
+    }
+
+    private bool SelectTurretPlace(GameObject turret)
+    {
+        GameManager.Instance.UIManager.SetCursorHand();
+        currentPlaceableObject = Instantiate(turret);
+        Debug.Log("[PlaceObject] turret has been created");
+        if (placedFirstTurret == false)
+        {
+            placedFirstTurret = true;
+            GameManager.Instance.UIManager.HideSelectGunTutorial();
+        }
+        return true;
+    }
+
+
 
     private void MoveCurrentObjectToMouse()
     {
@@ -106,7 +99,6 @@ public class PlaceObject : MonoBehaviour
 
     private void RotateFromMouseWheel()
     {
-        //Debug.Log(Input.mouseScrollDelta);
         buildingRotation += Input.mouseScrollDelta.y;
         RotateBuilding();
     }
@@ -114,8 +106,7 @@ public class PlaceObject : MonoBehaviour
     private void ReleaseIfClicked()
     {
         Building b = currentPlaceableObject.GetComponent<Building>();
-        bool canPlace = GameManager.Instance.InventoryManager.HasBuilding(b.buildingName);
-        // canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
+        bool canPlace = GameManager.Instance.InventoryManager.isInventoryAvailable(b.buildingName);
         if (b.gameObject.GetComponent<Harvester>() != null)
         {
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
@@ -123,23 +114,24 @@ public class PlaceObject : MonoBehaviour
 
         canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
 
-        if(currentPlaceableObject.GetComponent<turretShoot>() != null) //make exclusion only apply for turrets
+        if (currentPlaceableObject.GetComponent<turretShoot>() != null) //make exclusion only apply for turrets
         {
             canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
         }
-        
+
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
-            GameManager.Instance.InventoryManager.TryPlaceBuilding(b.buildingName);
+            GameManager.Instance.InventoryManager.TryUseInventoryItem(b.buildingName);
             b.OnPlace();
             currentPlaceableObject = null;
             GameManager.Instance.UIManager.SetCursorCrosshair();
 
             //rangeIndicator.SetActive(false);
         }
-        else if (Input.GetMouseButtonDown(1)){
+        else if (Input.GetMouseButtonDown(1))
+        {
 
-        CancelPlace();
+            CancelPlace();
         }
     }
 
@@ -153,7 +145,7 @@ public class PlaceObject : MonoBehaviour
         {
             buildingRotation += 1;
         }
-        RotateBuilding() ;
+        RotateBuilding();
     }
 
     private void RotateBuilding()

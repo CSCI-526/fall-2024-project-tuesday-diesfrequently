@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &368259697453654843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 714374728061355071}
+  - component: {fileID: 6482716643340797134}
+  - component: {fileID: 8626850916652475655}
+  - component: {fileID: 4730567282749379631}
+  - component: {fileID: 6683548619100361680}
+  - component: {fileID: 4076889085620958360}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &714374728061355071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368259697453654843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6482716643340797134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368259697453654843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32a5cb388e5f2a40bd74c32f60e23b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useBulletPool: 0
+--- !u!114 &8626850916652475655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368259697453654843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1656624d7395c54ea66bf0f4c1952a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveInterval: 5
+  maxSpawnDelay: 3
+  enemyCount: 0
+  wave: 0
+  difficulty: 0.8
+  tankRate: 1
+  tank: {fileID: 6013629208632606210, guid: 2f4b90fa476cd40549e7d9dc2d55c7b9, type: 3}
+  tankSpawnStartWave: 5
+  spawnerBoss: {fileID: 6013629208632606210, guid: 3b5bba5c60f32c548af9ae3240374613, type: 3}
+  spawnerBossStartWave: 10
+  shieldBoss: {fileID: 6013629208632606210, guid: 043c26fd723417644bb1ff73a471e0e4, type: 3}
+  enemyPrefabs:
+  - {fileID: 6013629208632606210, guid: 4f8316f4c6dace64e8093e78c01ea5d1, type: 3}
+  - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
+  - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
+  enemies: []
+  spawnPoints: []
+--- !u!114 &4730567282749379631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368259697453654843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ad1143d79304746802989ee3c7785e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreBoard: {fileID: 0}
+  expUI: {fileID: 0}
+  expSlider: {fileID: 0}
+  displayedInventoryCount:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  inventoryGbox:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  goldUI: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  SelectGunTutorialUI: {fileID: 0}
+  rewardMenu: {fileID: 0}
+  upgradePanel: {fileID: 0}
+  pauseUI: {fileID: 0}
+  crosshairTexture: {fileID: 2800000, guid: 6bb4e046bf9666047ba42a3c0d25d34f, type: 3}
+  HandTexture: {fileID: 5285177031238896781, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
+  pauseMenuActive: 0
+  rewardMenuActive: 0
+--- !u!114 &6683548619100361680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368259697453654843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a297ec0e09cea247afe5bd845279954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPrefabs: []
+--- !u!114 &4076889085620958360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368259697453654843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031d10a98bc744b2c9c81a65c84679dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  URL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSfjtjHdsAHNgMOAG65EgsWcrUNn7YornePsiKmTTvlsB_SjRg/formResponse
