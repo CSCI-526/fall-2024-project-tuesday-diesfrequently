@@ -29,7 +29,9 @@ public class Exclusion : MonoBehaviour
     public static bool CheckForExclusion(GameObject placeableObject)
     {
         // always show the range indicator
+        if (placeableObject.GetComponent<RangeIndicator>() == null) { Debug.Log("Rangeindicator is Null"); }
         placeableObject.GetComponent<RangeIndicator>().ShowIndicator();
+
         Vector3 boxSize = placeableObject.transform.localScale;
         Vector3 position = placeableObject.transform.position;
         LayerMask objectLayer = 1 << placeableObject.layer;
