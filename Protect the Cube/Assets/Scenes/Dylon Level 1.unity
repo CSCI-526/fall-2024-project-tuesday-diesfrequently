@@ -3736,38 +3736,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1527875836}
     - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: inventoryCount.Array.data[0]
-      value: 
-      objectReference: {fileID: 5021235089233810954}
-    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: inventoryCount.Array.data[1]
-      value: 
-      objectReference: {fileID: 5021235089233810953}
-    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: inventoryCount.Array.data[2]
-      value: 
-      objectReference: {fileID: 5021235089233810952}
-    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: inventoryCount.Array.data[3]
-      value: 
-      objectReference: {fileID: 5021235089233810951}
-    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: inventoryCount.Array.data[4]
-      value: 
-      objectReference: {fileID: 5021235089233810950}
-    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: inventoryCount.Array.data[5]
-      value: 
-      objectReference: {fileID: 5021235089233810949}
-    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: inventoryCount.Array.data[6]
-      value: 
-      objectReference: {fileID: 5021235089233810948}
-    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: displayedInventoryCount.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: displayedInventoryCount.Array.data[0]
       value: 
       objectReference: {fileID: 5021235089233810954}
@@ -4021,10 +3989,6 @@ PrefabInstance:
     - target: {fileID: 4173156817336489669, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463722469469685877, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
-      propertyPath: m_text
-      value: 'Wave: 1'
       objectReference: {fileID: 0}
     - target: {fileID: 8649850190111873191, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target

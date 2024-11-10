@@ -706,7 +706,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
-  currentPlaceableObject: {fileID: 0}
   bName: Turret Booster
 --- !u!1 &1239447020022321220
 GameObject:
@@ -760,7 +759,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 415337832395152133, guid: f6edc88301e129b4aaed9c842bbdd0fe, type: 3}
-  currentPlaceableObject: {fileID: 0}
   bName: Harvester
 --- !u!1 &1245909485954803687
 GameObject:
@@ -1068,9 +1066,6 @@ RectTransform:
   - {fileID: 7314863624969689498}
   - {fileID: 2002915414420117871}
   - {fileID: 4728971835806877002}
-  - {fileID: 1638014649724952630}
-  - {fileID: 5970622985168956406}
-  - {fileID: 5790842441949776830}
   - {fileID: 1173655480494880068}
   - {fileID: 7980805267527578815}
   - {fileID: 2771268202009247211}
@@ -3658,9 +3653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Wave: 1
-
-    Nexus: 20/20'
+  m_text: 'Wave: 1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3740,7 +3733,7 @@ GameObject:
   - component: {fileID: 7669794616474596274}
   - component: {fileID: 3181749230403285671}
   m_Layer: 5
-  m_Name: Sinper Icon
+  m_Name: Sniper Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3780,8 +3773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b088d340687484756875293ea39d9430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretPrefab: {fileID: 1272256851593019809, guid: 88d92cc50b4e783408df66e4ec9fe34d, type: 3}
-  currentPlaceableObject: {fileID: 0}
+  turretPrefab: {fileID: 3021881062986590767, guid: 940d5808eee60aa44aebb9b0a13e38d0, type: 3}
   bName: Sniper Turret
 --- !u!1 &4935100298476744062
 GameObject:
@@ -3835,7 +3827,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
-  currentPlaceableObject: {fileID: 0}
   bName: Gun Turret
 --- !u!1 &5042874968167784113
 GameObject:
@@ -4025,7 +4016,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 6191134258547235123, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-  currentPlaceableObject: {fileID: 0}
   bName: Flamethrower Turret
 --- !u!1 &5062804544380985559
 GameObject:
@@ -4343,7 +4333,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 6852214484739291977, guid: 2543412762f80df449e7edae5b5abbe3, type: 3}
-  currentPlaceableObject: {fileID: 0}
   bName: Slow Tower
 --- !u!1 &5722626541016457145
 GameObject:
@@ -4356,7 +4345,7 @@ GameObject:
   - component: {fileID: 9207247758865641751}
   - component: {fileID: 4733004649817202894}
   m_Layer: 5
-  m_Name: Galting Icon
+  m_Name: Gatling Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4397,7 +4386,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 3732443334033032084, guid: 1be928d46a8b6db478a64830a4364934, type: 3}
-  currentPlaceableObject: {fileID: 0}
   bName: Gatling Turret
 --- !u!1 &5914926659756420941
 GameObject:

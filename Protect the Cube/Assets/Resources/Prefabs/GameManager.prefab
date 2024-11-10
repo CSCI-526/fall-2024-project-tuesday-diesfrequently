@@ -116,7 +116,7 @@ MonoBehaviour:
   upgradePanel: {fileID: 0}
   pauseUI: {fileID: 0}
   crosshairTexture: {fileID: 2800000, guid: 6bb4e046bf9666047ba42a3c0d25d34f, type: 3}
-  HandTexture: {fileID: 5285177031238896781, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
+  HandTexture: {fileID: 0}
   pauseMenuActive: 0
   rewardMenuActive: 0
 --- !u!114 &6683548619100361680
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a297ec0e09cea247afe5bd845279954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPrefabs: []
 --- !u!114 &4076889085620958360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,4 +143,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031d10a98bc744b2c9c81a65c84679dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  URL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSfjtjHdsAHNgMOAG65EgsWcrUNn7YornePsiKmTTvlsB_SjRg/formResponse

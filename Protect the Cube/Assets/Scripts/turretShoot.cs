@@ -15,7 +15,7 @@ public class turretShoot : Building
 
     [SerializeField] GameObject projectile;
     [SerializeField] GameObject gunBarrel;
-    [SerializeField] GameObject target;
+    protected GameObject target;
 
     // Start is called before the first frame update
     void Start()
