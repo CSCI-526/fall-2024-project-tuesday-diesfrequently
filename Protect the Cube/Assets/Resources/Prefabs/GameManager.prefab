@@ -69,9 +69,13 @@ MonoBehaviour:
   tankRate: 1
   tank: {fileID: 6013629208632606210, guid: 2f4b90fa476cd40549e7d9dc2d55c7b9, type: 3}
   tankSpawnStartWave: 5
+  shooterRate: 1
+  shooter: {fileID: 6013629208632606210, guid: 8f020f1a1c8736d4b95a745e185fe290, type: 3}
+  shooterSpawnStartWave: 2
   spawnerBoss: {fileID: 6013629208632606210, guid: 3b5bba5c60f32c548af9ae3240374613, type: 3}
   spawnerBossStartWave: 10
-  shieldBoss: {fileID: 6013629208632606210, guid: 043c26fd723417644bb1ff73a471e0e4, type: 3}
+  shieldTank: {fileID: 6013629208632606210, guid: 043c26fd723417644bb1ff73a471e0e4, type: 3}
+  shieldEnemyStartWave: 7
   enemyPrefabs:
   - {fileID: 6013629208632606210, guid: 4f8316f4c6dace64e8093e78c01ea5d1, type: 3}
   - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
