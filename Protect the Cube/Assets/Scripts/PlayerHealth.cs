@@ -73,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
         inventoryManager.PlayerHealth_OnPlayerHealthUpdate += AddPlayerHealth;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int amount = 1)
     {
         if (isInvincible) return; // can't take dmg if Invincibile
 
@@ -81,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
         animator.SetTrigger("Damage");
 
         // Decrease Current Health (by dmg)
-        currentHealth = Mathf.Max(currentHealth - 1, 0);
+        currentHealth = Mathf.Max(currentHealth - amount, 0);
 
         // Update HP Bar
         UpdateHPBar();

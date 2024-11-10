@@ -16,10 +16,15 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public GameObject tank;
     [SerializeField] public int tankSpawnStartWave = 5;
 
+    [SerializeField] public float shooterRate = 0.8f;
+    [SerializeField] public GameObject shooter;
+    [SerializeField] public int shooterSpawnStartWave = 2;
+
     [SerializeField] public GameObject spawnerBoss;
     [SerializeField] public int spawnerBossStartWave = 10;
 
-    [SerializeField] public GameObject shieldBoss;
+    [SerializeField] public GameObject shieldTank;
+    [SerializeField] public int shieldEnemyStartWave = 7;
 
     [SerializeField] public List<GameObject> enemyPrefabs = new List<GameObject>();
     [SerializeField] public List<GameObject> enemies = new List<GameObject>();
@@ -58,6 +63,7 @@ public class WaveManager : MonoBehaviour
         SpawnTanks();
         SpawnSpawnerBoss();
         SpawnShieldEnemy();
+        SpawnRangedEnemy();
         GameManager.Instance.UIManager.UpdateUI();
         Debug.Log("Updating Wave... Wave " + wave + " starting");
         GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave);// Send wave number to analytics
@@ -80,7 +86,7 @@ public class WaveManager : MonoBehaviour
             if (Random.Range(0.0f, 1.0f) <= tankRate)
             {
                 GameObject tankEnemy = Instantiate(tank);
-                tankEnemy.transform.position = randomSpawnPoint.transform.position;
+                tankEnemy.transform.position = randomSpawnPoint.transform.position + RandomPosition();
             }
         }
     }
@@ -93,21 +99,38 @@ public class WaveManager : MonoBehaviour
             {
                 SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
                 GameObject spawnerEnemy = Instantiate(spawnerBoss);
-                spawnerEnemy.transform.position = randomSpawnPoint.transform.position;
+                spawnerEnemy.transform.position = randomSpawnPoint.transform.position + RandomPosition();
             }
         }
     }
 
     void SpawnShieldEnemy()
     {
-        for (int i = wave; i >= tankSpawnStartWave; --i)
+        for (int i = wave; i >= shieldEnemyStartWave; --i)
         {
             SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
             if (Random.Range(0.0f, 1.0f) <= tankRate)
             {
-                GameObject shieldEnemy = Instantiate(shieldBoss);
-                shieldEnemy.transform.position = randomSpawnPoint.transform.position;
+                GameObject shieldEnemy = Instantiate(shieldTank);
+                shieldEnemy.transform.position = randomSpawnPoint.transform.position + RandomPosition();
             }
         }
+    }
+    void SpawnRangedEnemy()
+    {
+        for (int i = wave; i >= shooterSpawnStartWave; --i)
+        {
+            SpawnPoint randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            if (Random.Range(0.0f, 1.0f) <= shooterRate)
+            {
+                GameObject rangedEnemy = Instantiate(shooter);
+                rangedEnemy.transform.position = randomSpawnPoint.transform.position + RandomPosition();
+            }
+        }
+    }
+
+    private Vector3 RandomPosition(float range = 2.0f)
+    {
+        return new Vector3(Random.Range(-range,range), 0.0f, Random.Range(-range, range));
     }
 }

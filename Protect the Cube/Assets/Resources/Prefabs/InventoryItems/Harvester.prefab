@@ -388,14 +388,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnXP: 1
-  health: 10
-  maxHealth: 10
   xpSpawnInterval: 5
-  XP: {fileID: 6435648702068270667, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
+  xpPrefab: {fileID: 6435648702068270667, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
-  triggerGameOver: 0
-  animator: {fileID: 0}
   hpBar: {fileID: 5515740668853933773}
+  triggerGameOver: 0
   indicator: {fileID: 0}
 --- !u!114 &8457574962055490782
 MonoBehaviour:

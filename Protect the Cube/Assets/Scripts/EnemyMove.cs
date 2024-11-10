@@ -9,18 +9,18 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyMove : MonoBehaviour
 {
     // Start is called before the first frame update
-    private GameObject _target;
-    private Rigidbody _rb;
+    protected GameObject _target;
+    protected Rigidbody _rb;
 
-    private List<GameObject> targetList = new List<GameObject>();
+    protected List<GameObject> targetList = new List<GameObject>();
 
     public float moveSpeed = 0.1f;
 
-    private float slowDebufTimer = 0;
-    private float slowAmount = 0;
-    [SerializeField] int damage = 1;
-    [SerializeField] bool targetPlayerOnly = false;
-    [SerializeField] bool targetBuildingsOnly = false;
+    protected float slowDebufTimer = 0;
+    protected float slowAmount = 0;
+    [SerializeField] protected int damage = 1;
+    [SerializeField] protected bool targetPlayerOnly = false;
+    [SerializeField] protected bool targetBuildingsOnly = false;
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public class EnemyMove : MonoBehaviour
         UpdateTargetList();
     }
 
-    private void UpdateTargetList()
+    protected void UpdateTargetList()
     {
         if(!targetPlayerOnly)
         {
@@ -82,7 +82,7 @@ public class EnemyMove : MonoBehaviour
         transform.rotation = UnityEngine.Quaternion.LookRotation(dirToTarget, Vector3.up);
     }
 
-    private void SetTarget(List<GameObject> targetList)
+    protected void SetTarget(List<GameObject> targetList)
     {   
         float closest = Int32.MaxValue; //add your max range here
         GameObject closestObject = null;

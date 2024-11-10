@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     [SerializeField] public float speed;
     [SerializeField] public float maxLifetime;
@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         if (lifetime > maxLifetime)
         {
             //lifetime = 0.0f;
-            if(GameManager.Instance.useBulletPool)
+            if (GameManager.Instance.useBulletPool)
             {
                 BulletPool.Instance.ReturnBullet(gameObject);
             }
@@ -37,21 +37,11 @@ public class Bullet : MonoBehaviour
 
     }
 
-    void OnTriggerEnter (Collider other) {
-        if (other.CompareTag("Enemy")){
-            other.GetComponent<EnemyHealth>().TakeDamage(damage);
-            if (GameManager.Instance.useBulletPool)
-            {
-                BulletPool.Instance.ReturnBullet(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        if (other.CompareTag("Wall"))
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
+            other.GetComponent<PlayerHealth>().TakeDamage((int)damage);
             if (GameManager.Instance.useBulletPool)
             {
                 BulletPool.Instance.ReturnBullet(gameObject);
@@ -67,5 +57,4 @@ public class Bullet : MonoBehaviour
     {
         lifetime = 0.0f; // Reset lifetime whenever bullet is reused
     }
-
 }

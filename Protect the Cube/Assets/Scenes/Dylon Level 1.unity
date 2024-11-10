@@ -3763,6 +3763,18 @@ PrefabInstance:
       propertyPath: displayedInventoryCount.Array.data[6]
       value: 
       objectReference: {fileID: 5021235089233810948}
+    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: shooter
+      value: 
+      objectReference: {fileID: 6013629208632606210, guid: 8f020f1a1c8736d4b95a745e185fe290, type: 3}
+    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: shieldTank
+      value: 
+      objectReference: {fileID: 6013629208632606210, guid: 043c26fd723417644bb1ff73a471e0e4, type: 3}
+    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: shooterRate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
