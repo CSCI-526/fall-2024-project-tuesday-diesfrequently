@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private Slider hpBar;
+    [SerializeField] private Canvas hpCanvas;
 
     private Animator animator;
     public int maxHealth { get; private set; }
@@ -31,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        //SetupHealthUI();
+        SetupHealthUI();
         UpdateHPBar();
     }
 
@@ -45,7 +46,22 @@ public class PlayerHealth : MonoBehaviour
         inventoryManager.PlayerHealth_OnPlayerHealthUpdate -= AddPlayerHealth;
     }
 
-  
+    private void SetupHealthUI()
+    {
+        if (hpCanvas != null)
+        {
+            var rotationConstraint = hpCanvas.GetComponent<RotationConstraint>();
+            if (rotationConstraint != null)
+            {
+                ConstraintSource cameraSource = new ConstraintSource
+                {
+                    sourceTransform = Camera.main.transform,
+                    weight = 1.0f
+                };
+                rotationConstraint.AddSource(cameraSource);
+            }
+        }
+    }
 
     private IEnumerator DelayedSubscribeToEvents()
     {

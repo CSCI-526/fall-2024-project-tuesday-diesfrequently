@@ -73,7 +73,6 @@ public class PlaceObject : MonoBehaviour
     {
         GameManager.Instance.UIManager.SetCursorHand();
         currentPlaceableObject = Instantiate(turret);
-
         Debug.Log("[PlaceObject] turret has been created");
         if (placedFirstTurret == false)
         {

@@ -11,11 +11,10 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public float invincibilityDuration = 0.01f;
     [SerializeField] public GameObject exp;
 
+    [SerializeField] public float xpDropRate = 0.5f;  
     [SerializeField] public int maxXpDrop = 3;
     [SerializeField] public int minXpDrop = 5;
     [SerializeField] public float currentHealth;
-    [SerializeField] public float xpDropRatePercent = 1.0f;  
-
     private bool isInvincible = false;
     private Animator animator;
 
@@ -24,7 +23,6 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public Slider hpBar;
     [SerializeField] public Vector3 hpBarOffset = new Vector3(0.0f,3.0f,0.0f);
 
-    //[SerializeField] public float MoreXpDropBreakpoints = 10.0f;  
     void Start()
     {
         currentHealth = maxHealth;
@@ -93,13 +91,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void DropExp(){
         int xpDrop = Random.Range(minXpDrop, maxXpDrop);
-
-        if (Random.Range(0.0f, 1.0f) <= xpDropRatePercent){
-            // float distanceFromNexus = Vector3.Distance(transform.position, GameManager.Instance.Nexus.transform.position);
-            // if (distanceFromNexus > MoreXpDropBreakpoints)
-            // {
-            //xpDrop += (int)(distanceFromNexus / MoreXpDropBreakpoints); // Increase XP drop if the enemy is far from the nexus
-            // }
+        if (Random.Range(0.0f, 1.0f) <= xpDropRate){
             for (int i = 0; i < xpDrop; i++){
                 GameObject xp = Instantiate(exp);
                 xp.transform.position = new Vector3(transform.position.x+Random.Range(-1*1, 1), transform.position.y, transform.position.z+Random.Range(-1*1, 1));;
