@@ -3829,6 +3829,10 @@ PrefabInstance:
       propertyPath: displayedInventoryCount.Array.data[6]
       value: 
       objectReference: {fileID: 5021235089233810948}
+    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: nexus
+      value: 
+      objectReference: {fileID: 7341533106581737996, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

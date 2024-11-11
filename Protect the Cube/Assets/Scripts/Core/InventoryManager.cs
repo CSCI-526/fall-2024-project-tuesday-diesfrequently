@@ -165,7 +165,7 @@ public class InventoryManager : MonoBehaviour
     private void AddPotentialReward(string reward_name, ref GameObject forced_reward, ref int forced_reward_count, int force_count = 1)
     {
         int rewardIndex = getItemIDX(reward_name); // get index of reward prefab
-        Debug.Log("[Inventory Prefabs] ADD POTENTIAL REWARD .. reward_name " + reward_name + "rewardIDX: " + rewardIndex);
+        //Debug.Log("[Inventory Prefabs] ADD POTENTIAL REWARD .. reward_name " + reward_name + "rewardIDX: " + rewardIndex);
         forced_reward = inventoryPrefabs[rewardIndex]; // get inventory prefab
         forced_reward_count = force_count > 0 ? force_count : 1; // set the # of times reward is forced as a choice
         _potentialRewards.Add(forced_reward); // current reward becomes "available" as a choice
@@ -204,7 +204,7 @@ public class InventoryManager : MonoBehaviour
         // create a final rewards list pre-populated with X counts of the forced_reward
         List<GameObject> finalRewards = new List<GameObject>(Enumerable.Repeat(forced_reward, forced_reward_count).Where(x => x != null));
 
-        Debug.Log(string.Join(", ", finalRewards.Select(reward => reward.name)));
+        //Debug.Log(string.Join(", ", finalRewards.Select(reward => reward.name)));
 
         // calculate how many rewards we need to add 
         int remainingSlots = _NUM_REWARD_CHOICES - finalRewards.Count;
@@ -219,7 +219,7 @@ public class InventoryManager : MonoBehaviour
             finalRewards.AddRange(availableRewards); // add additional rewards to final output
         }
 
-        Debug.Log(string.Join(", ", finalRewards.Select(reward => reward.name)));
+        //Debug.Log(string.Join(", ", finalRewards.Select(reward => reward.name)));
 
         // if we do not have 3 VALID reward choices, just duplicate existing rewards
         while (finalRewards.Count < 3) { finalRewards.Add(finalRewards[0]); }

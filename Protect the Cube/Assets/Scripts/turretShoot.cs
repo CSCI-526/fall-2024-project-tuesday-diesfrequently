@@ -100,7 +100,7 @@ public class turretShoot : Building
     {
         target = null;
         float minRange = maxRange;
-        foreach (GameObject enemy in GameManager.Instance.WaveManager.enemies)
+        foreach (GameObject enemy in GameManager.Instance.WaveManager.AllEnemyEntities)
         {
             if(enemy != null && !enemy.IsDestroyed())
             {

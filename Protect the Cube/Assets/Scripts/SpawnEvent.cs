@@ -1,19 +1,40 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-// each wave has a list of EnemySpawnInfo objects (specifies enemy types, spawn delay, spawn points)
 
 public class SpawnEvent
 {
-    public GameObject SpawnedEnemyPrefab { get; private set; }
+    public string EnemyType { get; private set; }
     public float SpawnDelay { get; private set; }
-    public SpawnPoint SpawnPoint { get; private set; }
+    public Vector3 SpawnPoint { get; private set; }
+    public float SpawnRange { get; private set; }
+    private WaveManager _waveManagerReference;
 
-    public SpawnEvent(GameObject prefab, float spawn_delay, SpawnPoint spawn_point)
+    public SpawnEvent(string enemy_type, float spawn_delay, Vector3 spawn_point, float spawn_range = 5.0f)
     {
-        SpawnedEnemyPrefab = prefab;
+        EnemyType = enemy_type;
         SpawnDelay = spawn_delay;
         SpawnPoint = spawn_point;
+        SpawnRange = spawn_range;
+        _waveManagerReference = GameManager.Instance.WaveManager;
     }
+
+    // adjust as needed
+    public void UpdateConfiguration(float newSpawnDelay, float newSpawnRange)
+    {
+        SpawnDelay = newSpawnDelay;
+        SpawnRange = newSpawnRange;
+    }
+
+    public IEnumerator DelayedSpawn()
+    {
+        yield return new WaitForSeconds(SpawnDelay);
+        int enemyIDX = _waveManagerReference.getEnemyIDX(EnemyType);
+        GameObject enemyPrefab = _waveManagerReference.EnemyPrefabs[enemyIDX];
+        GameObject enemyEntity = Object.Instantiate(enemyPrefab);
+
+        _waveManagerReference.AddEnemyEntity(enemyEntity, 0);
+        enemyEntity.transform.position = SpawnPoint + new Vector3(Random.Range(-SpawnRange, SpawnRange), 0, Random.Range(-SpawnRange, SpawnRange));
+    }
+
+
 }
