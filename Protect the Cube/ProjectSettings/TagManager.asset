@@ -13,6 +13,7 @@ TagManager:
   - ExperienceOrb
   - GoldOrb
   - DamageEffect
+  - Breakable
   layers:
   - Default
   - TransparentFX
