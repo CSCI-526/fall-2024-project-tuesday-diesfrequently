@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject upgradePanel;
     [SerializeField] public GameObject pauseUI;
     
-    public GameObject crosshairTexture;
+    public Texture2D crosshairTexture;
     public GameObject HandTexture;
 
     private Nexus _nexus;
@@ -46,22 +46,11 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         SetCursorCrosshair();
-        
         _nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
          _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
         goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
         UpdateUI();
-    }
-
-    private void Update()
-    {
-        Cursor.visible = false;
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (pauseMenuActive) HidePauseScreen();
-            else ShowPauseScreen();
-        }
     }
 
     private void OnEnable()
@@ -89,16 +78,17 @@ public class UIManager : MonoBehaviour
 
     public void SetCursorCrosshair()
     {
-        crosshairTexture.transform.position = Input.mousePosition;
-        crosshairTexture.SetActive(true);
+        Vector2 crossHotspot = new Vector2(crosshairTexture.width / 2, crosshairTexture.height / 2);
+        Cursor.visible = true;
         HandTexture.SetActive(false);
+        Cursor.SetCursor(crosshairTexture, crossHotspot, CursorMode.Auto);
     }
 
     public void SetCursorHand()
     {
         HandTexture.transform.position = Input.mousePosition;
         HandTexture.SetActive(true);
-        crosshairTexture.SetActive(false);
+        Cursor.visible = false;
     }
 
     public void ShowGameOverScreen()
