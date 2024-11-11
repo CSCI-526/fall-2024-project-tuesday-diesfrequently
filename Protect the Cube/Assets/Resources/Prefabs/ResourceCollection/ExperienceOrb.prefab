@@ -294,6 +294,7 @@ MonoBehaviour:
   lifetime: 15
   moveSpeed: 8
   moveToPlayer: 1
+  moveToEXPBar: 1
   attractionRange: 4
 --- !u!114 &-3978978509010604329
 MonoBehaviour:

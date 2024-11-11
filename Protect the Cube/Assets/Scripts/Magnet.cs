@@ -60,7 +60,9 @@ public class Magnet : MonoBehaviour
 
             if (pickup != null)
             {
+                Debug.Log("moving EXP");
                 pickup.StartMoveToPlayer();
+                pickup.StartMoveToEXPBar();
             }
             else
             {

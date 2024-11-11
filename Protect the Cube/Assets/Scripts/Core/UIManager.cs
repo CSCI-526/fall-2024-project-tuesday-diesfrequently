@@ -31,6 +31,10 @@ public class UIManager : MonoBehaviour
     private Image goldImage;
 
     private InventoryManager inventoryManager;
+    private GameObject minimap;
+    private GameObject uiObject;
+    private GameObject inventoryBar;
+    private GameObject expBar;
     
     public bool pauseMenuActive = false;
     public bool rewardMenuActive = false;
@@ -50,6 +54,10 @@ public class UIManager : MonoBehaviour
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
          _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
         goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
+        minimap = GameObject.Find("MinimapComponent");
+        uiObject = GameObject.Find("UI");
+        inventoryBar = uiObject.transform.Find("Inventory Bar").gameObject;
+        expBar = uiObject.transform.Find("EXP").gameObject;
         UpdateUI();
     }
 
@@ -93,52 +101,59 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
+        minimap.SetActive(false);
+        inventoryBar.SetActive(false);
+        expBar.SetActive(false);
         gameOverScreen.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void ShowPauseScreen()
     {
-        if(rewardMenuActive) rewardMenu.SetActive(false);
+        if(rewardMenuActive){
+            rewardMenu.SetActive(false);
+        }
         pauseMenuActive = true;
         pauseUI.SetActive(true);
         Time.timeScale = 0.0f;
+        minimap.SetActive(false);
+        inventoryBar.SetActive(false);
+        expBar.SetActive(false);
     }
 
     public void HidePauseScreen()
     {
-        if(rewardMenuActive) rewardMenu.SetActive(true);
-        else Time.timeScale = 1.0f;
-        
+        if(rewardMenuActive){
+            rewardMenu.SetActive(true);
+        } 
+        else {
+            Time.timeScale = 1.0f;
+            minimap.SetActive(true);
+            inventoryBar.SetActive(true);
+            expBar.SetActive(true);
+        }
         pauseMenuActive = false;
         pauseUI.SetActive(false);
-        
     }
 
     public void ShowRewardScreen()
     {
+        minimap.SetActive(false);
         rewardMenuActive = true;
         rewardMenu.SetActive(true);
         Time.timeScale = 0.0f;
+        inventoryBar.SetActive(false);
+        expBar.SetActive(false);
     }
 
     public void HideRewardScreen()
     {
+        minimap.SetActive(true);
         rewardMenuActive = false;
         rewardMenu.SetActive(false);
         Time.timeScale = 1.0f;
-            
-    }
-
-    public void ShowUpgradeScreen()
-    {
-        upgradePanel.SetActive(true);        
-        Invoke("HideUpgradeScreen", 5.0f);
-    }
-
-    public void HideUpgradeScreen()
-    {
-        upgradePanel.SetActive(false);
+        inventoryBar.SetActive(true);
+        expBar.SetActive(true);
     }
 
     public void ShowSelectGunTutorial()

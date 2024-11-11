@@ -13,6 +13,7 @@ public class ExperiencePickup : MonoBehaviour
     [SerializeField] protected float moveSpeed = 8.0f;
 
     [SerializeField] public bool moveToPlayer = false;
+    [SerializeField] public bool moveToEXPBar = false;
     [SerializeField] public float attractionRange = 4.0f;
 
     private float counter = 0;
@@ -58,6 +59,9 @@ public class ExperiencePickup : MonoBehaviour
     {
         GameObject playerObject = GameManager.Instance.Player;
         Transform player = playerObject.transform;
+        GameObject ui = GameObject.Find("UI");
+        GameObject expBar = ui.transform.Find("EXP").gameObject;
+        Transform bar = expBar.transform;
         if (moveToPlayer && player != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -67,6 +71,13 @@ public class ExperiencePickup : MonoBehaviour
                 // Move the orb towards the player
                 Vector3 direction = (player.position - transform.position).normalized;
                 transform.position += direction * moveSpeed * Time.deltaTime;
+                
+                // if (Vector3.Distance(transform.position, player.position) < 0.1f)
+                // {
+                //     Debug.Log("moving EXP to EXPBar");
+                //     direction = (bar.position - transform.position).normalized;
+                //     transform.position += direction * moveSpeed * Time.deltaTime;
+                // }
             }
 
             // Optionally, stop moving when very close to the player
@@ -76,4 +87,33 @@ public class ExperiencePickup : MonoBehaviour
             }
         }
     }
+
+    public void StartMoveToEXPBar(){
+        moveToEXPBar= true;
+    }
+
+    private void MoveToEXPBar()
+    {
+        GameObject ui = GameObject.Find("UI");
+        GameObject expBar = ui.transform.Find("EXP").gameObject;
+        Transform player = expBar.transform;
+        if (moveToEXPBar && player != null)
+        {
+            Debug.Log("moving EXP to EXPBar");
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            // Debug.Log(distanceToPlayer);
+
+            // Move the orb towards the exp bar
+            Vector3 direction = (player.position - transform.position).normalized;
+            transform.position += direction * moveSpeed * Time.deltaTime;
+
+            // Optionally, stop moving when very close to the player
+            if (Vector3.Distance(transform.position, player.position) < 0.1f)
+            {
+                moveToEXPBar = false;  // Stop moving when very close
+            }
+        }
+    }
+
+    
 }
