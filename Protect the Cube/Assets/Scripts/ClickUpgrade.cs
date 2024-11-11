@@ -103,7 +103,7 @@ public class ClickUpgrade : MonoBehaviour
         arrow.name = "UpgradeArrow"; // Give it a name to identify it later
         arrow.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         // Set the position above the turret
-        arrow.transform.localPosition = Vector3.up * 4;
+        arrow.transform.localPosition = Vector3.up * 2.2f;
 
     }
 
