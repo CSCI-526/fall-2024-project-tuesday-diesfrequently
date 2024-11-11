@@ -29,11 +29,6 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        if(countInWave)
-        {
-            GameManager.Instance.WaveManager.enemyCount++;
-            GameManager.Instance.WaveManager.enemies.Add(this.gameObject);
-        }
         animator = GetComponent<Animator>();    
         
         if(hpCanvas)
@@ -88,10 +83,8 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
-        GameManager.Instance.WaveManager.enemyCount--;
-        GameManager.Instance.WaveManager.enemies.Remove(this.gameObject);
+        GameManager.Instance.WaveManager.KillEnemyEntity(this.gameObject, 0);
         DropExp();
-        //Debug.Log(GameManager.Instance.WaveManager.enemyCount);
         Destroy(gameObject);
     }
 

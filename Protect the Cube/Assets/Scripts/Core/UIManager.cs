@@ -186,7 +186,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateWaveUI()
     {
-        if (_nexus && _playerHP) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave;
+        if (_nexus && _playerHP) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_index;
     }
 
     public void UpdatePlayerXPUI()

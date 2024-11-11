@@ -20,7 +20,7 @@ public class Indicator : MonoBehaviour
             return;
         }
         HandlePosition();
-        Debug.Log("Indicator Position: " + transform.position);
+        //Debug.Log("Indicator Position: " + transform.position);
     }
 
     private void HandlePosition()
