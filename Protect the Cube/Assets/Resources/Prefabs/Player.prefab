@@ -522,12 +522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b91f1110e2e3d640b83ef27f5cbb2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
   invincibilityDuration: 1
-  animator: {fileID: 0}
   hpBar: {fileID: 3090110262206307061}
-  hpCanvas: {fileID: 3163795046395538534}
-  currentHealth: 0
 --- !u!114 &8531904022790211960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +568,7 @@ MonoBehaviour:
   currentXP: 0
   currentLevel: 0
   currentGold: 0
+  clickUpgrade: {fileID: 0}
 --- !u!95 &6535186658134325154
 Animator:
   serializedVersion: 5
@@ -605,8 +602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7764170669242f44ba63a92ba3cb1e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Player HP
-  desc: Regain 2 Player HP. Cannot go over Max HP.
+  RewardName: missing name
+  RewardDescription: missing description
 --- !u!1 &5713703534664780110
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +782,7 @@ Transform:
   m_GameObject: {fileID: 7782645869315754156}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.473, y: 0.062000036, z: 0.241}
+  m_LocalPosition: {x: 0.473, y: 0.062000036, z: -0.07}
   m_LocalScale: {x: 0.93161225, y: 0.22093715, z: 0.18835852}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1003,11 +1000,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!223 &3163795046395538534 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 3943768746623018704, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
-  m_PrefabInstance: {fileID: 2113061317870570166}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3771889541316447260 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2957575911117342378, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}

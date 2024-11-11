@@ -102,7 +102,7 @@ public class EnemyMove : MonoBehaviour
         _target = closestObject; 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Nexus"))
         {
