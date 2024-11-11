@@ -254,6 +254,11 @@ public class InventoryManager : MonoBehaviour
         // add reward to "inventory"
         InventoryItemCount[itemIDX]++;
 
+        //flash rward inventory box
+        if (!item_name.Contains("HP")){
+            GameManager.Instance.UIManager.FlashInventory(itemIDX);
+        }
+
         // Update Inventory UI
         UI_OnInventoryUpdated?.Invoke();
 

@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] public List<TextMeshProUGUI> displayedInventoryCount = new List<TextMeshProUGUI>();
     [SerializeField] public List<Image> inventoryGbox = new List<Image>();
+    [SerializeField] public List<Image> inventoryWbox = new List<Image>();
 
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject rewardMenu;
     [SerializeField] public GameObject upgradePanel;
     [SerializeField] public GameObject pauseUI;
+    [SerializeField] public Image damageEffect;
     
     public GameObject crosshairTexture;
     public GameObject HandTexture;
@@ -34,6 +36,7 @@ public class UIManager : MonoBehaviour
     
     public bool pauseMenuActive = false;
     public bool rewardMenuActive = false;
+    private int _currentHealth = 5;
 
     private void Awake()
     {
@@ -61,6 +64,19 @@ public class UIManager : MonoBehaviour
         {
             if (pauseMenuActive) HidePauseScreen();
             else ShowPauseScreen();
+        }
+        float atarget = (5 - _currentHealth)/10.0f;
+        if(damageEffect.color.a > atarget){
+            var color = damageEffect.color;
+            color.a -= 0.01f;
+            damageEffect.color = color;
+        }
+        foreach (Image wbox in inventoryWbox){
+            if(wbox.color.a > 0){
+                Color c = wbox.color;
+                c.a -= 0.005f;
+                wbox.color = c;
+            }
         }
     }
 
@@ -213,6 +229,25 @@ public class UIManager : MonoBehaviour
     public void updateUpgradeUI(string buildingName, int materialNum, int id)
     {
         upgradePanel.GetComponent<upgradeUI>().updateText(buildingName, materialNum, id);
+    }
+
+    public void DamageEffect(int health)
+    {   
+        Color color = damageEffect.color;
+        if (health > _currentHealth){
+            color.a = (5 - _currentHealth)/10.0f;
+        } else {
+            color.a = 0.8f;
+        }
+        _currentHealth = health;
+        damageEffect.color = color;
+    }
+
+    public void FlashInventory(int itemIDX)
+    {   
+        Color c = inventoryWbox[itemIDX].color;
+        c.a = 1.0f;
+        inventoryWbox[itemIDX].color = c;
     }
 
 }

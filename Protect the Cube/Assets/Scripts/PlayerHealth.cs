@@ -69,7 +69,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Update HP Bar
         UpdateHPBar();
-
+        GameManager.Instance.UIManager.DamageEffect(currentHealth);
         // Die() if below 0 hp, Momentary Invincibility otherwise
         if (currentHealth <= 0) Die();
         else StartCoroutine(InvincibilityCoroutine());
@@ -96,6 +96,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = Mathf.Min(currentHealth + InventoryManager.PLAYER_HEALTH_INCREASE, maxHealth);
         UpdateHPBar();
+        GameManager.Instance.UIManager.DamageEffect(currentHealth);
     }
 
     private void UpdateHPBar()
