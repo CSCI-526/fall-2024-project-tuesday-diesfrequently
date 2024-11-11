@@ -535,6 +535,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 67411152904928837, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1385569584534000333, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -615,9 +619,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1434903789285242989, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3755903192492939094, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
       propertyPath: m_Name
       value: CursorCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755903192492939094, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135050932433857934, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7933326613084583334, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8071145938253736870, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708542458251946963, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2419,6 +2447,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 692f46e2b25121b46877549f210b6069, type: 3}
+--- !u!1 &1337305059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1434903789285242989, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+  m_PrefabInstance: {fileID: 231369261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1350216089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3706,7 +3739,7 @@ PrefabInstance:
     - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: crosshairTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 6bb4e046bf9666047ba42a3c0d25d34f, type: 3}
+      objectReference: {fileID: 1337305059}
     - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: SelectGunTutorialUI
       value: 
@@ -4288,10 +4321,10 @@ SceneRoots:
   - {fileID: 1198900559}
   - {fileID: 811816662}
   - {fileID: 316437142}
+  - {fileID: 231369261}
   - {fileID: 5021235089233810946}
   - {fileID: 173871967}
   - {fileID: 6394137816754856717}
   - {fileID: 1320817825}
   - {fileID: 4105744721452001794}
   - {fileID: 367942146}
-  - {fileID: 231369261}
