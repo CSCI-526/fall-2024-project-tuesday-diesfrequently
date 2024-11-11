@@ -131,6 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   damage: 1
+  targetPlayerOnly: 0
+  targetBuildingsOnly: 0
 --- !u!114 &1139330064262291029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,14 +148,15 @@ MonoBehaviour:
   maxHealth: 3
   invincibilityDuration: 0.01
   exp: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
-  xpDropRate: 0.1
   maxXpDrop: 1
   minXpDrop: 1
   currentHealth: 0
+  xpDropRatePercent: 1
   showHPBar: 1
   hpCanvas: {fileID: 1050699750667707997}
   hpBar: {fileID: 7484320389990937438}
   hpBarOffset: {x: 0, y: 1.5, z: 0}
+  countInWave: 1
 --- !u!136 &8803482667701268275
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -389,6 +392,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2957575911117342378, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013090980228223043, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4250514968043131335, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}

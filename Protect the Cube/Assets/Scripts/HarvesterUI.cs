@@ -22,6 +22,6 @@ public class HarvesterUI : MonoBehaviour
     // Update is called once per frame
     void UpdateHarvesterText()
     {
-        tmp.text = title /*+ ": (" + mNexus.health + "/" + mNexus.maxHealth + ")"*/ + "\r\nDefend\r\nv";
+        tmp.text = "\rDefend\r\nv";//title /*+ ": (" + mNexus.health + "/" + mNexus.maxHealth + ")"*/ + "\r\nDefend\r\nv";
     }
 }

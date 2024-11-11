@@ -713,14 +713,15 @@ MonoBehaviour:
   maxHealth: 30
   invincibilityDuration: 0.01
   exp: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
-  xpDropRate: 0.5
   maxXpDrop: 3
   minXpDrop: 10
   currentHealth: 0
+  xpDropRatePercent: 1
   showHPBar: 1
   hpCanvas: {fileID: 595257988322012064}
   hpBar: {fileID: 6992884718561214115}
   hpBarOffset: {x: 0, y: 2, z: 0}
+  countInWave: 1
 --- !u!136 &8803482667701268275
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1061,6 +1062,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2957575911117342378, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013090980228223043, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4250514968043131335, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}

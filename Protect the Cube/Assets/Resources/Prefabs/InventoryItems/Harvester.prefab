@@ -249,7 +249,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 4723649397639216816}
   m_HandleRect: {fileID: 0}
@@ -412,7 +412,7 @@ MonoBehaviour:
   buildingDesc: Generates gold over time. Use gold to upgrade turrets.
   colorDiffAfterPlace: 50
   currentPlaceableObject: {fileID: 0}
-  radius: 4
+  radius: 2
 --- !u!114 &6488971438371175472
 MonoBehaviour:
   m_ObjectHideFlags: 0
