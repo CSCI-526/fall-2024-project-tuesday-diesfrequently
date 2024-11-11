@@ -12,6 +12,7 @@ TagManager:
   - Turret
   - ExperienceOrb
   - GoldOrb
+  - Breakable
   layers:
   - Default
   - TransparentFX

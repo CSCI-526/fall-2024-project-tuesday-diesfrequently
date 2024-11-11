@@ -54,8 +54,10 @@ public class turretShoot : Building
     {
         if (target && (timeSinceLastShot > 1 / fireRate) && projectile && gunBarrel)
         {
-            Vector3 toTarget = (target.transform.position - transform.position).normalized;
-            if(Vector3.Dot(toTarget,transform.forward) > 0.9)
+            Vector3 toTarget = (target.transform.position - transform.position);
+            float dist = toTarget.magnitude;
+            toTarget.Normalize();
+            if (Vector3.Dot(toTarget, transform.forward) > 0.9 || dist < 1.0f)
             {
                 if(GameManager.Instance.useBulletPool)
                 {
