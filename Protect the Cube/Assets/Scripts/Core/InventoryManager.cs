@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour
     public List<int> InventoryItemCount { get; private set; } // old: buildingCount, stores # of reward in inventory
 
     // store item prefabs
-    private List<GameObject> inventoryPrefabs;
+    [SerializeField] private List<GameObject> inventoryPrefabs;
 
     // event definitions
     public event Action UI_OnInventoryUpdated;

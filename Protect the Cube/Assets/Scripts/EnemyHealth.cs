@@ -23,13 +23,17 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public GameObject hpCanvas;
     [SerializeField] public Slider hpBar;
     [SerializeField] public Vector3 hpBarOffset = new Vector3(0.0f,3.0f,0.0f);
+    [SerializeField] public bool countInWave = true;
 
     //[SerializeField] public float MoreXpDropBreakpoints = 10.0f;  
     void Start()
     {
         currentHealth = maxHealth;
-        GameManager.Instance.WaveManager.enemyCount++;
-        GameManager.Instance.WaveManager.enemies.Add(this.gameObject);
+        if(countInWave)
+        {
+            GameManager.Instance.WaveManager.enemyCount++;
+            GameManager.Instance.WaveManager.enemies.Add(this.gameObject);
+        }
         animator = GetComponent<Animator>();    
         
         if(hpCanvas)

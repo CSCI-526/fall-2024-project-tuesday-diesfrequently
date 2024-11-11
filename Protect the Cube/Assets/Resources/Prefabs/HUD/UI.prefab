@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 6852214484739291977, guid: be95804629007ef48b125d5464255bfa, type: 3}
-  bName: Turret Booster
+  bName: Booster Turret
 --- !u!1 &1239447020022321220
 GameObject:
   m_ObjectHideFlags: 0
@@ -4557,7 +4557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 6852214484739291977, guid: 2543412762f80df449e7edae5b5abbe3, type: 3}
-  bName: Slow Tower
+  bName: Slow Turret
 --- !u!1 &5722626541016457145
 GameObject:
   m_ObjectHideFlags: 0

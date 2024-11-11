@@ -130,6 +130,7 @@ MonoBehaviour:
   hpCanvas: {fileID: 7590791986490379850}
   hpBar: {fileID: 8613017962453833}
   hpBarOffset: {x: 0, y: 3, z: 0}
+  countInWave: 0
 --- !u!1001 &4012642969974426378
 PrefabInstance:
   m_ObjectHideFlags: 0
