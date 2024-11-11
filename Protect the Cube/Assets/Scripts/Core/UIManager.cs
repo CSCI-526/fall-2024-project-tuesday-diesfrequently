@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] public List<TextMeshProUGUI> displayedInventoryCount = new List<TextMeshProUGUI>();
     [SerializeField] public List<Image> inventoryGbox = new List<Image>();
-    [SerializeField] public List<Image> inventoryWbox = new List<Image>();
+
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
     [SerializeField] protected GameObject SelectGunTutorialUI;
@@ -35,10 +35,6 @@ public class UIManager : MonoBehaviour
     public bool pauseMenuActive = false;
     public bool rewardMenuActive = false;
 
-    public Image damageEffect;
-
-    private int _currentHealth = 5;
-
     private void Awake()
     {
         // References to Managers
@@ -55,22 +51,6 @@ public class UIManager : MonoBehaviour
          _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
         goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
         UpdateUI();
-    }
-
-    void Update(){
-        float atarget = (5 - _currentHealth)/10.0f;
-        if(damageEffect.color.a > atarget){
-            var color = damageEffect.color;
-            color.a -= 0.01f;
-            damageEffect.color = color;
-        }
-        foreach (Image wbox in inventoryWbox){
-            if(wbox.color.a > 0){
-                Color c = wbox.color;
-                c.a -= 0.005f;
-                wbox.color = c;
-            }
-        }
     }
 
     private void OnEnable()
@@ -205,7 +185,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdateInventoryUI()
-    {   
+    {
         for (int i = 0; i < InventoryManager.NUM_PLACEABLE_ITEMS; i++)
         {
             displayedInventoryCount[i].text = "";
@@ -215,7 +195,6 @@ public class UIManager : MonoBehaviour
             {
                 displayedInventoryCount[i].text = inventoryManager.InventoryItemCount[i].ToString();
                 inventoryGbox[i].enabled = false; // disable greyed out background
-                
             }
             else inventoryGbox[i].enabled = true; // enable greyed out background
         }
@@ -226,22 +205,4 @@ public class UIManager : MonoBehaviour
         upgradePanel.GetComponent<upgradeUI>().updateText(buildingName, materialNum, id);
     }
 
-    public void DamageEffect(int health)
-    {   
-        Color color = damageEffect.color;
-        if (health > _currentHealth){
-            color.a = (5 - _currentHealth)/10.0f;
-        } else {
-            color.a = 0.8f;
-        }
-        _currentHealth = health;
-        damageEffect.color = color;
-    }
-
-    public void FlashInventory(int itemIDX)
-    {   
-        Color c = inventoryWbox[itemIDX].color;
-        c.a = 1.0f;
-        inventoryWbox[itemIDX].color = c;
-    }
 }

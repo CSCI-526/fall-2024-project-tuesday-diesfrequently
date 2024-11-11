@@ -12,7 +12,6 @@ TagManager:
   - Turret
   - ExperienceOrb
   - GoldOrb
-  - DamageEffect
   layers:
   - Default
   - TransparentFX
