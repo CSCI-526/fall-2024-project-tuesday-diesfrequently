@@ -40,14 +40,26 @@ Script: ClickUpgrade
         - upgradeArrow
         - transform
 
+Script: CursorManager
+    - No dependencies found for CursorManager
+    - No Explicit GameObjects/Prefabs referenced in CursorManager
+
 Script: DefensiveWallHealth
     - No dependencies found for DefensiveWallHealth
     - No Explicit GameObjects/Prefabs referenced in DefensiveWallHealth
+
+Script: EnemyBullet
+    - Dependencies for EnemyBullet:
+        - GameManager
+        - BulletPool
+        - PlayerHealth
+    - No Explicit GameObjects/Prefabs referenced in EnemyBullet
 
 Script: EnemyHealth
     - Dependencies for EnemyHealth:
         - GameManager
         - WaveManager
+        - Nexus
     - GameObjects/Prefabs referenced in EnemyHealth:
         - exp
         - hpCanvas
@@ -79,6 +91,7 @@ Script: FollowMouse
 
 Script: GameSummaryUI
     - Dependencies for GameSummaryUI:
+        - Wave
         - GameManager
         - WaveManager
     - No Explicit GameObjects/Prefabs referenced in GameSummaryUI
@@ -134,13 +147,14 @@ Script: MinimapCameraMove
 
 Script: Nexus
     - Dependencies for Nexus:
+        - InventoryManager
         - GameManager
         - AnalyticsManager
         - UIManager
         - OffScreenIndicator
         - Indicator
     - GameObjects/Prefabs referenced in Nexus:
-        - XP
+        - xpPrefab
         - identity
 
 Script: OffScreenIndicator
@@ -161,8 +175,8 @@ Script: PlaceObject
         - UIManager
         - Building
         - InventoryManager
-        - Exclusion
         - Harvester
+        - Exclusion
     - GameObjects/Prefabs referenced in PlaceObject:
         - rangeIndicator
         - currentPlaceableObject
@@ -181,6 +195,7 @@ Script: PlayerController
 
 Script: PlayerHealth
     - Dependencies for PlayerHealth:
+        - InventoryManager
         - GameManager
         - UIManager
         - AnalyticsManager
@@ -199,6 +214,14 @@ Script: RangeIndicator
     - No dependencies found for RangeIndicator
     - No Explicit GameObjects/Prefabs referenced in RangeIndicator
 
+Script: RangedEnemyMove
+    - Dependencies for RangedEnemyMove:
+        - EnemyMove
+        - GameManager
+    - GameObjects/Prefabs referenced in RangedEnemyMove:
+        - _projectilePrefab
+        - rotation
+
 Script: ResumeBtn
     - Dependencies for ResumeBtn:
         - GameManager
@@ -216,8 +239,8 @@ Script: RewardInfo
 
 Script: RewardPanel
     - Dependencies for RewardPanel:
-        - Building
         - RewardInfo
+        - Building
         - GameManager
         - InventoryManager
     - No Explicit GameObjects/Prefabs referenced in RewardPanel
@@ -228,6 +251,14 @@ Script: SlowTower
         - EnemyMove
     - No Explicit GameObjects/Prefabs referenced in SlowTower
 
+Script: SpawnEvent
+    - Dependencies for SpawnEvent:
+        - SpawnPoint
+        - WaveManager
+        - GameManager
+    - GameObjects/Prefabs referenced in SpawnEvent:
+        - enemyPrefab
+
 Script: SpawnPoint
     - Dependencies for SpawnPoint:
         - GameManager
@@ -235,10 +266,14 @@ Script: SpawnPoint
         - EnemyMove
     - GameObjects/Prefabs referenced in SpawnPoint:
         - prefab
+        - Enemy
         - enemyToSpawn
 
 Script: SpawnerEnemy
-    - No dependencies found for SpawnerEnemy
+    - Dependencies for SpawnerEnemy:
+        - GameManager
+        - WaveManager
+        - EnemyHealth
     - GameObjects/Prefabs referenced in SpawnerEnemy:
         - enemyPrefab
         - rotation
@@ -263,6 +298,15 @@ Script: TurretBooster
 Script: TurretBoosterVisual
     - No dependencies found for TurretBoosterVisual
     - No Explicit GameObjects/Prefabs referenced in TurretBoosterVisual
+
+Script: Wave
+    - Dependencies for Wave:
+        - SpawnEvent
+    - No Explicit GameObjects/Prefabs referenced in Wave
+
+Script: WaveInfo
+    - No dependencies found for WaveInfo
+    - No Explicit GameObjects/Prefabs referenced in WaveInfo
 
 Script: turretShoot
     - Dependencies for turretShoot:
@@ -290,18 +334,21 @@ Script: upgradeUI
 
 Script: AnalyticsManager
     - Dependencies for AnalyticsManager:
+        - Wave
         - InventoryManager
-        - GameManager
         - Nexus
+        - PlayerHealth
+        - GameManager
     - No Explicit GameObjects/Prefabs referenced in AnalyticsManager
 
 Script: GameManager
     - Dependencies for GameManager:
         - WaveManager
         - UIManager
-        - AnalyticsManager
         - InventoryManager
+        - AnalyticsManager
         - Nexus
+        - PlayerController
     - No Explicit GameObjects/Prefabs referenced in GameManager
 
 Script: InventoryManager
@@ -314,6 +361,7 @@ Script: InventoryManager
         - Helper
         - MultiTag
         - PlaceObject
+        - UIManager
     - No Explicit GameObjects/Prefabs referenced in InventoryManager
 
 Script: UIManager
@@ -321,30 +369,31 @@ Script: UIManager
         - Nexus
         - PlayerHealth
         - PlayerLevels
+        - InventoryManager
         - GameManager
+        - Wave
         - WaveManager
         - RewardChoiceUI
-        - InventoryManager
     - GameObjects/Prefabs referenced in UIManager:
         - gameOverScreen
+        - SelectGunTutorialUI
         - rewardMenu
-        - miniRewardMenu
         - upgradePanel
         - pauseUI
-        - SelectGunTutorialUI
-        - HarvesterTutorialUI
+        - crosshairTexture
         - HandTexture
 
 Script: WaveManager
     - Dependencies for WaveManager:
-        - SpawnPoint
+        - WaveInfo
+        - Nexus
+        - Wave
+        - EnemyMove
         - GameManager
         - UIManager
         - AnalyticsManager
     - GameObjects/Prefabs referenced in WaveManager:
-        - tank
-        - spawnerBoss
-        - shieldBoss
+        - enemyPrefab
 
 Script: Wall
     - Dependencies for Wall:

@@ -25,10 +25,6 @@ public class PlayerLevels : MonoBehaviour
     private List<GameObject> selectedTurrets = new List<GameObject>();
 
     public ClickUpgrade clickUpgrade;
-    
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
@@ -71,8 +67,12 @@ public class PlayerLevels : MonoBehaviour
                     levels_to_process += 1;
                     xpNeededForLevel = xpLinearScaler * currentLevel + xpNeededBase;
                 }
+
                 GameManager.Instance.UIManager.ShowRewardScreen();
                 GameManager.Instance.InventoryManager.GenerateRewards();
+
+                
+
             }
         }
         else if (Orb.tag == "GoldOrb"){
@@ -84,7 +84,5 @@ public class PlayerLevels : MonoBehaviour
             }
         }
         GameManager.Instance.UIManager.UpdateUI();
-
-        
     }
 }

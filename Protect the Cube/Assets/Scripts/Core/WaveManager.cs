@@ -93,13 +93,75 @@ public class WaveManager : MonoBehaviour
         return temp_spawn_points;
     }
 
+    public void SpawnSingleEnemy()
+    {
+        Vector3 spawnPosition = spawnConfigs[0][UnityEngine.Random.Range(0, spawnConfigs[0].Count)];
+
+        // Instantiate the enemy at the selected spawn point
+        string enemyName = "Enemy";
+        GameObject enemyPrefab = GetEnemyPrefab(enemyName);
+        GameObject enemyEntity = Instantiate(enemyPrefab);
+        AddEnemyEntity(enemyEntity, GetEnemyIDX(enemyName));
+
+        // MATCHA: Hard Coded
+        int configID = 0;
+        float spawnRange = 2.0f;
+        Vector3 location = spawnConfigs[configID][UnityEngine.Random.Range(0, spawnConfigs[configID].Count - 1)];
+        enemyEntity.transform.position = location + new Vector3(UnityEngine.Random.Range(-spawnRange, spawnRange), 0, UnityEngine.Random.Range(-spawnRange, spawnRange));
+        Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
+    }
+
+    public void LockAllEnemiesMovement()
+    {
+        Debug.Log("[Wave Manager] Locking All Enemies Movement");
+        foreach (var enemy in AllEnemyEntities)
+        {
+            if (enemy != null)
+            {
+                EnemyMove enemyMove = enemy.GetComponent<EnemyMove>();
+                if (enemyMove != null) enemyMove.LockMovement();
+            }
+        }
+    }
+
+    public void UnlockAllEnemiesMovement()
+    {
+        Debug.Log("[Wave Manager] Unlocking All Enemies Movement");
+        foreach (var enemy in AllEnemyEntities)
+        {
+            if (enemy != null)
+            {
+                EnemyMove enemyMove = enemy.GetComponent<EnemyMove>();
+                if (enemyMove != null) enemyMove.UnlockMovement();
+            }
+        }
+    }
+
+    public void SetConstantXPDrops(int exp_amount)
+    {
+        Debug.Log("[Wave Manager] Setting All XP Drops to Constant");
+        foreach (var enemy in AllEnemyEntities)
+        {
+            if (enemy != null)
+            {
+                EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+                if (enemyHealth != null) enemyHealth.ActivateTutorialEXPDrop(exp_amount);
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        UpdateGlobalWaveTimer();
-        if (AllEnemiesKilled() && WaveTimerComplete()) {
-            SpawnNextWave();
+        if (GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves)
+        {
+            UpdateGlobalWaveTimer();
+            if (AllEnemiesKilled() && WaveTimerComplete())
+            {
+                SpawnNextWave();
+            }
         }
+        
     }
 
     private void UpdateGlobalWaveTimer() { _currentWaveLength += Time.deltaTime; }
@@ -204,7 +266,7 @@ public class WaveManager : MonoBehaviour
         return _currentWaveLength > MIN_WAVE_COMPLETION_LENGTH;
     }
 
-    private bool AllEnemiesKilled()
+    public bool AllEnemiesKilled()
     {
         return AllEnemyEntities.Count == 0;
     }

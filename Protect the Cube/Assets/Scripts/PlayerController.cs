@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float jumpForce = 5.0f;
     [SerializeField] protected Rigidbody rb;
     private UnityEngine.Vector3 direction;
+    private bool isMovementLocked = true; // controls "movement" lock
+    private bool isShootingLocked = true; // controls "shooting" lock
 
     //shooting variables
     [SerializeField] float fireRate = 5.0f;
@@ -22,26 +24,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject gunBarrel;
     [SerializeField] GameObject rangeIndicator;
     private float timeSinceLastShot = 0.0f;
+    private static bool hasPlayerShot = false;
+
 
 
     private void Update()
     {
-        //movement
+        // only check for movement input if movement not locked
         HandleMoveInput();
 
-        //shoot on left(click)
-        if (Input.GetMouseButton(0))
-        {
-            Shoot();
-        }
-        // if (Input.GetButtonDown("Jump"))
-        // {
-        //     Jump();
-        // }
-        if(Input.GetButton("Cancel"))
-        {
-            GameManager.Instance.QuitGame();
-        }
+        if (Input.GetMouseButton(0)) Shoot(); // shoot on left click
+
+        // Quit Game if cancel button pressed
+        if(Input.GetButton("Cancel")) { GameManager.Instance.QuitGame(); }
 
         // detecting turrets
         if (gameObject.GetComponent<PlaceObject>().currentPlaceableObject == null) // only hover when not currently placing a turret
@@ -60,62 +55,104 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    if (rangeIndicator.activeSelf)
-                    {
-                        rangeIndicator.SetActive(false);
-                    }
+                    if (rangeIndicator.activeSelf) rangeIndicator.SetActive(false);
                 }
             }
         }
     }
-
-
 
     void FixedUpdate()
     {
-        //move using WASD/arrows
-        rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+        // move via WASD keys if movement not locked
+        if (!isMovementLocked) rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
 
-        //look at mouse
+        // look at mouse
         LookAtMouse();
 
         //update shot time
-        timeSinceLastShot += Time.fixedDeltaTime;
+        if (!isShootingLocked) timeSinceLastShot += Time.fixedDeltaTime;
     }
-    // private void Jump()
-    // {
-    //     if (transform.position.y < 1.01)
-    //     {
-    //         rb.AddForce(new UnityEngine.Vector3(0.0f, jumpForce, 0.0f));
-    //     }
-    // }
+
+    //private void Shoot()
+    //{
+    //    if (!isShootingLocked)
+    //    {
+    //        hasPlayerShot = true; // boolean flag for the first time
+    //        Debug.Log("hasPlayerShot is TRUE");
+    //        if ((timeSinceLastShot > 1 / fireRate) && projectile && gunBarrel)
+    //        {
+    //            if (GameManager.Instance.useBulletPool)
+    //            {
+    //                var bullet = BulletPool.Instance.GetBullet();
+
+    //                if (bullet == null)
+    //                {
+    //                    Debug.Log("All Bullets are Currently Being Used");
+    //                    return; // return early to indicate "stop shooting"
+    //                }
+    //                bullet.transform.position = gunBarrel.transform.position;
+    //                bullet.transform.rotation = gunBarrel.transform.rotation;
+    //                timeSinceLastShot = 0;
+    //            }
+    //            else
+    //            {
+    //                var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+    //                bullet.transform.position = gunBarrel.transform.position;
+    //                bullet.transform.rotation = gunBarrel.transform.rotation;
+    //                timeSinceLastShot = 0;
+    //            }
+    //        }
+    //    }
+        
+    //}
 
     private void Shoot()
     {
-        if ((timeSinceLastShot > 1 / fireRate) && projectile && gunBarrel)
+        if (!isShootingLocked)
         {
-            if (GameManager.Instance.useBulletPool)
-            {
-                var bullet = BulletPool.Instance.GetBullet();
+            hasPlayerShot = true; // boolean flag for the first time
+            //Debug.Log("hasPlayerShot is TRUE");
 
-                if (bullet == null)
-                {
-                    Debug.Log("All Bullets are Currently Being Used");
-                    return; // return early to indicate "stop shooting"
-                }
-                bullet.transform.position = gunBarrel.transform.position;
-                bullet.transform.rotation = gunBarrel.transform.rotation;
-                timeSinceLastShot = 0;
-            }
-            else
+            // Check if projectile and gunBarrel are assigned
+            if (projectile == null || gunBarrel == null)
             {
-                var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
-                bullet.transform.position = gunBarrel.transform.position;
-                bullet.transform.rotation = gunBarrel.transform.rotation;
-                timeSinceLastShot = 0;
+                Debug.LogError("Projectile or Gun Barrel not assigned!");
+                return;
             }
-        }
+
+            if (timeSinceLastShot > 1 / fireRate)
+            {
+                if (GameManager.Instance.useBulletPool)
+                {
+                    if (BulletPool.Instance == null)
+                    {
+                        Debug.LogError("Bullet Pool is not initialized!");
+                        return;
+                    }
+
+                    var bullet = BulletPool.Instance.GetBullet();
+
+                    if (bullet == null)
+                    {
+                        Debug.Log("All Bullets are Currently Being Used");
+                        return; // return early to indicate "stop shooting"
+                    }
+
+                    bullet.transform.position = gunBarrel.transform.position;
+                    bullet.transform.rotation = gunBarrel.transform.rotation;
+                    timeSinceLastShot = 0;
+                }
+                else
+                {
+                    var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
+                    bullet.transform.position = gunBarrel.transform.position;
+                    bullet.transform.rotation = gunBarrel.transform.rotation;
+                    timeSinceLastShot = 0;
+                }
+            }
+        } else { timeSinceLastShot = 0; }
     }
+
 
     void LookAtMouse()
     {
@@ -143,4 +180,30 @@ public class PlayerController : MonoBehaviour
         // Rotate the input direction based on camera's orientation
         direction = (cameraForward * input.z + cameraRight * input.x).normalized;
     }
+
+    // lock the player movement
+    public void LockMovement()
+    {
+        Debug.Log("[PlayerController] isMovementLocked = true");
+        isMovementLocked = true;
+        direction = UnityEngine.Vector3.zero; // Reset direction to prevent continued movement
+    }
+
+    // unlock the player movement
+    public void UnlockMovement() { Debug.Log("[PlayerController] isMovementLocked = false");  isMovementLocked = false; }
+
+    // lock the player movement
+    public void LockShooting() { Debug.Log("[PlayerController] isShootingLocked = true"); isShootingLocked = true; }
+
+    // unlock the player movement
+    public void UnlockShooting() { Debug.Log("[PlayerController] isShootingLocked = false"); isShootingLocked = false; }
+
+    // check if player has pressed a movement key
+    public static bool HasPressedMovementKeys()
+    {
+        return Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+    }
+
+    // check if player has "shot" yet
+    public static bool HasShotOnce() { return hasPlayerShot; }
 }

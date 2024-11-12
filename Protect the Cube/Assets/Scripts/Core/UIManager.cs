@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject rewardMenu;
     [SerializeField] public GameObject upgradePanel;
     [SerializeField] public GameObject pauseUI;
+    [SerializeField] public GameObject inventoryBar;
     [SerializeField] public Image damageEffect;
     
     public GameObject crosshairTexture;
@@ -37,13 +38,14 @@ public class UIManager : MonoBehaviour
     public bool pauseMenuActive = false;
     public bool rewardMenuActive = false;
     private int _currentHealth = 5;
+    private bool isRewardLocked = true;
+    static private bool firstRewardScreenEnded = false; 
 
-    private void Awake()
+private void Awake()
     {
         // References to Managers
         inventoryManager = GameManager.Instance.InventoryManager;
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -65,14 +67,20 @@ public class UIManager : MonoBehaviour
             if (pauseMenuActive) HidePauseScreen();
             else ShowPauseScreen();
         }
+
+        // code for UI Screen Flash on Dmg Taken
         float atarget = (5 - _currentHealth)/10.0f;
         if(damageEffect.color.a > atarget){
             var color = damageEffect.color;
             color.a -= 0.01f;
             damageEffect.color = color;
         }
-        foreach (Image wbox in inventoryWbox){
-            if(wbox.color.a > 0){
+
+        // Displays the Inventory Panel
+        foreach (Image wbox in inventoryWbox)
+        {
+            if (wbox.color.a > 0)
+            {
                 Color c = wbox.color;
                 c.a -= 0.005f;
                 wbox.color = c;
@@ -92,15 +100,37 @@ public class UIManager : MonoBehaviour
         inventoryManager.UI_OnRewardsUpdated -= UpdateRewardsUI;
     }
 
-    // Update is called once per frame
+
     public void UpdateUI()
     {
         UpdateWaveUI();
         UpdatePlayerXPUI();
         UpdateInventoryUI();
 
-        // only show gold count when the player have a harvester
+        // Only show gold count when the player has a harvester
         if (_playerLVL.currentLevel > 4) UpdateGoldUI(1);
+    }
+
+    public void ActivateInventoryUI()
+    {
+        inventoryBar.SetActive(true);
+    }
+
+    public void DeactivateInventoryUI()
+    {
+        inventoryBar.SetActive(false);
+    }
+
+    public void ActivateEXPUI()
+    {
+        expUI.gameObject.SetActive(true);
+        expSlider.gameObject.SetActive(true);
+    }
+
+    public void DeactivateEXPUI()
+    {
+        expUI.gameObject.SetActive(false);
+        expSlider.gameObject.SetActive(false);
     }
 
     public void SetCursorCrosshair()
@@ -138,12 +168,12 @@ public class UIManager : MonoBehaviour
         
         pauseMenuActive = false;
         pauseUI.SetActive(false);
-        
     }
 
     public void ShowRewardScreen()
     {
         rewardMenuActive = true;
+        DeactivateInventoryUI(); // tutorial
         rewardMenu.SetActive(true);
         Time.timeScale = 0.0f;
     }
@@ -152,8 +182,9 @@ public class UIManager : MonoBehaviour
     {
         rewardMenuActive = false;
         rewardMenu.SetActive(false);
+        ActivateInventoryUI(); // tutorial
         Time.timeScale = 1.0f;
-            
+        firstRewardScreenEnded = true;
     }
 
     public void ShowUpgradeScreen()
@@ -186,7 +217,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateWaveUI()
     {
-        if (_nexus && _playerHP) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_index;
+        if ((_nexus && _playerHP) && (GameManager.GamePhase.HandCraftedWaves == GameManager.Instance.CurrentPhase)) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_index;
     }
 
     public void UpdatePlayerXPUI()
@@ -250,4 +281,18 @@ public class UIManager : MonoBehaviour
         inventoryWbox[itemIDX].color = c;
     }
 
+    public void LockRewardUI()
+    {
+        isRewardLocked = true;
+    }
+
+    public void UnlockRewardUI()
+    {
+        isRewardLocked = false;
+    }
+
+    public static bool FirstRewardScreenEnded()
+    {
+        return firstRewardScreenEnded;
+    }
 }

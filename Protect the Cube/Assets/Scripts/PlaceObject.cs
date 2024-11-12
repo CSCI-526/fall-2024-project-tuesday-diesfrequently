@@ -12,6 +12,8 @@ public class PlaceObject : MonoBehaviour
     private float buildingRotation;
     [SerializeField] protected float rotateIncrement = 10.0f;
     private bool placedFirstTurret = false;
+    static private bool isTurretPickedUp = false;
+    static private bool isFirstTurretPlaced = false;
 
 
     private void Update()
@@ -21,6 +23,7 @@ public class PlaceObject : MonoBehaviour
 
         if (currentPlaceableObject != null)
         {
+            isTurretPickedUp = true;
             //rangeIndicator.SetActive(true);
             //rangeIndicator.transform.localScale = new Vector3(currentPlaceableObject.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currentPlaceableObject.GetComponent<turretShoot>().maxRange);
             MoveCurrentObjectToMouse();
@@ -34,6 +37,7 @@ public class PlaceObject : MonoBehaviour
 
     public void CancelPlace()
     {
+        isTurretPickedUp = false;
         if (currentPlaceableObject == null) return;
         Destroy(currentPlaceableObject);
         GameManager.Instance.UIManager.SetCursorCrosshair();
@@ -54,6 +58,7 @@ public class PlaceObject : MonoBehaviour
             }
         }
     }
+
     public void StartPlacingIfPossible(GameObject turret, string bName)
     {
         if (CanStartPlacing(bName))
@@ -61,6 +66,7 @@ public class PlaceObject : MonoBehaviour
             SelectTurretPlace(turret);
         }
     }
+
     private bool CanStartPlacing(string bName)
     {
         bool canPlace = GameManager.Instance.InventoryManager.isInventoryAvailable(bName);
@@ -124,6 +130,7 @@ public class PlaceObject : MonoBehaviour
         {
             GameManager.Instance.InventoryManager.TryUseInventoryItem(b.buildingName);
             b.OnPlace();
+            isFirstTurretPlaced = true;
             currentPlaceableObject = null;
             GameManager.Instance.UIManager.SetCursorCrosshair();
 
@@ -160,5 +167,8 @@ public class PlaceObject : MonoBehaviour
             currentPlaceableObject.transform.rotation = Quaternion.identity;
         }
     }
+
+    static public bool turretPickedUp() { return isTurretPickedUp; }
+    static public bool firstTurretPlaced() { return isFirstTurretPlaced; }
 
 }

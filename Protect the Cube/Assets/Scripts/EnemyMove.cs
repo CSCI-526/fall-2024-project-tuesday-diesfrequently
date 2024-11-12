@@ -22,6 +22,8 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] protected bool targetPlayerOnly = false;
     [SerializeField] protected bool targetBuildingsOnly = false;
 
+    private bool isEnemyMovementLocked = false; // controls enemy "movement" lock
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -74,12 +76,17 @@ public class EnemyMove : MonoBehaviour
             SetTarget(targetList);
         }
 
-        Vector3 dirToTarget = _target.transform.position - _rb.transform.position;
-        dirToTarget.y = 0.0f;
-        dirToTarget.Normalize();
-        _rb.MovePosition(transform.position + dirToTarget * (moveSpeed *(1-slowAmount)) * Time.fixedDeltaTime);
+        // does not move if enemy movement is locked
+        if (!isEnemyMovementLocked)
+        {
+            Vector3 dirToTarget = _target.transform.position - _rb.transform.position;
+            dirToTarget.y = 0.0f;
+            dirToTarget.Normalize();
 
-        transform.rotation = UnityEngine.Quaternion.LookRotation(dirToTarget, Vector3.up);
+            _rb.MovePosition(transform.position + dirToTarget * (moveSpeed * (1 - slowAmount)) * Time.fixedDeltaTime);
+            transform.rotation = UnityEngine.Quaternion.LookRotation(dirToTarget, Vector3.up);
+        }
+        
     }
 
     protected void SetTarget(List<GameObject> targetList)
@@ -119,4 +126,10 @@ public class EnemyMove : MonoBehaviour
         slowAmount = Mathf.Max(slowAmount, slowRate);
         slowDebufTimer = 0.1f;
     }
+
+    // lock the enemy movement
+    public void LockMovement() { Debug.Log("[EnemyMove] isEnemyMovementLocked = true"); isEnemyMovementLocked = true; }
+
+    // unlock the enemy movement
+    public void UnlockMovement() { Debug.Log("[EnemyMove] isEnemyMovementLocked = false"); isEnemyMovementLocked = false; }
 }

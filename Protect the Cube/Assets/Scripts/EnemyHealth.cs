@@ -26,6 +26,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public bool countInWave = true;
     [SerializeField] public string enemyName = "None";
 
+    private bool isTutorialEXPDrop = false;
+    private int tutorialEXPAmt = 0; 
+
     //[SerializeField] public float MoreXpDropBreakpoints = 10.0f;  
     void Start()
     {
@@ -93,17 +96,31 @@ public class EnemyHealth : MonoBehaviour
     }
 
     public void DropExp(){
-        int xpDrop = Random.Range(minXpDrop, maxXpDrop);
 
-        if (Random.Range(0.0f, 1.0f) <= xpDropRatePercent){
-            // float distanceFromNexus = Vector3.Distance(transform.position, GameManager.Instance.Nexus.transform.position);
-            // if (distanceFromNexus > MoreXpDropBreakpoints)
-            // {
-            //xpDrop += (int)(distanceFromNexus / MoreXpDropBreakpoints); // Increase XP drop if the enemy is far from the nexus
-            // }
-            for (int i = 0; i < xpDrop; i++){
+        if (isTutorialEXPDrop)
+        {
+            for (int i = 0; i < tutorialEXPAmt; i++)
+            {
                 GameObject xp = Instantiate(exp);
-                xp.transform.position = new Vector3(transform.position.x+Random.Range(-1*1, 1), transform.position.y, transform.position.z+Random.Range(-1*1, 1));;
+                xp.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
+            }
+        }
+        else
+        {
+            int xpDrop = Random.Range(minXpDrop, maxXpDrop);
+
+            if (Random.Range(0.0f, 1.0f) <= xpDropRatePercent)
+            {
+                // float distanceFromNexus = Vector3.Distance(transform.position, GameManager.Instance.Nexus.transform.position);
+                // if (distanceFromNexus > MoreXpDropBreakpoints)
+                // {
+                //xpDrop += (int)(distanceFromNexus / MoreXpDropBreakpoints); // Increase XP drop if the enemy is far from the nexus
+                // }
+                for (int i = 0; i < xpDrop; i++)
+                {
+                    GameObject xp = Instantiate(exp);
+                    xp.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
+                }
             }
         }
     }
@@ -122,4 +139,10 @@ public class EnemyHealth : MonoBehaviour
 
         //hpCanvas.transform.LookAt(Camera.main.transform.position);
     }
+
+    public void ActivateTutorialEXPDrop(int exp_amount) {
+        isTutorialEXPDrop = true;
+        tutorialEXPAmt = exp_amount;
+    }
+    public void DeactivateTutorialEXPDrop() { isTutorialEXPDrop = false; }
 }
