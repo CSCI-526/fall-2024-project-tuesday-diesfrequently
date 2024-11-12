@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public class turretShoot : Building
 {   
     private float timeSinceLastShot = 0.0f;
-    [SerializeField] float fireRate = 5.0f;
+    [SerializeField] public float fireRate = 5.0f;
     public float maxRange = 50.0f;
     [SerializeField] float turnSpeed = 15.0f;
 

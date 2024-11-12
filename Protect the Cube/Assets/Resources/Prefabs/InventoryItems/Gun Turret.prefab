@@ -4946,7 +4946,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardName: Gun Turret
-  RewardDescription: A turret with decent range, accuracy, and damage
+  RewardDescription: A turret with decent overall stats.
+  rangeDesc: 'Range: high'
+  damageDesc: 'Damage: medium'
+  firerateDesc: 'Fire Rate: medium'
 --- !u!114 &-8703829114956844515
 MonoBehaviour:
   m_ObjectHideFlags: 0

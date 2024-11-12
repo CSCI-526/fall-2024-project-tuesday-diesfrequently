@@ -143,6 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: Sniper Turret
   RewardDescription: Excels at picking off targets at long range
+  rangeDesc: 'Range: very high'
+  damageDesc: 'Damage: high'
+  firerateDesc: 'Fire Rate: low'
 --- !u!114 &-7560772824372044512
 MonoBehaviour:
   m_ObjectHideFlags: 0

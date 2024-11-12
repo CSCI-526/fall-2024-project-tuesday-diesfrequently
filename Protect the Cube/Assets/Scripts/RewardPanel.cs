@@ -22,7 +22,10 @@ public class RewardPanel : MonoBehaviour
             if (reward_info != null)
             {
                 displayedRewardName.text = reward_info.RewardName;
-                rewardDescription.text = reward_info.RewardDescription;
+                rewardDescription.text = reward_info.RewardDescription
+                    + "\n" + reward_info.rangeDesc
+                    + "\n" + reward_info.damageDesc
+                    + "\n" + reward_info.firerateDesc;
             }
             else if (building != null)
             {

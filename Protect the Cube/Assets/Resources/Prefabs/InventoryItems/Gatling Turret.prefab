@@ -5309,7 +5309,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardName: Gatling Turret
-  RewardDescription: A gun turret varient with a very high fire rate
+  RewardDescription: A turret with a high fire rate
+  rangeDesc: 'Range: medium'
+  damageDesc: 'Damage: low'
+  firerateDesc: 'Fire Rate: very high'
 --- !u!114 &6567213520952982247
 MonoBehaviour:
   m_ObjectHideFlags: 0
