@@ -74,6 +74,7 @@ public class PlayerLevels : MonoBehaviour
                 
 
             }
+            GameManager.Instance.UIManager.Tutorial_HideXPUI(); // hide xp UI
         }
         else if (Orb.tag == "GoldOrb"){
             currentGold += resource_gained;

@@ -3713,6 +3713,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 367276438222979151, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
+      propertyPath: m_text
+      value: Shoot!
+      objectReference: {fileID: 0}
     - target: {fileID: 522192525252783077, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4216,6 +4220,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2392664201584677010, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_text
+      value: '<-Click on your turret to select it!
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 3073331988763717442, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4239,6 +4249,7 @@ PrefabInstance:
     - target: {fileID: 4463722469469685877, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5650612961316166526, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_IsActive
       value: 1

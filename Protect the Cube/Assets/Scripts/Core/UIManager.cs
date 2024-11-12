@@ -45,7 +45,6 @@ public class UIManager : MonoBehaviour
     private InventoryManager inventoryManager;
     private GameObject minimap;
     private GameObject uiObject;
-    private GameObject inventoryBar;
     private GameObject expBar;
     
     public bool pauseMenuActive = false;
@@ -221,8 +220,12 @@ private void Awake()
         ActivateInventoryUI(); // tutorial
         Time.timeScale = 1.0f;
         inventoryBar.SetActive(true);
+        if (!firstRewardScreenEnded)
+        {
+            ShowSelectGunTutorial(); // show tutorial text (first time only
+            firstRewardScreenEnded = true;
+        }
         expBar.SetActive(true);
-        firstRewardScreenEnded = true;
     }
 
     public void ShowUpgradeScreen()
@@ -239,13 +242,14 @@ private void Awake()
 
     public void ShowSelectGunTutorial()
     {
-        SelectGunTutorialUI.SetActive(true);
-        
+        //SelectGunTutorialUI.SetActive(true);
+        inventoryArrow.SetActive(true);
     }
 
     public void HideSelectGunTutorial()
     {
-        SelectGunTutorialUI.SetActive(false);
+        //SelectGunTutorialUI.SetActive(false);
+        inventoryArrow.SetActive(false);
     }
 
     public void ShowXPTutorial()
@@ -280,7 +284,7 @@ private void Awake()
         xpArrow.SetActive(true);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
         screenPos.y += xpArrowOffset;
-        xpArrow.transform.position = pos;
+        xpArrow.transform.position = screenPos;
     }
 
     public void Tutorial_HideXPUI()

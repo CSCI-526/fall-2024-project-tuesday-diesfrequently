@@ -99,11 +99,11 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForMovementInput()
     {
         yield return new WaitForSeconds(2.0f); // free movement for 3 seconds
-        // UIManager.Tutorial_ShowMovementUI(); // Shows the Animated 4 WASD KEys
+        UIManager.Tutorial_ShowMovementUI(); // Shows the Animated 4 WASD KEys
         Player.GetComponent<PlayerController>().UnlockMovement();
         yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys());        
         yield return new WaitForSeconds(3.0f); // free movement for 3 seconds
-        // UIManager.Tutorial_HideMovementUI(); // hide WASD movement keys
+        UIManager.Tutorial_HideMovementUI(); // hide WASD movement keys
         Debug.Log("Ending GamePhase.BasicTutorial_Movement Phase");
         SetGamePhase(GamePhase.BasicTutorial_Shooting);
     }
@@ -122,13 +122,13 @@ public class GameManager : MonoBehaviour
         WaveManager.SetConstantXPDrops(4);
         Player.GetComponent<PlayerController>().LockMovement();
 
-        // UIManager.Tutorial_ShowShootingUI(); // show shooting UI
+        UIManager.Tutorial_ShowShootingUI(); // show shooting UI
         Player.GetComponent<PlayerController>().UnlockShooting();
 
         // continue when player has shot + all enemies are dead
         yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
 
-        // UIManager.Tutorial_HideShootingUI(); // hide shooting UI
+        UIManager.Tutorial_HideShootingUI(); // hide shooting UI
         Debug.Log("Ending GamePhase.BasicTutorial_Shooting Phase");
         SetGamePhase(GamePhase.BasicTutorial_XP);
     }
@@ -137,8 +137,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Starting GamePhase.BasicTutorial_XP Phase");
         UIManager.ActivateEXPUI();
-        // UIManager.Tutorial_ShowXPBounceArrow; // show xp UI
-        // UIManager.Tutorial_HideXPBounceArrow; // show xp UI ... tbh we need to hide this in add_exp function under playerLevels (more accurate)
+        UIManager.Tutorial_ShowXPUI(new Vector3(12.0f, 1.0f, 0.0f)); // show xp UI
         Debug.Log("Ending GamePhase.BasicTutorial_XP Phase");
         SetGamePhase(GamePhase.BasicTutorial_Reward);
     }
@@ -146,7 +145,7 @@ public class GameManager : MonoBehaviour
     private void StartRewardTutorial()
     {
         Debug.Log("Starting GamePhase.BasicTutorial_Reward Phase");
-        //StartCoroutine(WaitForRewardScreenEnd());
+        StartCoroutine(WaitForRewardScreenEnd());
         Debug.Log("Ending GamePhase.BasicTutorial_Reward Phase");
         SetGamePhase(GamePhase.BasicTutorial_Placement);
     }
@@ -163,13 +162,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Starting GamePhase.BasicTutorial_Placement Phase");
 
-        // UIManager.Tutorial_ShowInventoryBouncingArrow; // show
-
-        //Player.GetComponent<PlayerController>().LockMovement();
-        //Player.GetComponent<PlayerController>().LockShooting();
+        Player.GetComponent<PlayerController>().LockMovement();
+        Player.GetComponent<PlayerController>().LockShooting();
         //StartCoroutine(WaitForPlacementInput());
 
-        // UIManager.Tutorial_HideInventoryBouncingArrow; // hide
         Debug.Log("Ending GamePhase.BasicTutorial_Placement Phase");
         SetGamePhase(GamePhase.HandCraftedWaves);
     }
@@ -200,7 +196,7 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<PlayerController>().UnlockShooting();
         WaveManager.UnlockAllEnemiesMovement();
 
-        // SetGamePhase(GamePhase.HandCraftedWaves);
+        //SetGamePhase(GamePhase.HandCraftedWaves);
     }
 
     /////////////////////////////
