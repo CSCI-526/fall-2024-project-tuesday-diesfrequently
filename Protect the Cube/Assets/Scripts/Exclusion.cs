@@ -40,6 +40,10 @@ public class Exclusion : MonoBehaviour
         {
             // show exclusion indicator if there are colliding buildings
             placeableObject.GetComponent<RangeIndicator>().ShowIndicator();
+            Renderer r = placeableObject.gameObject.GetComponent<Renderer>();
+            Debug.Log("current color: " + r.material.color);
+            r.material.color = Color.green;
+            Debug.Log("new color: " + r.material.color);
             foreach (var collider in colliders)
             {
                 if ((collider.gameObject != placeableObject) && (collider.gameObject.GetComponent<RangeIndicator>() != null))

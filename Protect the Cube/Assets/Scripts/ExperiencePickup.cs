@@ -13,15 +13,17 @@ public class ExperiencePickup : MonoBehaviour
     [SerializeField] protected float moveSpeed = 8.0f;
 
     [SerializeField] public bool moveToPlayer = false;
-    [SerializeField] public bool moveToEXPBar = false;
     [SerializeField] public float attractionRange = 4.0f;
+    [SerializeField] private GameObject uiExpOrbPrefab;
 
+    private Transform canvasTransform;
     private float counter = 0;
     float dir = 1.0f;
 
     void Start()
     {
         StartCoroutine(Countdown());
+        canvasTransform = GameObject.Find("UI").transform;
     }
 
     // Update is called once per frame
@@ -42,8 +44,45 @@ public class ExperiencePickup : MonoBehaviour
         if (other.tag == "Player"){
             other.GetComponent<PlayerLevels>().add_exp(exp_value, gameObject);
             Destroy(gameObject);
+            // CreateUIOrbAtCenter();
         }
     }
+
+    private void CreateUIOrbAtCenter()
+    {
+        GameObject uiOrb = Instantiate(uiExpOrbPrefab, canvasTransform);
+        RectTransform uiOrbRect = uiOrb.GetComponent<RectTransform>();
+
+        // center it on the Canvas
+        uiOrbRect.anchoredPosition = Vector2.zero;
+
+        // Start the coroutine to move the UI orb to the experience bar
+        StartCoroutine(MoveUIOrbToExpBar(uiOrbRect));
+    }
+
+private IEnumerator MoveUIOrbToExpBar(RectTransform uiOrbRect)
+{
+    Vector3 worldStartPosition = uiOrbRect.position;
+    RectTransform expBarTarget = GameObject.Find("UI/EXP").GetComponent<RectTransform>();
+    Vector3 worldTargetPosition = expBarTarget.position;
+
+    if (expBarTarget == null)
+    {
+        Debug.LogError("EXP Bar target not found in UI");
+        yield break;
+    }
+
+    // Move towards the experience bar target
+    while (Vector3.Distance(worldStartPosition, worldTargetPosition) > 0.1f)
+    {
+        worldStartPosition = Vector3.Lerp(worldStartPosition, worldTargetPosition, moveSpeed * Time.deltaTime);
+        uiOrbRect.position = worldStartPosition;
+
+        Debug.Log("Current Position: " + uiOrbRect.position + " Target Position: " + worldTargetPosition);
+        yield return null;
+    }
+    Destroy(uiOrbRect.gameObject);
+}
 
     IEnumerator Countdown()
     {
@@ -59,9 +98,6 @@ public class ExperiencePickup : MonoBehaviour
     {
         GameObject playerObject = GameManager.Instance.Player;
         Transform player = playerObject.transform;
-        GameObject ui = GameObject.Find("UI");
-        GameObject expBar = ui.transform.Find("EXP").gameObject;
-        Transform bar = expBar.transform;
         if (moveToPlayer && player != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -71,13 +107,6 @@ public class ExperiencePickup : MonoBehaviour
                 // Move the orb towards the player
                 Vector3 direction = (player.position - transform.position).normalized;
                 transform.position += direction * moveSpeed * Time.deltaTime;
-                
-                // if (Vector3.Distance(transform.position, player.position) < 0.1f)
-                // {
-                //     Debug.Log("moving EXP to EXPBar");
-                //     direction = (bar.position - transform.position).normalized;
-                //     transform.position += direction * moveSpeed * Time.deltaTime;
-                // }
             }
 
             // Optionally, stop moving when very close to the player
@@ -88,32 +117,4 @@ public class ExperiencePickup : MonoBehaviour
         }
     }
 
-    public void StartMoveToEXPBar(){
-        moveToEXPBar= true;
-    }
-
-    private void MoveToEXPBar()
-    {
-        GameObject ui = GameObject.Find("UI");
-        GameObject expBar = ui.transform.Find("EXP").gameObject;
-        Transform player = expBar.transform;
-        if (moveToEXPBar && player != null)
-        {
-            Debug.Log("moving EXP to EXPBar");
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            // Debug.Log(distanceToPlayer);
-
-            // Move the orb towards the exp bar
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
-
-            // Optionally, stop moving when very close to the player
-            if (Vector3.Distance(transform.position, player.position) < 0.1f)
-            {
-                moveToEXPBar = false;  // Stop moving when very close
-            }
-        }
-    }
-
-    
 }
