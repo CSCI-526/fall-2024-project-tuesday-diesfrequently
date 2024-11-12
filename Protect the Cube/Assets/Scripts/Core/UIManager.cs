@@ -4,9 +4,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject WASD;
+    public GameObject inventoryArrow;
+    public GameObject xpArrow;
+    public float xpArrowOffset;
+    public GameObject holdMouse;
+    public GameObject XPLevelUp;
+    public TextMeshProUGUI expAnimText;
+
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
     [SerializeField] protected Slider expSlider;
@@ -164,6 +173,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowRewardScreen()
     {
+        XPLevelUp.SetActive(false);
         minimap.SetActive(false);
         rewardMenuActive = true;
         rewardMenu.SetActive(true);
@@ -199,6 +209,40 @@ public class UIManager : MonoBehaviour
         
     }
 
+    // Author: Isabel --> Tutorial Functions
+    public void Tutorial_ShowMovementUI()
+    {
+        WASD.SetActive(true);
+    }
+
+    public void Tutorial_HideMovementUI()
+    {
+        WASD.SetActive(false);
+    }
+
+    public void Tutorial_ShowShootingUI()
+    {
+        holdMouse.SetActive(true);
+    }
+
+    public void Tutorial_HideShootingUI()
+    {
+        holdMouse.SetActive(false);
+    }
+
+    public void Tutorial_ShowXPUI(Vector3 pos)
+    {
+        xpArrow.SetActive(true);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+        screenPos.y += xpArrowOffset;
+        xpArrow.transform.position = pos;
+    }
+
+    public void Tutorial_HideXPUI()
+    {
+        xpArrow.SetActive(false);
+    }
+
     public void UpdateWaveUI()
     {
         if (_nexus && _playerHP) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count;
@@ -209,6 +253,7 @@ public class UIManager : MonoBehaviour
         if (_playerLVL)
         {
             expUI.text = ( _playerLVL.currentLevel+1).ToString();
+            expAnimText.text = expUI.text;
             expSlider.value =  _playerLVL.currentXP;
             expSlider.maxValue =  _playerLVL.xpNeededForLevel;
         }
