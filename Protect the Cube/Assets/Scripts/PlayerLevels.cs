@@ -71,6 +71,7 @@ public class PlayerLevels : MonoBehaviour
                     xpNeededForLevel = xpLinearScaler * currentLevel + xpNeededBase;
                 }
                 GameManager.Instance.UIManager.XPLevelUp.SetActive(true);
+                Time.timeScale = 0.0f;
                 //GameManager.Instance.UIManager.ShowRewardScreen();
                 GameManager.Instance.InventoryManager.GenerateRewards();
             }
