@@ -119,7 +119,7 @@ public class InventoryManager : MonoBehaviour
         if (playerHealthSnapshot < PlayerHealth.PLAYER_MAX_HEALTH) { AddPotentialReward("Player HP", ref forcedReward, ref forcedRewardCount); }
         else { RemovePotentialReward("Player HP"); }
         // post level 10, give nexus health regen as an option for players
-        if (nexusHealthSnapshot < Nexus.NEXUS_MAX_HEALTH && playerLevelSnapshot >= 5) { AddPotentialReward("Nexus HP", ref forcedReward, ref forcedRewardCount); }
+        if (nexusHealthSnapshot < GameManager.Instance.Nexus.GetComponent<Nexus>().maxHealth && playerLevelSnapshot >= 5) { AddPotentialReward("Nexus HP", ref forcedReward, ref forcedRewardCount); }
         else { RemovePotentialReward("Nexus HP"); }
 
         // Level 1: Add "Gun Turret" as Valid Reward Choice

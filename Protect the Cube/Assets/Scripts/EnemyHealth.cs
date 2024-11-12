@@ -86,7 +86,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if(countInWave)
         {
-            GameManager.Instance.WaveManager.KillEnemyEntity(this.gameObject, GameManager.Instance.WaveManager.getEnemyIDX(enemyName));
+            GameManager.Instance.WaveManager.KillEnemyEntity(this.gameObject, GameManager.Instance.WaveManager.GetEnemyIDX(enemyName));
         }
         DropExp();
         Destroy(gameObject);

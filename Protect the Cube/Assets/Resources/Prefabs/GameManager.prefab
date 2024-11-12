@@ -61,27 +61,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1656624d7395c54ea66bf0f4c1952a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveInterval: 5
-  maxSpawnDelay: 3
-  enemyCount: 0
-  wave: 0
-  difficulty: 0.8
-  tankRate: 1
-  tank: {fileID: 6013629208632606210, guid: 2f4b90fa476cd40549e7d9dc2d55c7b9, type: 3}
-  tankSpawnStartWave: 5
-  shooterRate: 1
-  shooter: {fileID: 6013629208632606210, guid: 8f020f1a1c8736d4b95a745e185fe290, type: 3}
-  shooterSpawnStartWave: 2
-  spawnerBoss: {fileID: 6013629208632606210, guid: 3b5bba5c60f32c548af9ae3240374613, type: 3}
-  spawnerBossStartWave: 10
-  shieldTank: {fileID: 6013629208632606210, guid: 043c26fd723417644bb1ff73a471e0e4, type: 3}
-  shieldEnemyStartWave: 7
-  enemyPrefabs:
+  EnemyPrefabs:
+  - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
   - {fileID: 6013629208632606210, guid: 4f8316f4c6dace64e8093e78c01ea5d1, type: 3}
-  - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
-  - {fileID: 6013629208632606210, guid: 408d845f82dc9bb4387177ba1b39936c, type: 3}
-  enemies: []
-  spawnPoints: []
+  - {fileID: 6013629208632606210, guid: 043c26fd723417644bb1ff73a471e0e4, type: 3}
+  - {fileID: 6013629208632606210, guid: 3b5bba5c60f32c548af9ae3240374613, type: 3}
+  - {fileID: 6013629208632606210, guid: 2f4b90fa476cd40549e7d9dc2d55c7b9, type: 3}
+  - {fileID: 6013629208632606210, guid: 8f020f1a1c8736d4b95a745e185fe290, type: 3}
+  Waves:
+  - {fileID: 11400000, guid: 7fc280e7c2311804ebd52e18b030e267, type: 2}
+  - {fileID: 11400000, guid: c9f79c00c526aaf40bc5de17d097b06f, type: 2}
+  - {fileID: 11400000, guid: 09ea481e19ae8d945b73f3963d116034, type: 2}
+  - {fileID: 11400000, guid: 09ea481e19ae8d945b73f3963d116034, type: 2}
+  EnemyCounter: 
+  AllEnemyEntities: []
+  wave_index: 0
+  nexus: {fileID: 7341533106581737996, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
+  centralPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4730567282749379631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,13 +109,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  inventoryWbox:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   goldUI: {fileID: 0}
   gameOverScreen: {fileID: 0}
   SelectGunTutorialUI: {fileID: 0}
   rewardMenu: {fileID: 0}
   upgradePanel: {fileID: 0}
   pauseUI: {fileID: 0}
-  crosshairTexture: {fileID: 2800000, guid: 6bb4e046bf9666047ba42a3c0d25d34f, type: 3}
+  damageEffect: {fileID: 0}
+  crosshairTexture: {fileID: 0}
   HandTexture: {fileID: 0}
   pauseMenuActive: 0
   rewardMenuActive: 0
@@ -135,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a297ec0e09cea247afe5bd845279954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryPrefabs: []
 --- !u!114 &4076889085620958360
 MonoBehaviour:
   m_ObjectHideFlags: 0

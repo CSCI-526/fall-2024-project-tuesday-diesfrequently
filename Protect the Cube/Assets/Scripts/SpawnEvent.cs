@@ -28,7 +28,7 @@ public class SpawnEvent
     public IEnumerator DelayedSpawn()
     {
         yield return new WaitForSeconds(SpawnDelay);
-        int enemyIDX = _waveManagerReference.getEnemyIDX(EnemyType);
+        int enemyIDX = _waveManagerReference.GetEnemyIDX(EnemyType);
         GameObject enemyPrefab = _waveManagerReference.EnemyPrefabs[enemyIDX];
         GameObject enemyEntity = Object.Instantiate(enemyPrefab);
 
