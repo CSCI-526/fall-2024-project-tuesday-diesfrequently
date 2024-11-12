@@ -16,6 +16,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public List<int> EnemyCounter = new List<int>();
     [SerializeField] public List<GameObject> AllEnemyEntities;
     [SerializeField] public int wave_index;
+    [SerializeField] public int wave_count;
 
     private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>(); //stores the spawn point configuration
     private float _currentWaveLength;
@@ -37,6 +38,7 @@ public class WaveManager : MonoBehaviour
         _currentWaveLength = 0;
         spawnConfigs = new List<List<Vector3>>();
         wave_index = 0;
+        wave_count = 0;
     }
 
     // Start is called before the first frame update
@@ -126,6 +128,7 @@ public class WaveManager : MonoBehaviour
         }
 
         wave_index++; // incrementing wave number
+        wave_count++;
         _currentWaveLength = 0;
         if (wave_index >= Waves.Count) //repeat the last wave if finished (temp)
         {

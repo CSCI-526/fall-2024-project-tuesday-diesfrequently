@@ -561,7 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpNeededForLevel: 4
   xpNeededBase: 4
-  xpLinearScaler: 1
+  xpLinearScaler: 3
   turretOptions:
   - {fileID: 6852214484739291977, guid: 5c6dcd31d3038d64e853cefcb9d02f05, type: 3}
   - {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
