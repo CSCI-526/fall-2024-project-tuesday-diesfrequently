@@ -34,8 +34,11 @@ public class Exclusion : MonoBehaviour
 
         Vector3 boxSize = placeableObject.transform.localScale;
         Vector3 position = placeableObject.transform.position;
-        LayerMask objectLayer = 1 << placeableObject.layer;
-        Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude/2, objectLayer);
+        // LayerMask objectLayer = 1 << placeableObject.layer;
+        // Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude/2, objectLayer);
+        string[] layers = new string[] { "Building", "Nexus" };
+        LayerMask combinedLayerMask = LayerMask.GetMask(layers);
+        Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude / 2, combinedLayerMask);
         if (colliders.Length > 1)
         {
             // show exclusion indicator if there are colliding buildings

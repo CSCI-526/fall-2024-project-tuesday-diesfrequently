@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 3552359513229429613}
   - component: {fileID: 3824991357619541582}
   - component: {fileID: 9204870354521129057}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Harvester
   m_TagString: Nexus
   m_Icon: {fileID: 0}
@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f5a12d4faa30442b9269fe02f493d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NEXUS_MAX_HEALTH: 20
   spawnXP: 1
   xpSpawnInterval: 5
   xpPrefab: {fileID: 6435648702068270667, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
