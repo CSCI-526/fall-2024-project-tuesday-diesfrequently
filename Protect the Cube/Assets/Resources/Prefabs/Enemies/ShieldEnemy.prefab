@@ -723,6 +723,7 @@ MonoBehaviour:
   hpBar: {fileID: 6992884718561214115}
   hpBarOffset: {x: 0, y: 2, z: 0}
   countInWave: 1
+  enemyName: ShieldEnemy
 --- !u!136 &8803482667701268275
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -6,7 +6,9 @@ using UnityEngine;
 public class Wave
 {
     public float Difficulty { get; private set; }
-    public List<SpawnEvent> SpawnSchedule { get; private set; }
+    [SerializeField] public List<SpawnEvent> SpawnSchedule { get; private set; }
+
+    [SerializeField] public List<GameObject> SpawnEvents;
     public float WaveDuration { get; private set; }
     public bool IsCustom { get; private set; }
 

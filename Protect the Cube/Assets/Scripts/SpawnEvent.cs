@@ -32,7 +32,7 @@ public class SpawnEvent
         GameObject enemyPrefab = _waveManagerReference.EnemyPrefabs[enemyIDX];
         GameObject enemyEntity = Object.Instantiate(enemyPrefab);
 
-        _waveManagerReference.AddEnemyEntity(enemyEntity, 0);
+        _waveManagerReference.AddEnemyEntity(enemyEntity, enemyIDX);
         enemyEntity.transform.position = SpawnPoint + new Vector3(Random.Range(-SpawnRange, SpawnRange), 0, Random.Range(-SpawnRange, SpawnRange));
     }
 

@@ -20,9 +20,8 @@ public class WaveManager : MonoBehaviour
     public int wave_index { get; private set; }
 
     private Dictionary<string, int> _enemyMapping; // Dictionary for Enemy Types
-    private List<GameObject> spawnPointList = new List<GameObject>();
-    private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>();
-    private List<Wave> TutorialWaves = new List<Wave>();
+    private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>(); //stores the spawn point configuration
+    [SerializeField] private List<Wave> TutorialWaves = new List<Wave>(); //contains waves of spawnevents
 
     private float _currentWaveLength;
     private Wave _currentWave;
@@ -38,10 +37,9 @@ public class WaveManager : MonoBehaviour
             { "FastEnemy", 1 },
             { "ShieldEnemy", 2 },
             { "SpawnerBossEnemy", 3 },
-            { "TankEnemy", 4 }
+            { "TankEnemy", 4 },
+            { "Ranged Enemy", 5 }
         };
-
-        spawnPointList = new List<GameObject>();
 
         // size of the potential number of dropped inventory items
         EnemyPrefabs = new List<GameObject>();
@@ -115,7 +113,6 @@ public class WaveManager : MonoBehaviour
 
     private List<Vector3> InitializeSpawnPoints(int num_spawn_points, float radius, string pattern)
     {
-        spawnPointList.Clear();
         List<Vector3> temp_spawn_points = new List<Vector3>();
         for (int i = 0; i < num_spawn_points; i++)
         {
@@ -150,7 +147,6 @@ public class WaveManager : MonoBehaviour
     {
         UpdateGlobalWaveTimer();
         if (AllEnemiesKilled() && WaveTimerComplete(_currentWave)) {
-            Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCount) + "]");
             SpawnNextWave();
         }
     }
@@ -200,6 +196,7 @@ public class WaveManager : MonoBehaviour
 
         GameManager.Instance.UIManager.UpdateUI();
         GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave_index);// Send wave number to analytics
+        Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCount) + "]");
     }
 
     private void SetupTutorialWaves()

@@ -21,7 +21,8 @@ public class SpawnerEnemy : MonoBehaviour
         {
             for(int i = 0; i < spawnQuantity; i++)
             {
-                Instantiate(enemyPrefab, spawnPos.position, transform.rotation);
+                GameObject minion = Instantiate(enemyPrefab, spawnPos.position, transform.rotation);
+                GameManager.Instance.WaveManager.AddEnemyEntity(minion, GameManager.Instance.WaveManager.getEnemyIDX(minion.GetComponent<EnemyHealth>().enemyName));
             }
             spawnTimer = 0.0f;
         }

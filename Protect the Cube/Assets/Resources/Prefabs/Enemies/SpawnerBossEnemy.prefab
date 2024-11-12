@@ -586,6 +586,7 @@ MonoBehaviour:
   hpBar: {fileID: 4146395562187970712}
   hpBarOffset: {x: 0, y: 3, z: 0}
   countInWave: 1
+  enemyName: SpawnerBossEnemy
 --- !u!114 &1853867677088179105
 MonoBehaviour:
   m_ObjectHideFlags: 0
