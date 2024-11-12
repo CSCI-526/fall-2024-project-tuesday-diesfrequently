@@ -67,7 +67,7 @@ public class Nexus : MonoBehaviour
     }
 
     private void Update() {
-         //if (GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves) HandleXPSpawn();
+         HandleXPSpawn();
     }
 
     private void AddNexusHealth()
