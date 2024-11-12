@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 1139330064262291029}
   - component: {fileID: 8803482667701268275}
   - component: {fileID: 3554670074321034959}
+  - component: {fileID: -3164685007622903208}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -233,6 +234,7 @@ MonoBehaviour:
   hpBar: {fileID: 8543504160947674801}
   hpBarOffset: {x: 0, y: 1.5, z: 0}
   countInWave: 1
+  enemyName: Enemy
 --- !u!136 &8803482667701268275
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -277,6 +279,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3164685007622903208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013629208632606210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697c249387eba450493cf08a9c65f256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Enemy
 --- !u!1 &6314795160200996642
 GameObject:
   m_ObjectHideFlags: 0

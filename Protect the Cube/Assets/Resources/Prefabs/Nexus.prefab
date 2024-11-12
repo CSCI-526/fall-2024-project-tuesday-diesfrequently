@@ -259,11 +259,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f5a12d4faa30442b9269fe02f493d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NEXUS_MAX_HEALTH: 20
   spawnXP: 1
   xpSpawnInterval: 4
   xpPrefab: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
-  hpBar: {fileID: 4094194676968528289}
+  hpBar: {fileID: 0}
   triggerGameOver: 1
   indicator: {fileID: 0}
 --- !u!114 &8375766490867417729
@@ -596,7 +597,7 @@ RectTransform:
   m_Father: {fileID: 6775243657658472710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

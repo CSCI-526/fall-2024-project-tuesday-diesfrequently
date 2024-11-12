@@ -578,6 +578,7 @@ GameObject:
   - component: {fileID: 1139330064262291029}
   - component: {fileID: 8803482667701268275}
   - component: {fileID: 1963565173388153342}
+  - component: {fileID: 8879899339022694377}
   m_Layer: 8
   m_Name: ShieldEnemy
   m_TagString: Enemy
@@ -722,6 +723,7 @@ MonoBehaviour:
   hpBar: {fileID: 6992884718561214115}
   hpBarOffset: {x: 0, y: 2, z: 0}
   countInWave: 1
+  enemyName: ShieldEnemy
 --- !u!136 &8803482667701268275
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -766,6 +768,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8879899339022694377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013629208632606210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697c249387eba450493cf08a9c65f256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Enemy
 --- !u!1 &7700221927900420305
 GameObject:
   m_ObjectHideFlags: 0

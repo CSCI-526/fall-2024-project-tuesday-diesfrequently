@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincibilityDuration: 1
-  hpBar: {fileID: 3090110262206307061}
+  hpBar: {fileID: 0}
 --- !u!114 &8531904022790211960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpNeededForLevel: 4
   xpNeededBase: 4
-  xpLinearScaler: 1
+  xpLinearScaler: 3
   turretOptions:
   - {fileID: 6852214484739291977, guid: 5c6dcd31d3038d64e853cefcb9d02f05, type: 3}
   - {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
@@ -958,11 +958,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5121493052925971619, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5121493052925971619, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6843268688715400512, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
       propertyPath: m_Name
@@ -977,17 +977,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
---- !u!114 &3090110262206307061 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4013090980228223043, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
-  m_PrefabInstance: {fileID: 2113061317870570166}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3771889541316447260 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2957575911117342378, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}

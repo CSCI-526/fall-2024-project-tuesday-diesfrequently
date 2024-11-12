@@ -24,16 +24,12 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public Slider hpBar;
     [SerializeField] public Vector3 hpBarOffset = new Vector3(0.0f,3.0f,0.0f);
     [SerializeField] public bool countInWave = true;
+    [SerializeField] public string enemyName = "None";
 
     //[SerializeField] public float MoreXpDropBreakpoints = 10.0f;  
     void Start()
     {
         currentHealth = maxHealth;
-        if(countInWave)
-        {
-            GameManager.Instance.WaveManager.enemyCount++;
-            GameManager.Instance.WaveManager.enemies.Add(this.gameObject);
-        }
         animator = GetComponent<Animator>();    
         
         if(hpCanvas)
@@ -88,10 +84,11 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
-        GameManager.Instance.WaveManager.enemyCount--;
-        GameManager.Instance.WaveManager.enemies.Remove(this.gameObject);
+        if(countInWave)
+        {
+            GameManager.Instance.WaveManager.KillEnemyEntity(this.gameObject, GameManager.Instance.WaveManager.GetEnemyIDX(enemyName));
+        }
         DropExp();
-        //Debug.Log(GameManager.Instance.WaveManager.enemyCount);
         Destroy(gameObject);
     }
 
