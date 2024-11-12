@@ -195,8 +195,6 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<PlayerController>().UnlockMovement();
         Player.GetComponent<PlayerController>().UnlockShooting();
         WaveManager.UnlockAllEnemiesMovement();
-
-        //SetGamePhase(GamePhase.HandCraftedWaves);
     }
 
     /////////////////////////////
