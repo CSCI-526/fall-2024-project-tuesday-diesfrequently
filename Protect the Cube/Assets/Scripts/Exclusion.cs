@@ -6,18 +6,12 @@ public class Exclusion : MonoBehaviour
 {
     // want to detect if an object already exist in this position
     // to prevent the player from placing a building on top of another building
-
-    // make the box size the size of the game object
-    public Vector3 boxSize = new Vector3(1, 1, 1);
-    // layer to check for existing objects 
-    public LayerMask objectLayer;
-
     private static List<GameObject> previousColliders = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -26,7 +20,7 @@ public class Exclusion : MonoBehaviour
         
     }
 
-    public static bool CheckForExclusion(GameObject placeableObject)
+    public static bool CheckForExclusion(GameObject placeableObject, Animator top, Animator bottom)
     {
         // always show the range indicator
         if (placeableObject.GetComponent<RangeIndicator>() == null) { Debug.Log("Rangeindicator is Null"); }
@@ -34,12 +28,19 @@ public class Exclusion : MonoBehaviour
 
         Vector3 boxSize = placeableObject.transform.localScale;
         Vector3 position = placeableObject.transform.position;
-        LayerMask objectLayer = 1 << placeableObject.layer;
-        Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude/2, objectLayer);
+        string[] layers = new string[] { "Building", "Nexus" };
+        LayerMask combinedLayerMask = LayerMask.GetMask(layers);
+        Collider[] colliders = Physics.OverlapSphere(position, boxSize.magnitude / 2, combinedLayerMask);
         if (colliders.Length > 1)
         {
             // show exclusion indicator if there are colliding buildings
             placeableObject.GetComponent<RangeIndicator>().ShowIndicator();
+            if (top != null && bottom != null)
+            {
+                // Debug.Log("Damage");
+                top.SetTrigger("Damage");
+                bottom.SetTrigger("Damage");
+            }
             foreach (var collider in colliders)
             {
                 if ((collider.gameObject != placeableObject) && (collider.gameObject.GetComponent<RangeIndicator>() != null))

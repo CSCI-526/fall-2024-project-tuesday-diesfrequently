@@ -14,13 +14,16 @@ public class ExperiencePickup : MonoBehaviour
 
     [SerializeField] public bool moveToPlayer = false;
     [SerializeField] public float attractionRange = 4.0f;
+    [SerializeField] private GameObject uiExpOrbPrefab;
 
+    private Transform canvasTransform;
     private float counter = 0;
     float dir = 1.0f;
 
     void Start()
     {
         StartCoroutine(Countdown());
+        canvasTransform = GameObject.Find("UI").transform;
     }
 
     // Update is called once per frame
@@ -41,8 +44,45 @@ public class ExperiencePickup : MonoBehaviour
         if (other.tag == "Player"){
             other.GetComponent<PlayerLevels>().add_exp(exp_value, gameObject);
             Destroy(gameObject);
+            // CreateUIOrbAtCenter();
         }
     }
+
+    private void CreateUIOrbAtCenter()
+    {
+        GameObject uiOrb = Instantiate(uiExpOrbPrefab, canvasTransform);
+        RectTransform uiOrbRect = uiOrb.GetComponent<RectTransform>();
+
+        // center it on the Canvas
+        uiOrbRect.anchoredPosition = Vector2.zero;
+
+        // Start the coroutine to move the UI orb to the experience bar
+        StartCoroutine(MoveUIOrbToExpBar(uiOrbRect));
+    }
+
+private IEnumerator MoveUIOrbToExpBar(RectTransform uiOrbRect)
+{
+    Vector3 worldStartPosition = uiOrbRect.position;
+    RectTransform expBarTarget = GameObject.Find("UI/EXP").GetComponent<RectTransform>();
+    Vector3 worldTargetPosition = expBarTarget.position;
+
+    if (expBarTarget == null)
+    {
+        Debug.LogError("EXP Bar target not found in UI");
+        yield break;
+    }
+
+    // Move towards the experience bar target
+    while (Vector3.Distance(worldStartPosition, worldTargetPosition) > 0.1f)
+    {
+        worldStartPosition = Vector3.Lerp(worldStartPosition, worldTargetPosition, moveSpeed * Time.deltaTime);
+        uiOrbRect.position = worldStartPosition;
+
+        Debug.Log("Current Position: " + uiOrbRect.position + " Target Position: " + worldTargetPosition);
+        yield return null;
+    }
+    Destroy(uiOrbRect.gameObject);
+}
 
     IEnumerator Countdown()
     {
@@ -76,4 +116,5 @@ public class ExperiencePickup : MonoBehaviour
             }
         }
     }
+
 }

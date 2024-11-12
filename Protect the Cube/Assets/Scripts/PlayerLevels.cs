@@ -11,7 +11,6 @@ public class PlayerLevels : MonoBehaviour
     [SerializeField] public int xpNeededBase = 2;
     [SerializeField] public int xpLinearScaler = 2;
 
-
     [SerializeField] public List<GameObject> turretOptions = new List<GameObject>();
 
     [SerializeField] public int currentXP = 0;
@@ -67,8 +66,9 @@ public class PlayerLevels : MonoBehaviour
                     levels_to_process += 1;
                     xpNeededForLevel = xpLinearScaler * currentLevel + xpNeededBase;
                 }
-
-                GameManager.Instance.UIManager.ShowRewardScreen();
+                GameManager.Instance.UIManager.XPLevelUp.SetActive(true);
+                Time.timeScale = 0.0f;
+                //GameManager.Instance.UIManager.ShowRewardScreen();
                 GameManager.Instance.InventoryManager.GenerateRewards();
 
                 

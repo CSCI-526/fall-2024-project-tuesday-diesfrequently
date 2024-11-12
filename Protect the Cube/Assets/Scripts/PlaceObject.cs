@@ -112,18 +112,25 @@ public class PlaceObject : MonoBehaviour
 
     private void ReleaseIfClicked()
     {
-        Building b = currentPlaceableObject.GetComponent<Building>();
+        Transform headTransform = currentPlaceableObject.transform.Find("Head"); 
+        Transform baseTransform = currentPlaceableObject.transform.Find("Base");
+        Animator baseAnimator = null;
+        Animator headAnimator = null;
+        Building b = currentPlaceableObject.GetComponent<Building>(); 
         bool canPlace = GameManager.Instance.InventoryManager.isInventoryAvailable(b.buildingName);
         if (b.gameObject.GetComponent<Harvester>() != null)
         {
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
+        } else {
+            baseAnimator = baseTransform.GetComponent<Animator>();
+            headAnimator = headTransform.GetComponent<Animator>();
         }
 
-        canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
+        canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject, baseAnimator, headAnimator);
 
         if (currentPlaceableObject.GetComponent<turretShoot>() != null) //make exclusion only apply for turrets
         {
-            canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject);
+            canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject, baseAnimator, headAnimator);
         }
 
         if (Input.GetMouseButtonDown(0) && canPlace)

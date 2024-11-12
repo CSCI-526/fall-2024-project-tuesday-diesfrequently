@@ -4,9 +4,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject WASD;
+    public GameObject inventoryArrow;
+    public GameObject xpArrow;
+    public float xpArrowOffset;
+    public GameObject holdMouse;
+    public GameObject XPLevelUp;
+    public TextMeshProUGUI expAnimText;
+
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
     [SerializeField] protected Slider expSlider;
@@ -34,6 +43,10 @@ public class UIManager : MonoBehaviour
     private Image goldImage;
 
     private InventoryManager inventoryManager;
+    private GameObject minimap;
+    private GameObject uiObject;
+    private GameObject inventoryBar;
+    private GameObject expBar;
     
     public bool pauseMenuActive = false;
     public bool rewardMenuActive = false;
@@ -56,6 +69,10 @@ private void Awake()
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
          _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
         goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
+        minimap = GameObject.Find("MinimapComponent");
+        uiObject = GameObject.Find("UI");
+        inventoryBar = uiObject.transform.Find("Inventory Bar").gameObject;
+        expBar = uiObject.transform.Find("EXP").gameObject;
         UpdateUI();
     }
 
@@ -149,41 +166,62 @@ private void Awake()
 
     public void ShowGameOverScreen()
     {
+        minimap.SetActive(false);
+        inventoryBar.SetActive(false);
+        expBar.SetActive(false);
         gameOverScreen.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void ShowPauseScreen()
     {
-        if(rewardMenuActive) rewardMenu.SetActive(false);
+        if(rewardMenuActive){
+            rewardMenu.SetActive(false);
+        }
         pauseMenuActive = true;
         pauseUI.SetActive(true);
         Time.timeScale = 0.0f;
+        minimap.SetActive(false);
+        inventoryBar.SetActive(false);
+        expBar.SetActive(false);
     }
 
     public void HidePauseScreen()
     {
-        if(rewardMenuActive) rewardMenu.SetActive(true);
-        else Time.timeScale = 1.0f;
-        
+        if(rewardMenuActive){
+            rewardMenu.SetActive(true);
+        } 
+        else {
+            Time.timeScale = 1.0f;
+            minimap.SetActive(true);
+            inventoryBar.SetActive(true);
+            expBar.SetActive(true);
+        }
         pauseMenuActive = false;
         pauseUI.SetActive(false);
     }
 
     public void ShowRewardScreen()
     {
+        XPLevelUp.SetActive(false);
+        minimap.SetActive(false);
         rewardMenuActive = true;
         DeactivateInventoryUI(); // tutorial
         rewardMenu.SetActive(true);
         Time.timeScale = 0.0f;
+        inventoryBar.SetActive(false);
+        expBar.SetActive(false);
     }
 
     public void HideRewardScreen()
     {
+        minimap.SetActive(true);
         rewardMenuActive = false;
         rewardMenu.SetActive(false);
         ActivateInventoryUI(); // tutorial
         Time.timeScale = 1.0f;
+        inventoryBar.SetActive(true);
+        expBar.SetActive(true);
         firstRewardScreenEnded = true;
     }
 
@@ -196,6 +234,7 @@ private void Awake()
     public void HideUpgradeScreen()
     {
         upgradePanel.SetActive(false);
+
     }
 
     public void ShowSelectGunTutorial()
@@ -215,9 +254,43 @@ private void Awake()
         
     }
 
+    // Author: Isabel --> Tutorial Functions
+    public void Tutorial_ShowMovementUI()
+    {
+        WASD.SetActive(true);
+    }
+
+    public void Tutorial_HideMovementUI()
+    {
+        WASD.SetActive(false);
+    }
+
+    public void Tutorial_ShowShootingUI()
+    {
+        holdMouse.SetActive(true);
+    }
+
+    public void Tutorial_HideShootingUI()
+    {
+        holdMouse.SetActive(false);
+    }
+
+    public void Tutorial_ShowXPUI(Vector3 pos)
+    {
+        xpArrow.SetActive(true);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+        screenPos.y += xpArrowOffset;
+        xpArrow.transform.position = pos;
+    }
+
+    public void Tutorial_HideXPUI()
+    {
+        xpArrow.SetActive(false);
+    }
+
     public void UpdateWaveUI()
     {
-        if ((_nexus && _playerHP) && (GameManager.GamePhase.HandCraftedWaves == GameManager.Instance.CurrentPhase)) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_index;
+        if ((_nexus && _playerHP) && (GameManager.GamePhase.HandCraftedWaves == GameManager.Instance.CurrentPhase)) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count;
     }
 
     public void UpdatePlayerXPUI()
@@ -225,6 +298,7 @@ private void Awake()
         if (_playerLVL)
         {
             expUI.text = ( _playerLVL.currentLevel+1).ToString();
+            expAnimText.text = expUI.text;
             expSlider.value =  _playerLVL.currentXP;
             expSlider.maxValue =  _playerLVL.xpNeededForLevel;
         }

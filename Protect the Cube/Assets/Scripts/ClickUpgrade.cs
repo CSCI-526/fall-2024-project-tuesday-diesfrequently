@@ -79,8 +79,8 @@ public class ClickUpgrade : MonoBehaviour
         foreach (GameObject turret in turrets)
         {
             Transform existingArrow = turret.transform.Find("UpgradeArrow");
-            // Check if the turret can be upgraded based on player's gold
-            if (goldRequired <= playerLevelObject.currentGold)
+            // Check if the turret can be upgraded based on player's gold and level of turret
+            if (goldRequired <= playerLevelObject.currentGold && upgradeable)
             {
                 if(existingArrow == null){
                     ShowUpgradeArrow(turret); // Show the upgrade arrow if affordable
@@ -101,9 +101,9 @@ public class ClickUpgrade : MonoBehaviour
         // create as child of turret
         GameObject arrow = Instantiate(upgradeArrow, turret.transform);
         arrow.name = "UpgradeArrow"; // Give it a name to identify it later
-        arrow.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        arrow.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         // Set the position above the turret
-        arrow.transform.localPosition = Vector3.up * 2.2f;
+        arrow.transform.localPosition = Vector3.up * 3.2f;
 
     }
 
