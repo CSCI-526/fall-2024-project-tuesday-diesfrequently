@@ -3743,46 +3743,6 @@ PrefabInstance:
       propertyPath: displayedInventoryCount.Array.data[6]
       value: 
       objectReference: {fileID: 5021235089233810948}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 979e160d5ac5b544cb591bb73b00193f, type: 2}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: c152bffe08450244cbb3f7ab6db1bcbf, type: 2}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: f274a770218cee94fb6a9f09d3173b28, type: 2}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[6]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9525346e41bf6444882331400aa0a847, type: 2}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[7]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4d1f380bc6d6e464089042fb9aa9cb9f, type: 2}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[8]
-      value: 
-      objectReference: {fileID: 11400000, guid: 5ef1f36b1d5a8ec4b871ba0130ca993c, type: 2}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[9]
-      value: 
-      objectReference: {fileID: 11400000, guid: 395babcb91f23574494e6e08e7e5d39f, type: 2}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[10]
-      value: 
-      objectReference: {fileID: 11400000, guid: f7b2b4c2067a07c4a82f22508710e2f6, type: 2}
-    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
-      propertyPath: Waves.Array.data[11]
-      value: 
-      objectReference: {fileID: 11400000, guid: 945bde7d7f7f2d24290649244049a14e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4064,10 +4024,6 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 1495458845}
-    - target: {fileID: 1443082488595280278, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
-      propertyPath: xpLinearScaler
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_Name
       value: Character
