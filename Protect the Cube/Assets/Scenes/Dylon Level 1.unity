@@ -2295,6 +2295,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7318285879288371285, guid: 692f46e2b25121b46877549f210b6069, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2015
+      objectReference: {fileID: 0}
     - target: {fileID: 7754581684733594620, guid: 692f46e2b25121b46877549f210b6069, type: 3}
       propertyPath: m_Name
       value: MinimapComponent
