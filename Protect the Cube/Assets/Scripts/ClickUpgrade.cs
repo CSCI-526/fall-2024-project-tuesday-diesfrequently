@@ -14,7 +14,7 @@ public class ClickUpgrade : MonoBehaviour
     private PlayerLevels playerLevelObject;
     public List<GameObject> turrets;
 
-    private int level = 0;
+    public int level = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +26,9 @@ public class ClickUpgrade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(upgradeable){
+            CheckForUpgradeableTurrets();
+        }
     }
 
     void OnMouseDown(){
@@ -51,21 +53,16 @@ public class ClickUpgrade : MonoBehaviour
     }
 
     public void upgrade(){
-        // if(PayCostIfPossible(goldRequired)){
-            level++;
-            goldRequired += level*3;
-            GameObject indicate = Instantiate(indicator);
-            indicate.transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f + level/5.0f, transform.position.z);
-            
-            gameObject.GetComponent<turretShoot>().upgrade(level, buildingName);
-            if(level == 3){
-                upgradeable = false;
-            }
-            // GameManager.Instance.UIManager.HideUpgradeScreen();
-        // }else{
-        //     Debug.Log("No enough resources");
-        //     GameManager.Instance.UIManager.HideUpgradeScreen();
-        // }
+
+        level++;
+        goldRequired += level*3;
+        GameObject indicate = Instantiate(indicator);
+        indicate.transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f + level/5.0f, transform.position.z);
+        
+        gameObject.GetComponent<turretShoot>().upgrade(level, buildingName);
+        if(level == 3){
+            upgradeable = false;
+        }
         GameManager.Instance.UIManager.UpdateUI();
         CheckForUpgradeableTurrets();
 
@@ -76,23 +73,23 @@ public class ClickUpgrade : MonoBehaviour
     {
         // update the list of turrets
         turrets = new List<GameObject>(GameObject.FindGameObjectsWithTag("Turret"));
-        foreach (GameObject turret in turrets)
-        {
-            Transform existingArrow = turret.transform.Find("UpgradeArrow");
+        // foreach (GameObject turret in turrets)
+        // {
+            Transform existingArrow = transform.Find("UpgradeArrow");
             // Check if the turret can be upgraded based on player's gold and level of turret
             if (goldRequired <= playerLevelObject.currentGold && upgradeable)
             {
                 if(existingArrow == null){
-                    ShowUpgradeArrow(turret); // Show the upgrade arrow if affordable
+                    ShowUpgradeArrow(gameObject); // Show the upgrade arrow if affordable
                 }
             }
             else
             {
                 if(existingArrow != null){
-                    HideUpgradeArrow(turret); // Hide the upgrade arrow if not affordable
+                    HideUpgradeArrow(gameObject); // Hide the upgrade arrow if not affordable
                 }
             }
-        }
+        // }
     }
 
     void ShowUpgradeArrow(GameObject turret)
