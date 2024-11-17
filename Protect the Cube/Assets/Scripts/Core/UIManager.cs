@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject pauseUI;
     [SerializeField] public GameObject inventoryBar;
     [SerializeField] public Image damageEffect;
-    
+
     public GameObject crosshairTexture;
     public GameObject HandTexture;
 
@@ -46,14 +46,14 @@ public class UIManager : MonoBehaviour
     private GameObject minimap;
     private GameObject uiObject;
     private GameObject expBar;
-    
+
     public bool pauseMenuActive = false;
     public bool rewardMenuActive = false;
     private int _currentHealth = 5;
     private bool isRewardLocked = true;
-    static private bool firstRewardScreenEnded = false; 
+    static private bool firstRewardScreenEnded = false;
 
-private void Awake()
+    private void Awake()
     {
         // References to Managers
         inventoryManager = GameManager.Instance.InventoryManager;
@@ -63,10 +63,10 @@ private void Awake()
     void Start()
     {
         SetCursorCrosshair();
-        
+
         _nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
-         _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
+        _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
         goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
         minimap = GameObject.Find("MinimapComponent");
         uiObject = GameObject.Find("UI");
@@ -85,8 +85,8 @@ private void Awake()
         }
 
         // code for UI Screen Flash on Dmg Taken
-        float atarget = (5 - _currentHealth)/10.0f;
-        if(damageEffect.color.a > atarget){
+        float atarget = (5 - _currentHealth) / 10.0f;
+        if (damageEffect.color.a > atarget) {
             var color = damageEffect.color;
             color.a -= 0.01f;
             damageEffect.color = color;
@@ -174,7 +174,7 @@ private void Awake()
 
     public void ShowPauseScreen()
     {
-        if(rewardMenuActive){
+        if (rewardMenuActive) {
             rewardMenu.SetActive(false);
         }
         pauseMenuActive = true;
@@ -187,9 +187,9 @@ private void Awake()
 
     public void HidePauseScreen()
     {
-        if(rewardMenuActive){
+        if (rewardMenuActive) {
             rewardMenu.SetActive(true);
-        } 
+        }
         else {
             Time.timeScale = 1.0f;
             minimap.SetActive(true);
@@ -230,7 +230,7 @@ private void Awake()
 
     public void ShowUpgradeScreen()
     {
-        upgradePanel.SetActive(true);        
+        upgradePanel.SetActive(true);
         Invoke("HideUpgradeScreen", 5.0f);
     }
 
@@ -255,7 +255,7 @@ private void Awake()
     public void ShowXPTutorial()
     {
         SelectGunTutorialUI.SetActive(true);
-        
+
     }
 
     // Author: Isabel --> Tutorial Functions
@@ -294,7 +294,11 @@ private void Awake()
 
     public void UpdateWaveUI()
     {
-        if ((_nexus && _playerHP) && (GameManager.GamePhase.HandCraftedWaves == GameManager.Instance.CurrentPhase)) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count;
+        if ((_nexus && _playerHP) && ((GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves)
+            || (GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)))
+        {
+            scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count;
+        }
     }
 
     public void UpdatePlayerXPUI()

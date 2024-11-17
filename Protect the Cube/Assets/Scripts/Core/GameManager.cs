@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
             case GamePhase.HandCraftedWaves:
                 StartHandCraftedWaves();
                 break;
+            case GamePhase.DynamicWaves:
+                StartDynamicWaves();
+                break;
 
             // can include future states here 
         }
@@ -198,6 +201,14 @@ public class GameManager : MonoBehaviour
         WaveManager.UnlockAllEnemiesMovement();
     }
 
+    private void StartDynamicWaves()
+    {
+        Debug.Log("ENTERING GamePhase.DynamicWaves Phase");
+        Player.GetComponent<PlayerController>().UnlockMovement();
+        Player.GetComponent<PlayerController>().UnlockShooting();
+        WaveManager.UnlockAllEnemiesMovement();
+    }
+
     /////////////////////////////
     // NON-TUTORIAL STATE CODE // 
     /////////////////////////////
@@ -223,7 +234,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SetGamePhase(GamePhase.HandCraftedWaves);
+            SetGamePhase(CurrentPhase);
         }
 
     }
