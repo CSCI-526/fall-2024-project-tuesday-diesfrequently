@@ -13,6 +13,7 @@ TagManager:
   - ExperienceOrb
   - GoldOrb
   - Breakable
+  - GoldVein
   layers:
   - Default
   - TransparentFX

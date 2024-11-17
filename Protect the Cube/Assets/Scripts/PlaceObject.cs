@@ -123,7 +123,8 @@ public class PlaceObject : MonoBehaviour
         {
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
             harvestorAnimator = currentPlaceableObject.GetComponent<Animator>();
-        } else {
+        } 
+        else {
             baseAnimator = baseTransform.GetComponent<Animator>();
             headAnimator = headTransform.GetComponent<Animator>();
         }

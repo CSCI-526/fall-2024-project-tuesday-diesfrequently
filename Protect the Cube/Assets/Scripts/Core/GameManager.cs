@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject Nexus {  get; set; }
 
     public bool useBulletPool = false;
+    public bool enableTutorial = true;
     private bool isPaused = false;
 
     // states for GamePhase Tutorialization
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
     }
 
     // tracks current phase
-    public GamePhase CurrentPhase { get; private set; } = GamePhase.Initialization;
+    [SerializeField] public GamePhase CurrentPhase = GamePhase.Initialization;
 
     public void SetGamePhase(GamePhase newPhase)
     {
@@ -63,6 +64,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GamePhase.HandCraftedWaves:
                 StartHandCraftedWaves();
+                break;
+            case GamePhase.DynamicWaves:
+                StartDynamicWaves();
                 break;
 
             // can include future states here 
@@ -197,6 +201,14 @@ public class GameManager : MonoBehaviour
         WaveManager.UnlockAllEnemiesMovement();
     }
 
+    private void StartDynamicWaves()
+    {
+        Debug.Log("ENTERING GamePhase.DynamicWaves Phase");
+        Player.GetComponent<PlayerController>().UnlockMovement();
+        Player.GetComponent<PlayerController>().UnlockShooting();
+        WaveManager.UnlockAllEnemiesMovement();
+    }
+
     /////////////////////////////
     // NON-TUTORIAL STATE CODE // 
     /////////////////////////////
@@ -215,7 +227,15 @@ public class GameManager : MonoBehaviour
 
     void Start() {
         Time.timeScale = 1.0f;
-        SetGamePhase(GamePhase.BasicTutorial_Start);
+        
+        if(enableTutorial)
+        {
+            SetGamePhase(GamePhase.BasicTutorial_Start);
+        }
+        else
+        {
+            SetGamePhase(CurrentPhase);
+        }
 
     }
 

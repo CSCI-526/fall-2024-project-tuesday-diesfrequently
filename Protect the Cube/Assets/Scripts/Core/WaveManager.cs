@@ -13,6 +13,8 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] public List<GameObject> EnemyPrefabs = new List<GameObject>();
     [SerializeField] public List<WaveInfo> Waves = new List<WaveInfo>();
+    [SerializeField] public WaveInfo dynamicWaveInfo = null;
+
     [SerializeField] public List<int> EnemyCounter = new List<int>();
     [SerializeField] public List<GameObject> AllEnemyEntities;
     [SerializeField] public int wave_index;
@@ -155,7 +157,8 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves)
+        if (GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves || 
+            GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)
         {
             UpdateGlobalWaveTimer();
             if (AllEnemiesKilled() && WaveTimerComplete())
@@ -168,23 +171,70 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateGlobalWaveTimer() { _currentWaveLength += Time.deltaTime; }
 
-    private void SpawnNextWave() //WaveInfo waveInfo)
+    private void SpawnNextWave()
     {
-        WaveInfo waveInfo = Waves[wave_index];
-        Debug.Log("[Starting Wave " + wave_index + " ]...");
+        if(GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)
+        {
+            SpawnDynamicWave(dynamicWaveInfo); //generates custom wave
+        }
+        else //normal behavior (uses custom waves)
+        {
+            WaveInfo waveInfo = Waves[wave_index];
+            Debug.Log("[Starting Wave " + wave_index + " ]...");
+
+            // output each wave event per wave
+            foreach (EnemyInfo enemy in waveInfo.enemyList)
+            {
+                for (int i = 0; i < enemy.amount; ++i)
+                {
+                    if (waveInfo.randomLocations)
+                    {
+                        StartCoroutine(DelayedSpawn(waveInfo, enemy));
+                    }
+                    else
+                    {
+                        StartCoroutine(DelayedSpawn(waveInfo, enemy, i));
+                    }
+                }
+            }
+
+            wave_index++; // incrementing wave number
+            wave_count++;
+            _currentWaveLength = 0;
+            if (wave_index >= Waves.Count) //swap to dynamic wave system
+            {
+                GameManager.Instance.SetGamePhase(GameManager.GamePhase.DynamicWaves);
+                //wave_index = Waves.Count - 1;
+            }
+
+            GameManager.Instance.UIManager.UpdateUI();
+            GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave_index);// Send wave number to analytics
+        }
+    }
+
+    private void SpawnDynamicWave(WaveInfo waveInfo = null)
+    {
+        if(waveInfo == null)
+        {
+            waveInfo = Waves[Waves.Count - 1]; //use last wave as base stats if missing
+        }
+        Debug.Log("[Starting Dynamic Wave " + wave_index + " ]...");
 
         // output each wave event per wave
         foreach (EnemyInfo enemy in waveInfo.enemyList)
         {
-            for(int i = 0; i < enemy.amount; ++i)
+            for (int i = 0; i < wave_count; ++i) //make spawns scale with wave length
             {
-                if(waveInfo.randomLocations)
+                if(UnityEngine.Random.Range(0, 100) <= enemy.spawnRate * 100.0f)
                 {
-                    StartCoroutine(DelayedSpawn(waveInfo, enemy));
-                }
-                else
-                {
-                    StartCoroutine(DelayedSpawn(waveInfo, enemy, i));
+                    if (waveInfo.randomLocations)
+                    {
+                        StartCoroutine(DelayedSpawn(waveInfo, enemy));
+                    }
+                    else
+                    {
+                        StartCoroutine(DelayedSpawn(waveInfo, enemy, i));
+                    }
                 }
             }
         }
@@ -192,16 +242,13 @@ public class WaveManager : MonoBehaviour
         wave_index++; // incrementing wave number
         wave_count++;
         _currentWaveLength = 0;
-        if (wave_index >= Waves.Count) //repeat the last wave if finished (temp)
-        {
-            wave_index = Waves.Count - 1;
-        }
 
         GameManager.Instance.UIManager.UpdateUI();
         GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave_index);// Send wave number to analytics
+
     }
 
-    public IEnumerator DelayedSpawn(WaveInfo wave, EnemyInfo enemy, int spawnLocationID = -1)// Vector3 location, float delay)
+    private IEnumerator DelayedSpawn(WaveInfo wave, EnemyInfo enemy, int spawnLocationID = -1)// Vector3 location, float delay)
     {
         float delay = UnityEngine.Random.Range(0, wave.spawnDelay) + enemy.spawnDelay;
         float spawnRange = wave.spawnRange;

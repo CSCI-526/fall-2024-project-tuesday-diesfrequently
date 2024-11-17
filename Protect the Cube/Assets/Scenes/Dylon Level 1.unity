@@ -3917,6 +3917,26 @@ PrefabInstance:
       propertyPath: displayedInventoryCount.Array.data[6]
       value: 
       objectReference: {fileID: 5021235089233810948}
+    - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: CurrentPhase
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: enableTutorial
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: dynamicWaveInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: abba71a79ba5c2845b0b436ebcb182db, type: 2}
+    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: Waves.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: Waves.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: abba71a79ba5c2845b0b436ebcb182db, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -131,7 +131,8 @@ public class Nexus : MonoBehaviour
 
     private void HandleXPSpawn()
     {
-        if (spawnXP && GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves)
+        if (spawnXP && (GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves 
+            || (GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)))
         {
             timeSinceLastSpawn += Time.deltaTime;
             if (timeSinceLastSpawn >= xpSpawnInterval)
