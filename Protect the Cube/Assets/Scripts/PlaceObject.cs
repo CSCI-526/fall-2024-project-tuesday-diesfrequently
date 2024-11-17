@@ -114,6 +114,7 @@ public class PlaceObject : MonoBehaviour
     {
         Transform headTransform = currentPlaceableObject.transform.Find("Head"); 
         Transform baseTransform = currentPlaceableObject.transform.Find("Base");
+        Animator harvestorAnimator = null;
         Animator baseAnimator = null;
         Animator headAnimator = null;
         Building b = currentPlaceableObject.GetComponent<Building>(); 
@@ -121,18 +122,14 @@ public class PlaceObject : MonoBehaviour
         if (b.gameObject.GetComponent<Harvester>() != null)
         {
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
+            harvestorAnimator = currentPlaceableObject.GetComponent<Animator>();
         } else {
             baseAnimator = baseTransform.GetComponent<Animator>();
             headAnimator = headTransform.GetComponent<Animator>();
         }
 
         canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject, baseAnimator, headAnimator);
-
-        if (currentPlaceableObject.GetComponent<turretShoot>() != null) //make exclusion only apply for turrets
-        {
-            canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject, baseAnimator, headAnimator);
-        }
-
+        // Debug.Log(currentPlaceableObject.tag + ":::[PlaceObject] canPlace: " + canPlace);
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
             GameManager.Instance.InventoryManager.TryUseInventoryItem(b.buildingName);
