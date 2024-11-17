@@ -121,17 +121,19 @@ public class PlaceObject : MonoBehaviour
         if (b.gameObject.GetComponent<Harvester>() != null)
         {
             canPlace &= currentPlaceableObject.GetComponent<Harvester>().CanPlace();
-        } else {
+        } 
+        else {
             baseAnimator = baseTransform.GetComponent<Animator>();
             headAnimator = headTransform.GetComponent<Animator>();
         }
 
         canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject, baseAnimator, headAnimator);
 
+        /*
         if (currentPlaceableObject.GetComponent<turretShoot>() != null) //make exclusion only apply for turrets
         {
             canPlace &= Exclusion.CheckForExclusion(currentPlaceableObject, baseAnimator, headAnimator);
-        }
+        }*/
 
         if (Input.GetMouseButtonDown(0) && canPlace)
         {

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject Nexus {  get; set; }
 
     public bool useBulletPool = false;
+    public bool enableTutorial = true;
     private bool isPaused = false;
 
     // states for GamePhase Tutorialization
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
     }
 
     // tracks current phase
-    public GamePhase CurrentPhase { get; private set; } = GamePhase.Initialization;
+    [SerializeField] public GamePhase CurrentPhase = GamePhase.Initialization;
 
     public void SetGamePhase(GamePhase newPhase)
     {
@@ -215,7 +216,15 @@ public class GameManager : MonoBehaviour
 
     void Start() {
         Time.timeScale = 1.0f;
-        SetGamePhase(GamePhase.BasicTutorial_Start);
+        
+        if(enableTutorial)
+        {
+            SetGamePhase(GamePhase.BasicTutorial_Start);
+        }
+        else
+        {
+            SetGamePhase(GamePhase.HandCraftedWaves);
+        }
 
     }
 
