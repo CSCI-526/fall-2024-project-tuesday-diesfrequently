@@ -49,9 +49,9 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else if(other.CompareTag("GoldVein"))
+        else if(other.CompareTag("Ore"))
         {
-            other.GetComponent<GoldVein>().TakeDamage(damage);
+            other.GetComponent<Ore>().TakeDamage(damage);
             if (GameManager.Instance.useBulletPool)
             {
                 BulletPool.Instance.ReturnBullet(gameObject);

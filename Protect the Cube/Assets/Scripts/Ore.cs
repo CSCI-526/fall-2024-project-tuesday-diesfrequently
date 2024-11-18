@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.UI;
 
-public class GoldVein : MonoBehaviour
+public class Ore : MonoBehaviour
 {
 
     [SerializeField] public float maxHealth = 5;
