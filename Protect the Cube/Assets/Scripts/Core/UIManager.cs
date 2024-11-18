@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour
     public GameObject holdMouse;
     public GameObject XPLevelUp;
     public TextMeshProUGUI expAnimText;
+    public GameObject playerHPSlider;
+    public GameObject nexusHPSlider;
+    public GameObject gold;
+    public GameObject pauseButton;
 
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
@@ -48,10 +52,12 @@ public class UIManager : MonoBehaviour
     private GameObject expBar;
 
     public bool pauseMenuActive = false;
+    private bool canPause = true;
     public bool rewardMenuActive = false;
     private int _currentHealth = 5;
     private bool isRewardLocked = true;
     static private bool firstRewardScreenEnded = false;
+    private bool goldActivated = false;
 
     private void Awake()
     {
@@ -78,7 +84,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         Cursor.visible = false;
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.P) && canPause)
         {
             if (pauseMenuActive) HidePauseScreen();
             else ShowPauseScreen();
@@ -124,7 +130,11 @@ public class UIManager : MonoBehaviour
         UpdateInventoryUI();
 
         // Only show gold count when the player has a harvester
-        if (_playerLVL.currentLevel > 4) UpdateGoldUI(1);
+        if (_playerLVL.currentLevel > 4)
+        {
+            UpdateGoldUI(1);
+            goldActivated = true;
+        }
     }
 
     public void ActivateInventoryUI()
@@ -165,6 +175,11 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
+        canPause = false;
+        playerHPSlider.SetActive(false);
+        nexusHPSlider.SetActive(false);
+        gold.SetActive(false);
+        pauseButton.SetActive(false);
         minimap.SetActive(false);
         inventoryBar.SetActive(false);
         expBar.SetActive(false);
@@ -174,6 +189,10 @@ public class UIManager : MonoBehaviour
 
     public void ShowPauseScreen()
     {
+        playerHPSlider.SetActive(false);
+        nexusHPSlider.SetActive(false);
+        gold.SetActive(false);
+        pauseButton.SetActive(false);
         if (rewardMenuActive) {
             rewardMenu.SetActive(false);
         }
@@ -187,6 +206,9 @@ public class UIManager : MonoBehaviour
 
     public void HidePauseScreen()
     {
+        pauseButton.SetActive(true);
+        playerHPSlider.SetActive(true);
+        nexusHPSlider.SetActive(true);
         if (rewardMenuActive) {
             rewardMenu.SetActive(true);
         }
@@ -195,6 +217,10 @@ public class UIManager : MonoBehaviour
             minimap.SetActive(true);
             inventoryBar.SetActive(true);
             expBar.SetActive(true);
+            if(goldActivated)
+            {
+                gold.SetActive(true);
+            }
         }
         pauseMenuActive = false;
         pauseUI.SetActive(false);
@@ -202,6 +228,10 @@ public class UIManager : MonoBehaviour
 
     public void ShowRewardScreen()
     {
+        //canPause = false;
+        //playerHPSlider.SetActive(false);
+        //nexusHPSlider.SetActive(false);
+        gold.SetActive(false);
         XPLevelUp.SetActive(false);
         minimap.SetActive(false);
         rewardMenuActive = true;
@@ -214,6 +244,13 @@ public class UIManager : MonoBehaviour
 
     public void HideRewardScreen()
     {
+        //canPause = true;
+        //playerHPSlider.SetActive(true);
+        //nexusHPSlider.SetActive(true);
+        if (goldActivated)
+        {
+            gold.SetActive(true);
+        }
         minimap.SetActive(true);
         rewardMenuActive = false;
         rewardMenu.SetActive(false);
