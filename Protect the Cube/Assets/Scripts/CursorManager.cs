@@ -19,4 +19,8 @@ public class CursorManager : MonoBehaviour
     public void Start(){
         SetCursorHand();
     }
+
+    public void Update(){
+        Cursor.visible = false;
+    }
 }
