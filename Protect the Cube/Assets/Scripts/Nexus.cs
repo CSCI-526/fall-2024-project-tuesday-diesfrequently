@@ -96,9 +96,12 @@ public class Nexus : MonoBehaviour
 
         OnTakeDamage?.Invoke();
 
-        if (currentHealth <= 0 && triggerGameOver)
+        if (currentHealth <= 0)
         {
-            GameManager.Instance.TriggerGameOver();
+            if(triggerGameOver)
+            {
+                GameManager.Instance.TriggerGameOver();
+            }
             Destroy(gameObject);
         }
 
