@@ -23,6 +23,7 @@ public class Building : MonoBehaviour
         //     renderer.material.color = color;
         // }
         placed = true;
+        
         foreach(Collider c in GetComponentsInChildren<Collider>())
         {
             c.enabled = true;

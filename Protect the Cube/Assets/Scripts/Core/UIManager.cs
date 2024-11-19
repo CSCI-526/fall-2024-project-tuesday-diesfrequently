@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour
     public GameObject holdMouse;
     public GameObject XPLevelUp;
     public TextMeshProUGUI expAnimText;
+    public GameObject playerHPSlider;
+    public GameObject nexusHPSlider;
+    public GameObject gold;
+    public GameObject pauseButton;
 
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
@@ -33,7 +37,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject pauseUI;
     [SerializeField] public GameObject inventoryBar;
     [SerializeField] public Image damageEffect;
-    
+
     public GameObject crosshairTexture;
     public GameObject HandTexture;
 
@@ -46,14 +50,16 @@ public class UIManager : MonoBehaviour
     private GameObject minimap;
     private GameObject uiObject;
     private GameObject expBar;
-    
+
     public bool pauseMenuActive = false;
+    private bool canPause = true;
     public bool rewardMenuActive = false;
     private int _currentHealth = 5;
     private bool isRewardLocked = true;
-    static private bool firstRewardScreenEnded = false; 
+    static private bool firstRewardScreenEnded = false;
+    private bool goldActivated = false;
 
-private void Awake()
+    private void Awake()
     {
         // References to Managers
         inventoryManager = GameManager.Instance.InventoryManager;
@@ -63,10 +69,10 @@ private void Awake()
     void Start()
     {
         SetCursorCrosshair();
-        
+
         _nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
-         _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
+        _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
         goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
         minimap = GameObject.Find("MinimapComponent");
         uiObject = GameObject.Find("UI");
@@ -78,15 +84,15 @@ private void Awake()
     private void Update()
     {
         Cursor.visible = false;
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.P) && canPause)
         {
             if (pauseMenuActive) HidePauseScreen();
             else ShowPauseScreen();
         }
 
         // code for UI Screen Flash on Dmg Taken
-        float atarget = (5 - _currentHealth)/10.0f;
-        if(damageEffect.color.a > atarget){
+        float atarget = (5 - _currentHealth) / 10.0f;
+        if (damageEffect.color.a > atarget) {
             var color = damageEffect.color;
             color.a -= 0.01f;
             damageEffect.color = color;
@@ -124,7 +130,11 @@ private void Awake()
         UpdateInventoryUI();
 
         // Only show gold count when the player has a harvester
-        if (_playerLVL.currentLevel > 4) UpdateGoldUI(1);
+        if (_playerLVL.currentLevel > 4)
+        {
+            UpdateGoldUI(1);
+            goldActivated = true;
+        }
     }
 
     public void ActivateInventoryUI()
@@ -165,6 +175,11 @@ private void Awake()
 
     public void ShowGameOverScreen()
     {
+        canPause = false;
+        playerHPSlider.SetActive(false);
+        nexusHPSlider.SetActive(false);
+        gold.SetActive(false);
+        pauseButton.SetActive(false);
         minimap.SetActive(false);
         inventoryBar.SetActive(false);
         expBar.SetActive(false);
@@ -174,7 +189,11 @@ private void Awake()
 
     public void ShowPauseScreen()
     {
-        if(rewardMenuActive){
+        playerHPSlider.SetActive(false);
+        nexusHPSlider.SetActive(false);
+        gold.SetActive(false);
+        pauseButton.SetActive(false);
+        if (rewardMenuActive) {
             rewardMenu.SetActive(false);
         }
         pauseMenuActive = true;
@@ -187,14 +206,21 @@ private void Awake()
 
     public void HidePauseScreen()
     {
-        if(rewardMenuActive){
+        pauseButton.SetActive(true);
+        playerHPSlider.SetActive(true);
+        nexusHPSlider.SetActive(true);
+        if (rewardMenuActive) {
             rewardMenu.SetActive(true);
-        } 
+        }
         else {
             Time.timeScale = 1.0f;
             minimap.SetActive(true);
             inventoryBar.SetActive(true);
             expBar.SetActive(true);
+            if(goldActivated)
+            {
+                gold.SetActive(true);
+            }
         }
         pauseMenuActive = false;
         pauseUI.SetActive(false);
@@ -202,6 +228,10 @@ private void Awake()
 
     public void ShowRewardScreen()
     {
+        //canPause = false;
+        //playerHPSlider.SetActive(false);
+        //nexusHPSlider.SetActive(false);
+        gold.SetActive(false);
         XPLevelUp.SetActive(false);
         minimap.SetActive(false);
         rewardMenuActive = true;
@@ -214,6 +244,13 @@ private void Awake()
 
     public void HideRewardScreen()
     {
+        //canPause = true;
+        //playerHPSlider.SetActive(true);
+        //nexusHPSlider.SetActive(true);
+        if (goldActivated)
+        {
+            gold.SetActive(true);
+        }
         minimap.SetActive(true);
         rewardMenuActive = false;
         rewardMenu.SetActive(false);
@@ -230,7 +267,7 @@ private void Awake()
 
     public void ShowUpgradeScreen()
     {
-        upgradePanel.SetActive(true);        
+        upgradePanel.SetActive(true);
         Invoke("HideUpgradeScreen", 5.0f);
     }
 
@@ -255,7 +292,7 @@ private void Awake()
     public void ShowXPTutorial()
     {
         SelectGunTutorialUI.SetActive(true);
-        
+
     }
 
     // Author: Isabel --> Tutorial Functions
@@ -294,7 +331,11 @@ private void Awake()
 
     public void UpdateWaveUI()
     {
-        if ((_nexus && _playerHP) && (GameManager.GamePhase.HandCraftedWaves == GameManager.Instance.CurrentPhase)) scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count;
+        if ((_nexus && _playerHP) && ((GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves)
+            || (GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)))
+        {
+            scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count;
+        }
     }
 
     public void UpdatePlayerXPUI()

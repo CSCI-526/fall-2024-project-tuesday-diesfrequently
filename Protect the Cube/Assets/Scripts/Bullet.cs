@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
     }
 
     void OnTriggerEnter (Collider other) {
-        if (other.CompareTag("Enemy") || other.CompareTag("Breakable")){
+        if (other.CompareTag("Enemy")){
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
             if (GameManager.Instance.useBulletPool)
             {
@@ -48,6 +48,19 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+        else if(other.CompareTag("Ore"))
+        {
+            other.GetComponent<Ore>().TakeDamage(damage);
+            if (GameManager.Instance.useBulletPool)
+            {
+                BulletPool.Instance.ReturnBullet(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
         }
 
         if (other.CompareTag("Wall"))
