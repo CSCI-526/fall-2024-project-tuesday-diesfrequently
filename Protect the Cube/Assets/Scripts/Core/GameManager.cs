@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public bool enableTutorial = true;
     private bool isPaused = false;
 
+    // Set the field where TutorialStorageValue is stored
+    private const string TutorialStorageKey = "IsTutorialEnabled";
+
     // states for GamePhase Tutorialization
     public enum GamePhase
     {
@@ -225,18 +228,23 @@ public class GameManager : MonoBehaviour
         Instance.AnalyticsManager = GetComponent<AnalyticsManager>();
     }
 
-    void Start() {
+    void Start()
+    {
+        // retrieve Tutorial Value
+        bool TutorialStorageValue = PlayerPrefs.GetInt(TutorialStorageKey, 1) == 1;
         Time.timeScale = 1.0f;
-        
-        if(enableTutorial)
+
+        // Tutorial Logic
+        if (TutorialStorageValue)
         {
+            Debug.Log("Tutorial is Enabled");
             SetGamePhase(GamePhase.BasicTutorial_Start);
         }
         else
         {
             SetGamePhase(CurrentPhase);
+            Debug.Log("Tutorial is SKIPPED");
         }
-
     }
 
     public void TogglePause()

@@ -6,7 +6,7 @@ using UnityEngine.Video;
 
 public class MainMenu : MonoBehaviour
 {   
-    public void  startGame(){
+    public void startGame(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
