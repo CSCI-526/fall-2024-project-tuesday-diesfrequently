@@ -3975,7 +3975,7 @@ PrefabInstance:
       objectReference: {fileID: 5021235089233810948}
     - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: CurrentPhase
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: enableTutorial
