@@ -613,6 +613,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2259302257490979156, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259302257490979156, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -7.6
+      objectReference: {fileID: 0}
     - target: {fileID: 5285177031238896781, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
       propertyPath: m_Name
       value: Cursor
@@ -754,6 +762,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5285177031238896781, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5458401009623610396, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
       propertyPath: m_Texture
       value: 
@@ -853,6 +865,10 @@ PrefabInstance:
     - target: {fileID: 6511655240066206373, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511655240066206373, guid: f5c9fa950f760584b8da67d7d41fc6b2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
