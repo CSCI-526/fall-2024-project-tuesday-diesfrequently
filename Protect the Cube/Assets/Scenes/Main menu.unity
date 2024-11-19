@@ -197,6 +197,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62386545}
   m_CullTransparentMesh: 1
+--- !u!1 &189877974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 189877975}
+  m_Layer: 5
+  m_Name: Checkbox Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &189877975
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189877974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 544696308}
+  - {fileID: 1118546545}
+  m_Father: {fileID: 1435113407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 7.1278, y: -308.07}
+  m_SizeDelta: {x: 426.8777, y: 63.387}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &222593829
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,15 +470,15 @@ RectTransform:
   m_GameObject: {fileID: 544696307}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.31779405, y: 0.31779405, z: 0.31779405}
+  m_LocalScale: {x: 0.7641069, y: 0.7641069, z: 0.7641069}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1118546545}
+  m_Father: {fileID: 189877975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 71.7, y: -9.6}
-  m_SizeDelta: {x: 784.11, y: 107.4162}
+  m_AnchoredPosition: {x: 38.735245, y: -6.3299866}
+  m_SizeDelta: {x: 479.0924, y: 66.378}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &544696309
 MonoBehaviour:
@@ -457,7 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -526,7 +563,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 280.28015, w: 51.179897}
+  m_margin: {x: 0, y: 0, z: 1.7319336, w: 3.5982776}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -830,6 +867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1118546545}
   - component: {fileID: 1118546546}
+  - component: {fileID: 1118546547}
   m_Layer: 5
   m_Name: Tutorial Toggle
   m_TagString: Untagged
@@ -844,19 +882,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118546544}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.4044087, y: 2.4044087, z: 2.4044087}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1221180481}
-  - {fileID: 544696308}
-  m_Father: {fileID: 1435113407}
+  m_Father: {fileID: 189877975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -307}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: -0.5396, y: -3.2897}
+  m_SizeDelta: {x: 174.0918, y: 23.626}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1118546546
 MonoBehaviour:
@@ -906,6 +943,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &1118546547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118546544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a1163e6eb874509b613368af7aef9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialToggle: {fileID: 1118546546}
 --- !u!1 &1135432068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1483,7 @@ RectTransform:
   - {fileID: 1827672022}
   - {fileID: 1876977843}
   - {fileID: 425791798}
-  - {fileID: 1118546545}
+  - {fileID: 189877975}
   m_Father: {fileID: 1817960314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
