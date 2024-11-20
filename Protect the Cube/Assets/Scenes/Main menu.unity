@@ -830,6 +830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1118546545}
   - component: {fileID: 1118546546}
+  - component: {fileID: 1118546547}
   m_Layer: 5
   m_Name: Tutorial Toggle
   m_TagString: Untagged
@@ -906,6 +907,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &1118546547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118546544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a1163e6eb874509b613368af7aef9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialToggle: {fileID: 1118546546}
 --- !u!1 &1135432068
 GameObject:
   m_ObjectHideFlags: 0

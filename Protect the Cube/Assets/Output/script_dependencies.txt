@@ -8,6 +8,7 @@ Script: Bullet
         - GameManager
         - BulletPool
         - EnemyHealth
+        - Ore
         - Wall
     - No Explicit GameObjects/Prefabs referenced in Bullet
 
@@ -75,15 +76,18 @@ Script: EnemyMove
 
 Script: Exclusion
     - Dependencies for Exclusion:
-        - RangeIndicator
         - Building
+        - Nexus
+        - RangeIndicator
     - No Explicit GameObjects/Prefabs referenced in Exclusion
 
 Script: ExperiencePickup
     - Dependencies for ExperiencePickup:
         - PlayerLevels
         - GameManager
-    - No Explicit GameObjects/Prefabs referenced in ExperiencePickup
+    - GameObjects/Prefabs referenced in ExperiencePickup:
+        - uiExpOrbPrefab
+        - canvasTransform
 
 Script: FollowMouse
     - No dependencies found for FollowMouse
@@ -163,6 +167,25 @@ Script: OffScreenIndicator
     - GameObjects/Prefabs referenced in OffScreenIndicator:
         - indicatorPrefab
 
+Script: Ore
+    - Dependencies for Ore:
+        - GameManager
+        - Nexus
+    - GameObjects/Prefabs referenced in Ore:
+        - exp
+        - hpCanvas
+
+Script: OreManager
+    - Dependencies for OreManager:
+        - WaveManager
+        - PlayerLevels
+        - GameManager
+        - Nexus
+    - GameObjects/Prefabs referenced in OreManager:
+        - _orePrefab
+        - _nexus
+        - identity
+
 Script: PauseBtn
     - Dependencies for PauseBtn:
         - GameManager
@@ -187,6 +210,7 @@ Script: PlayerController
         - GameManager
         - PlaceObject
         - BulletPool
+        - Bullet
     - GameObjects/Prefabs referenced in PlayerController:
         - projectile
         - gunBarrel
@@ -299,6 +323,10 @@ Script: TurretBoosterVisual
     - No dependencies found for TurretBoosterVisual
     - No Explicit GameObjects/Prefabs referenced in TurretBoosterVisual
 
+Script: TutorialToggle
+    - No dependencies found for TutorialToggle
+    - No Explicit GameObjects/Prefabs referenced in TutorialToggle
+
 Script: Wave
     - Dependencies for Wave:
         - SpawnEvent
@@ -307,6 +335,12 @@ Script: Wave
 Script: WaveInfo
     - No dependencies found for WaveInfo
     - No Explicit GameObjects/Prefabs referenced in WaveInfo
+
+Script: XPLevelUpAnim
+    - Dependencies for XPLevelUpAnim:
+        - GameManager
+        - UIManager
+    - No Explicit GameObjects/Prefabs referenced in XPLevelUpAnim
 
 Script: turretShoot
     - Dependencies for turretShoot:
@@ -349,6 +383,8 @@ Script: GameManager
         - AnalyticsManager
         - Nexus
         - PlayerController
+        - PlayerLevels
+        - PlaceObject
     - No Explicit GameObjects/Prefabs referenced in GameManager
 
 Script: InventoryManager
@@ -375,13 +411,26 @@ Script: UIManager
         - WaveManager
         - RewardChoiceUI
     - GameObjects/Prefabs referenced in UIManager:
+        - WASD
+        - inventoryArrow
+        - xpArrow
+        - holdMouse
+        - XPLevelUp
+        - playerHPSlider
+        - nexusHPSlider
+        - gold
+        - pauseButton
         - gameOverScreen
         - SelectGunTutorialUI
         - rewardMenu
         - upgradePanel
         - pauseUI
+        - inventoryBar
         - crosshairTexture
         - HandTexture
+        - minimap
+        - uiObject
+        - expBar
 
 Script: WaveManager
     - Dependencies for WaveManager:
@@ -389,6 +438,7 @@ Script: WaveManager
         - Nexus
         - Wave
         - EnemyMove
+        - EnemyHealth
         - GameManager
         - UIManager
         - AnalyticsManager

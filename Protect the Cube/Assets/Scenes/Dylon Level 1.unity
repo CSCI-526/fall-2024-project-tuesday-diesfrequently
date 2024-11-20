@@ -2504,9 +2504,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819f39af1bd8f9e418cd87b05b3678e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orePrefab: {fileID: 3085768726303237568, guid: d6d19834c918a5b49b504624914e8024, type: 3}
-  _oreSpawnRateSeconds: 5
-  maxOreDistance: 40
+  OrePrefabTier1: {fileID: 3085768726303237568, guid: d6d19834c918a5b49b504624914e8024, type: 3}
+  OrePrefabTier2: {fileID: 8053327629888195560, guid: ce47e5e1f81e24b7188a613019a3cd66, type: 3}
+  OrePrefabTier3: {fileID: 5961231977043227133, guid: 984ea20d880ba4dccb1a0436d5f6486f, type: 3}
+  OreHeightAboveGround: 1.2
+  OreSpawnRateSeconds: 5
+  MaxOreSpawnDistance: 45
+  InitialOreCount: 5
+  OreSpawnStartLevelThreshold: 5
+  NumOreSpawnedPerLevel: 2
+  TIER_1_THRESHOLD: 20
+  TIER_2_THRESHOLD: 30
+  TIER_3_THRESHOLD: 40
+  _playerLevelSnapshot: 0
+  _canOreSpawn: 0
+  _oreCount: 0
+  _OreEntityList: []
 --- !u!1001 &1415106840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3975,7 +3988,7 @@ PrefabInstance:
       objectReference: {fileID: 5021235089233810948}
     - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: CurrentPhase
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: enableTutorial
@@ -4406,7 +4419,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3594844298877099021, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4576,7 +4590,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8481553435057110212, guid: 46669698741967b479c6ba4a92079abc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46669698741967b479c6ba4a92079abc, type: 3}

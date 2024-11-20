@@ -45,8 +45,6 @@ public class PlayerHealth : MonoBehaviour
         inventoryManager.PlayerHealth_OnPlayerHealthUpdate -= AddPlayerHealth;
     }
 
-  
-
     private IEnumerator DelayedSubscribeToEvents()
     {
         // Wait until GameManager instance and InventoryManager are initialized

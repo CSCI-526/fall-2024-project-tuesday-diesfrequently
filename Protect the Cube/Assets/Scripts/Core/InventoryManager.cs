@@ -201,7 +201,7 @@ public class InventoryManager : MonoBehaviour
 
     public List<GameObject> GenerateUniqueRewards(List<GameObject> rewards_list, GameObject forced_reward = null, int forced_reward_count = 0)
     {
-        Debug.Log(string.Join(", ", rewards_list.Select(reward => reward.name)));
+        if (GameManager.Instance.DEBUG_INVENTORY_MANAGER) Debug.Log(string.Join(", ", rewards_list.Select(reward => reward.name)));
 
         // sanity check for valid forced reward count
         forced_reward_count = Mathf.Clamp(forced_reward_count, 0, _NUM_REWARD_CHOICES);
@@ -254,7 +254,7 @@ public class InventoryManager : MonoBehaviour
     private void UpdateInventoryCount(string item_name)
     {
         int itemIDX = getItemIDX(item_name);
-        if (itemIDX < 0) Debug.Log("[InventoryManager] Cannot Find Item IDX to store in Inventory");
+        if (itemIDX < 0) Debug.LogWarning("[InventoryManager] Cannot Find Item IDX to store in Inventory");
 
         // add reward to "inventory"
         InventoryItemCount[itemIDX]++;

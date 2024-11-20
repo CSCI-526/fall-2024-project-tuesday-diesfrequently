@@ -35,6 +35,7 @@ public class PrefabDependencies
 
                 foreach (var script in scripts)
                 {
+                    if (script == null) continue;
                     string scriptName = script.GetType().Name;
                     if (uniqueScripts.Add(scriptName)) // Add returns false if the item already exists
                     {

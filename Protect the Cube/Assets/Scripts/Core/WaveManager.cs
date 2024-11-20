@@ -6,11 +6,11 @@ using System.Collections;
 public class WaveManager : MonoBehaviour
 {
     // NEW VARIABLES
+    [Header("PUBLIC Modifiable Constants")]
     public const float MIN_WAVE_COMPLETION_LENGTH = 2.0f;
     public const float MAX_DISTANCE_FROM_NEXUS = 40.0f;
     public const float MIDDLE_DISTANCE_FROM_NEXUS = 20.0f;
     public const float WAVE_DIFFICULTY = 1.0f;
-
     [SerializeField] public List<GameObject> EnemyPrefabs = new List<GameObject>();
     [SerializeField] public List<WaveInfo> Waves = new List<WaveInfo>();
     [SerializeField] public WaveInfo dynamicWaveInfo = null;
@@ -23,6 +23,7 @@ public class WaveManager : MonoBehaviour
     private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>(); //stores the spawn point configuration
     private float _currentWaveLength;
 
+    [Header("PRIVATE Members")]
     [SerializeField] private Transform nexus; // reference to Nexus position
     [SerializeField] private Vector3 centralPosition; // central location of the nexus
 
@@ -31,8 +32,7 @@ public class WaveManager : MonoBehaviour
         // size of the potential number of dropped inventory items
         EnemyCounter = new List<int>();
         AllEnemyEntities = new List<GameObject>();
-
-        while(EnemyCounter.Count < EnemyPrefabs.Count) //initialize enemy counter
+        while (EnemyCounter.Count < EnemyPrefabs.Count) //initialize enemy counter
         {
             EnemyCounter.Add(0);
         }
@@ -112,12 +112,12 @@ public class WaveManager : MonoBehaviour
         float spawnRange = 2.0f;
         Vector3 location = spawnConfigs[configID][UnityEngine.Random.Range(0, spawnConfigs[configID].Count - 1)];
         enemyEntity.transform.position = location + new Vector3(UnityEngine.Random.Range(-spawnRange, spawnRange), 0, UnityEngine.Random.Range(-spawnRange, spawnRange));
-        Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
     }
 
     public void LockAllEnemiesMovement()
     {
-        Debug.Log("[Wave Manager] Locking All Enemies Movement");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Locking All Enemies Movement");
         foreach (var enemy in AllEnemyEntities)
         {
             if (enemy != null)
@@ -130,7 +130,7 @@ public class WaveManager : MonoBehaviour
 
     public void UnlockAllEnemiesMovement()
     {
-        Debug.Log("[Wave Manager] Unlocking All Enemies Movement");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Unlocking All Enemies Movement");
         foreach (var enemy in AllEnemyEntities)
         {
             if (enemy != null)
@@ -143,7 +143,7 @@ public class WaveManager : MonoBehaviour
 
     public void SetConstantXPDrops(int exp_amount)
     {
-        Debug.Log("[Wave Manager] Setting All XP Drops to Constant");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Setting All XP Drops to Constant");
         foreach (var enemy in AllEnemyEntities)
         {
             if (enemy != null)
@@ -271,7 +271,7 @@ public class WaveManager : MonoBehaviour
             location = spawnConfigs[configID][spawnLocationID % (spawnConfigs[configID].Count - 1)];
         }
         enemyEntity.transform.position = location + new Vector3(UnityEngine.Random.Range(-spawnRange,spawnRange), 0, UnityEngine.Random.Range(-spawnRange, spawnRange));
-        Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
     }
 
     //Used to get enemy names using the EnemyType enum
@@ -323,14 +323,14 @@ public class WaveManager : MonoBehaviour
 
     public void AddEnemyEntity(GameObject enemy_entity, int enemyIDX)
     {
-        Debug.Log("Adding Enemy Entity ... ");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Adding Enemy Entity ... ");
         AllEnemyEntities.Add(enemy_entity);
         EnemyCounter[enemyIDX] += 1;
     }
 
     public void KillEnemyEntity(GameObject enemy_entity, int enemyIDX)
     {
-        Debug.Log("Removing Enemy Entity ... ");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Removing Enemy Entity ... ");
         AllEnemyEntities.Remove(enemy_entity);
         EnemyCounter[enemyIDX] -= 1;
     }

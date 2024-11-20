@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager { get; private set; }
     public InventoryManager InventoryManager { get; private set; }
     public AnalyticsManager AnalyticsManager { get; private set; }
+    public OreManager OreManager { get; private set; }
 
     public GameObject Player {  get; private set; }
     public GameObject Nexus {  get; set; }
@@ -38,6 +39,10 @@ public class GameManager : MonoBehaviour
 
     // tracks current phase
     [SerializeField] public GamePhase CurrentPhase = GamePhase.Initialization;
+    [SerializeField] public bool DEBUG_WAVE_MANAGER;
+    [SerializeField] public bool DEBUG_ORE_MANAGER;
+    [SerializeField] public bool DEBUG_INVENTORY_MANAGER;
+
 
     public void SetGamePhase(GamePhase newPhase)
     {
@@ -226,6 +231,11 @@ public class GameManager : MonoBehaviour
         Instance.UIManager = GetComponent<UIManager>();
         Instance.InventoryManager = GetComponent<InventoryManager>();
         Instance.AnalyticsManager = GetComponent<AnalyticsManager>();
+        Instance.OreManager = GetComponent<OreManager>();
+
+        DEBUG_WAVE_MANAGER = false;
+        DEBUG_ORE_MANAGER = true;
+        DEBUG_INVENTORY_MANAGER = false;
     }
 
     void Start()
