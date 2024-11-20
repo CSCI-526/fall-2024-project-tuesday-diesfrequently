@@ -49,20 +49,20 @@ public class BouncingBullet : Bullet
         }
     }
 
-    protected override void HitOre(Collider other)
-    {
-        other.GetComponent<Ore>().TakeDamage(damage);
-    }
+    //protected override void HitOre(Collider other)
+    //{
+    //    other.GetComponent<Ore>().TakeDamage(damage);
+    //}
 
     protected virtual void OnTriggerEnter (Collider other) {
         if (other.CompareTag("Enemy")){
             HitEnemy(other);
         }
-        else if(other.CompareTag("Ore"))
-        {
+        //else if(other.CompareTag("Ore"))
+        //{
             
-            HitOre(other);
-        }
+        //    HitOre(other);
+        //}
 
 
     }

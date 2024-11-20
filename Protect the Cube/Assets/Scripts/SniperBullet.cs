@@ -10,9 +10,9 @@ public class SniperBullet : Bullet
         other.GetComponent<EnemyHealth>().TakeDamage(damage);
     }
 
-    protected override void HitOre(Collider other)
-    {
-        other.GetComponent<Ore>().TakeDamage(damage);
-    }
+    //protected override void HitOre(Collider other)
+    //{
+    //    other.GetComponent<Ore>().TakeDamage(damage);
+    //}
     
 }

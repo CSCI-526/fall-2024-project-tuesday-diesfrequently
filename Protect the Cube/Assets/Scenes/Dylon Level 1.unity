@@ -1312,71 +1312,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5747132913586418175, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
   m_PrefabInstance: {fileID: 1016860515}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &828218998
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 197939339994636871, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: placed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 197939339994636871, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: maxRange
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.6260252
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3194981
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.7740717
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 468919678972366759, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191134258547235123, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
-      propertyPath: m_Name
-      value: Flamethrower Turret
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bdfb57020aa84e848abb3d6d124ec1c2, type: 3}
 --- !u!4 &853079879 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5747132913586418175, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
@@ -2580,9 +2515,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819f39af1bd8f9e418cd87b05b3678e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orePrefab: {fileID: 3085768726303237568, guid: d6d19834c918a5b49b504624914e8024, type: 3}
-  _oreSpawnRateSeconds: 5
-  maxOreDistance: 40
+  OrePrefabTier1: {fileID: 3085768726303237568, guid: d6d19834c918a5b49b504624914e8024, type: 3}
+  OrePrefabTier2: {fileID: 8053327629888195560, guid: ce47e5e1f81e24b7188a613019a3cd66, type: 3}
+  OrePrefabTier3: {fileID: 5961231977043227133, guid: 984ea20d880ba4dccb1a0436d5f6486f, type: 3}
+  OreTier1StartingSpawnLevel: 2
+  OreTier2StartingSpawnLevel: 4
+  OreTier3StartingSpawnLevel: 6
+  ORE_MIN_DIST_THRESHOLD: 10
+  ORE_T1_DIST_THRESHOLD: 20
+  ORE_T2_DIST_THRESHOLD: 28
+  ORE_T3_DIST_THRESHOLD: 35
+  ORE_MAX_DIST_THRESHOLD: 45
+  ORE_HEIGHT_ABOVE_GROUND: 1.2
+  ORE_RESOURCE_DROP_ZONE_RADIUS: 2
+  ORE_T1_NUM_EYES: 5
+  ORE_T2_NUM_EYES: 10
+  ORE_T3_NUM_EYES: 15
+  InitialOreCount: 4
+  ORE_INCREASE_PER_LVL: 1
+  ORE_T1_DROP_XP: 4
+  ORE_T2_DROP_XP: 6
+  ORE_T2_DROP_GOLD: 3
+  ORE_T3_DROP_XP: 8
+  ORE_T3_DROP_GOLD: 5
+  ORE_T1_MAX_HEALTH: 15
+  ORE_T2_MAX_HEALTH: 25
+  ORE_T3_MAX_HEALTH: 35
+  _playerLevelSnapshot: 0
+  _canOreSpawn: 
+  _oreCount: 0
+  _OreEntityList: []
 --- !u!1001 &1415106840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4668,4 +4630,3 @@ SceneRoots:
   - {fileID: 1320817825}
   - {fileID: 4105744721452001794}
   - {fileID: 367942146}
-  - {fileID: 828218998}
