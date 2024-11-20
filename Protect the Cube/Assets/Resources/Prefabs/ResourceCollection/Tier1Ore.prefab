@@ -750,19 +750,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03059f7c9d2252641bdb36839b7633fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BASE_ORE_DROP_XP: 3
-  MAX_HEALTH: 5
-  expPrefab: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
-  xpDropDistanceThreshold: 15
-  xpDropDistanceMultiplyer: 1
-  xpDistanceGroups: 3
-  xpDropRatePercent: 1
+  ExpPrefab: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
+  GoldPrefab: {fileID: 6435648702068270667, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
   showHPBar: 1
   hpCanvas: {fileID: 7590791986490379850}
   hpBar: {fileID: 8613017962453833}
-  hpBarOffset: {x: 0, y: 3, z: 0}
+  hpBarVerticalOffset: 2
   currentHealth: 0
-  adjustedDropAmount: 0
   distanceFromNexus: 0
 --- !u!1 &3135121684639061623
 GameObject:

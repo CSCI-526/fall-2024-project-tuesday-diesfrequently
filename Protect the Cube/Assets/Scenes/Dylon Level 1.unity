@@ -2510,14 +2510,17 @@ MonoBehaviour:
   OreHeightAboveGround: 1.2
   OreSpawnRateSeconds: 5
   MaxOreSpawnDistance: 45
-  InitialOreCount: 5
-  OreSpawnStartLevelThreshold: 5
-  NumOreSpawnedPerLevel: 2
-  TIER_1_THRESHOLD: 20
-  TIER_2_THRESHOLD: 30
-  TIER_3_THRESHOLD: 40
+  InitialOreCount: 4
+  OreTier1StartingSpawnLevel: 2
+  OreTier2StartingSpawnLevel: 4
+  OreTier3StartingSpawnLevel: 6
+  NumOreSpawnedPerLevel: 1
+  MIN_DISTANCE_THRESHOLD: 10
+  TIER_1_DISTANCE_THRESHOLD: 20
+  TIER_2_DISTANCE_THRESHOLD: 28
+  TIER_3_DISTANCE_THRESHOLD: 35
   _playerLevelSnapshot: 0
-  _canOreSpawn: 0
+  _canOreSpawn: 
   _oreCount: 0
   _OreEntityList: []
 --- !u!1001 &1415106840
@@ -4190,6 +4193,10 @@ PrefabInstance:
     - target: {fileID: 7659804913446454785, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659804913446454785, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.70996
       objectReference: {fileID: 0}
     - target: {fileID: 7894508426752650380, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
