@@ -2507,18 +2507,29 @@ MonoBehaviour:
   OrePrefabTier1: {fileID: 3085768726303237568, guid: d6d19834c918a5b49b504624914e8024, type: 3}
   OrePrefabTier2: {fileID: 8053327629888195560, guid: ce47e5e1f81e24b7188a613019a3cd66, type: 3}
   OrePrefabTier3: {fileID: 5961231977043227133, guid: 984ea20d880ba4dccb1a0436d5f6486f, type: 3}
-  OreHeightAboveGround: 1.2
-  OreSpawnRateSeconds: 5
-  MaxOreSpawnDistance: 45
-  InitialOreCount: 4
   OreTier1StartingSpawnLevel: 2
   OreTier2StartingSpawnLevel: 4
   OreTier3StartingSpawnLevel: 6
-  NumOreSpawnedPerLevel: 1
-  MIN_DISTANCE_THRESHOLD: 10
-  TIER_1_DISTANCE_THRESHOLD: 20
-  TIER_2_DISTANCE_THRESHOLD: 28
-  TIER_3_DISTANCE_THRESHOLD: 35
+  ORE_MIN_DIST_THRESHOLD: 10
+  ORE_T1_DIST_THRESHOLD: 20
+  ORE_T2_DIST_THRESHOLD: 28
+  ORE_T3_DIST_THRESHOLD: 35
+  ORE_MAX_DIST_THRESHOLD: 45
+  ORE_HEIGHT_ABOVE_GROUND: 1.2
+  ORE_RESOURCE_DROP_ZONE_RADIUS: 2
+  ORE_T1_NUM_EYES: 5
+  ORE_T2_NUM_EYES: 10
+  ORE_T3_NUM_EYES: 15
+  InitialOreCount: 4
+  ORE_INCREASE_PER_LVL: 1
+  ORE_T1_DROP_XP: 4
+  ORE_T2_DROP_XP: 6
+  ORE_T2_DROP_GOLD: 3
+  ORE_T3_DROP_XP: 8
+  ORE_T3_DROP_GOLD: 5
+  ORE_T1_MAX_HEALTH: 15
+  ORE_T2_MAX_HEALTH: 25
+  ORE_T3_MAX_HEALTH: 35
   _playerLevelSnapshot: 0
   _canOreSpawn: 
   _oreCount: 0

@@ -44,9 +44,9 @@ public class OreManager : MonoBehaviour
     [SerializeField] public int ORE_T3_DROP_GOLD = 5;
 
     [Header("Ore Max Health Balancing")]
-    [SerializeField] public float ORE_T1_MAX_HEALTH = 10;
-    [SerializeField] public float ORE_T2_MAX_HEALTH = 15;
-    [SerializeField] public float ORE_T3_MAX_HEALTH = 20;
+    [SerializeField] public float ORE_T1_MAX_HEALTH = 15;
+    [SerializeField] public float ORE_T2_MAX_HEALTH = 25;
+    [SerializeField] public float ORE_T3_MAX_HEALTH = 35;
 
     // Ore Tier Variables
     public const int ORE_TIER_1 = 1;
@@ -88,18 +88,21 @@ public class OreManager : MonoBehaviour
             {
                 _canOreSpawn[ORE_TIER_1 - 1] = true;
                 InitializeSpawnedOre(ORE_TIER_1);
-            } else if (_playerLevelSnapshot == OreTier2StartingSpawnLevel)
+            }
+            else if (_playerLevelSnapshot == OreTier2StartingSpawnLevel)
             {
                 _canOreSpawn[ORE_TIER_2 - 1] = true;
                 InitializeSpawnedOre(ORE_TIER_2);
-            } else if (_playerLevelSnapshot == OreTier3StartingSpawnLevel)
+            }
+            else if (_playerLevelSnapshot == OreTier3StartingSpawnLevel)
             {
                 _canOreSpawn[ORE_TIER_3 - 1] = true;
                 InitializeSpawnedOre(ORE_TIER_3);
             }
 
             // spawn consistent ore per level
-            if ((_playerLevelSnapshot > OreTier1StartingSpawnLevel) && _canOreSpawn[ORE_TIER_1 - 1]) {
+            if ((_playerLevelSnapshot > OreTier1StartingSpawnLevel) && _canOreSpawn[ORE_TIER_1 - 1])
+            {
                 SpawnOrePerNewLevel(ORE_TIER_1);
             }
 
