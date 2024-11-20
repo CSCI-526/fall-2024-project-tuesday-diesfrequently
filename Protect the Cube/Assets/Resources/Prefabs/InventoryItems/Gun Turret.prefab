@@ -61,8 +61,8 @@ MonoBehaviour:
   buildingName: Gun Turret
   buildingDesc: A turret with decent range, accuracy, and damage
   colorDiffAfterPlace: 50
-  fireRate: 2
-  maxRange: 16
+  fireRate: 12
+  maxRange: 12
   turnSpeed: 2
   projectile: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
   gunBarrel: {fileID: 2130665220319076271}
@@ -136,6 +136,7 @@ MonoBehaviour:
   indicator: {fileID: 5432939863929631517, guid: 693069057d8394f489a20f9e909b3c04, type: 3}
   upgradeArrow: {fileID: 3907081904980417976, guid: aa655861ef8e34d94b991abe0801ea0c, type: 3}
   turrets: []
+  level: 0
 --- !u!199 &4545694227343427290
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -400,7 +401,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.60691816, g: 1, b: 0.7789011, a: 1}
+      maxColor: {r: 1, g: 0.745283, b: 0.90552884, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

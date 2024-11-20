@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4243132067449504909
+--- !u!1001 &7310369730026746574
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,29 +8,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1677332616392144054, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
-      propertyPath: speed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677332616392144054, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677332616392144054, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677332616392144054, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
-      propertyPath: maxLifetime
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
       propertyPath: m_Name
-      value: SniperBullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
+      value: BouncingBullet 1
       objectReference: {fileID: 0}
     - target: {fileID: 3538237464379928796, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -75,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 5721283078563959621, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dcdeecb867ff85e49b5ea86aa253f220, type: 2}
+      objectReference: {fileID: 2100000, guid: fe5426d1ef7746946a8a8faa47505eb2, type: 2}
     m_RemovedComponents:
     - {fileID: 1677332616392144054, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
     m_RemovedGameObjects: []
@@ -83,25 +63,26 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5866857708243592881}
+      addedObject: {fileID: 4301722141912205366}
   m_SourcePrefab: {fileID: 100100000, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
---- !u!1 &2516476828890733242 stripped
+--- !u!1 &9042479267294620921 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
-  m_PrefabInstance: {fileID: 4243132067449504909}
+  m_PrefabInstance: {fileID: 7310369730026746574}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-5866857708243592881
+--- !u!114 &4301722141912205366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2516476828890733242}
+  m_GameObject: {fileID: 9042479267294620921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45ac741174a475e469d0d9eeeaef4087, type: 3}
+  m_Script: {fileID: 11500000, guid: 3604dbf577b0e7242b78371474817399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  maxLifetime: 4
-  damage: 10
+  speed: 30
+  maxLifetime: 2
+  damage: 1
+  maxBounces: 3
