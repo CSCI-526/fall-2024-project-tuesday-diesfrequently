@@ -11,6 +11,8 @@ public class Tier3Ore : MonoBehaviour
 
     private int oreT3ExpDropAmt; // stores # of exp orbs dropped on die()
     private int oreT3GoldDropAmt;// stores # of gold orbs dropped on die()
+    private float oreDropZoneRadius; // stores how wide a zone to drop resources on die()
+
 
     [Header("HP Bar Debug")]
     [SerializeField] public bool showHPBar = true;
@@ -31,6 +33,7 @@ public class Tier3Ore : MonoBehaviour
         currentHealth = GameManager.Instance.OreManager.ORE_T3_MAX_HEALTH;
         oreT3ExpDropAmt = GameManager.Instance.OreManager.ORE_T3_DROP_XP;
         oreT3GoldDropAmt = GameManager.Instance.OreManager.ORE_T3_DROP_GOLD;
+        oreDropZoneRadius = GameManager.Instance.OreManager.ORE_RESOURCE_DROP_ZONE_RADIUS;
 
         if (hpCanvas)
         {
@@ -86,7 +89,7 @@ public class Tier3Ore : MonoBehaviour
         for (int i = 0; i < oreT3ExpDropAmt; i++)
         {
             GameObject exp_entity = Instantiate(ExpPrefab);
-            exp_entity.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
+            exp_entity.transform.position = new Vector3(transform.position.x + Random.Range(-oreDropZoneRadius, oreDropZoneRadius), transform.position.y, transform.position.z + Random.Range(-oreDropZoneRadius, oreDropZoneRadius)); ;
         }
     }
 
@@ -95,7 +98,7 @@ public class Tier3Ore : MonoBehaviour
         for (int i = 0; i < oreT3GoldDropAmt; i++)
         {
             GameObject gold_entity = Instantiate(GoldPrefab);
-            gold_entity.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
+            gold_entity.transform.position = new Vector3(transform.position.x + Random.Range(-oreDropZoneRadius, oreDropZoneRadius), transform.position.y, transform.position.z + Random.Range(-oreDropZoneRadius, oreDropZoneRadius)); ;
         }
     }
 

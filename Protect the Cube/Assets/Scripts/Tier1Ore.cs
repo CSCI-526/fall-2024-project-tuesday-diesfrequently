@@ -13,6 +13,7 @@ public class Tier1Ore : MonoBehaviour
 
     private int oreT1ExpDropAmt; // stores # of exp orbs dropped on die()
     private int oreT1GoldDropAmt;// stores # of gold orbs dropped on die()
+    private float oreDropZoneRadius; // stores how wide a zone to drop resources on die()
 
     [Header("HP Bar Debug")]
     [SerializeField] public bool showHPBar = true;
@@ -33,7 +34,9 @@ public class Tier1Ore : MonoBehaviour
         currentHealth = GameManager.Instance.OreManager.ORE_T1_MAX_HEALTH;
         oreT1ExpDropAmt = GameManager.Instance.OreManager.ORE_T1_DROP_XP;
         oreT1GoldDropAmt = 0; // no gold for Tier 1 Ores
-        
+        oreDropZoneRadius = GameManager.Instance.OreManager.ORE_RESOURCE_DROP_ZONE_RADIUS;
+
+
         if (hpCanvas) {
             hpCanvas.SetActive(showHPBar);
             ConstraintSource cs = new ConstraintSource();
@@ -86,7 +89,7 @@ public class Tier1Ore : MonoBehaviour
         for (int i = 0; i < oreT1ExpDropAmt; i++)
         {
             GameObject exp_entity = Instantiate(ExpPrefab);
-            exp_entity.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
+            exp_entity.transform.position = new Vector3(transform.position.x + Random.Range(-oreDropZoneRadius, oreDropZoneRadius), transform.position.y, transform.position.z + Random.Range(-oreDropZoneRadius, oreDropZoneRadius)); ;
         }
     }
 
@@ -95,7 +98,7 @@ public class Tier1Ore : MonoBehaviour
         for (int i = 0; i < oreT1GoldDropAmt; i++)
         {
             GameObject gold_entity = Instantiate(GoldPrefab);
-            gold_entity.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
+            gold_entity.transform.position = new Vector3(transform.position.x + Random.Range(-oreDropZoneRadius, oreDropZoneRadius), transform.position.y, transform.position.z + Random.Range(-oreDropZoneRadius, oreDropZoneRadius)); ;
         }
     }
 

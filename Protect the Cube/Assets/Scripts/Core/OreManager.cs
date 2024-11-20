@@ -27,6 +27,7 @@ public class OreManager : MonoBehaviour
 
     [Header("Ore Visuals Balancing")]
     [SerializeField] public float ORE_HEIGHT_ABOVE_GROUND = 1.2f;
+    [SerializeField] public float ORE_RESOURCE_DROP_ZONE_RADIUS = 2.0f;
     [SerializeField] public int ORE_T1_NUM_EYES = 5;
     [SerializeField] public int ORE_T2_NUM_EYES = 10;
     [SerializeField] public int ORE_T3_NUM_EYES = 15;
