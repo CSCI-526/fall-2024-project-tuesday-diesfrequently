@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
       propertyPath: m_Name
-      value: Fire
+      value: FlamethrowerFire
       objectReference: {fileID: 0}
     - target: {fileID: 3538237464379928796, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -65,10 +65,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5721283078563959621, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5721283078563959621, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 44a579c0b379c524688b78990003cebd, type: 2}
-    m_RemovedComponents: []
+      objectReference: {fileID: 2100000, guid: 1d55dff6b3dfa9b45b23518319a98e08, type: 2}
+    m_RemovedComponents:
+    - {fileID: 1677332616392144054, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -78,6 +83,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
       insertIndex: -1
       addedObject: {fileID: -6245749570766075420}
+    - targetCorrespondingSourceObject: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8383478540961449201}
   m_SourcePrefab: {fileID: 100100000, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
 --- !u!1 &3362676759128714227 stripped
 GameObject:
@@ -274,7 +282,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.49922678, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -920,8 +928,8 @@ ParticleSystem:
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 10
+      minMaxState: 3
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1351,15 +1359,15 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 1, g: 0.58835566, b: 0, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -1383,13 +1391,13 @@ ParticleSystem:
         atime5: 0
         atime6: 0
         atime7: 0
-        m_Mode: 0
-        m_ColorSpace: -1
+        m_Mode: 2
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 1, g: 0.8776027, b: 0, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -1405,7 +1413,7 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 0
+        atime0: 63029
         atime1: 65535
         atime2: 0
         atime3: 0
@@ -1414,7 +1422,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
@@ -4828,7 +4836,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4881,3 +4889,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8383478540961449201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362676759128714227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ac741174a475e469d0d9eeeaef4087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
+  maxLifetime: 1
+  damage: 0.5

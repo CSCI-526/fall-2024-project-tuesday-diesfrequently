@@ -225,7 +225,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.49803925, g: 0.2901961, b: 0.17254902, a: 1}
+  m_Color: {r: 0.3490566, g: 0.2008127, b: 0.11690104, a: 1}
   m_Intensity: 4
   m_Range: 0.6
   m_SpotAngle: 30
@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8fb2fc0063e80349a3f968c98c6f537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exp_value: 1
   period: 1
   amplitude: 1
-  lifetime: 20
+  lifetime: 45

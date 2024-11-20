@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ffbdf1587994e014a8cacbb5219477db, type: 2}
+  - {fileID: 2100000, guid: fe5426d1ef7746946a8a8faa47505eb2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ffbdf1587994e014a8cacbb5219477db, type: 2}
+  - {fileID: 2100000, guid: fe5426d1ef7746946a8a8faa47505eb2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,7 +272,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ffbdf1587994e014a8cacbb5219477db, type: 2}
+  - {fileID: 2100000, guid: fe5426d1ef7746946a8a8faa47505eb2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -338,7 +338,7 @@ PrefabInstance:
     - target: {fileID: 996285083111918376, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7f32ccd71c770c84ba622d9199ed3c85, type: 2}
+      objectReference: {fileID: 2100000, guid: 5930956f4c100f845a18cff11132830d, type: 2}
     - target: {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Name
       value: Gatling Turret
@@ -374,11 +374,11 @@ PrefabInstance:
     - target: {fileID: 4739192330666534134, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ffbdf1587994e014a8cacbb5219477db, type: 2}
+      objectReference: {fileID: 2100000, guid: fe5426d1ef7746946a8a8faa47505eb2, type: 2}
     - target: {fileID: 4809673224787670642, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7f32ccd71c770c84ba622d9199ed3c85, type: 2}
+      objectReference: {fileID: 2100000, guid: 5930956f4c100f845a18cff11132830d, type: 2}
     - target: {fileID: 4813585925586114357, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -421,7 +421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: fireRate
-      value: 12
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: maxRange
@@ -430,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 1733587294317518391, guid: 5e9444d4fe731d44abde75b9acacfd73, type: 3}
+      objectReference: {fileID: 9042479267294620921, guid: 37d035d5be95e3842a95a7781e302d93, type: 3}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingDesc
       value: A gun turret variant with a very high fire rate
@@ -438,6 +438,14 @@ PrefabInstance:
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingName
       value: Gatling Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266269406354168798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266269406354168798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7943139715569199764, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -763,7 +771,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.60691816, g: 1, b: 0.7789011, a: 1}
+      maxColor: {r: 0.92549026, g: 0.69411767, b: 0.83921576, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

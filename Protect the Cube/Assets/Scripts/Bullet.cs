@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         if (lifetime > maxLifetime)
         {
             //lifetime = 0.0f;
-            if(GameManager.Instance.useBulletPool)
+            if (GameManager.Instance.useBulletPool)
             {
                 BulletPool.Instance.ReturnBullet(gameObject);
             }
@@ -36,27 +36,44 @@ public class Bullet : MonoBehaviour
         }
 
     }
-
-    void OnTriggerEnter (Collider other) {
-        if (other.CompareTag("Enemy")){
-            other.GetComponent<EnemyHealth>().TakeDamage(damage);
-            if (GameManager.Instance.useBulletPool)
-            {
-                BulletPool.Instance.ReturnBullet(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+    public void KillBullet()
+    {
+        if (GameManager.Instance.useBulletPool)
+        {
+            BulletPool.Instance.ReturnBullet(gameObject);
         }
-        else if(other.CompareTag("Ore"))
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    protected virtual void HitEnemy(Collider other)
+    {
+        other.GetComponent<EnemyHealth>().TakeDamage(damage);
+        KillBullet();
+    }
+
+    // protected virtual void HitOre(Collider other) 
+    // {
+    //     other.GetComponent<Ore>().TakeDamage(damage);
+    //     KillBullet();
+    // }
+
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            HitEnemy(other);
+        }
+        else if (other.CompareTag("Ore"))
         {
             bool damageTaken = false;
 
             Tier1Ore ore_t1 = other.GetComponent<Tier1Ore>();
             if (ore_t1 != null) { ore_t1.TakeDamage(damage); damageTaken = true; }
 
-            if (!damageTaken) {
+            if (!damageTaken)
+            {
                 Tier2Ore ore_t2 = other.GetComponent<Tier2Ore>();
                 if (ore_t2 != null) { ore_t2.TakeDamage(damage); damageTaken = true; }
             }
@@ -69,19 +86,7 @@ public class Bullet : MonoBehaviour
 
             if (GameManager.Instance.useBulletPool) BulletPool.Instance.ReturnBullet(gameObject);
             else Destroy(gameObject);
-
-        }
-
-        if (other.CompareTag("Wall"))
-        {
-            if (GameManager.Instance.useBulletPool)
-            {
-                BulletPool.Instance.ReturnBullet(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            // HitOre(other);
         }
     }
 

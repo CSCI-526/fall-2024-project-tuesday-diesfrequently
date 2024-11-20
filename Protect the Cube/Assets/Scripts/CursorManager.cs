@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-    [SerializeField] private Texture2D cursorTexture;
-    private Vector2 cursorHotspot;
+    public GameObject HandTexture;
+
+
+
+    public void SetCursorHand()
+    {
+        HandTexture.transform.position = Input.mousePosition;
+        HandTexture.SetActive(true);
+        Cursor.visible = false;
+
+    }
 
     public void Start(){
-        Cursor.visible = true;
-        cursorHotspot = new Vector2(cursorTexture.width/2, cursorTexture.height / 2);
-        Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.Auto);
-        
+        SetCursorHand();
+    }
+
+    public void Update(){
+        Cursor.visible = false;
     }
 }

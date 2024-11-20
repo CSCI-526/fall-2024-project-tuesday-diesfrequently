@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 996285083111918376, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8343ec736b3b3304284ceaafcd7dd746, type: 2}
+      objectReference: {fileID: 2100000, guid: 13b841d0436a4a0469ec6275ad01cc4e, type: 2}
     - target: {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Name
       value: Flamethrower Turret
@@ -99,7 +99,7 @@ PrefabInstance:
     - target: {fileID: 4809673224787670642, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 44a579c0b379c524688b78990003cebd, type: 2}
+      objectReference: {fileID: 2100000, guid: 13b841d0436a4a0469ec6275ad01cc4e, type: 2}
     - target: {fileID: 4813585925586114357, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.3244543
@@ -142,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: fireRate
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: maxRange
@@ -164,6 +164,10 @@ PrefabInstance:
       propertyPath: buildingName
       value: Flamethrower Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 5231336506220754123, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13b841d0436a4a0469ec6275ad01cc4e, type: 2}
     - target: {fileID: 8238119884321818877, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -393,7 +397,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.60691816, g: 1, b: 0.7789011, a: 1}
+      maxColor: {r: 0.9254902, g: 0.69411767, b: 0.8392157, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1478,8 +1482,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 1, g: 0.5653568, b: 0, a: 1}
+        key1: {r: 1, g: 0.5653568, b: 0, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1503,7 +1507,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:

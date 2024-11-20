@@ -240,10 +240,11 @@ MonoBehaviour:
   exp_value: 1
   period: 1
   amplitude: 0.5
-  lifetime: 15
+  lifetime: 45
   moveSpeed: 8
   moveToPlayer: 1
   attractionRange: 4
+  uiExpOrbPrefab: {fileID: 0}
 --- !u!114 &-3978978509010604329
 MonoBehaviour:
   m_ObjectHideFlags: 0

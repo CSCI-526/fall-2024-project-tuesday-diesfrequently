@@ -18,6 +18,7 @@ public class Nexus : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private Slider hpBar;
+    [SerializeField] private Slider localhpBar;
 
     [Header("Game Over Settings")]
     [SerializeField] private bool triggerGameOver = false;
@@ -96,9 +97,12 @@ public class Nexus : MonoBehaviour
 
         OnTakeDamage?.Invoke();
 
-        if (currentHealth <= 0 && triggerGameOver)
+        if (currentHealth <= 0)
         {
-            GameManager.Instance.TriggerGameOver();
+            if(triggerGameOver)
+            {
+                GameManager.Instance.TriggerGameOver();
+            }
             Destroy(gameObject);
         }
 
@@ -146,5 +150,6 @@ public class Nexus : MonoBehaviour
     private void UpdateHPBar()
     {
         if (hpBar != null) hpBar.value = (float)currentHealth / maxHealth;
+        if (localhpBar != null) localhpBar.value = (float)currentHealth / maxHealth;
     }
 }
