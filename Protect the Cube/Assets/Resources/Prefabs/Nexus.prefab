@@ -265,6 +265,7 @@ MonoBehaviour:
   xpPrefab: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
   hpBar: {fileID: 0}
+  localhpBar: {fileID: 4094194676968528289}
   triggerGameOver: 1
   indicator: {fileID: 0}
 --- !u!114 &8375766490867417729
@@ -335,6 +336,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: missing name
   RewardDescription: missing description
+  rangeDesc: 
+  damageDesc: 
+  firerateDesc: 
 --- !u!1 &541082699506193634
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6514929613103759028
 RectTransform:
   m_ObjectHideFlags: 0
