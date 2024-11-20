@@ -36,44 +36,40 @@ public class Bullet : MonoBehaviour
         }
 
     }
+    public void KillBullet()
+    {
+        if (GameManager.Instance.useBulletPool)
+        {
+            BulletPool.Instance.ReturnBullet(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    protected virtual void  HitEnemy(Collider other) 
+    {
+        other.GetComponent<EnemyHealth>().TakeDamage(damage);
+        KillBullet();
+    }
 
-    void OnTriggerEnter (Collider other) {
+    protected virtual void HitOre(Collider other) 
+    {
+        other.GetComponent<Ore>().TakeDamage(damage);
+        KillBullet();
+    }
+
+    protected virtual void OnTriggerEnter (Collider other) {
         if (other.CompareTag("Enemy")){
-            other.GetComponent<EnemyHealth>().TakeDamage(damage);
-            if (GameManager.Instance.useBulletPool)
-            {
-                BulletPool.Instance.ReturnBullet(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            HitEnemy(other);
         }
         else if(other.CompareTag("Ore"))
         {
-            other.GetComponent<Ore>().TakeDamage(damage);
-            if (GameManager.Instance.useBulletPool)
-            {
-                BulletPool.Instance.ReturnBullet(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
+            
+            HitOre(other);
         }
 
-        if (other.CompareTag("Wall"))
-        {
-            if (GameManager.Instance.useBulletPool)
-            {
-                BulletPool.Instance.ReturnBullet(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
+
     }
 
     public void ResetBullet()

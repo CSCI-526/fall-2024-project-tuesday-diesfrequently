@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8343ec736b3b3304284ceaafcd7dd746, type: 2}
+  - {fileID: 2100000, guid: e68517d357cbfd347867b10325ab4bc1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -321,7 +321,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8343ec736b3b3304284ceaafcd7dd746, type: 2}
+  - {fileID: 2100000, guid: 0abbd4acca436f24785e8a51a59d3803, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -428,7 +428,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8343ec736b3b3304284ceaafcd7dd746, type: 2}
+  - {fileID: 2100000, guid: 0abbd4acca436f24785e8a51a59d3803, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -603,6 +603,9 @@ MonoBehaviour:
   RewardName: Booster Turret
   RewardDescription: Greatly improves the fire rate, turn rate, and tracking ability
     of nearby turrets
+  rangeDesc: 
+  damageDesc: 
+  firerateDesc: 
 --- !u!114 &7986581021140794080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,7 +684,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99c8299f92393af49917990959245f86, type: 2}
+  - {fileID: 2100000, guid: e68517d357cbfd347867b10325ab4bc1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

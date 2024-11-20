@@ -507,7 +507,7 @@ MonoBehaviour:
   jumpForce: 300
   rb: {fileID: 1615652832181997374}
   fireRate: 8
-  projectile: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
+  projectile: {fileID: 4743884611961699680, guid: 1329f8925e50b7d4383c5eec6bcf9da6, type: 3}
   gunBarrel: {fileID: 2143742393447370335}
   rangeIndicator: {fileID: 3324131970941142489}
 --- !u!114 &1267738778565106773
@@ -604,6 +604,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: missing name
   RewardDescription: missing description
+  rangeDesc: 
+  damageDesc: 
+  firerateDesc: 
 --- !u!1 &5713703534664780110
 GameObject:
   m_ObjectHideFlags: 0
