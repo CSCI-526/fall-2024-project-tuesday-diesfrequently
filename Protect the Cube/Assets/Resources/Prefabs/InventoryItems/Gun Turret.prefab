@@ -61,7 +61,7 @@ MonoBehaviour:
   buildingName: Gun Turret
   buildingDesc: A turret with decent range, accuracy, and damage
   colorDiffAfterPlace: 50
-  fireRate: 12
+  fireRate: 6
   maxRange: 12
   turnSpeed: 2
   projectile: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}

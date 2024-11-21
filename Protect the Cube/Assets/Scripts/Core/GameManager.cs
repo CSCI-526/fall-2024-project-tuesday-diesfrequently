@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
 
         // Tutorial Logic
-        if (TutorialStorageValue)
+        if (TutorialStorageValue && enableTutorial)
         {
             Debug.Log("Tutorial is Enabled");
             SetGamePhase(GamePhase.BasicTutorial_Start);

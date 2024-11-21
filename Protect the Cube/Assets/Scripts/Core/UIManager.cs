@@ -83,7 +83,11 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        Cursor.visible = false;
+        if (Input.GetMouseButtonDown(0))
+        {
+            Cursor.visible = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.P) && canPause)
         {
             if (pauseMenuActive) HidePauseScreen();

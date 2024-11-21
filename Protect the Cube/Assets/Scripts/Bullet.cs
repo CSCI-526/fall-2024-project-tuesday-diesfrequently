@@ -52,7 +52,10 @@ public class Bullet : MonoBehaviour
         other.GetComponent<EnemyHealth>().TakeDamage(damage);
         KillBullet();
     }
-
+    protected virtual void HitWall(Collider other)
+    {
+        KillBullet();
+    }
     // protected virtual void HitOre(Collider other) 
     // {
     //     other.GetComponent<Ore>().TakeDamage(damage);
@@ -87,6 +90,10 @@ public class Bullet : MonoBehaviour
             if (GameManager.Instance.useBulletPool) BulletPool.Instance.ReturnBullet(gameObject);
             else Destroy(gameObject);
             // HitOre(other);
+        }
+        else if (other.CompareTag("Wall"))
+        {
+            HitWall(other);
         }
     }
 
