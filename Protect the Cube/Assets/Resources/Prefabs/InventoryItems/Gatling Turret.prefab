@@ -5318,9 +5318,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: Gatling Turret
   RewardDescription: A turret with a high fire rate
-  rangeDesc: 'Range: medium'
-  damageDesc: 'Damage: low'
-  firerateDesc: 'Fire Rate: very high'
+  RewardImage: {fileID: 21300000, guid: 5d88657cdb08b4a7394e84a2c959f308, type: 3}
+  rangeDesc: 3
+  damageDesc: 1
+  firerateDesc: 4
 --- !u!114 &6567213520952982247
 MonoBehaviour:
   m_ObjectHideFlags: 0

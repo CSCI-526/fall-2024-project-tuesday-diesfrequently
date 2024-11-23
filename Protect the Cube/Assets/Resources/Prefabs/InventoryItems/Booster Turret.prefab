@@ -603,9 +603,10 @@ MonoBehaviour:
   RewardName: Booster Turret
   RewardDescription: Greatly improves the fire rate, turn rate, and tracking ability
     of nearby turrets
-  rangeDesc: 
-  damageDesc: 
-  firerateDesc: 
+  RewardImage: {fileID: 21300000, guid: e4a172a4c509c4f838864a0455207e74, type: 3}
+  rangeDesc: 0
+  damageDesc: 0
+  firerateDesc: 0
 --- !u!114 &7986581021140794080
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using TMPro;
 using UnityEngine;
@@ -17,15 +19,17 @@ public class RewardPanel : MonoBehaviour
         {
             RewardInfo reward_info = reward.GetComponent<RewardInfo>();
             Building building = reward.GetComponent<Building>();
-
             // Prioritize "INFO" over BuildingInfo
-            if (reward_info != null)
+            if(reward_info.RewardImage != null){
+                rewardImage.sprite = reward_info.RewardImage;
+            }
+            if (reward_info.rangeDesc != 0)
             {
                 displayedRewardName.text = reward_info.RewardName;
-                rewardDescription.text = reward_info.RewardDescription
-                    + "\n" + reward_info.rangeDesc
-                    + "\n" + reward_info.damageDesc
-                    + "\n" + reward_info.firerateDesc;
+                rewardDescription.text = reward_info.RewardDescription+ 
+                    "\n" + "Range:" + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.rangeDesc)) +
+                    "\n" + "Damage:" + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.damageDesc)) + 
+                    "\n" + "Fire Rate:"+ String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.firerateDesc));
             }
             else if (building != null)
             {

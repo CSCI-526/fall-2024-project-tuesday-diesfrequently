@@ -4948,9 +4948,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: Gun Turret
   RewardDescription: A turret with decent overall stats.
-  rangeDesc: 'Range: high'
-  damageDesc: 'Damage: medium'
-  firerateDesc: 'Fire Rate: medium'
+  RewardImage: {fileID: 21300000, guid: e064f93fd7cd54e47834aff3489dd246, type: 3}
+  rangeDesc: 2
+  damageDesc: 2
+  firerateDesc: 2
 --- !u!114 &-8703829114956844515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5751,6 +5752,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 672e2868f4f2143409d8e1e1a0721c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation:
+    value:
+      x: 0
+      y: 0
+      z: 0
+      w: 1
 --- !u!1001 &4691808515420813455
 PrefabInstance:
   m_ObjectHideFlags: 0

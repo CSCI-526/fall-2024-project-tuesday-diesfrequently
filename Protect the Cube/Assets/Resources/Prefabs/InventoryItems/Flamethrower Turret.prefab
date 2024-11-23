@@ -5018,9 +5018,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: Flamethrower Turret
   RewardDescription: Excels at frying enemies at close range
-  rangeDesc: 'Range: low'
-  damageDesc: 'Damage: high'
-  firerateDesc: 'Fire Rate: very high'
+  RewardImage: {fileID: 21300000, guid: cc94b97c93a174edab3405b674e32f7d, type: 3}
+  rangeDesc: 1
+  damageDesc: 3
+  firerateDesc: 5
 --- !u!114 &-5126039586335022412
 MonoBehaviour:
   m_ObjectHideFlags: 0

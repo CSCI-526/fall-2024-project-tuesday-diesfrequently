@@ -301,7 +301,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.8
+  m_fontSize: 35.8
   m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.8
+  m_fontSize: 35.8
   m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2037,7 +2037,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.8
+  m_fontSize: 35.8
   m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2722,7 +2722,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.8
+  m_fontSize: 35.8
   m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3548,7 +3548,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.8
+  m_fontSize: 35.8
   m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3757,7 +3757,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.8
+  m_fontSize: 35.8
   m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5302,7 +5302,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.8
+  m_fontSize: 35.8
   m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7983,6 +7983,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2440924202804582847, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: m_text
+      value: 'Description: blah blah blah blah blah blah blah blah blah blah blah<sprite=0>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440924202804582847, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fb05ff6a89db94e4782f37ffde3e2882, type: 2}
+    - target: {fileID: 3422496958977902010, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: m_text
+      value: 'Description: blah blah blah blah blah blah blah blah blah blah blah
+        <sprite=0>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3422496958977902010, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fb05ff6a89db94e4782f37ffde3e2882, type: 2}
     - target: {fileID: 3569839739221761757, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
       propertyPath: m_Name
       value: RewardMenu
@@ -8015,6 +8032,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: HideRewardScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 6323230406650823540, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: m_text
+      value: 'Description: blah blah blah blah blah blah blah blah blah blah blah<sprite=0>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6323230406650823540, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fb05ff6a89db94e4782f37ffde3e2882, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -5183,9 +5183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: Slow Turret
   RewardDescription: Slows all enemies within range of the tower
-  rangeDesc: 
-  damageDesc: 
-  firerateDesc: 
+  RewardImage: {fileID: 21300000, guid: 9bb637318a4a24121b462d749f2b6541, type: 3}
+  rangeDesc: 0
+  damageDesc: 0
+  firerateDesc: 0
 --- !u!114 &-9047651862579276083
 MonoBehaviour:
   m_ObjectHideFlags: 0
