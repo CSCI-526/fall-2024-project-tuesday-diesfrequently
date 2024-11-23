@@ -393,6 +393,7 @@ MonoBehaviour:
   xpPrefab: {fileID: 6435648702068270667, guid: c3ce4bb346d63aa408f248ac2bfa4bab, type: 3}
   xpSpawnOffset: {x: 0, y: 1, z: 0}
   hpBar: {fileID: 5515740668853933773}
+  localhpBar: {fileID: 0}
   triggerGameOver: 0
   indicator: {fileID: 0}
 --- !u!114 &8457574962055490782
@@ -479,9 +480,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: Harvester
   RewardDescription: Generates gold over time. Use gold to upgrade turrets
-  rangeDesc: 
-  damageDesc: 
-  firerateDesc: 
+  RewardImage: {fileID: 21300000, guid: 427ee8bc4f53b44ea822e080ccd38077, type: 3}
+  rangeDesc: 0
+  damageDesc: 0
+  firerateDesc: 0
 --- !u!114 &9204870354521129057
 MonoBehaviour:
   m_ObjectHideFlags: 0
