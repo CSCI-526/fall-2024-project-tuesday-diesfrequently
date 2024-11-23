@@ -7903,6 +7903,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1756854516122169047}
     m_Modifications:
+    - target: {fileID: 440084564235439598, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: emptyImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 7fd0d3326e91944c29a563e7a7ce38e4, type: 3}
+    - target: {fileID: 629307596386030059, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: emptyImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 7fd0d3326e91944c29a563e7a7ce38e4, type: 3}
     - target: {fileID: 1240450294383833263, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8040,6 +8048,10 @@ PrefabInstance:
       propertyPath: m_spriteAsset
       value: 
       objectReference: {fileID: 11400000, guid: fb05ff6a89db94e4782f37ffde3e2882, type: 2}
+    - target: {fileID: 9125692248670227232, guid: 7cc8d0a795e3581418a2197341b591f4, type: 3}
+      propertyPath: emptyImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 7fd0d3326e91944c29a563e7a7ce38e4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class RewardPanel : MonoBehaviour
 {
     [SerializeField] protected Image rewardImage;
+    [SerializeField] protected Sprite emptyImage;
     [SerializeField] protected TextMeshProUGUI displayedRewardName;
     [SerializeField] protected TextMeshProUGUI rewardDescription;
 
@@ -20,11 +21,9 @@ public class RewardPanel : MonoBehaviour
             RewardInfo reward_info = reward.GetComponent<RewardInfo>();
             Building building = reward.GetComponent<Building>();
             // Prioritize "INFO" over BuildingInfo
-            if(reward_info.RewardImage != null){
-                rewardImage.sprite = reward_info.RewardImage;
-            }
             if (reward_info.rangeDesc != 0)
-            {
+            {   
+                rewardImage.sprite = reward_info.RewardImage;
                 displayedRewardName.text = reward_info.RewardName;
                 rewardDescription.text = reward_info.RewardDescription+ 
                     "\n" + "Range:" + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.rangeDesc)) +
@@ -32,7 +31,8 @@ public class RewardPanel : MonoBehaviour
                     "\n" + "Fire Rate:"+ String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.firerateDesc));
             }
             else if (building != null)
-            {
+            {   
+                rewardImage.sprite = reward_info.RewardImage;
                 displayedRewardName.text = building.buildingName;
                 rewardDescription.text = building.buildingDesc;
             }

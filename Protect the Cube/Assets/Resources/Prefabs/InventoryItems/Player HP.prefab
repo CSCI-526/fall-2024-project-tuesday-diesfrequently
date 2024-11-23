@@ -61,3 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: Player HP
   RewardDescription: adds 2 HP back to player
+  RewardImage: {fileID: 21300000, guid: d25c8f0efa1a049869228b922a8f16ee, type: 3}
+  rangeDesc: 0
+  damageDesc: 0
+  firerateDesc: 0
