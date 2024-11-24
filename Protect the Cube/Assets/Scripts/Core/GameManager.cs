@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(10.0f); // delay 10 seconds for enemy to come close to nexus
         WaveManager.LockAllEnemiesMovement();
         WaveManager.SetConstantXPDrops(4);
-        Player.GetComponent<PlayerController>().LockMovement();
+        //Player.GetComponent<PlayerController>().LockMovement();
 
         UIManager.Tutorial_ShowShootingUI(); // show shooting UI
         Player.GetComponent<PlayerController>().UnlockShooting();
