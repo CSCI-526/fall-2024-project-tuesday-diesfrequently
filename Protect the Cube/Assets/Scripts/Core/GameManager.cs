@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
 
     // Set the field where TutorialStorageValue is stored
     private const string TutorialStorageKey = "IsTutorialEnabled";
-
     // states for GamePhase Tutorialization
     public enum GamePhase
     {
@@ -200,10 +199,19 @@ public class GameManager : MonoBehaviour
     //    Debug.Log("Ending GamePhase.BasicTutorial_Placement Phase");
     //    SetGamePhase(GamePhase.HandCraftedWaves);
     //}
+    private void DisableBarrier()
+    {
+        GameObject barrier = GameObject.Find("Barrier");
+        if(barrier != null)
+        {
+            barrier.SetActive(false);
+        }
+    }
 
     private void StartHandCraftedWaves()
     {
         Debug.Log("ENTERING GamePhase.HandCraftedWaves Phase");
+        DisableBarrier();
         Player.GetComponent<PlayerController>().UnlockMovement();
         Player.GetComponent<PlayerController>().UnlockShooting();
         WaveManager.UnlockAllEnemiesMovement();
@@ -212,6 +220,7 @@ public class GameManager : MonoBehaviour
     private void StartDynamicWaves()
     {
         Debug.Log("ENTERING GamePhase.DynamicWaves Phase");
+        DisableBarrier();
         Player.GetComponent<PlayerController>().UnlockMovement();
         Player.GetComponent<PlayerController>().UnlockShooting();
         WaveManager.UnlockAllEnemiesMovement();
