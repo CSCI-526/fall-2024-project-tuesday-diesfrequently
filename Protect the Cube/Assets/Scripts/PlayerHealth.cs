@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private Slider hpBar;
+    [SerializeField] private Slider playerHpBar;
 
     private Animator animator;
     public int maxHealth { get; private set; }
@@ -100,5 +101,6 @@ public class PlayerHealth : MonoBehaviour
     private void UpdateHPBar()
     {
         if (hpBar) hpBar.value = (float)currentHealth/maxHealth;
+        if (playerHpBar) playerHpBar.value = (float)currentHealth/maxHealth;
     }
 }
