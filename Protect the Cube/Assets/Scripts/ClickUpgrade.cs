@@ -32,12 +32,20 @@ public class ClickUpgrade : MonoBehaviour
     }
 
     void OnMouseDown(){
-        if(upgradeable && PayCostIfPossible(goldRequired)){
+        AttemptUpgrade();
+    }
+
+    public void AttemptUpgrade()
+    {
+        if (upgradeable && PayCostIfPossible(goldRequired))
+        {
             // GameManager.Instance.UIManager.ShowUpgradeScreen();
             upgrade();
             GameManager.Instance.UIManager.updateUpgradeUI(buildingName, goldRequired, id);
             Debug.Log("upgrade");
-        }else{
+        }
+        else
+        {
             Debug.Log("no enough resources");
         }
     }
@@ -101,7 +109,11 @@ public class ClickUpgrade : MonoBehaviour
         arrow.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         // Set the position above the turret
         arrow.transform.localPosition = Vector3.up * 3.2f;
-
+        UpgradeArrow uaComponent = arrow.GetComponent<UpgradeArrow>();
+        if(uaComponent != null)
+        {
+            uaComponent.SetParentTurret(turret);
+        }
     }
 
     void HideUpgradeArrow(GameObject turret)
