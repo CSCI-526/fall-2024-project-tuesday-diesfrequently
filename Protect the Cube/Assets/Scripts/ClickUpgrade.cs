@@ -9,6 +9,8 @@ public class ClickUpgrade : MonoBehaviour
     [SerializeField] public string buildingName;
     [SerializeField] public GameObject indicator;
     [SerializeField] public GameObject upgradeArrow;
+    [SerializeField] public GameObject lvl2Appearance;
+    [SerializeField] public GameObject lvl3Appearance;
     private int id;
     private bool upgradeable = true;
     private PlayerLevels playerLevelObject;
@@ -66,7 +68,7 @@ public class ClickUpgrade : MonoBehaviour
         goldRequired += level*3;
         GameObject indicate = Instantiate(indicator);
         indicate.transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f + level/5.0f, transform.position.z);
-        
+        updateAppearance();
         gameObject.GetComponent<turretShoot>().upgrade(level, buildingName);
         if(level == 3){
             upgradeable = false;
@@ -74,6 +76,18 @@ public class ClickUpgrade : MonoBehaviour
         GameManager.Instance.UIManager.UpdateUI();
         CheckForUpgradeableTurrets();
 
+    }
+
+    public void updateAppearance()
+    {
+        if(level == 1)
+        {
+            lvl2Appearance.SetActive(true);
+        }
+        else if(level == 2)
+        {
+            lvl3Appearance.SetActive(true);
+        }
     }
 
 
