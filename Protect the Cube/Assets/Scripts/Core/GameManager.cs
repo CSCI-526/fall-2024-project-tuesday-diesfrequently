@@ -82,17 +82,20 @@ public class GameManager : MonoBehaviour
     }
 
     private void StartInitialization() {
-        UIManager.ShowModalWindow("Test Message");
-        StartCoroutine(WaitForSpace());
-    }
-
-    private IEnumerator WaitForSpace()
-    {
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         UIManager.HideModalWindow();
+        //UIManager.ShowModalWindow("Test Message");
+        //StartCoroutine(WaitForSpace());
         SetGamePhase(GamePhase.BasicTutorial_Start);
         Debug.Log("Finished GamePhase.Initialization Phase");
     }
+
+    //private IEnumerator WaitForSpace()
+    //{
+    //    yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+    //    UIManager.HideModalWindow();
+    //    SetGamePhase(GamePhase.BasicTutorial_Start);
+    //    Debug.Log("Finished GamePhase.Initialization Phase");
+    //}
 
     private void StartBasicTutorialStart()
     {
@@ -118,7 +121,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForInitializationEnd()
     {
-        yield return new WaitForSeconds(1.0f); // wait 1s before state change
+        yield return new WaitForSeconds(0.5f); // wait 1s before state change
         SetGamePhase(GamePhase.BasicTutorial_Movement);
     }
 
@@ -217,13 +220,7 @@ public class GameManager : MonoBehaviour
         // wait until player has "PLACED" turret
         yield return new WaitUntil(() => PlaceObject.firstTurretPlaced());
         WaveManager.UnlockAllEnemiesMovement();
-
-        //UIManager.Tutorial_HideInventoryBouncingArrow; // hide
-
-        // ngl if they cancel we're screwed bc i dont want to write a while loop for that here! 
-
-        //yield return new WaitForSeconds(4.0f); // delay 4 seconds
-
+        Player.GetComponent<PlayerController>().ActivatePlayerGun();
 
         Debug.Log("Ending GamePhase.BasicTutorial_Placement Phase");
         SetGamePhase(GamePhase.HandCraftedWaves);
@@ -232,10 +229,7 @@ public class GameManager : MonoBehaviour
     private void DisableBarrier()
     {
         GameObject barrier = GameObject.Find("Barrier");
-        if(barrier != null)
-        {
-            barrier.SetActive(false);
-        }
+        if(barrier != null) barrier.SetActive(false);
     }
 
     private void StartHandCraftedWaves()
@@ -244,6 +238,7 @@ public class GameManager : MonoBehaviour
         DisableBarrier();
         Player.GetComponent<PlayerController>().UnlockMovement();
         Player.GetComponent<PlayerController>().UnlockShooting();
+        Player.GetComponent<PlayerController>().ActivatePlayerGun();
         WaveManager.UnlockAllEnemiesMovement();
     }
 
