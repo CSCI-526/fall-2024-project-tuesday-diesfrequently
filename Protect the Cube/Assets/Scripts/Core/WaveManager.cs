@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public List<GameObject> AllEnemyEntities;
     [SerializeField] public int wave_index;
     [SerializeField] public int wave_count;
+    [SerializeField] public float TUTORIAL_SPAWN_DIST = 15.0f;
 
     private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>(); //stores the spawn point configuration
     private float _currentWaveLength;
@@ -107,11 +108,7 @@ public class WaveManager : MonoBehaviour
         GameObject enemyEntity = Instantiate(enemyPrefab);
         AddEnemyEntity(enemyEntity, GetEnemyIDX(enemyName));
 
-        // MATCHA: Hard Coded
-        int configID = 0;
-        float spawnRange = 2.0f;
-        Vector3 location = spawnConfigs[configID][UnityEngine.Random.Range(0, spawnConfigs[configID].Count - 1)];
-        enemyEntity.transform.position = location + new Vector3(UnityEngine.Random.Range(-spawnRange, spawnRange), 0, UnityEngine.Random.Range(-spawnRange, spawnRange));
+        enemyEntity.transform.position = new Vector3(-TUTORIAL_SPAWN_DIST, 0, TUTORIAL_SPAWN_DIST);
         if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
     }
 
@@ -157,8 +154,8 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves || 
-            GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)
+        if (GameManager.Instance.currentPhase == GameManager.GamePhase.HandCraftedWaves || 
+            GameManager.Instance.currentPhase == GameManager.GamePhase.DynamicWaves)
         {
             UpdateGlobalWaveTimer();
             if (AllEnemiesKilled() && WaveTimerComplete())
@@ -173,14 +170,14 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnNextWave()
     {
-        if(GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)
+        if(GameManager.Instance.currentPhase == GameManager.GamePhase.DynamicWaves)
         {
             SpawnDynamicWave(dynamicWaveInfo); //generates custom wave
         }
         else //normal behavior (uses custom waves)
         {
             WaveInfo waveInfo = Waves[wave_index];
-            Debug.Log("[Starting Wave " + wave_index + " ]...");
+            Debug.Log("[[[Starting Wave " + wave_index + 1 + "]]]");
 
             // output each wave event per wave
             foreach (EnemyInfo enemy in waveInfo.enemyList)
@@ -332,6 +329,9 @@ public class WaveManager : MonoBehaviour
     {
         if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Removing Enemy Entity ... ");
         AllEnemyEntities.Remove(enemy_entity);
-        EnemyCounter[enemyIDX] -= 1;
+        if (EnemyCounter[enemyIDX] > 0)
+        {
+            EnemyCounter[enemyIDX] -= 1;
+        }
     }
 }

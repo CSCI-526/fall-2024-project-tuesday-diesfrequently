@@ -47,6 +47,13 @@ public class BouncingBullet : Bullet
                 transform.right = directionToEnemy;
                 bounces++;
             }
+            else
+            {
+                KillBullet();
+            }
+        }
+        else{
+            KillBullet();
         }
     }
 

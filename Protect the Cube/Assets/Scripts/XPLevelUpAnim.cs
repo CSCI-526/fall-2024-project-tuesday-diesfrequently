@@ -7,6 +7,7 @@ public class XPLevelUpAnim : MonoBehaviour
     // Start is called before the first frame update
     public void ShowRewardScreen()
     {
+        GameManager.Instance.UIManager.ShowRewardUIMask();
         GameManager.Instance.UIManager.ShowRewardScreen();
     }
 }

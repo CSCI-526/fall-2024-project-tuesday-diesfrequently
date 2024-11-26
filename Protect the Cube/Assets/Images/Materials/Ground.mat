@@ -64,5 +64,5 @@ Material:
     - _SpecularHighlights: 0
     m_Colors:
     - _BaseColor: {r: 0.074166276, g: 0.3144653, b: 0.11936013, a: 1}
-    - _Color: {r: 0.074166246, g: 0.31446528, b: 0.1193601, a: 1}
+    - _Color: {r: 0.074166276, g: 0.3144653, b: 0.11936013, a: 1}
   m_BuildTextureStacks: []

@@ -12,13 +12,14 @@ public class UIManager : MonoBehaviour
     public GameObject inventoryArrow;
     public GameObject xpArrow;
     public float xpArrowOffset;
-    public GameObject holdMouse;
+    public GameObject TutorialShootingCursor;
     public GameObject XPLevelUp;
     public TextMeshProUGUI expAnimText;
     public GameObject playerHPSlider;
     public GameObject nexusHPSlider;
     public GameObject gold;
     public GameObject pauseButton;
+    public GameObject RewardUIMask;
 
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
@@ -38,8 +39,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject inventoryBar;
     [SerializeField] public Image damageEffect;
 
-    public GameObject crosshairTexture;
-    public GameObject HandTexture;
+    [SerializeField] public GameObject InstructionModalWindow; 
+
+    public GameObject ShootingCursor;
+    public GameObject CustomCursor;
 
     private Nexus _nexus;
     private PlayerHealth _playerHP;
@@ -55,7 +58,6 @@ public class UIManager : MonoBehaviour
     private bool canPause = true;
     public bool rewardMenuActive = false;
     private int _currentHealth = 5;
-    private bool isRewardLocked = true;
     static private bool firstRewardScreenEnded = false;
     private bool goldActivated = false;
 
@@ -68,8 +70,6 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetCursorCrosshair();
-
         _nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
@@ -78,15 +78,73 @@ public class UIManager : MonoBehaviour
         uiObject = GameObject.Find("UI");
         inventoryBar = uiObject.transform.Find("Inventory Bar").gameObject;
         expBar = uiObject.transform.Find("EXP").gameObject;
+
+        RewardUIMask.SetActive(false);
+
+        ActivateCustomCursor();
         UpdateUI();
+    }
+
+    public void ActivateDefaultCursor() {
+
+        // one hot encoding for (4) cursor options
+        Cursor.visible = true;
+        ShootingCursor.SetActive(false);
+        CustomCursor.SetActive(false);
+        TutorialShootingCursor.SetActive(false);
+    }
+
+    public void ActivateCustomCursor() // SetCursorHand
+    {
+        CustomCursor.transform.position = Input.mousePosition;
+
+        // one hot encoding for (4) cursor options
+        ShootingCursor.SetActive(false);
+        TutorialShootingCursor.SetActive(false);
+        Cursor.visible = false;
+
+        CustomCursor.SetActive(true);
+        CustomCursor.GetComponent<FollowMouse>().DeactivateTutorialShootingCursor();
+    }
+
+    public void ActivateCustomPlacementCursor() // SetCursorHand
+    {
+        CustomCursor.transform.position = Input.mousePosition;
+
+        // one hot encoding for (4) cursor options
+        ShootingCursor.SetActive(false);
+        TutorialShootingCursor.SetActive(false);
+        Cursor.visible = false;
+        CustomCursor.SetActive(true);
+        CustomCursor.GetComponent<FollowMouse>().ActivateTutorialShootingCursor();
+    }
+
+    public void ActivateShootingCursor()
+    {
+        ShootingCursor.transform.position = Input.mousePosition;
+
+        // one hot encoding for (4) cursor options
+        Cursor.visible = false;
+        CustomCursor.SetActive(false);
+        TutorialShootingCursor.SetActive(false);
+        ShootingCursor.SetActive(true);
+    }
+
+    public void ActivateCustomShootingCursor() // SetCursorHand
+    {
+        CustomCursor.transform.position = Input.mousePosition;
+
+        // one hot encoding for (4) cursor options
+        CustomCursor.SetActive(false);
+        ShootingCursor.SetActive(false);
+        Cursor.visible = false;
+        TutorialShootingCursor.SetActive(true);
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.visible = false;
-        }
+        // prevent "esc" error in WebGL builds
+        //if (Input.GetMouseButtonDown(0)) Cursor.visible = false;
 
         if (Input.GetKeyDown(KeyCode.P) && canPause)
         {
@@ -126,7 +184,6 @@ public class UIManager : MonoBehaviour
         inventoryManager.UI_OnRewardsUpdated -= UpdateRewardsUI;
     }
 
-
     public void UpdateUI()
     {
         UpdateWaveUI();
@@ -161,20 +218,6 @@ public class UIManager : MonoBehaviour
     {
         expUI.gameObject.SetActive(false);
         expSlider.gameObject.SetActive(false);
-    }
-
-    public void SetCursorCrosshair()
-    {
-        crosshairTexture.transform.position = Input.mousePosition;
-        crosshairTexture.SetActive(true);
-        HandTexture.SetActive(false);
-    }
-
-    public void SetCursorHand()
-    {
-        HandTexture.transform.position = Input.mousePosition;
-        HandTexture.SetActive(true);
-        crosshairTexture.SetActive(false);
     }
 
     public void ShowGameOverScreen()
@@ -230,11 +273,14 @@ public class UIManager : MonoBehaviour
         pauseUI.SetActive(false);
     }
 
+    public void ShowRewardUIMask()
+    {
+        RewardUIMask.SetActive(true);
+    }
+
     public void ShowRewardScreen()
     {
-        //canPause = false;
-        //playerHPSlider.SetActive(false);
-        //nexusHPSlider.SetActive(false);
+        ActivateCustomCursor();
         gold.SetActive(false);
         XPLevelUp.SetActive(false);
         minimap.SetActive(false);
@@ -246,15 +292,17 @@ public class UIManager : MonoBehaviour
         expBar.SetActive(false);
     }
 
+    public void HideRewardUIMask()
+    {
+        RewardUIMask.SetActive(false);
+    }
+
     public void HideRewardScreen()
     {
-        //canPause = true;
-        //playerHPSlider.SetActive(true);
-        //nexusHPSlider.SetActive(true);
-        if (goldActivated)
-        {
-            gold.SetActive(true);
-        }
+        ActivateShootingCursor();
+
+        if (goldActivated) { gold.SetActive(true); }
+
         minimap.SetActive(true);
         rewardMenuActive = false;
         rewardMenu.SetActive(false);
@@ -278,10 +326,23 @@ public class UIManager : MonoBehaviour
     public void HideUpgradeScreen()
     {
         upgradePanel.SetActive(false);
-
     }
 
-    public void ShowSelectGunTutorial()
+    public void ShowModalWindow(string msg)
+    {
+        InstructionModalWindow.GetComponent<InstructionPopup>().ShowInstruction("Test Message");
+    }
+
+    public void HideModalWindow()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            InstructionModalWindow.GetComponent<InstructionPopup>().HideInstruction();
+        }
+    }
+
+
+public void ShowSelectGunTutorial()
     {
         //SelectGunTutorialUI.SetActive(true);
         inventoryArrow.SetActive(true);
@@ -310,16 +371,6 @@ public class UIManager : MonoBehaviour
         WASD.SetActive(false);
     }
 
-    public void Tutorial_ShowShootingUI()
-    {
-        holdMouse.SetActive(true);
-    }
-
-    public void Tutorial_HideShootingUI()
-    {
-        holdMouse.SetActive(false);
-    }
-
     public void Tutorial_ShowXPUI(Vector3 pos)
     {
         xpArrow.SetActive(true);
@@ -335,10 +386,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateWaveUI()
     {
-        if ((_nexus && _playerHP) && ((GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves)
-            || (GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)))
+        if ((_nexus && _playerHP) && ((GameManager.Instance.currentPhase == GameManager.GamePhase.HandCraftedWaves) || (GameManager.Instance.currentPhase == GameManager.GamePhase.DynamicWaves)))
         {
-            scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count;
+            //if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Wave Count: " + GameManager.Instance.WaveManager.wave_count);
+            if (GameManager.Instance.WaveManager.wave_count == 0) scoreBoard.text = "";
+            else { scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count; }
         }
     }
 
@@ -402,16 +454,6 @@ public class UIManager : MonoBehaviour
         Color c = inventoryWbox[itemIDX].color;
         c.a = 1.0f;
         inventoryWbox[itemIDX].color = c;
-    }
-
-    public void LockRewardUI()
-    {
-        isRewardLocked = true;
-    }
-
-    public void UnlockRewardUI()
-    {
-        isRewardLocked = false;
     }
 
     public static bool FirstRewardScreenEnded()

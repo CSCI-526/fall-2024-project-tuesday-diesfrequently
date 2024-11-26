@@ -42,8 +42,10 @@ public class PlayerController : MonoBehaviour
         if (gameObject.GetComponent<PlaceObject>().currentPlaceableObject == null) // only hover when not currently placing a turret
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            bool turretFound = false;
+
+            foreach (RaycastHit hit in hits)
             {
                 if (hit.collider.tag == "Turret")
                 {
@@ -52,12 +54,15 @@ public class PlayerController : MonoBehaviour
                     rangeIndicator.transform.position = currTurret.transform.root.position;
                     rangeIndicator.transform.localScale = new UnityEngine.Vector3(currTurret.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currTurret.GetComponent<turretShoot>().maxRange);
                     rangeIndicator.transform.rotation = UnityEngine.Quaternion.identity;
+                    turretFound = true;
+                    break; // stop after finding the first turret
                 }
                 else
                 {
                     if (rangeIndicator.activeSelf) rangeIndicator.SetActive(false);
                 }
             }
+           
         }
     }
 
@@ -67,7 +72,7 @@ public class PlayerController : MonoBehaviour
         if (!isMovementLocked) rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
 
         // look at mouse
-        LookAtMouse();
+        if (!isMovementLocked) LookAtMouse();
 
         //update shot time
         if (!isShootingLocked) timeSinceLastShot += Time.fixedDeltaTime;
@@ -151,6 +156,26 @@ public class PlayerController : MonoBehaviour
                 }
             }
         } else { timeSinceLastShot = 0; }
+    }
+
+    public void ActivatePlayerGun()
+    {
+        Transform childTransform = transform.Find("Gun");
+        if (childTransform != null) {
+            GameObject playerGun = childTransform.gameObject;
+            playerGun.SetActive(true);
+        } else Debug.LogError("[Player Controller] Player Gun Component not found!");
+    }
+
+    public void DeactivatePlayerGun()
+    {
+        Transform childTransform = transform.Find("Gun");
+        if (childTransform != null)
+        {
+            GameObject playerGun = childTransform.gameObject;
+            playerGun.SetActive(false);
+        }
+        else Debug.LogError("[Player Controller] Player Gun Component not found!");
     }
 
 

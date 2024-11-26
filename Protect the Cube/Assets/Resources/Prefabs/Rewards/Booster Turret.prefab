@@ -601,9 +601,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardName: Booster Turret
-  RewardDescription: Greatly improves the fire rate, turn rate, and tracking ability
-    of nearby turrets
+  RewardDescription: Boosts nearby turret stats
   RewardImage: {fileID: 21300000, guid: e4a172a4c509c4f838864a0455207e74, type: 3}
+  isStatBased: 0
   rangeDesc: 0
   damageDesc: 0
   firerateDesc: 0
@@ -792,7 +792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_IsActive
@@ -875,7 +875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5358934860030988262, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_IsActive
