@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject inventoryArrow;
     public GameObject xpArrow;
     public float xpArrowOffset;
-    public GameObject holdMouse;
+    public GameObject TutorialShootingCursor;
     public GameObject XPLevelUp;
     public TextMeshProUGUI expAnimText;
     public GameObject playerHPSlider;
@@ -38,8 +38,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject inventoryBar;
     [SerializeField] public Image damageEffect;
 
-    public GameObject crosshairTexture;
-    public GameObject HandTexture;
+    public GameObject ShootingCursor;
+    public GameObject CustomCursor;
 
     private Nexus _nexus;
     private PlayerHealth _playerHP;
@@ -55,10 +55,8 @@ public class UIManager : MonoBehaviour
     private bool canPause = true;
     public bool rewardMenuActive = false;
     private int _currentHealth = 5;
-    private bool isRewardLocked = true;
     static private bool firstRewardScreenEnded = false;
     private bool goldActivated = false;
-    private bool activateCrosshair = false; 
 
     private void Awake()
     {
@@ -77,19 +75,71 @@ public class UIManager : MonoBehaviour
         uiObject = GameObject.Find("UI");
         inventoryBar = uiObject.transform.Find("Inventory Bar").gameObject;
         expBar = uiObject.transform.Find("EXP").gameObject;
+
+        ActivateCustomCursor();
         UpdateUI();
     }
 
-    public void ActivateCrosshair()
+    public void ActivateDefaultCursor() {
+
+        // one hot encoding for (4) cursor options
+        Cursor.visible = true;
+        ShootingCursor.SetActive(false);
+        CustomCursor.SetActive(false);
+        TutorialShootingCursor.SetActive(false);
+    }
+
+    public void ActivateCustomCursor() // SetCursorHand
     {
-        activateCrosshair = true;
-        SetCursorCrosshair();
+        CustomCursor.transform.position = Input.mousePosition;
+
+        // one hot encoding for (4) cursor options
+        ShootingCursor.SetActive(false);
+        TutorialShootingCursor.SetActive(false);
+        Cursor.visible = false;
+
+        CustomCursor.SetActive(true);
+        CustomCursor.GetComponent<FollowMouse>().DeactivateTutorialShootingCursor();
+    }
+
+    public void ActivateCustomPlacementCursor() // SetCursorHand
+    {
+        CustomCursor.transform.position = Input.mousePosition;
+
+        // one hot encoding for (4) cursor options
+        ShootingCursor.SetActive(false);
+        TutorialShootingCursor.SetActive(false);
+        Cursor.visible = false;
+        CustomCursor.SetActive(true);
+        CustomCursor.GetComponent<FollowMouse>().DeactivateTutorialShootingCursor();
+    }
+
+    public void ActivateShootingCursor()
+    {
+        ShootingCursor.transform.position = Input.mousePosition;
+
+        // one hot encoding for (4) cursor options
+        Cursor.visible = false;
+        CustomCursor.SetActive(false);
+        TutorialShootingCursor.SetActive(false);
+        ShootingCursor.SetActive(true);
+    }
+
+    public void ActivateCustomShootingCursor() // SetCursorHand
+    {
+        CustomCursor.transform.position = Input.mousePosition;
+
+        // one hot encoding for (4) cursor options
+        CustomCursor.SetActive(false);
+        ShootingCursor.SetActive(false);
+        Cursor.visible = false;
+        TutorialShootingCursor.SetActive(true);
     }
 
     private void Update()
     {
         // prevent "esc" error in WebGL builds
-        if (activateCrosshair && Input.GetMouseButtonDown(0)) Cursor.visible = false;
+        //if (Input.GetMouseButtonDown(0)) Cursor.visible = false;
 
         if (Input.GetKeyDown(KeyCode.P) && canPause)
         {
@@ -166,20 +216,6 @@ public class UIManager : MonoBehaviour
         expSlider.gameObject.SetActive(false);
     }
 
-    public void SetCursorCrosshair()
-    {
-        crosshairTexture.transform.position = Input.mousePosition;
-        crosshairTexture.SetActive(true);
-        HandTexture.SetActive(false);
-    }
-
-    public void SetCursorHand()
-    {
-        HandTexture.transform.position = Input.mousePosition;
-        HandTexture.SetActive(true);
-        crosshairTexture.SetActive(false);
-    }
-
     public void ShowGameOverScreen()
     {
         canPause = false;
@@ -238,6 +274,7 @@ public class UIManager : MonoBehaviour
         //canPause = false;
         //playerHPSlider.SetActive(false);
         //nexusHPSlider.SetActive(false);
+        ActivateCustomCursor();
         gold.SetActive(false);
         XPLevelUp.SetActive(false);
         minimap.SetActive(false);
@@ -254,10 +291,10 @@ public class UIManager : MonoBehaviour
         //canPause = true;
         //playerHPSlider.SetActive(true);
         //nexusHPSlider.SetActive(true);
-        if (goldActivated)
-        {
-            gold.SetActive(true);
-        }
+        ActivateShootingCursor();
+
+        if (goldActivated) { gold.SetActive(true); }
+
         minimap.SetActive(true);
         rewardMenuActive = false;
         rewardMenu.SetActive(false);
@@ -311,16 +348,6 @@ public class UIManager : MonoBehaviour
     public void Tutorial_HideMovementUI()
     {
         WASD.SetActive(false);
-    }
-
-    public void Tutorial_ShowShootingUI()
-    {
-        holdMouse.SetActive(true);
-    }
-
-    public void Tutorial_HideShootingUI()
-    {
-        holdMouse.SetActive(false);
     }
 
     public void Tutorial_ShowXPUI(Vector3 pos)
@@ -405,16 +432,6 @@ public class UIManager : MonoBehaviour
         Color c = inventoryWbox[itemIDX].color;
         c.a = 1.0f;
         inventoryWbox[itemIDX].color = c;
-    }
-
-    public void LockRewardUI()
-    {
-        isRewardLocked = true;
-    }
-
-    public void UnlockRewardUI()
-    {
-        isRewardLocked = false;
     }
 
     public static bool FirstRewardScreenEnded()

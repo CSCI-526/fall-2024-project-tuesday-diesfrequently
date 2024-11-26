@@ -12,7 +12,7 @@ public class PlaceObject : MonoBehaviour
     private float buildingRotation;
     [SerializeField] protected float rotateIncrement = 10.0f;
     private bool placedFirstTurret = false;
-    static private bool isTurretPickedUp = false;
+    static private bool isItemPickedUp = false;
     static private bool isFirstTurretPlaced = false;
 
 
@@ -23,9 +23,9 @@ public class PlaceObject : MonoBehaviour
 
         if (currentPlaceableObject != null)
         {
-            isTurretPickedUp = true;
+            isItemPickedUp = true;
             //rangeIndicator.SetActive(true);
-            //rangeIndicator.transform.localScale = new Vector3(currentPlaceableObject.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currentPlaceableObject.GetComponent<turretShoot>().maxRange);
+            //rangeIndicator.transform.localScale = new Vector3(currentPlaceableObject.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currentPlaceableObject.GetComponent<turretShoot>().maxRange)
             MoveCurrentObjectToMouse();
             RotateFromMouseWheel();
             RotateFromQE();
@@ -37,10 +37,10 @@ public class PlaceObject : MonoBehaviour
 
     public void CancelPlace()
     {
-        isTurretPickedUp = false;
+        isItemPickedUp = false;
         if (currentPlaceableObject == null) return;
         Destroy(currentPlaceableObject);
-        GameManager.Instance.UIManager.SetCursorCrosshair();
+        GameManager.Instance.UIManager.ActivateShootingCursor();
 
     }
     private void HandleNewObjectHotkey()
@@ -77,7 +77,7 @@ public class PlaceObject : MonoBehaviour
 
     private bool SelectTurretPlace(GameObject turret)
     {
-        GameManager.Instance.UIManager.SetCursorHand();
+        GameManager.Instance.UIManager.ActivateCustomPlacementCursor();
         currentPlaceableObject = Instantiate(turret);
 
         Debug.Log("[PlaceObject] turret has been created");
@@ -137,7 +137,7 @@ public class PlaceObject : MonoBehaviour
             b.OnPlace();
             isFirstTurretPlaced = true;
             currentPlaceableObject = null;
-            GameManager.Instance.UIManager.SetCursorCrosshair();
+            GameManager.Instance.UIManager.ActivateShootingCursor();
 
             //rangeIndicator.SetActive(false);
         }
@@ -173,7 +173,7 @@ public class PlaceObject : MonoBehaviour
         }
     }
 
-    static public bool turretPickedUp() { return isTurretPickedUp; }
+    static public bool turretPickedUp() { return isItemPickedUp; }
     static public bool firstTurretPlaced() { return isFirstTurretPlaced; }
 
 }

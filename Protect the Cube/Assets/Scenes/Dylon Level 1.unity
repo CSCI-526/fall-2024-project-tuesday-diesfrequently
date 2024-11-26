@@ -1055,6 +1055,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CursorCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7135050932433857934, guid: 03c261ab76ab2a64fa9e46f00f455eed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7193,6 +7197,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1685440113813595798, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053758858353761095, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5203412964412962768, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786291867027706076, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8180688501937806211, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
       propertyPath: m_Name
       value: TutorialCanvas
@@ -7331,6 +7351,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1675781485}
     - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: CustomCursor
+      value: 
+      objectReference: {fileID: 2013104311}
+    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: damageEffect
       value: 
       objectReference: {fileID: 134879974}
@@ -7351,6 +7375,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: ShootingCursor
+      value: 
+      objectReference: {fileID: 1337305059}
+    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: gameOverScreen
       value: 
       objectReference: {fileID: 1359509860}
@@ -7370,6 +7398,10 @@ PrefabInstance:
       propertyPath: SelectGunTutorialUI
       value: 
       objectReference: {fileID: 495271083}
+    - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: TutorialShootingCursor
+      value: 
+      objectReference: {fileID: 1305109980992848638}
     - target: {fileID: 4730567282749379631, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: inventoryGbox.Array.data[0]
       value: 
@@ -7639,6 +7671,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2618327576512224325, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771268202009247211, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99998987
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771268202009247211, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000005190835
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771268202009247211, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0043398645
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771268202009247211, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0011960703
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771268202009247211, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771268202009247211, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.497
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771268202009247211, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.137
+      objectReference: {fileID: 0}
     - target: {fileID: 3073331988763717442, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7649,6 +7713,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4173156817336489669, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5042874968167784113, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7894508426752650380, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}

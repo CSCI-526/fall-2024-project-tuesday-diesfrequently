@@ -94,9 +94,9 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<PlayerController>().LockMovement();
         Player.GetComponent<PlayerController>().DeactivatePlayerGun();
 
-        //Player.GetComponent<PlayerLevels>().LockRewardUI();
-
         WaveManager.LockAllEnemiesMovement();
+
+        UIManager.ActivateCustomCursor(); // sets CustomCursor
         UIManager.DeactivateInventoryUI();
         UIManager.DeactivateEXPUI();
 
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForMovementInput()
     {
         yield return new WaitForSeconds(2.0f); // free movement for 3 seconds
-        UIManager.Tutorial_ShowMovementUI(); // Shows the Animated 4 WASD KEys
+        UIManager.Tutorial_ShowMovementUI(); // Shows the Animated 4 WASD Keys
         Player.GetComponent<PlayerController>().UnlockMovement();
         yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys());        
         yield return new WaitForSeconds(3.0f); // free movement for 3 seconds
@@ -136,15 +136,14 @@ public class GameManager : MonoBehaviour
         WaveManager.SetConstantXPDrops(4);
         //Player.GetComponent<PlayerController>().LockMovement();
 
-        UIManager.Tutorial_ShowShootingUI(); // show shooting UI
-        UIManager.ActivateCrosshair(); // show shooting Crosshair
+        UIManager.ActivateCustomShootingCursor(); // Show Custom Shooting Cursor
         Player.GetComponent<PlayerController>().ActivatePlayerGun(); // show player gun
         Player.GetComponent<PlayerController>().UnlockShooting();
 
         // continue when player has shot + all enemies are dead
         yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
 
-        UIManager.Tutorial_HideShootingUI(); // hide shooting UI
+        UIManager.ActivateShootingCursor(); // show shooting Crosshair
         Debug.Log("Ending GamePhase.BasicTutorial_Shooting Phase");
         SetGamePhase(GamePhase.BasicTutorial_XP);
     }

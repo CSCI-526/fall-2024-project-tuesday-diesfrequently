@@ -32,7 +32,6 @@ public class ClickUpgrade : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(ray);
-            bool turretFound = false;
 
             foreach (RaycastHit hit in hits)
             {
