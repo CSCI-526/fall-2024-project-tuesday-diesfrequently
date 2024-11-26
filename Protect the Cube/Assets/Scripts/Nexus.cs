@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Nexus : MonoBehaviour
 {
     [SerializeField] public  int NEXUS_MAX_HEALTH = 20;
+    public List<Transform> spawnPoints = new List<Transform>();
 
     public int maxHealth { get; private set; }
     public int currentHealth { get; private set; }
@@ -142,7 +144,8 @@ public class Nexus : MonoBehaviour
             if (timeSinceLastSpawn >= xpSpawnInterval)
             {
                 timeSinceLastSpawn = 0.0f;
-                Instantiate(xpPrefab, transform.position + xpSpawnOffset, Quaternion.identity);
+                int idx = UnityEngine.Random.Range(0, spawnPoints.Count - 1);
+                Instantiate(xpPrefab, spawnPoints[idx].position + xpSpawnOffset, Quaternion.identity);
             }
         }
     }
