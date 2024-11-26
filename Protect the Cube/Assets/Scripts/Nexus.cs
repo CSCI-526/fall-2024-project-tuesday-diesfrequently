@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Nexus : MonoBehaviour
 {
     [SerializeField] public  int NEXUS_MAX_HEALTH = 20;
-    public List<Transform> spawnPoints = new List<Transform>();
 
     public int maxHealth { get; private set; }
     public int currentHealth { get; private set; }
@@ -17,6 +15,8 @@ public class Nexus : MonoBehaviour
     [SerializeField] private float xpSpawnInterval = 5f;
     [SerializeField] private GameObject xpPrefab;
     [SerializeField] private Vector3 xpSpawnOffset;
+    [SerializeField] private float min_offset = 3f;
+    [SerializeField] private float max_offset = 5f;
 
     [Header("UI References")]
     [SerializeField] private Slider hpBar;
@@ -144,8 +144,16 @@ public class Nexus : MonoBehaviour
             if (timeSinceLastSpawn >= xpSpawnInterval)
             {
                 timeSinceLastSpawn = 0.0f;
-                int idx = UnityEngine.Random.Range(0, spawnPoints.Count - 1);
-                Instantiate(xpPrefab, spawnPoints[idx].position + xpSpawnOffset, Quaternion.identity);
+                float randomX = UnityEngine.Random.Range(0, 2) == 0
+                    ? UnityEngine.Random.Range(-max_offset, -min_offset)
+                    : UnityEngine.Random.Range(min_offset, max_offset);
+
+                float randomZ = UnityEngine.Random.Range(0, 2) == 0
+                    ? UnityEngine.Random.Range(-max_offset, -min_offset)
+                    : UnityEngine.Random.Range(min_offset, max_offset);
+
+                Vector3 spawnPosition = transform.position + new Vector3(randomX, transform.position.y, randomZ);
+                Instantiate(xpPrefab, spawnPosition + xpSpawnOffset, Quaternion.identity);
             }
         }
     }
