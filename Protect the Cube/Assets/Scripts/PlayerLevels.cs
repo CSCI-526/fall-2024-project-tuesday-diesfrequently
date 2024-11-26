@@ -19,6 +19,7 @@ public class PlayerLevels : MonoBehaviour
 
     private int levels_to_process = 0;
     private int accumulated_xp = 0;
+    private bool isPlayerLevelTwo = false;
 
     private bool isSelectingTurret = false;
     private List<GameObject> selectedTurrets = new List<GameObject>();
@@ -60,6 +61,7 @@ public class PlayerLevels : MonoBehaviour
                 while (currentXP >= xpNeededForLevel)
                 {
                     currentLevel += 1;
+                    if (currentLevel == 1) isPlayerLevelTwo = true; // starts at lvl 0
                     GameManager.Instance.AnalyticsManager.UpdatePlayerLevel(currentLevel); 
 
                     currentXP -= xpNeededForLevel;
@@ -83,4 +85,7 @@ public class PlayerLevels : MonoBehaviour
         }
         GameManager.Instance.UIManager.UpdateUI();
     }
+
+    public bool isLevelTwo() { return isPlayerLevelTwo; }
+
 }

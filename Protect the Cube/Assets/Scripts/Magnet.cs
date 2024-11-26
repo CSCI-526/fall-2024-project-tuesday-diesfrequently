@@ -34,7 +34,6 @@ public class Magnet : MonoBehaviour
         if (other.tag == "Player"){
             suckExp();
             Destroy(gameObject);
-            
         }
     }
 
@@ -43,8 +42,9 @@ public class Magnet : MonoBehaviour
         yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
     }
+
     private void suckExp(){
-                // Find all game objects with the "ExperienceOrb" and "GoldOrb" tags
+        // Find all game objects with the "ExperienceOrb" and "GoldOrb" tags
         GameObject[] experienceOrbs = GameObject.FindGameObjectsWithTag("ExperienceOrb");
         GameObject[] goldOrbs = GameObject.FindGameObjectsWithTag("GoldOrb");
 

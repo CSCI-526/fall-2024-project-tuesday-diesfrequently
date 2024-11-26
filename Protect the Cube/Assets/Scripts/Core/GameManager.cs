@@ -81,7 +81,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void StartInitialization() { SetGamePhase(GamePhase.BasicTutorial_Start); Debug.Log("Finished GamePhase.Initialization Phase"); }
+    private void StartInitialization() {
+        UIManager.ShowModalWindow("Test Message");
+        StartCoroutine(WaitForSpace());
+    }
+
+    private IEnumerator WaitForSpace()
+    {
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        UIManager.HideModalWindow();
+        SetGamePhase(GamePhase.BasicTutorial_Start);
+        Debug.Log("Finished GamePhase.Initialization Phase");
+    }
 
     private void StartBasicTutorialStart()
     {
@@ -187,33 +198,37 @@ public class GameManager : MonoBehaviour
     private void StartPlacementTutorial()
     {
         Debug.Log("Starting GamePhase.BasicTutorial_Placement Phase");
+        WaveManager.LockAllEnemiesMovement();
+        StartCoroutine(WaitForLevelTwo());
+    }
 
+    private IEnumerator WaitForLevelTwo()
+    {
+        yield return new WaitUntil(() => Player.GetComponent<PlayerLevels>().isLevelTwo());
         Player.GetComponent<PlayerController>().LockMovement();
         Player.GetComponent<PlayerController>().LockShooting();
-        //StartCoroutine(WaitForPlacementInput());
+        Player.GetComponent<PlayerController>().DeactivatePlayerGun();
+        UIManager.ActivateCustomCursor(); // sets CustomCursor
+        StartCoroutine(WaitForPlacementInput());
+    }
+
+    private IEnumerator WaitForPlacementInput()
+    {
+        // wait until player has "PLACED" turret
+        yield return new WaitUntil(() => PlaceObject.firstTurretPlaced());
+        WaveManager.UnlockAllEnemiesMovement();
+
+        //UIManager.Tutorial_HideInventoryBouncingArrow; // hide
+
+        // ngl if they cancel we're screwed bc i dont want to write a while loop for that here! 
+
+        //yield return new WaitForSeconds(4.0f); // delay 4 seconds
+
 
         Debug.Log("Ending GamePhase.BasicTutorial_Placement Phase");
         SetGamePhase(GamePhase.HandCraftedWaves);
     }
 
-    //private IEnumerator WaitForPlacementInput()
-    //{
-    //    // wait until player has "PICKED UP"
-    //    //yield return new WaitUntil(() => PlaceObject.turretPickedUp());
-
-    //    // UIManager.Tutorial_HideInventoryBouncingArrow; // hide
-
-    //    // wait until player has "PLACED" turret
-    //    //yield return new WaitUntil(() => PlaceObject.firstTurretPlaced());
-
-    //    // ngl if they cancel we're screwed bc i dont want to write a while loop for that here! 
-
-    //    //yield return new WaitForSeconds(4.0f); // delay 4 seconds
-
-
-    //    Debug.Log("Ending GamePhase.BasicTutorial_Placement Phase");
-    //    SetGamePhase(GamePhase.HandCraftedWaves);
-    //}
     private void DisableBarrier()
     {
         GameObject barrier = GameObject.Find("Barrier");

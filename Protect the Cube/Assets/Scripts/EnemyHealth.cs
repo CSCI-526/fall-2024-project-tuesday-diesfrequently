@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public float maxHealth = 5;
     [SerializeField] public float invincibilityDuration = 0.01f;
     [SerializeField] public GameObject exp;
+    [SerializeField] public GameObject magnet;
 
     [SerializeField] public int maxXpDrop = 3;
     [SerializeField] public int minXpDrop = 5;
@@ -91,8 +92,16 @@ public class EnemyHealth : MonoBehaviour
         {
             GameManager.Instance.WaveManager.KillEnemyEntity(this.gameObject, GameManager.Instance.WaveManager.GetEnemyIDX(enemyName));
         }
+        //if (enemyName == "SpawnerBossEnemy") { DropMagnet(); }
+        //else { DropExp(); }
         DropExp();
+
         Destroy(gameObject);
+    }
+
+    public void DropMagnet() {
+        GameObject magnetPowerUp = Instantiate(magnet);
+        magnetPowerUp.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
     }
 
     public void DropExp(){

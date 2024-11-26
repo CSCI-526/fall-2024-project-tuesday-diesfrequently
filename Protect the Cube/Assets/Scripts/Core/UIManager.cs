@@ -39,6 +39,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject inventoryBar;
     [SerializeField] public Image damageEffect;
 
+    [SerializeField] public GameObject InstructionModalWindow; 
+
     public GameObject ShootingCursor;
     public GameObject CustomCursor;
 
@@ -182,7 +184,6 @@ public class UIManager : MonoBehaviour
         inventoryManager.UI_OnRewardsUpdated -= UpdateRewardsUI;
     }
 
-
     public void UpdateUI()
     {
         UpdateWaveUI();
@@ -325,10 +326,23 @@ public class UIManager : MonoBehaviour
     public void HideUpgradeScreen()
     {
         upgradePanel.SetActive(false);
-
     }
 
-    public void ShowSelectGunTutorial()
+    public void ShowModalWindow(string msg)
+    {
+        InstructionModalWindow.GetComponent<InstructionPopup>().ShowInstruction("Test Message");
+    }
+
+    public void HideModalWindow()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            InstructionModalWindow.GetComponent<InstructionPopup>().HideInstruction();
+        }
+    }
+
+
+public void ShowSelectGunTutorial()
     {
         //SelectGunTutorialUI.SetActive(true);
         inventoryArrow.SetActive(true);
