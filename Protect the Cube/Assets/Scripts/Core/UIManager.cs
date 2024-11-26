@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
         TutorialShootingCursor.SetActive(false);
         Cursor.visible = false;
         CustomCursor.SetActive(true);
-        CustomCursor.GetComponent<FollowMouse>().DeactivateTutorialShootingCursor();
+        CustomCursor.GetComponent<FollowMouse>().ActivateTutorialShootingCursor();
     }
 
     public void ActivateShootingCursor()

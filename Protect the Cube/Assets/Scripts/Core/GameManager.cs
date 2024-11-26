@@ -117,12 +117,12 @@ public class GameManager : MonoBehaviour
         UIManager.Tutorial_ShowMovementUI(); // Shows the Animated 4 WASD Keys
         Player.GetComponent<PlayerController>().UnlockMovement();
         StartCoroutine(WaitForMovementInput());
-        StartCoroutine(WaitForMovementTutorialEnd());
     }
 
     private IEnumerator WaitForMovementInput()
     {
-        yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys());                
+        yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys());
+        StartCoroutine(WaitForMovementTutorialEnd());
         Debug.Log("Ending GamePhase.BasicTutorial_Movement Phase");
         SetGamePhase(GamePhase.BasicTutorial_Shooting);
     }
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Starting GamePhase.BasicTutorial_XP Phase");
         UIManager.ActivateEXPUI();
-        UIManager.Tutorial_ShowXPUI(new Vector3(12.0f, 1.0f, 0.0f)); // show xp UI
+        UIManager.Tutorial_ShowXPUI(new Vector3(-5.0f, 1.0f, 5.0f)); // show xp UI
         Debug.Log("Ending GamePhase.BasicTutorial_XP Phase");
         SetGamePhase(GamePhase.BasicTutorial_Reward);
     }
