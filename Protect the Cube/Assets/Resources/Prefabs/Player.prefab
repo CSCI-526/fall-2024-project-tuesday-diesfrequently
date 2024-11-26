@@ -524,6 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invincibilityDuration: 1
   hpBar: {fileID: 0}
+  playerHpBar: {fileID: 3090110262206307061}
 --- !u!114 &8531904022790211960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,9 +605,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: missing name
   RewardDescription: missing description
-  rangeDesc: 
-  damageDesc: 
-  firerateDesc: 
+  RewardImage: {fileID: 0}
+  rangeDesc: 0
+  damageDesc: 0
+  firerateDesc: 0
 --- !u!1 &5713703534664780110
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,13 +975,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843268688715400512, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
+--- !u!114 &3090110262206307061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4013090980228223043, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
+  m_PrefabInstance: {fileID: 2113061317870570166}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3771889541316447260 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2957575911117342378, guid: fc224e03e8be18f4c9d388561b5d1772, type: 3}
