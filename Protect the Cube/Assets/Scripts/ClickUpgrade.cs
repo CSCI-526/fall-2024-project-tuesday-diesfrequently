@@ -28,14 +28,27 @@ public class ClickUpgrade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            bool turretFound = false;
+
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.collider.gameObject == this.gameObject)
+                {
+                    AttemptUpgrade();
+                    break; // stop after finding the first turret
+                }
+            }
+            
+        }
         if(upgradeable){
             CheckForUpgradeableTurrets();
         }
     }
 
-    void OnMouseDown(){
-        AttemptUpgrade();
-    }
 
     public void AttemptUpgrade()
     {

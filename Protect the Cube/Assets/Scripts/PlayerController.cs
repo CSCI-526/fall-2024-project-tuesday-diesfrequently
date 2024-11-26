@@ -42,8 +42,10 @@ public class PlayerController : MonoBehaviour
         if (gameObject.GetComponent<PlaceObject>().currentPlaceableObject == null) // only hover when not currently placing a turret
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            bool turretFound = false;
+
+            foreach (RaycastHit hit in hits)
             {
                 if (hit.collider.tag == "Turret")
                 {
@@ -52,12 +54,15 @@ public class PlayerController : MonoBehaviour
                     rangeIndicator.transform.position = currTurret.transform.root.position;
                     rangeIndicator.transform.localScale = new UnityEngine.Vector3(currTurret.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currTurret.GetComponent<turretShoot>().maxRange);
                     rangeIndicator.transform.rotation = UnityEngine.Quaternion.identity;
+                    turretFound = true;
+                    break; // stop after finding the first turret
                 }
                 else
                 {
                     if (rangeIndicator.activeSelf) rangeIndicator.SetActive(false);
                 }
             }
+           
         }
     }
 
