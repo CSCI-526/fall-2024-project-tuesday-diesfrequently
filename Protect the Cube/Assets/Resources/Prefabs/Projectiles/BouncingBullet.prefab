@@ -84,6 +84,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   maxLifetime: 2
-  damage: 1
+  damage: 2
   maxBounces: 3
   maxBounceRange: 10
