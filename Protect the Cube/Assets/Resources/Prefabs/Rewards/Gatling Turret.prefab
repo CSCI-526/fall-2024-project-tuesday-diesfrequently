@@ -430,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 9042479267294620921, guid: 37d035d5be95e3842a95a7781e302d93, type: 3}
+      objectReference: {fileID: 1733587294317518391, guid: 86a87e10bc563614bb77ae58fdf9d8c5, type: 3}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingDesc
       value: A gun turret variant with a very high fire rate
