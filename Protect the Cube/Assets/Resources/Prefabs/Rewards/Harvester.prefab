@@ -471,7 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: Harvester
   RewardDescription: Generates gold over time. Use gold to upgrade turrets
-  RewardImage: {fileID: 21300000, guid: 427ee8bc4f53b44ea822e080ccd38077, type: 3}
+  RewardImage: {fileID: 21300000, guid: 01a473860644f4aa59ad8a9641353f24, type: 3}
   rangeDesc: 0
   damageDesc: 0
   firerateDesc: 0
