@@ -6,6 +6,7 @@ public class BouncingBullet : Bullet
 {
 
     [SerializeField] private int maxBounces = 3;
+    [SerializeField]private int maxBounceRange = 5;
     private int bounces = 0;
 
     private GameObject FindClosestEnemy(GameObject currentEnemy)
@@ -19,7 +20,7 @@ public class BouncingBullet : Bullet
             if (enemy != currentEnemy && enemy.GetComponent<EnemyHealth>() != null)
             {
                 float distance = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distance < minDistance)
+                if (distance < minDistance && distance < maxBounceRange)
                 {
                     minDistance = distance;
                     closestEnemy = enemy;

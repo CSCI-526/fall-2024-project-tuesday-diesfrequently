@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 996285083111918376, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c55838e9cd49b004d906d82d92ded598, type: 2}
+      objectReference: {fileID: 2100000, guid: 7f32ccd71c770c84ba622d9199ed3c85, type: 2}
     - target: {fileID: 1272256851593019809, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Name
       value: Sniper Turret
@@ -55,22 +55,22 @@ PrefabInstance:
     - target: {fileID: 4739192330666534134, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c55838e9cd49b004d906d82d92ded598, type: 2}
+      objectReference: {fileID: 2100000, guid: 7f32ccd71c770c84ba622d9199ed3c85, type: 2}
     - target: {fileID: 4809673224787670642, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c55838e9cd49b004d906d82d92ded598, type: 2}
     - target: {fileID: 4813585925586114357, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.7243423
       objectReference: {fileID: 0}
     - target: {fileID: 4813585925586114357, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.4194129
       objectReference: {fileID: 0}
     - target: {fileID: 4813585925586114357, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.221239
       objectReference: {fileID: 0}
     - target: {fileID: 4813585925586114357, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: m_LocalRotation.w

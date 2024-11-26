@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b9962544223b2468ec3bce6d57981c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 300
   invincibilityDuration: 0.01
   exp: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   maxXpDrop: 10

@@ -15,6 +15,7 @@ public class Nexus : MonoBehaviour
     [SerializeField] private float xpSpawnInterval = 5f;
     [SerializeField] private GameObject xpPrefab;
     [SerializeField] private Vector3 xpSpawnOffset;
+    [SerializeField] private float offsetDistance = 5f;
 
     [Header("UI References")]
     [SerializeField] private Slider hpBar;
@@ -142,7 +143,26 @@ public class Nexus : MonoBehaviour
             if (timeSinceLastSpawn >= xpSpawnInterval)
             {
                 timeSinceLastSpawn = 0.0f;
-                Instantiate(xpPrefab, transform.position + xpSpawnOffset, Quaternion.identity);
+
+                float randomX = UnityEngine.Random.Range(-1.0f, 1.0f);
+                float randomZ = UnityEngine.Random.Range(-1.0f, 1.0f);
+                
+                Vector3 offset = new Vector3(randomX, 0.0f, randomZ);
+                offset.Normalize();
+                offset *= offsetDistance;
+                offset.y = transform.position.y;
+                /*
+                float randomX = UnityEngine.Random.Range(0, 2) == 0
+                    ? UnityEngine.Random.Range(-max_offset, -min_offset)
+                    : UnityEngine.Random.Range(min_offset, max_offset);
+
+                float randomZ = UnityEngine.Random.Range(0, 2) == 0
+                    ? UnityEngine.Random.Range(-max_offset, -min_offset)
+                    : UnityEngine.Random.Range(min_offset, max_offset);
+                */
+                //Vector3 spawnPosition = transform.position + new Vector3(randomX, transform.position.y, randomZ);
+                Vector3 spawnPosition = transform.position + offset;
+                Instantiate(xpPrefab, spawnPosition + xpSpawnOffset, Quaternion.identity);
             }
         }
     }

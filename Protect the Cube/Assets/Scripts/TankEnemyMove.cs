@@ -74,9 +74,10 @@ public class TankEnemyMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Nexus"))
+        Debug.Log("HELLO: " + collision.transform.root.gameObject.name);
+        if (collision.transform.root.gameObject.CompareTag("Nexus"))
         {
-            collision.gameObject.GetComponent<Nexus>().TakeDamage(damage);
+            collision.transform.root.gameObject.GetComponent<Nexus>().TakeDamage(damage);
             GetComponent<EnemyHealth>().Die();
         }
         else if(collision.gameObject.CompareTag("Player"))

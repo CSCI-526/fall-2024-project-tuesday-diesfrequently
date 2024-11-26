@@ -153,5 +153,10 @@ public class turretShoot : Building
             fireRate *= level;
             turnSpeed += 3;
         }
+        RangeIndicator[] indicators = GetComponents<RangeIndicator>();
+        foreach (RangeIndicator i in indicators)
+        {
+            i.HideIndicator();
+        }
     }
 }

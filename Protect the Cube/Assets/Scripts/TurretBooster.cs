@@ -11,7 +11,7 @@ public class TurretBooster : Building
 
     override public void OnPlace()
     {
-        GetComponent<Collider>().enabled = true;
+        base.OnPlace();
         BoostNeighbors(radius);
     }
 
