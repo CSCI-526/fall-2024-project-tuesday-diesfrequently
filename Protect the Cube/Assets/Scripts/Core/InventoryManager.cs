@@ -233,7 +233,6 @@ public class InventoryManager : MonoBehaviour
     }
 
     // How to handle which "reward" is picked
-    // MATCHA: should rename to HandlePickedReward
     public void HandlePickedReward(string reward_name)
     {
         // Update Health if the reward is health-based
@@ -258,7 +257,7 @@ public class InventoryManager : MonoBehaviour
         // add reward to "inventory"
         InventoryItemCount[itemIDX]++;
 
-        //flash rward inventory box
+        //flash reward inventory box
         if (!item_name.Contains("HP")){
             GameManager.Instance.UIManager.FlashInventory(itemIDX);
         }

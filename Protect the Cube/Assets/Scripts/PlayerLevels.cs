@@ -68,12 +68,9 @@ public class PlayerLevels : MonoBehaviour
                 }
                 GameManager.Instance.UIManager.XPLevelUp.SetActive(true);
                 Time.timeScale = 0.0f;
-                //GameManager.Instance.UIManager.ShowRewardScreen();
                 GameManager.Instance.InventoryManager.GenerateRewards();
-
-                
-
             }
+
             GameManager.Instance.UIManager.Tutorial_HideXPUI(); // hide xp UI
         }
         else if (Orb.tag == "GoldOrb"){

@@ -35,9 +35,9 @@ public class RewardPanel : MonoBehaviour
                     if (GameManager.Instance.DEBUG_REWARD_PANEL) Debug.Log("[Reward Panel] firerateDesc: " + reward_info.firerateDesc);
 
                     displayedRewardDescription.text = reward_info.RewardDescription +
-                    "\n" + "Range: " + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.rangeDesc)) +
-                    "\n" + "Damage: " + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.damageDesc)) +
-                    "\n" + "Fire Rate: " + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.firerateDesc));
+                    "\n" + "[Range] " + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.rangeDesc)) +
+                    "\n" + "[Damage] " + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.damageDesc)) +
+                    "\n" + "[Fire Rate] " + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.firerateDesc));
                 } else { displayedRewardDescription.text = reward_info.RewardDescription; }
             } else { // if no valid reward info found
                 Debug.LogError("[Reward Panel] No Valid Reward Description");
@@ -59,6 +59,7 @@ public class RewardPanel : MonoBehaviour
 
     public void OnPick()
     {
+        GameManager.Instance.UIManager.HideRewardUIMask();
         if (displayedRewardName.text.Length > 0)
         {
             GameManager.Instance.InventoryManager.HandlePickedReward(displayedRewardName.text);

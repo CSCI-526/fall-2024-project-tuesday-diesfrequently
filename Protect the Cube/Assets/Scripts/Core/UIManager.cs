@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public GameObject nexusHPSlider;
     public GameObject gold;
     public GameObject pauseButton;
+    public GameObject RewardUIMask;
 
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
@@ -75,6 +76,8 @@ public class UIManager : MonoBehaviour
         uiObject = GameObject.Find("UI");
         inventoryBar = uiObject.transform.Find("Inventory Bar").gameObject;
         expBar = uiObject.transform.Find("EXP").gameObject;
+
+        RewardUIMask.SetActive(false);
 
         ActivateCustomCursor();
         UpdateUI();
@@ -269,11 +272,13 @@ public class UIManager : MonoBehaviour
         pauseUI.SetActive(false);
     }
 
+    public void ShowRewardUIMask()
+    {
+        RewardUIMask.SetActive(true);
+    }
+
     public void ShowRewardScreen()
     {
-        //canPause = false;
-        //playerHPSlider.SetActive(false);
-        //nexusHPSlider.SetActive(false);
         ActivateCustomCursor();
         gold.SetActive(false);
         XPLevelUp.SetActive(false);
@@ -286,11 +291,13 @@ public class UIManager : MonoBehaviour
         expBar.SetActive(false);
     }
 
+    public void HideRewardUIMask()
+    {
+        RewardUIMask.SetActive(false);
+    }
+
     public void HideRewardScreen()
     {
-        //canPause = true;
-        //playerHPSlider.SetActive(true);
-        //nexusHPSlider.SetActive(true);
         ActivateShootingCursor();
 
         if (goldActivated) { gold.SetActive(true); }
@@ -365,10 +372,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateWaveUI()
     {
-        if ((_nexus && _playerHP) && ((GameManager.Instance.CurrentPhase == GameManager.GamePhase.HandCraftedWaves)
-            || (GameManager.Instance.CurrentPhase == GameManager.GamePhase.DynamicWaves)))
+        if ((_nexus && _playerHP) && ((GameManager.Instance.currentPhase == GameManager.GamePhase.HandCraftedWaves) || (GameManager.Instance.currentPhase == GameManager.GamePhase.DynamicWaves)))
         {
-            scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count;
+            //if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Wave Count: " + GameManager.Instance.WaveManager.wave_count);
+            if (GameManager.Instance.WaveManager.wave_count == 0) scoreBoard.text = "";
+            else { scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count; }
         }
     }
 

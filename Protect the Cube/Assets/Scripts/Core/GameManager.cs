@@ -37,17 +37,17 @@ public class GameManager : MonoBehaviour
     }
 
     // tracks current phase
-    [SerializeField] public GamePhase CurrentPhase = GamePhase.Initialization;
+    [SerializeField] public GamePhase StartPhase;
+    public GamePhase currentPhase { get; private set; }
     [SerializeField] public bool DEBUG_WAVE_MANAGER;
     [SerializeField] public bool DEBUG_ORE_MANAGER;
     [SerializeField] public bool DEBUG_INVENTORY_MANAGER;
     [SerializeField] public bool DEBUG_REWARD_PANEL;
 
-
     public void SetGamePhase(GamePhase newPhase)
     {
-        CurrentPhase = newPhase;
-        switch (CurrentPhase)
+        currentPhase = newPhase;
+        switch (currentPhase)
         {
             case GamePhase.Initialization:
                 StartInitialization();
@@ -99,30 +99,41 @@ public class GameManager : MonoBehaviour
         UIManager.ActivateCustomCursor(); // sets CustomCursor
         UIManager.DeactivateInventoryUI();
         UIManager.DeactivateEXPUI();
+        UIManager.UpdateWaveUI();
 
         Debug.Log("Ending GamePhase.BasicTutorial_Start Phase");
+        StartCoroutine(WaitForInitializationEnd());
+    }
+
+    private IEnumerator WaitForInitializationEnd()
+    {
+        yield return new WaitForSeconds(1.0f); // wait 1s before state change
         SetGamePhase(GamePhase.BasicTutorial_Movement);
     }
 
     private void StartMovementTutorial()
     {
         Debug.Log("Starting GamePhase.BasicTutorial_Movement Phase");
+        UIManager.Tutorial_ShowMovementUI(); // Shows the Animated 4 WASD Keys
+        Player.GetComponent<PlayerController>().UnlockMovement();
         StartCoroutine(WaitForMovementInput());
+        StartCoroutine(WaitForMovementTutorialEnd());
     }
 
     private IEnumerator WaitForMovementInput()
     {
-        yield return new WaitForSeconds(2.0f); // free movement for 3 seconds
-        UIManager.Tutorial_ShowMovementUI(); // Shows the Animated 4 WASD Keys
-        Player.GetComponent<PlayerController>().UnlockMovement();
-        yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys());        
-        yield return new WaitForSeconds(3.0f); // free movement for 3 seconds
-        UIManager.Tutorial_HideMovementUI(); // hide WASD movement keys
+        yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys());                
         Debug.Log("Ending GamePhase.BasicTutorial_Movement Phase");
         SetGamePhase(GamePhase.BasicTutorial_Shooting);
     }
 
-    private void StartShootingTutorial()
+    private IEnumerator WaitForMovementTutorialEnd()
+    {
+        yield return new WaitForSeconds(3.0f); // free movement for 3 seconds
+        UIManager.Tutorial_HideMovementUI(); // hide WASD movement keys
+    }
+
+        private void StartShootingTutorial()
     {
         Debug.Log("Starting GamePhase.BasicTutorial_Shooting Phase");
         WaveManager.SpawnSingleEnemy();
@@ -131,7 +142,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForShootingInput()
     {
-        yield return new WaitForSeconds(10.0f); // delay 10 seconds for enemy to come close to nexus
+        yield return new WaitForSeconds(4.5f); // delay 4.5 seconds for enemy to come close to nexus
         WaveManager.LockAllEnemiesMovement();
         WaveManager.SetConstantXPDrops(4);
         //Player.GetComponent<PlayerController>().LockMovement();
@@ -249,7 +260,7 @@ public class GameManager : MonoBehaviour
         DEBUG_WAVE_MANAGER = false;
         DEBUG_ORE_MANAGER = false;
         DEBUG_INVENTORY_MANAGER = true;
-        DEBUG_REWARD_PANEL = true;
+        DEBUG_REWARD_PANEL = false;
     }
 
     void Start()
@@ -262,11 +273,13 @@ public class GameManager : MonoBehaviour
         if (TutorialStorageValue && enableTutorial)
         {
             Debug.Log("Tutorial is Enabled");
-            SetGamePhase(GamePhase.BasicTutorial_Start);
+            currentPhase = GamePhase.Initialization;
+            SetGamePhase(currentPhase);
         }
         else
         {
-            SetGamePhase(CurrentPhase);
+            currentPhase = StartPhase;
+            SetGamePhase(currentPhase);
             Debug.Log("Tutorial is SKIPPED");
         }
     }

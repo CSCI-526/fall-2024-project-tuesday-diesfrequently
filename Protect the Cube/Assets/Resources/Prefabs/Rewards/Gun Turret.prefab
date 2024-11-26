@@ -5117,7 +5117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardName: Gun Turret
-  RewardDescription: A turret with decent overall stats.
+  RewardDescription: Fires rapidly at enemies
   RewardImage: {fileID: 21300000, guid: e064f93fd7cd54e47834aff3489dd246, type: 3}
   isStatBased: 1
   rangeDesc: 3
