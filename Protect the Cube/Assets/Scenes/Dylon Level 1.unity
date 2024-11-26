@@ -4746,6 +4746,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6232713910824706000, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
   m_PrefabInstance: {fileID: 5021235089233810946}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1429185930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1804638436381948150, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+  m_PrefabInstance: {fileID: 5021235089233810946}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429185929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1450223870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7846,6 +7857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nexus
       objectReference: {fileID: 0}
+    - target: {fileID: 831108058407699104, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
+      propertyPath: hpBar
+      value: 
+      objectReference: {fileID: 1429185930}
     - target: {fileID: 6716108328489607673, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
