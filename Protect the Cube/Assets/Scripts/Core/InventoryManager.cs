@@ -116,7 +116,7 @@ public class InventoryManager : MonoBehaviour
         int forcedRewardCount = 0; // how many times a specific reward is forced as choice
 
         // add "Player HP" reward if the player has less than max health
-        if (playerHealthSnapshot < PlayerHealth.PLAYER_MAX_HEALTH) { AddPotentialReward("Player HP", ref forcedReward, ref forcedRewardCount); }
+        if (playerHealthSnapshot < PlayerHealth.PLAYER_MAX_HEALTH && playerLevelSnapshot >= 2) { AddPotentialReward("Player HP", ref forcedReward, ref forcedRewardCount); }
         else { RemovePotentialReward("Player HP"); }
         // post level 10, give nexus health regen as an option for players
         if (nexusHealthSnapshot < GameManager.Instance.Nexus.GetComponent<Nexus>().maxHealth && playerLevelSnapshot >= 5) { AddPotentialReward("Nexus HP", ref forcedReward, ref forcedRewardCount); }
@@ -125,15 +125,17 @@ public class InventoryManager : MonoBehaviour
         // Level 1: Add "Gun Turret" as Valid Reward Choice
         if (playerLevelSnapshot == 1) { AddPotentialReward("Gun Turret", ref forcedReward, ref forcedRewardCount); }
         // Level 2: Add "Gatling Turret" and "Sniper Turret" as Valid Reward Choice
-        else if (playerLevelSnapshot == 2) { 
+        else if (playerLevelSnapshot == 3)
+        {
             AddPotentialReward("Gatling Turret", ref forcedReward, ref forcedRewardCount);
         }
         // Level 3: Add "Flamethrower Turret" as Valid Reward Choice
-        else if (playerLevelSnapshot == 3) {
+        else if (playerLevelSnapshot == 4)
+        {
             AddPotentialReward("Flamethrower Turret", ref forcedReward, ref forcedRewardCount);
         }
         // Level 3: Add "Sniper Turret" as Valid Reward Choice
-        else if (playerLevelSnapshot == 4)
+        else if (playerLevelSnapshot == 6)
         {
             AddPotentialReward("Sniper Turret", ref forcedReward, ref forcedRewardCount);
         }
@@ -141,9 +143,9 @@ public class InventoryManager : MonoBehaviour
         // Level 5: Force ONLY Harvestor Reward
         else if (playerLevelSnapshot % 5 == 0) { AddPotentialReward("Harvester", ref forcedReward, ref forcedRewardCount, playerLevelSnapshot == 5 ? 3 : 0); }
         // Level 7: Add "Turret Booster" as Valid Reward Choice
-        else if (playerLevelSnapshot == 6) { AddPotentialReward("Booster Turret", ref forcedReward, ref forcedRewardCount); }
+        else if (playerLevelSnapshot == 7) { AddPotentialReward("Booster Turret", ref forcedReward, ref forcedRewardCount); }
         // Level 7: Add "Slow Tower" as Valid Reward Choice
-        else if (playerLevelSnapshot == 7) { AddPotentialReward("Slow Turret", ref forcedReward, ref forcedRewardCount); }
+        else if (playerLevelSnapshot == 9) { AddPotentialReward("Slow Turret", ref forcedReward, ref forcedRewardCount); }
 
         if (playerLevelSnapshot % 5 != 0) { RemovePotentialReward("Harvester"); }
 
@@ -258,7 +260,8 @@ public class InventoryManager : MonoBehaviour
         InventoryItemCount[itemIDX]++;
 
         //flash reward inventory box
-        if (!item_name.Contains("HP")){
+        if (!item_name.Contains("HP"))
+        {
             GameManager.Instance.UIManager.FlashInventory(itemIDX);
         }
 

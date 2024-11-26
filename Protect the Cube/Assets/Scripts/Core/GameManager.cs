@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool useBulletPool = false;
     public bool enableTutorial = true;
     private bool isPaused = false;
+    private bool modalAcknowleged = false; 
 
     // Set the field where TutorialStorageValue is stored
     private const string TutorialStorageKey = "IsTutorialEnabled";
@@ -83,19 +84,12 @@ public class GameManager : MonoBehaviour
 
     private void StartInitialization() {
         UIManager.HideModalWindow();
-        //UIManager.ShowModalWindow("Test Message");
-        //StartCoroutine(WaitForSpace());
+        UIManager.HideMinimap();
+        UIManager.HideNexusHealthSlider();
+        UIManager.HidePlayerHealthSlider();
         SetGamePhase(GamePhase.BasicTutorial_Start);
         Debug.Log("Finished GamePhase.Initialization Phase");
     }
-
-    //private IEnumerator WaitForSpace()
-    //{
-    //    yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-    //    UIManager.HideModalWindow();
-    //    SetGamePhase(GamePhase.BasicTutorial_Start);
-    //    Debug.Log("Finished GamePhase.Initialization Phase");
-    //}
 
     private void StartBasicTutorialStart()
     {
@@ -113,6 +107,7 @@ public class GameManager : MonoBehaviour
         UIManager.ActivateCustomCursor(); // sets CustomCursor
         UIManager.DeactivateInventoryUI();
         UIManager.DeactivateEXPUI();
+        UIManager.HideModalWindow();
         UIManager.UpdateWaveUI();
 
         Debug.Log("Ending GamePhase.BasicTutorial_Start Phase");
@@ -136,35 +131,76 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForMovementInput()
     {
         yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys());
-        StartCoroutine(WaitForMovementTutorialEnd());
-        Debug.Log("Ending GamePhase.BasicTutorial_Movement Phase");
-        SetGamePhase(GamePhase.BasicTutorial_Shooting);
+        StartCoroutine(WaitForMovementTutorialEnd()); 
     }
 
     private IEnumerator WaitForMovementTutorialEnd()
     {
         yield return new WaitForSeconds(3.0f); // free movement for 3 seconds
         UIManager.Tutorial_HideMovementUI(); // hide WASD movement keys
+        UIManager.ConfigModalWindow(1);
+        UIManager.ShowModalWindow("Defend your Nexus!");
+        StartCoroutine(WaitForNexusMessageAcknowlegement());
     }
 
-        private void StartShootingTutorial()
+    private IEnumerator WaitForNexusMessageAcknowlegement()
+    {
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        UIManager.HideModalWindow();
+
+        Debug.Log("Ending GamePhase.BasicTutorial_Movement Phase");
+        SetGamePhase(GamePhase.BasicTutorial_Shooting);
+
+    }
+
+    private void StartShootingTutorial()
     {
         Debug.Log("Starting GamePhase.BasicTutorial_Shooting Phase");
-        WaveManager.SpawnSingleEnemy();
+
+        WaveManager.SpawnSingleEnemy(2);
+        WaveManager.SetConstantXPDrops(0);
+        WaveManager.LockAllEnemiesMovement();
+        Player.GetComponent<PlayerController>().LockMovement();
+
+        UIManager.ShowModalWindow("Enemies deal damage to your nexus (blue)");
+        UIManager.ShowNexusHealthSlider();
+
+        StartCoroutine(WaitForNexusHPAcknowledgement());
+    }
+
+    private IEnumerator WaitForNexusHPAcknowledgement()
+    {
+        yield return new WaitForSeconds(1.0f);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        UIManager.HideModalWindow();
+        WaveManager.UnlockAllEnemiesMovement();
+
+        yield return new WaitForSeconds(1.0f);
+        Player.GetComponent<PlayerController>().UnlockMovement();
+
+        WaveManager.SpawnSingleEnemy(1);
         StartCoroutine(WaitForShootingInput());
+
+        UIManager.ShowModalWindow("Touching enemies lowers your HP! (red)");
+        UIManager.ShowPlayerHealthSlider();
+        yield return new WaitForSeconds(1.0f);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        UIManager.HideModalWindow();
+        modalAcknowleged = true;
     }
 
     private IEnumerator WaitForShootingInput()
     {
         yield return new WaitForSeconds(4.5f); // delay 4.5 seconds for enemy to come close to nexus
         WaveManager.LockAllEnemiesMovement();
-        WaveManager.SetConstantXPDrops(4);
-        //Player.GetComponent<PlayerController>().LockMovement();
+
+        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
 
         UIManager.ActivateCustomShootingCursor(); // Show Custom Shooting Cursor
         Player.GetComponent<PlayerController>().ActivatePlayerGun(); // show player gun
+        WaveManager.SetConstantXPDrops(4);
         Player.GetComponent<PlayerController>().UnlockShooting();
-
+        
         // continue when player has shot + all enemies are dead
         yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
 
@@ -240,6 +276,7 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<PlayerController>().UnlockShooting();
         Player.GetComponent<PlayerController>().ActivatePlayerGun();
         WaveManager.UnlockAllEnemiesMovement();
+        UIManager.ShowMinimap();
     }
 
     private void StartDynamicWaves()

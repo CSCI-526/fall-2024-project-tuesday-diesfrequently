@@ -18,7 +18,6 @@ public class PlaceObject : MonoBehaviour
 
     private void Update()
     {
-
         HandleNewObjectHotkey();
 
         if (currentPlaceableObject != null)
@@ -31,9 +30,7 @@ public class PlaceObject : MonoBehaviour
             RotateFromQE();
             ReleaseIfClicked();
         }
-
     }
-
 
     public void CancelPlace()
     {

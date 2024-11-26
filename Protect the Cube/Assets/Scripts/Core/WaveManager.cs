@@ -98,7 +98,7 @@ public class WaveManager : MonoBehaviour
         return temp_spawn_points;
     }
 
-    public void SpawnSingleEnemy()
+    public void SpawnSingleEnemy(int step)
     {
         Vector3 spawnPosition = spawnConfigs[0][UnityEngine.Random.Range(0, spawnConfigs[0].Count)];
 
@@ -108,7 +108,8 @@ public class WaveManager : MonoBehaviour
         GameObject enemyEntity = Instantiate(enemyPrefab);
         AddEnemyEntity(enemyEntity, GetEnemyIDX(enemyName));
 
-        enemyEntity.transform.position = new Vector3(-TUTORIAL_SPAWN_DIST, 0, TUTORIAL_SPAWN_DIST);
+        if (step == 1) enemyEntity.transform.position = new Vector3(-TUTORIAL_SPAWN_DIST, 0, TUTORIAL_SPAWN_DIST);
+        if (step == 2) enemyEntity.transform.position = new Vector3(TUTORIAL_SPAWN_DIST / 4, 0, TUTORIAL_SPAWN_DIST / 4); // match dynamically determine this
         if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
     }
 

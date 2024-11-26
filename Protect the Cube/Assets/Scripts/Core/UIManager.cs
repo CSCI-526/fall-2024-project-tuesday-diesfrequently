@@ -15,8 +15,8 @@ public class UIManager : MonoBehaviour
     public GameObject TutorialShootingCursor;
     public GameObject XPLevelUp;
     public TextMeshProUGUI expAnimText;
-    public GameObject playerHPSlider;
-    public GameObject nexusHPSlider;
+    [SerializeField] public GameObject playerHPSlider;
+    [SerializeField] public GameObject nexusHPSlider;
     public GameObject gold;
     public GameObject pauseButton;
     public GameObject RewardUIMask;
@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
     private Image goldImage;
 
     private InventoryManager inventoryManager;
-    private GameObject minimap;
+    [SerializeField] public GameObject minimap;
     private GameObject uiObject;
     private GameObject expBar;
 
@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
         goldImage = goldUI.transform.Find("Gold").GetComponent<Image>();
-        minimap = GameObject.Find("MinimapComponent");
+        //minimap = GameObject.Find("MinimapComponent");
         uiObject = GameObject.Find("UI");
         inventoryBar = uiObject.transform.Find("Inventory Bar").gameObject;
         expBar = uiObject.transform.Find("EXP").gameObject;
@@ -220,6 +220,13 @@ public class UIManager : MonoBehaviour
         expSlider.gameObject.SetActive(false);
     }
 
+    public void ShowNexusHealthSlider() { nexusHPSlider.SetActive(true); }
+    public void HideNexusHealthSlider() { nexusHPSlider.SetActive(false); }
+
+    public void ShowPlayerHealthSlider() { playerHPSlider.SetActive(true); }
+    public void HidePlayerHealthSlider() { playerHPSlider.SetActive(false); }
+
+
     public void ShowGameOverScreen()
     {
         canPause = false;
@@ -297,6 +304,10 @@ public class UIManager : MonoBehaviour
         RewardUIMask.SetActive(false);
     }
 
+    public void ShowMinimap() { minimap.SetActive(true); }
+
+    public void HideMinimap() { minimap.SetActive(false); }
+
     public void HideRewardScreen()
     {
         ActivateShootingCursor();
@@ -330,7 +341,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowModalWindow(string msg)
     {
-        InstructionModalWindow.GetComponent<InstructionPopup>().ShowInstruction("Test Message");
+        InstructionModalWindow.GetComponent<InstructionPopup>().ShowInstruction(msg);
     }
 
     public void HideModalWindow()
@@ -339,6 +350,17 @@ public class UIManager : MonoBehaviour
         {
             InstructionModalWindow.GetComponent<InstructionPopup>().HideInstruction();
         }
+    }
+
+    // 0 is full modal, 1 is bottom modal
+    public void ConfigModalWindow(int modal_type)
+    {
+        InstructionModalWindow.SetActive(true); // modal needs to be active to call functions on it
+        if (modal_type == 0) {
+            InstructionModalWindow.GetComponent<InstructionPopup>().ConfigureModal(InstructionPopup.ModalType.FullScreen);
+        } else if (modal_type == 1) {
+            InstructionModalWindow.GetComponent<InstructionPopup>().ConfigureModal(InstructionPopup.ModalType.BottomBar);
+        } else { Debug.LogError("[UI Manager] Error! Incorrect Modal_Type."); }
     }
 
 

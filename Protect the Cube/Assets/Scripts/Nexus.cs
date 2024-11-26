@@ -89,6 +89,7 @@ public class Nexus : MonoBehaviour
 
         // Update HP Bar
         UpdateHPBar();
+        GameManager.Instance.UIManager.UpdateUI();
 
         // Update Analytics
         Analytics_OnNexusHPLoss?.Invoke(AnalyticsManager.TYPE_NEXUS_LOSS_HP);
