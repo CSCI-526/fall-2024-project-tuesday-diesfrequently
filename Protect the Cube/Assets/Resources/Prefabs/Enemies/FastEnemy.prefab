@@ -149,6 +149,7 @@ MonoBehaviour:
   maxHealth: 6
   invincibilityDuration: 0.01
   exp: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
+  magnet: {fileID: 6435648702068270667, guid: 2da496d4af282004891a3be51ef2f2ba, type: 3}
   maxXpDrop: 1
   minXpDrop: 0
   currentHealth: 0

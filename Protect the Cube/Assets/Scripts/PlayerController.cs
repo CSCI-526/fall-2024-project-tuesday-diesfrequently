@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         if (!isMovementLocked) rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
 
         // look at mouse
-        LookAtMouse();
+        if (!isMovementLocked) LookAtMouse();
 
         //update shot time
         if (!isShootingLocked) timeSinceLastShot += Time.fixedDeltaTime;

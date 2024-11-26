@@ -79,13 +79,6 @@ public class PlaceObject : MonoBehaviour
     {
         GameManager.Instance.UIManager.ActivateCustomPlacementCursor();
         currentPlaceableObject = Instantiate(turret);
-
-        Debug.Log("[PlaceObject] turret has been created");
-        if (placedFirstTurret == false)
-        {
-            placedFirstTurret = true;
-            GameManager.Instance.UIManager.HideSelectGunTutorial();
-        }
         return true;
     }
 
@@ -137,6 +130,14 @@ public class PlaceObject : MonoBehaviour
             b.OnPlace();
             isFirstTurretPlaced = true;
             currentPlaceableObject = null;
+
+            Debug.Log("[PlaceObject] turret has been created");
+            if (placedFirstTurret == false)
+            {
+                placedFirstTurret = true;
+                GameManager.Instance.UIManager.HideSelectGunTutorial();
+            }
+
             GameManager.Instance.UIManager.ActivateShootingCursor();
 
             //rangeIndicator.SetActive(false);
