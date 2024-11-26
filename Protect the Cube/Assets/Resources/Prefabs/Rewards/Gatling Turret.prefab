@@ -425,7 +425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: maxRange
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: projectile
@@ -433,7 +433,7 @@ PrefabInstance:
       objectReference: {fileID: 4594105414263302984, guid: 992400245434ed64598f953af999ec96, type: 3}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingDesc
-      value: shoots bullets that bounces between enemies
+      value: Has a high fire rate
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingName
@@ -5325,7 +5325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardName: Gatling Turret
-  RewardDescription: Bullets hit up to 3 targets.
+  RewardDescription: Has a high fire rate
   RewardImage: {fileID: 21300000, guid: 5d88657cdb08b4a7394e84a2c959f308, type: 3}
   isStatBased: 1
   rangeDesc: 3

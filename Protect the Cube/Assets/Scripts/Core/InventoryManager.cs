@@ -126,24 +126,24 @@ public class InventoryManager : MonoBehaviour
         if (playerLevelSnapshot == 1) { AddPotentialReward("Gun Turret", ref forcedReward, ref forcedRewardCount); }
         // Level 2: Add "Gatling Turret" and "Sniper Turret" as Valid Reward Choice
         else if (playerLevelSnapshot == 2) { 
-            AddPotentialReward("Sniper Turret", ref forcedReward, ref forcedRewardCount);
-        }
-        // Level 3: Add "Gatling Turret" as Valid Reward Choice
-        else if (playerLevelSnapshot == 3) {
             AddPotentialReward("Gatling Turret", ref forcedReward, ref forcedRewardCount);
         }
-        // Level 3: Add "FlameThrower Turret" as Valid Reward Choice
+        // Level 3: Add "Flamethrower Turret" as Valid Reward Choice
+        else if (playerLevelSnapshot == 3) {
+            AddPotentialReward("Flamethrower Turret", ref forcedReward, ref forcedRewardCount);
+        }
+        // Level 3: Add "Sniper Turret" as Valid Reward Choice
         else if (playerLevelSnapshot == 4)
         {
-            AddPotentialReward("Flamethrower Turret", ref forcedReward, ref forcedRewardCount);
+            AddPotentialReward("Sniper Turret", ref forcedReward, ref forcedRewardCount);
         }
         // Level of Multiple 5: Force Harvestor on Levels of Multiple 5
         // Level 5: Force ONLY Harvestor Reward
         else if (playerLevelSnapshot % 5 == 0) { AddPotentialReward("Harvester", ref forcedReward, ref forcedRewardCount, playerLevelSnapshot == 5 ? 3 : 0); }
-        // Level 7: Add "Slow Tower" as Valid Reward Choice
-        else if (playerLevelSnapshot == 6) { AddPotentialReward("Slow Turret", ref forcedReward, ref forcedRewardCount); }
         // Level 7: Add "Turret Booster" as Valid Reward Choice
-        else if (playerLevelSnapshot == 7) { AddPotentialReward("Booster Turret", ref forcedReward, ref forcedRewardCount); }
+        else if (playerLevelSnapshot == 6) { AddPotentialReward("Booster Turret", ref forcedReward, ref forcedRewardCount); }
+        // Level 7: Add "Slow Tower" as Valid Reward Choice
+        else if (playerLevelSnapshot == 7) { AddPotentialReward("Slow Turret", ref forcedReward, ref forcedRewardCount); }
 
         if (playerLevelSnapshot % 5 != 0) { RemovePotentialReward("Harvester"); }
 

@@ -102,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: fireRate
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: maxRange
@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 2516476828890733242, guid: 533f60986f9a5c8498034a5024d68861, type: 3}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingDesc
-      value: Excels at picking off targets at long range.
+      value: Fires armor-penetrating bullets from long range
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingName
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardName: Sniper Turret
-  RewardDescription: Pierces through enemies
+  RewardDescription: Fires piercing bullets from long range
   RewardImage: {fileID: 21300000, guid: 5319cd608383d45cfa3e99b0133b95d6, type: 3}
   isStatBased: 1
   rangeDesc: 5

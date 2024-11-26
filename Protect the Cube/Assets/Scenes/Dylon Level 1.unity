@@ -7342,22 +7342,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1685440113813595798, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053758858353761095, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5203412964412962768, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5786291867027706076, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8180688501937806211, guid: 65ba2362cb63f4a4184feb035675e7ef, type: 3}
       propertyPath: m_Name
       value: TutorialCanvas

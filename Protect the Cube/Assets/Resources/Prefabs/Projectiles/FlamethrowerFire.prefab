@@ -4901,6 +4901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ac741174a475e469d0d9eeeaef4087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 8
   maxLifetime: 1
-  damage: 0.5
+  damage: 1
+  piercing: 2

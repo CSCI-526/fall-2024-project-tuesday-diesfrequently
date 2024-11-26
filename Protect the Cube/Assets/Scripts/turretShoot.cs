@@ -57,7 +57,7 @@ public class turretShoot : Building
             Vector3 toTarget = (target.transform.position - transform.position);
             float dist = toTarget.magnitude;
             toTarget.Normalize();
-            if (Vector3.Dot(toTarget, transform.forward) > 0.9 || dist < 1.0f)
+            if (Vector3.Dot(toTarget, transform.forward) > 0.9 || dist < 3.0f)
             {
                 if(GameManager.Instance.useBulletPool)
                 {
@@ -140,17 +140,19 @@ public class turretShoot : Building
         Debug.Log("[Analytics][Prio] Level: " + level + " and buildingName: " + buildingName);
         if (buildingName == "Flamethrower Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 3);
-            maxRange += maxRange/5; 
+            maxRange += maxRange/5;
+            turnSpeed += 2;
         }else if (buildingName == "Gatling Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 2);
-            turnSpeed += turnSpeed; 
+            turnSpeed += 2;
+            fireRate += 3;
         }else if (buildingName == "Gun Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 1);
             fireRate += 3;
             turnSpeed += 3; 
         }else if (buildingName == "Sniper Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 4);
-            fireRate *= level;
+            fireRate += 0.5f;
             turnSpeed += 3;
         }
         RangeIndicator[] indicators = GetComponents<RangeIndicator>();
