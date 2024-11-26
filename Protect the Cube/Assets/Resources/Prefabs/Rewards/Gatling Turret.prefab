@@ -421,7 +421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: fireRate
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: maxRange
@@ -430,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 9042479267294620921, guid: 37d035d5be95e3842a95a7781e302d93, type: 3}
+      objectReference: {fileID: 4594105414263302984, guid: 992400245434ed64598f953af999ec96, type: 3}
     - target: {fileID: 5112603536194239189, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingDesc
       value: shoots bullets that bounces between enemies
@@ -5329,8 +5329,8 @@ MonoBehaviour:
   RewardImage: {fileID: 21300000, guid: 5d88657cdb08b4a7394e84a2c959f308, type: 3}
   isStatBased: 1
   rangeDesc: 3
-  damageDesc: 3
-  firerateDesc: 2
+  damageDesc: 1
+  firerateDesc: 4
 --- !u!114 &6567213520952982247
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -329,6 +329,9 @@ public class WaveManager : MonoBehaviour
     {
         if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Removing Enemy Entity ... ");
         AllEnemyEntities.Remove(enemy_entity);
-        EnemyCounter[enemyIDX] -= 1;
+        if (EnemyCounter[enemyIDX] > 0)
+        {
+            EnemyCounter[enemyIDX] -= 1;
+        }
     }
 }
