@@ -10,6 +10,6 @@ public class GameSummaryUI : MonoBehaviour
 
     private void OnEnable()
     {
-        gameSummary.text = "You Reached Wave " + GameManager.Instance.WaveManager.wave_index;
+        gameSummary.text = "You Reached Wave " + GameManager.Instance.WaveManager.wave_count;
     }
 }
