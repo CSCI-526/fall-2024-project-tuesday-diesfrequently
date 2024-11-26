@@ -12,7 +12,7 @@ public class RewardPanel : MonoBehaviour
     [SerializeField] protected Image rewardImage;
     [SerializeField] protected Sprite emptyImage;
     [SerializeField] protected TextMeshProUGUI displayedRewardName;
-    [SerializeField] protected TextMeshProUGUI rewardDescription;
+    [SerializeField] protected TextMeshProUGUI displayedRewardDescription;
 
     public void UpdateRewardPanel(GameObject reward)
     {
@@ -20,35 +20,43 @@ public class RewardPanel : MonoBehaviour
         {
             RewardInfo reward_info = reward.GetComponent<RewardInfo>();
             Building building = reward.GetComponent<Building>();
-            // Prioritize "INFO" over BuildingInfo
+
+            // Prioritize "Reward Info" over BuildingInfo
             if (reward_info.rangeDesc != 0)
             {   
                 rewardImage.sprite = reward_info.RewardImage;
                 displayedRewardName.text = reward_info.RewardName;
-                rewardDescription.text = reward_info.RewardDescription+ 
+                if (!reward_info.RewardName.Contains("HP"))
+                {
+                    displayedRewardDescription.text = reward_info.RewardDescription +
                     "\n" + "Range:" + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.rangeDesc)) +
-                    "\n" + "Damage:" + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.damageDesc)) + 
-                    "\n" + "Fire Rate:"+ String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.firerateDesc));
+                    "\n" + "Damage:" + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.damageDesc)) +
+                    "\n" + "Fire Rate:" + String.Concat(Enumerable.Repeat("<sprite=0>", reward_info.firerateDesc));
+                } else
+                {
+                    displayedRewardDescription.text = reward_info.RewardDescription;
+                }
+                
             }
             else if (building != null)
             {   
                 rewardImage.sprite = reward_info.RewardImage;
                 displayedRewardName.text = building.buildingName;
-                rewardDescription.text = building.buildingDesc;
+                displayedRewardDescription.text = building.buildingDesc;
             }
         }
         else
         {
             Debug.Log("In ERROR.cs");
             displayedRewardName.text = "Error: missing";
-            rewardDescription.text = "Error: missing";
+            displayedRewardDescription.text = "Error: missing";
         }
     }
 
     public void ClearRewardPanel()
     {
         displayedRewardName.text = "";
-        rewardDescription.text = "";
+        displayedRewardDescription.text = "";
     }
 
     public void OnPick()

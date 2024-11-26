@@ -96,7 +96,7 @@ public class InventoryManager : MonoBehaviour
             // handle non-building prefabs / rewards here
             int inventoryIDX = getItemIDX(prefab.name); // Use prefab name or another identifier
 
-            //Debug.Log("Inventory Item Name: " + prefab.name + " with IDX of inventory: " + inventoryIDX);
+            //if (GameManager.Instance.DEBUG_INVENTORY_MANAGER) Debug.Log("Inventory Item Name: " + prefab.name + " with IDX of inventory: " + inventoryIDX);
 
             if (inventoryIDX >= 0 && inventoryIDX < TOTAL_NUM_INVENTORY)
             {
@@ -104,7 +104,7 @@ public class InventoryManager : MonoBehaviour
                 InventoryItemCount[inventoryIDX] = 0;
             }
         }
-        Debug.Log($"Initialized {inventoryPrefabs.Count} reward prefabs with the 'Inventory' tag.");
+        if (GameManager.Instance.DEBUG_INVENTORY_MANAGER) Debug.Log($"Initialized {inventoryPrefabs.Count} reward prefabs with the 'Inventory' tag.");
     }
 
     public void GenerateRewards()
@@ -152,7 +152,6 @@ public class InventoryManager : MonoBehaviour
         // Pick 3 Random Rewards from Available Rewards
         var chosenRewards = GenerateUniqueRewards(_potentialRewards.ToList(), forcedReward, forcedRewardCount);
 
-
         UpdateRewardDisplay(chosenRewards); // Updates Reward Display
 
         // cancel placing if rewards display activates
@@ -170,7 +169,7 @@ public class InventoryManager : MonoBehaviour
     private void AddPotentialReward(string reward_name, ref GameObject forced_reward, ref int forced_reward_count, int force_count = 1)
     {
         int rewardIndex = getItemIDX(reward_name); // get index of reward prefab
-        //Debug.Log("[Inventory Prefabs] ADD POTENTIAL REWARD .. reward_name " + reward_name + "rewardIDX: " + rewardIndex);
+        if (GameManager.Instance.DEBUG_INVENTORY_MANAGER) Debug.Log("[Inventory Manger] Adding New Accessible Reward: " + reward_name + "(" + rewardIndex + ")");
         forced_reward = inventoryPrefabs[rewardIndex]; // get inventory prefab
         forced_reward_count = force_count > 0 ? force_count : 1; // set the # of times reward is forced as a choice
         _potentialRewards.Add(forced_reward); // current reward becomes "available" as a choice
@@ -195,7 +194,7 @@ public class InventoryManager : MonoBehaviour
 
         if (rewardsToRemove.Count > 0)
         {
-            Debug.Log($"Removed {rewardsToRemove.Count} instances of {reward_name} from available rewards.");
+            Debug.Log($"[Inventory Manager] Removing {reward_name} from accessible rewards: {rewardsToRemove.Count} instances");
         }
     }
 
@@ -224,10 +223,10 @@ public class InventoryManager : MonoBehaviour
             finalRewards.AddRange(availableRewards); // add additional rewards to final output
         }
 
-        //Debug.Log(string.Join(", ", finalRewards.Select(reward => reward.name)));
-
         // if we do not have 3 VALID reward choices, just duplicate existing rewards
         while (finalRewards.Count < 3) { finalRewards.Add(finalRewards[0]); }
+
+        if (GameManager.Instance.DEBUG_INVENTORY_MANAGER) Debug.Log(string.Join(", ", finalRewards.Select(reward => reward.name)));
 
         // return the 3 reward choices
         return finalRewards;
@@ -254,7 +253,7 @@ public class InventoryManager : MonoBehaviour
     private void UpdateInventoryCount(string item_name)
     {
         int itemIDX = getItemIDX(item_name);
-        if (itemIDX < 0) Debug.LogWarning("[InventoryManager] Cannot Find Item IDX to store in Inventory");
+        if (itemIDX < 0) Debug.LogWarning("[InventoryManager] Cannot Find Item IDX " + itemIDX + " for item " + item_name + " to store in Inventory");
 
         // add reward to "inventory"
         InventoryItemCount[itemIDX]++;

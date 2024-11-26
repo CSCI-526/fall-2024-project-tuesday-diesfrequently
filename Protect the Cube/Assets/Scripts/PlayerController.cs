@@ -153,6 +153,26 @@ public class PlayerController : MonoBehaviour
         } else { timeSinceLastShot = 0; }
     }
 
+    public void ActivatePlayerGun()
+    {
+        Transform childTransform = transform.Find("Gun");
+        if (childTransform != null) {
+            GameObject playerGun = childTransform.gameObject;
+            playerGun.SetActive(true);
+        } else Debug.LogError("[Player Controller] Player Gun Component not found!");
+    }
+
+    public void DeactivatePlayerGun()
+    {
+        Transform childTransform = transform.Find("Gun");
+        if (childTransform != null)
+        {
+            GameObject playerGun = childTransform.gameObject;
+            playerGun.SetActive(false);
+        }
+        else Debug.LogError("[Player Controller] Player Gun Component not found!");
+    }
+
 
     void LookAtMouse()
     {

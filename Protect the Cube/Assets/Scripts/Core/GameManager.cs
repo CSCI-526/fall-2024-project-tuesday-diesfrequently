@@ -91,6 +91,8 @@ public class GameManager : MonoBehaviour
 
         Player.GetComponent<PlayerController>().LockShooting();
         Player.GetComponent<PlayerController>().LockMovement();
+        Player.GetComponent<PlayerController>().DeactivatePlayerGun();
+
         //Player.GetComponent<PlayerLevels>().LockRewardUI();
 
         WaveManager.LockAllEnemiesMovement();
@@ -134,6 +136,7 @@ public class GameManager : MonoBehaviour
         //Player.GetComponent<PlayerController>().LockMovement();
 
         UIManager.Tutorial_ShowShootingUI(); // show shooting UI
+        Player.GetComponent<PlayerController>().ActivatePlayerGun(); // show player gun
         Player.GetComponent<PlayerController>().UnlockShooting();
 
         // continue when player has shot + all enemies are dead
@@ -243,8 +246,8 @@ public class GameManager : MonoBehaviour
         Instance.OreManager = GetComponent<OreManager>();
 
         DEBUG_WAVE_MANAGER = false;
-        DEBUG_ORE_MANAGER = true;
-        DEBUG_INVENTORY_MANAGER = false;
+        DEBUG_ORE_MANAGER = false;
+        DEBUG_INVENTORY_MANAGER = true;
     }
 
     void Start()

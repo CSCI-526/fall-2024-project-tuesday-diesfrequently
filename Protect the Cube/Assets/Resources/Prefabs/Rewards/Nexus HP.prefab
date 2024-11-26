@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardName: Nexus HP
-  RewardDescription: 'Regeneratees 5 Nexus HP '
+  RewardDescription: Restore 25% Nexus HP
   RewardImage: {fileID: 21300000, guid: 72db6be32f5584913b0527b0cba3f48d, type: 3}
   rangeDesc: 0
   damageDesc: 0
