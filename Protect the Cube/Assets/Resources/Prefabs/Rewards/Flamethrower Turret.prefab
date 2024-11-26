@@ -5027,6 +5027,7 @@ MonoBehaviour:
   RewardName: Flamethrower Turret
   RewardDescription: Excels at frying enemies at close range
   RewardImage: {fileID: 21300000, guid: cc94b97c93a174edab3405b674e32f7d, type: 3}
+  isStatBased: 1
   rangeDesc: 1
   damageDesc: 3
   firerateDesc: 5

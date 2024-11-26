@@ -58,6 +58,7 @@ public class UIManager : MonoBehaviour
     private bool isRewardLocked = true;
     static private bool firstRewardScreenEnded = false;
     private bool goldActivated = false;
+    private bool activateCrosshair = false; 
 
     private void Awake()
     {
@@ -68,8 +69,6 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetCursorCrosshair();
-
         _nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         _playerLVL = GameManager.Instance.Player.GetComponent<PlayerLevels>();
@@ -81,12 +80,16 @@ public class UIManager : MonoBehaviour
         UpdateUI();
     }
 
+    public void ActivateCrosshair()
+    {
+        activateCrosshair = true;
+        SetCursorCrosshair();
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.visible = false;
-        }
+        // prevent "esc" error in WebGL builds
+        if (activateCrosshair && Input.GetMouseButtonDown(0)) Cursor.visible = false;
 
         if (Input.GetKeyDown(KeyCode.P) && canPause)
         {

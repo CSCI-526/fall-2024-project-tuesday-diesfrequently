@@ -604,6 +604,7 @@ MonoBehaviour:
   RewardDescription: Greatly improves the fire rate, turn rate, and tracking ability
     of nearby turrets
   RewardImage: {fileID: 21300000, guid: e4a172a4c509c4f838864a0455207e74, type: 3}
+  isStatBased: 0
   rangeDesc: 0
   damageDesc: 0
   firerateDesc: 0

@@ -92,10 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27b2f2191b787348a37d1908be7ba58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardImage: {fileID: 5714723832585736461}
   emptyImage: {fileID: 0}
+  rewardImage: {fileID: 5714723832585736461}
   displayedRewardName: {fileID: 3346992498680603140}
-  rewardDescription: {fileID: 8201296733337385288}
+  displayedRewardDescription: {fileID: 0}
 --- !u!1 &4062297845144121194
 GameObject:
   m_ObjectHideFlags: 0

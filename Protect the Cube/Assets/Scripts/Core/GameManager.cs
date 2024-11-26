@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool DEBUG_WAVE_MANAGER;
     [SerializeField] public bool DEBUG_ORE_MANAGER;
     [SerializeField] public bool DEBUG_INVENTORY_MANAGER;
+    [SerializeField] public bool DEBUG_REWARD_PANEL;
 
 
     public void SetGamePhase(GamePhase newPhase)
@@ -136,6 +137,7 @@ public class GameManager : MonoBehaviour
         //Player.GetComponent<PlayerController>().LockMovement();
 
         UIManager.Tutorial_ShowShootingUI(); // show shooting UI
+        UIManager.ActivateCrosshair(); // show shooting Crosshair
         Player.GetComponent<PlayerController>().ActivatePlayerGun(); // show player gun
         Player.GetComponent<PlayerController>().UnlockShooting();
 
@@ -248,6 +250,7 @@ public class GameManager : MonoBehaviour
         DEBUG_WAVE_MANAGER = false;
         DEBUG_ORE_MANAGER = false;
         DEBUG_INVENTORY_MANAGER = true;
+        DEBUG_REWARD_PANEL = true;
     }
 
     void Start()
