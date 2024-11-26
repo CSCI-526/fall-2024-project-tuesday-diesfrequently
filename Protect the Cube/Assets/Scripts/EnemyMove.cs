@@ -111,9 +111,9 @@ public class EnemyMove : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.transform.root.gameObject.CompareTag("Nexus"))
+        if (collision.transform.gameObject.CompareTag("Nexus"))
         {
-            collision.transform.root.gameObject.GetComponent<Nexus>().TakeDamage(damage);
+            collision.transform.gameObject.GetComponent<Nexus>().TakeDamage(damage);
             GetComponent<EnemyHealth>().Die();
         }
         else if(collision.gameObject.CompareTag("Player"))
