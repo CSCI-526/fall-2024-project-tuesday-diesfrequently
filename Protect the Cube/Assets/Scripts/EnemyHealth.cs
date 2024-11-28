@@ -92,9 +92,9 @@ public class EnemyHealth : MonoBehaviour
         {
             GameManager.Instance.WaveManager.KillEnemyEntity(this.gameObject, GameManager.Instance.WaveManager.GetEnemyIDX(enemyName));
         }
-        //if (enemyName == "SpawnerBossEnemy") { DropMagnet(); }
-        //else { DropExp(); }
-        DropExp();
+        if (enemyName == "SpawnerBossEnemy") { DropMagnet(); }
+        else { DropExp(); }
+        
 
         Destroy(gameObject);
     }
