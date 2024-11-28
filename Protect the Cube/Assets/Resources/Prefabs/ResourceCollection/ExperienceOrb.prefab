@@ -291,9 +291,8 @@ MonoBehaviour:
   exp_value: 1
   period: 1
   amplitude: 0.5
-  lifetime: 15
+  lifetime: 45
   moveSpeed: 8
-  moveToPlayer: 1
   attractionRange: 4
   uiExpOrbPrefab: {fileID: 6435648702068270667, guid: fbc6005d16ed74c1f97783e5ac6b9316, type: 3}
 --- !u!114 &-3978978509010604329
