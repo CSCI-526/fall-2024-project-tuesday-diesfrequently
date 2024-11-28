@@ -7645,6 +7645,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5021235089233810948}
     - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
+      propertyPath: StartPhase
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: CurrentPhase
       value: 7
       objectReference: {fileID: 0}
@@ -8064,15 +8068,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3771889541316447260, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.86602557
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: 3771889541316447260, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.4999997
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503242775520331285, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503242775520331285, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7305155446510436518, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_Sources.Array.size
@@ -8348,6 +8360,10 @@ PrefabInstance:
     - target: {fileID: 6852629257426476074, guid: 46669698741967b479c6ba4a92079abc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061703290287138158, guid: 46669698741967b479c6ba4a92079abc, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 7181013821309983112, guid: 46669698741967b479c6ba4a92079abc, type: 3}
       propertyPath: m_LocalPosition.x

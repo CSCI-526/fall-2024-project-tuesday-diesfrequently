@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public const int PLAYER_MAX_HEALTH = 5;
+    [SerializeField] public int PLAYER_MAX_HEALTH = 5;
 
     [SerializeField] private float invincibilityDuration = 0.01f;
 

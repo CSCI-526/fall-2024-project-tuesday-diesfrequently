@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 4194215232517746498}
   - component: {fileID: 1702812880498901224}
   - component: {fileID: 3594844298877099021}
+  - component: {fileID: 2676073696104446126}
   m_Layer: 10
   m_Name: Nexus
   m_TagString: Nexus
@@ -188,7 +189,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -289,9 +290,26 @@ MonoBehaviour:
   RewardName: missing name
   RewardDescription: missing description
   RewardImage: {fileID: 0}
+  isStatBased: 0
   rangeDesc: 0
   damageDesc: 0
   firerateDesc: 0
+--- !u!114 &2676073696104446126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415337832395152133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d38265095da724b97a9968d6e6d079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableAnimation: 1
+  startPosition: {x: 0, y: -5, z: 0}
+  endPosition: {x: 0, y: -0.15, z: 0}
+  duration: 1
 --- !u!1 &541082699506193634
 GameObject:
   m_ObjectHideFlags: 0

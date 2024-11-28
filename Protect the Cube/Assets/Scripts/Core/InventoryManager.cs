@@ -116,7 +116,7 @@ public class InventoryManager : MonoBehaviour
         int forcedRewardCount = 0; // how many times a specific reward is forced as choice
 
         // add "Player HP" reward if the player has less than max health
-        if (playerHealthSnapshot < PlayerHealth.PLAYER_MAX_HEALTH && playerLevelSnapshot >= 2) { AddPotentialReward("Player HP", ref forcedReward, ref forcedRewardCount); }
+        if (playerHealthSnapshot < _playerHP.PLAYER_MAX_HEALTH && playerLevelSnapshot >= 2) { AddPotentialReward("Player HP", ref forcedReward, ref forcedRewardCount); }
         else { RemovePotentialReward("Player HP"); }
         // post level 10, give nexus health regen as an option for players
         if (nexusHealthSnapshot < GameManager.Instance.Nexus.GetComponent<Nexus>().maxHealth && playerLevelSnapshot >= 5) { AddPotentialReward("Nexus HP", ref forcedReward, ref forcedRewardCount); }
