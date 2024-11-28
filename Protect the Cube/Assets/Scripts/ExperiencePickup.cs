@@ -12,7 +12,7 @@ public class ExperiencePickup : MonoBehaviour
 
     [SerializeField] protected float moveSpeed = 8.0f;
 
-    [SerializeField] public bool moveToPlayer = false;
+    private bool magnetMoveToPlayer = false;
     [SerializeField] public float attractionRange = 4.0f;
     [SerializeField] private GameObject uiExpOrbPrefab;
 
@@ -91,29 +91,24 @@ private IEnumerator MoveUIOrbToExpBar(RectTransform uiOrbRect)
     }
 
     public void StartMoveToPlayer(){
-        moveToPlayer= true;
+        magnetMoveToPlayer = true;
     }
 
     private void MoveToPlayer()
     {
         GameObject playerObject = GameManager.Instance.Player;
         Transform player = playerObject.transform;
-        if (moveToPlayer && player != null)
+        if (player == null)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            return;
+        }
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            if(distanceToPlayer <= attractionRange)
-            {
-                // Move the orb towards the player
-                Vector3 direction = (player.position - transform.position).normalized;
-                transform.position += direction * moveSpeed * Time.deltaTime;
-            }
-
-            // Optionally, stop moving when very close to the player
-            if (Vector3.Distance(transform.position, player.position) < 0.1f)
-            {
-                moveToPlayer = false;  // Stop moving when very close
-            }
+        if ((magnetMoveToPlayer || distanceToPlayer <= attractionRange)  && Vector3.Distance(transform.position, player.position) >= 0.1f )
+        {
+            // Move the orb towards the player
+            Vector3 direction = (player.position - transform.position).normalized;
+            transform.position += direction * moveSpeed * Time.deltaTime;
         }
     }
 
