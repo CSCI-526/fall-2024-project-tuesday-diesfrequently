@@ -7817,18 +7817,6 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 1495458845}
-    - target: {fileID: 2419686059696138600, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
-      propertyPath: m_Color.b
-      value: 0.9411765
-      objectReference: {fileID: 0}
-    - target: {fileID: 2419686059696138600, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2419686059696138600, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_Name
       value: Character
