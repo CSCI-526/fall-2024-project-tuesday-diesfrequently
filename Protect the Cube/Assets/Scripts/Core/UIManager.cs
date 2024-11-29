@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public GameObject pauseButtonBackground;
     public GameObject RewardUIMask;
     public GameObject goldHighlight;
+    public GameObject goldCollect;  
 
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
@@ -418,7 +419,12 @@ public void ShowSelectGunTutorial()
     public void Tutorial_HideGoldHighlight()
     {
         goldHighlight.SetActive(false);
-    }    
+    } 
+    
+    public void Tutorial_ShowGoldCollect()
+    {
+        goldCollect.SetActive(true); 
+    }
 
     public void UpdateWaveUI()
     {
