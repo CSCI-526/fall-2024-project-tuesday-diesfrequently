@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     private InventoryManager inventoryManager;
     public event Action<int> Analytics_OnPlayerHPLoss;
 
+    public Animator healthbarAnim;
+
     private void Awake()
     {
         // updateMaxHealth
@@ -62,6 +64,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Update Animation 
         animator.SetTrigger("Damage");
+        healthbarAnim.SetTrigger("DamageBar");
 
         // Decrease Current Health (by dmg)
         currentHealth = Mathf.Max(currentHealth - amount, 0);

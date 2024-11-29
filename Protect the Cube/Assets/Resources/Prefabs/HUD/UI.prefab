@@ -7425,6 +7425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3615207510945325708}
   - component: {fileID: 1804638436381948150}
+  - component: {fileID: 836686085049637981}
   m_Layer: 5
   m_Name: NexusBar
   m_TagString: Untagged
@@ -7505,6 +7506,27 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &836686085049637981
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232713910824706000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a77677f775a177d4388940df9df9724d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6352592394892924075
 GameObject:
   m_ObjectHideFlags: 0
@@ -9422,6 +9444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1853774543208968364}
   - component: {fileID: 418259040942426965}
+  - component: {fileID: 7409230264469214065}
   m_Layer: 5
   m_Name: PlayerHealthBar
   m_TagString: Untagged
@@ -9502,6 +9525,27 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &7409230264469214065
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8317130379295477877}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b4a83b54ca76d449a551431ea0338e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8537000536542927871
 GameObject:
   m_ObjectHideFlags: 0

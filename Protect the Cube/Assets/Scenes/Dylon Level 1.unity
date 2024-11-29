@@ -2156,6 +2156,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
+--- !u!95 &741020246 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 836686085049637981, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+  m_PrefabInstance: {fileID: 5021235089233810946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &741020247 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7409230264469214065, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+  m_PrefabInstance: {fileID: 5021235089233810946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &746626000 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5747132913586418175, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
@@ -7820,11 +7830,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4306289582288373623, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00000047683716
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4306289582288373623, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.1000004
+      value: -3.1000023
       objectReference: {fileID: 0}
     - target: {fileID: 4806294349054637773, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_fontSize
@@ -7984,6 +7994,10 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 1495458845}
+    - target: {fileID: 1267738778565106773, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
+      propertyPath: healthbarAnim
+      value: 
+      objectReference: {fileID: 741020247}
     - target: {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_Name
       value: Character
@@ -8061,6 +8075,10 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 1429185930}
+    - target: {fileID: 831108058407699104, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
+      propertyPath: healthbarAnim
+      value: 
+      objectReference: {fileID: 741020246}
     - target: {fileID: 6716108328489607673, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
