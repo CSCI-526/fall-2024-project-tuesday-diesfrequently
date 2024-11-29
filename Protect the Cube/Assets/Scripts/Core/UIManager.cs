@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject nexusHPSlider;
     public GameObject gold;
     public GameObject pauseButton;
+    public GameObject pauseButtonBackground;
     public GameObject RewardUIMask;
 
     [SerializeField] protected TextMeshProUGUI scoreBoard;
@@ -51,7 +52,7 @@ public class UIManager : MonoBehaviour
 
     private InventoryManager inventoryManager;
     [SerializeField] public GameObject minimap;
-    private GameObject uiObject;
+    public GameObject uiObject;
     private GameObject expBar;
 
     public bool pauseMenuActive = false;
@@ -247,6 +248,7 @@ public class UIManager : MonoBehaviour
         nexusHPSlider.SetActive(false);
         gold.SetActive(false);
         pauseButton.SetActive(false);
+        pauseButtonBackground.SetActive(false);
         if (rewardMenuActive) {
             rewardMenu.SetActive(false);
         }
@@ -261,6 +263,7 @@ public class UIManager : MonoBehaviour
     public void HidePauseScreen()
     {
         pauseButton.SetActive(true);
+        pauseButtonBackground.SetActive(true);
         playerHPSlider.SetActive(true);
         nexusHPSlider.SetActive(true);
         if (rewardMenuActive) {

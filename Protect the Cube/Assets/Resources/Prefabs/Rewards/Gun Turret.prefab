@@ -305,6 +305,7 @@ MonoBehaviour:
   upgradeArrow: {fileID: 3907081904980417976, guid: aa655861ef8e34d94b991abe0801ea0c, type: 3}
   lvl2Appearance: {fileID: 7957147490572194958}
   lvl3Appearance: {fileID: 7173713017338194910}
+  upgradeText: {fileID: 5367874686638370608, guid: d7f0fb11758e0514b91077d7304f3207, type: 3}
   turrets: []
   level: 0
 --- !u!199 &4545694227343427290

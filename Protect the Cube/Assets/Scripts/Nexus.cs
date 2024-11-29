@@ -85,7 +85,10 @@ public class Nexus : MonoBehaviour
     {
         // activate the animator
         animator.SetTrigger("Damage");
-        healthbarAnim.SetTrigger("DamageBar");
+        if(healthbarAnim != null)
+        {
+            healthbarAnim.SetTrigger("DamageBar");
+        }
 
         // reduce currentHP nexus
         currentHealth = Mathf.Max(currentHealth - dmg_amount, 0);
