@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
         Cursor.visible = false;
 
         CustomCursor.SetActive(true);
-        CustomCursor.GetComponent<FollowMouse>().DeactivateTutorialShootingCursor();
+        CustomCursor.GetComponent<FollowMouse>().ActivateTutorialShootingCursor();
     }
 
     public void ActivateCustomPlacementCursor() // SetCursorHand
@@ -206,7 +206,7 @@ public class UIManager : MonoBehaviour
         inventoryBar.SetActive(true);
     }
 
-    public void DeactivateInventoryUI()
+    public void HideInventoryUI()
     {
         inventoryBar.SetActive(false);
     }
@@ -217,7 +217,7 @@ public class UIManager : MonoBehaviour
         expSlider.gameObject.SetActive(true);
     }
 
-    public void DeactivateEXPUI()
+    public void HideEXPSlider()
     {
         expUI.gameObject.SetActive(false);
         expSlider.gameObject.SetActive(false);
@@ -297,7 +297,7 @@ public class UIManager : MonoBehaviour
         XPLevelUp.SetActive(false);
         minimap.SetActive(false);
         rewardMenuActive = true;
-        DeactivateInventoryUI(); // tutorial
+        HideInventoryUI(); // tutorial
         rewardMenu.SetActive(true);
         Time.timeScale = 0.0f;
         inventoryBar.SetActive(false);
@@ -428,13 +428,14 @@ public void ShowSelectGunTutorial()
 
     public void UpdateWaveUI()
     {
-        if ((_nexus && _playerHP) && ((GameManager.Instance.currentPhase == GameManager.GamePhase.HandCraftedWaves) || (GameManager.Instance.currentPhase == GameManager.GamePhase.DynamicWaves)))
-        {
-            //if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Wave Count: " + GameManager.Instance.WaveManager.wave_count);
-            if (GameManager.Instance.WaveManager.wave_count == 0) scoreBoard.text = "";
-            else { scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count; }
-        }
+        if (GameManager.Instance.WaveManager.wave_count == 0) scoreBoard.text = "";
+        else { scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count; }
     }
+
+    public void ShowWaveUI() { scoreBoard.gameObject.SetActive(true); }
+
+    public void HideWaveUI() { scoreBoard.gameObject.SetActive(false);  }
+
 
     public void UpdatePlayerXPUI()
     {

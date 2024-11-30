@@ -243,7 +243,7 @@ public class WaveManager : MonoBehaviour
         _currentWaveLength = 0;
 
         GameManager.Instance.UIManager.UpdateUI();
-        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave_index);// Send wave number to analytics
+        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave_count);// Send wave number to analytics
 
     }
 
