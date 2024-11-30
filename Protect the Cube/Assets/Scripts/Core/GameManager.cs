@@ -205,11 +205,14 @@ public class GameManager : MonoBehaviour
         //modalAcknowleged = true;
         //yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
 
-        MainCamera.GetComponent<CameraFollow>().SetNewTarget(WaveManager.AllEnemyEntities[0], 3.0f, OnCameraTransitionComplete);
-        Debug.Log("Arrived Back in GameManager.");
+        //MoveCameraToTargetX(WaveManager.AllEnemyEntities[0], 1.5f);
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().LockMovement();
+        MainCamera.GetComponent<CameraFollow>().SetNewTarget(WaveManager.AllEnemyEntities[0], 1.5f, OnCameraTransitionComplete);
         yield return new WaitUntil(() => isCameraTransitionDone);
         isCameraTransitionDone = false;
-        
+        Player.GetComponent<PlayerController>().UnlockMovement();
+
         StartCoroutine(WaitForShootingInput());
     }
 
@@ -219,15 +222,30 @@ public class GameManager : MonoBehaviour
         Debug.Log("Set isCameraTransitionDone to TRUE!");
     }
 
+    private IEnumerator MoveCameraToTargetX(GameObject entity, float transition_time)
+    {
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().LockMovement();
+        MainCamera.GetComponent<CameraFollow>().SetNewTarget(entity, transition_time, OnCameraTransitionComplete);
+        yield return new WaitUntil(() => isCameraTransitionDone);
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().UnlockMovement();
+    }
+
+
     private IEnumerator WaitForShootingInput()
     {
         WaveManager.UnlockAllEnemiesMovement();
         yield return new WaitForSeconds(4.5f); // delay 4.5 seconds for enemy to come close to nexus
         WaveManager.LockAllEnemiesMovement();
 
+        //MoveCameraToTargetX(Player, 1.5f);
         isCameraTransitionDone = false;
-        MainCamera.GetComponent<CameraFollow>().SetNewTarget(Player, 1.5f, OnCameraTransitionComplete);
+        Player.GetComponent<PlayerController>().LockMovement();
+        MainCamera.GetComponent<CameraFollow>().SetNewTarget(Player, 1.0f, OnCameraTransitionComplete);
         yield return new WaitUntil(() => isCameraTransitionDone);
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().UnlockMovement();
 
         UIManager.ActivateCustomShootingCursor(); // Show Custom Shooting Cursor
         Player.GetComponent<PlayerController>().ActivatePlayerGun(); // show player gun

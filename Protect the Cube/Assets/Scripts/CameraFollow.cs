@@ -5,17 +5,19 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] protected GameObject target;
+    private GameObject currTarget; 
     [SerializeField] protected float lerpSpeed;
     [SerializeField] protected Vector3 offset = new Vector3(-5.0f, 10.0f, -5.0f);
     private bool isCameraTransitioning = false; 
 
-    private void Start() { offset = transform.position; }
+    private void Start() { offset = transform.position; currTarget = target;  }
 
     void FixedUpdate()
     {
         if (!isCameraTransitioning)
         {
-            Vector3 destination = target.transform.position + offset;
+            if (currTarget == null) currTarget = target; // reset to player if other targets disappear
+            Vector3 destination = currTarget.transform.position + offset;
             Vector3 smoothDestination = Vector3.Lerp(transform.position, destination, lerpSpeed);
             transform.position = smoothDestination;
         }
@@ -44,7 +46,7 @@ public class CameraFollow : MonoBehaviour
 
         // Ensure it's exactly on the target after the transition
         transform.position = new_target.transform.position + offset;
-        target = new_target;
+        currTarget = new_target;
 
         isCameraTransitioning = false; // Resume normal updates
         Debug.Log("Camera transition complete!");

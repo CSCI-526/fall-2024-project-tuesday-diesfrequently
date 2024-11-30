@@ -2939,9 +2939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 870464421}
   lerpSpeed: 0.124
-  lerpSpeed2: 10
   offset: {x: -5, y: 10, z: -5}
-  transitionTime: 10
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
