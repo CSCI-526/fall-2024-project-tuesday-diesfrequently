@@ -1,5 +1,6 @@
  using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.UI;
@@ -26,6 +27,10 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public Vector3 hpBarOffset = new Vector3(0.0f,3.0f,0.0f);
     [SerializeField] public bool countInWave = true;
     [SerializeField] public string enemyName = "None";
+
+    [SerializeField] public float upgradeChance = 0.01f;
+    [SerializeField] public float upgradeHealth = 1.0f;
+    [SerializeField] public Color upgradeColor = Color.red;
 
     private bool isTutorialEXPDrop = false;
     private int tutorialEXPAmt = 0; 
@@ -56,6 +61,16 @@ public class EnemyHealth : MonoBehaviour
         {
             UpdateHPBarTransform();
         }
+    }
+
+    public void LevelUp()
+    {
+        maxHealth = upgradeHealth;
+        currentHealth = upgradeHealth;
+        //GetComponent<MeshRenderer>().material = upgradeColor;
+        //GetComponent<Material>().color = upgradeColor;
+        GetComponent<Renderer>().material.color = upgradeColor;
+        Debug.Log("Upgraded Enemy!");
     }
 
     public void TakeDamage(float damage)

@@ -794,6 +794,9 @@ MonoBehaviour:
   hpBarOffset: {x: 0, y: 1.5, z: 0}
   countInWave: 1
   enemyName: Ranged Enemy
+  upgradeChance: 0.5
+  upgradeHealth: 18
+  upgradeColor: {fileID: 2100000, guid: 23bc07b820072cf4394abc1889ecb0a7, type: 2}
 --- !u!136 &8803482667701268275
 CapsuleCollider:
   m_ObjectHideFlags: 0

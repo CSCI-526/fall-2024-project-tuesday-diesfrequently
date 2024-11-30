@@ -20,6 +20,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public int wave_index;
     [SerializeField] public int wave_count;
     [SerializeField] public float TUTORIAL_SPAWN_DIST = 15.0f;
+    [SerializeField] public bool enableElites = false;
 
     private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>(); //stores the spawn point configuration
     private float _currentWaveLength;
@@ -269,6 +270,20 @@ public class WaveManager : MonoBehaviour
             location = spawnConfigs[configID][spawnLocationID % (spawnConfigs[configID].Count - 1)];
         }
         enemyEntity.transform.position = location + new Vector3(UnityEngine.Random.Range(-spawnRange,spawnRange), 0, UnityEngine.Random.Range(-spawnRange, spawnRange));
+
+        if(enableElites)
+        {
+            EnemyHealth enemyHealth = enemyEntity.GetComponent<EnemyHealth>();
+            if(enemyHealth != null)
+            {
+                float upgrade = UnityEngine.Random.Range(0, 1);
+                if(upgrade < enemyHealth.upgradeChance * wave_count)
+                {
+                    enemyHealth.LevelUp();
+                }
+            }
+        }
+
         if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
     }
 
