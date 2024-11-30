@@ -179,7 +179,7 @@ public class WaveManager : MonoBehaviour
         else //normal behavior (uses custom waves)
         {
             WaveInfo waveInfo = Waves[wave_index];
-            Debug.Log("[[[Starting Wave " + wave_index + 1 + "]]]");
+            Debug.Log("[[[Starting Wave " + wave_index + "]]]");
 
             // output each wave event per wave
             foreach (EnemyInfo enemy in waveInfo.enemyList)
@@ -276,7 +276,7 @@ public class WaveManager : MonoBehaviour
             EnemyHealth enemyHealth = enemyEntity.GetComponent<EnemyHealth>();
             if(enemyHealth != null)
             {
-                float upgrade = UnityEngine.Random.Range(0, 1);
+                float upgrade = UnityEngine.Random.Range(0.0f, 1.0f);
                 if(upgrade < enemyHealth.upgradeChance * wave_count)
                 {
                     enemyHealth.LevelUp();
