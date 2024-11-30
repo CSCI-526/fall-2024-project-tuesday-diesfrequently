@@ -33,6 +33,8 @@ public class Nexus : MonoBehaviour
     public event NexusEvent OnTakeDamage;
     public GameObject indicator = null;
 
+    public Animator healthbarAnim;
+
     private void Awake()
     {
         maxHealth = NEXUS_MAX_HEALTH;
@@ -83,6 +85,10 @@ public class Nexus : MonoBehaviour
     {
         // activate the animator
         animator.SetTrigger("Damage");
+        if(healthbarAnim != null)
+        {
+            healthbarAnim.SetTrigger("DamageBar");
+        }
 
         // reduce currentHP nexus
         currentHealth = Mathf.Max(currentHealth - dmg_amount, 0);

@@ -19,7 +19,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject nexusHPSlider;
     public GameObject gold;
     public GameObject pauseButton;
+    public GameObject pauseButtonBackground;
     public GameObject RewardUIMask;
+    public GameObject goldHighlight;
+    public GameObject goldCollect;  
 
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
@@ -51,7 +54,7 @@ public class UIManager : MonoBehaviour
 
     private InventoryManager inventoryManager;
     [SerializeField] public GameObject minimap;
-    private GameObject uiObject;
+    public GameObject uiObject;
     private GameObject expBar;
 
     public bool pauseMenuActive = false;
@@ -247,6 +250,7 @@ public class UIManager : MonoBehaviour
         nexusHPSlider.SetActive(false);
         gold.SetActive(false);
         pauseButton.SetActive(false);
+        pauseButtonBackground.SetActive(false);
         if (rewardMenuActive) {
             rewardMenu.SetActive(false);
         }
@@ -261,6 +265,7 @@ public class UIManager : MonoBehaviour
     public void HidePauseScreen()
     {
         pauseButton.SetActive(true);
+        pauseButtonBackground.SetActive(true);
         playerHPSlider.SetActive(true);
         nexusHPSlider.SetActive(true);
         if (rewardMenuActive) {
@@ -404,6 +409,21 @@ public void ShowSelectGunTutorial()
     public void Tutorial_HideXPUI()
     {
         xpArrow.SetActive(false);
+    }
+
+    public void Tutorial_ShowGoldHighlight()
+    {
+        goldHighlight.SetActive(true);
+    }
+
+    public void Tutorial_HideGoldHighlight()
+    {
+        goldHighlight.SetActive(false);
+    } 
+    
+    public void Tutorial_ShowGoldCollect()
+    {
+        goldCollect.SetActive(true); 
     }
 
     public void UpdateWaveUI()

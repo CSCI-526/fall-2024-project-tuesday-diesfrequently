@@ -26,6 +26,7 @@ public class Indicator : MonoBehaviour
     private void HandlePosition()
     {
         Vector3 screenpos = Camera.main.WorldToScreenPoint(target.transform.position);
+        transform.localScale = Vector3.one;
 
         if (screenpos.z > 0 && screenpos.x > 0 && screenpos.y > 0 && screenpos.x < Screen.width && screenpos.y < Screen.height) // on screen
         {
