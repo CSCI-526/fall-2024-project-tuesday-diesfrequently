@@ -543,6 +543,7 @@ MonoBehaviour:
   upgradeChance: 0.01
   upgradeHealth: 450
   upgradeColorMaterial: {fileID: 2100000, guid: 23bc07b820072cf4394abc1889ecb0a7, type: 2}
+  needToUpgrade: 0
 --- !u!114 &1853867677088179105
 MonoBehaviour:
   m_ObjectHideFlags: 0

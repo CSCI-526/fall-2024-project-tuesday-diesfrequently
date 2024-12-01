@@ -72,6 +72,7 @@ public class UIManager : MonoBehaviour
     {
         // References to Managers
         inventoryManager = GameManager.Instance.InventoryManager;
+
     }
 
     // Start is called before the first frame update
@@ -87,8 +88,8 @@ public class UIManager : MonoBehaviour
         expBar = uiObject.transform.Find("EXP").gameObject;
 
         RewardUIMask.SetActive(false);
-
         ActivateCustomCursor();
+
         UpdateUI();
     }
 
@@ -111,7 +112,7 @@ public class UIManager : MonoBehaviour
         Cursor.visible = false;
 
         CustomCursor.SetActive(true);
-        CustomCursor.GetComponent<FollowMouse>().ActivateTutorialShootingCursor();
+        CustomCursor.GetComponent<FollowMouse>().DeactivateTutorialShootingCursor();
     }
 
     public void ActivateCustomPlacementCursor() // SetCursorHand
@@ -151,7 +152,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         // prevent "esc" error in WebGL builds
-        //if (Input.GetMouseButtonDown(0)) Cursor.visible = false;
+        if (Cursor.visible == true) Cursor.visible = false;
 
         if (Input.GetKeyDown(KeyCode.P) && canPause)
         {

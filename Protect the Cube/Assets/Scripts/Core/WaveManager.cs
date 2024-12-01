@@ -22,6 +22,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public float TUTORIAL_SPAWN_DIST = 15.0f;
     [SerializeField] public bool enableElites = false;
 
+    [SerializeField] public int wavesBetweenMagnetSpawns = 2;
+    [SerializeField] public int lastWaveMagnetSpawned = -1000;
+
     private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>(); //stores the spawn point configuration
     private float _currentWaveLength;
 
