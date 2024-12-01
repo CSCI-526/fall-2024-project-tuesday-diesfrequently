@@ -25,7 +25,7 @@ public class InventoryManager : MonoBehaviour
     private PlayerLevels _playerLevel;
 
     // stores reward-related and inventory-related information
-    public Dictionary<string, int> inventoryMapping; // Dictionary for Rewards String - Int Mapping
+    private Dictionary<string, int> _inventoryMapping; // Dictionary for Rewards String - Int Mapping
     private HashSet<GameObject> _potentialRewards; // stores (increasing) list of valid rewards player can choose from
     public List<int> InventoryItemCount { get; private set; } // old: buildingCount, stores # of reward in inventory
 
@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         _potentialRewards = new HashSet<GameObject>();
-        inventoryMapping = new Dictionary<string, int>()
+        _inventoryMapping = new Dictionary<string, int>()
         {
             { "Gun Turret", 0 },
             { "Gatling Turret", 1 },
@@ -260,10 +260,10 @@ public class InventoryManager : MonoBehaviour
         InventoryItemCount[itemIDX]++;
 
         //flash reward inventory box
-        // if (!item_name.Contains("HP"))
-        // {
-        //     GameManager.Instance.UIManager.FlashInventory(itemIDX);
-        // }
+        if (!item_name.Contains("HP"))
+        {
+            GameManager.Instance.UIManager.FlashInventory(itemIDX);
+        }
 
         // Update Inventory UI
         UI_OnInventoryUpdated?.Invoke();
@@ -299,5 +299,5 @@ public class InventoryManager : MonoBehaviour
     public bool isInventoryAvailable(string reward_name) => InventoryItemCount[getItemIDX(reward_name)] > 0;
 
     // get IDX of reward given a rewardName
-    public int getItemIDX(string rewardName) => inventoryMapping.TryGetValue(rewardName, out int index) ? index : -1;
+    public int getItemIDX(string rewardName) => _inventoryMapping.TryGetValue(rewardName, out int index) ? index : -1;
 }
