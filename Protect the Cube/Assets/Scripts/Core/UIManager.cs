@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,8 +30,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] protected Slider expSlider;
 
     [SerializeField] public List<TextMeshProUGUI> displayedInventoryCount = new List<TextMeshProUGUI>();
-    [SerializeField] public List<Image> inventoryGbox = new List<Image>();
-    [SerializeField] public List<Image> inventoryWbox = new List<Image>();
 
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
@@ -40,6 +39,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject upgradePanel;
     [SerializeField] public GameObject pauseUI;
     [SerializeField] public GameObject inventoryBar;
+    [SerializeField] public Image[] inventorySlots;
+    [SerializeField] public Image[] inventoryItemPrefabs;
     [SerializeField] public Image damageEffect;
 
     [SerializeField] public GameObject InstructionModalWindow; 
@@ -67,11 +68,13 @@ public class UIManager : MonoBehaviour
     private bool showPlayerBar = false;
     private bool showExpBar = false;
     private bool showInvenMini = false;
+    public Dictionary<string, int> inventSlotMapping;
 
     private void Awake()
     {
         // References to Managers
         inventoryManager = GameManager.Instance.InventoryManager;
+        inventSlotMapping = new Dictionary<string, int>();
     }
 
     // Start is called before the first frame update
@@ -168,15 +171,15 @@ public class UIManager : MonoBehaviour
         }
 
         // Displays the Inventory Panel
-        foreach (Image wbox in inventoryWbox)
-        {
-            if (wbox.color.a > 0)
-            {
-                Color c = wbox.color;
-                c.a -= 0.005f;
-                wbox.color = c;
-            }
-        }
+        // foreach (Image wbox in inventoryWbox)
+        // {
+        //     if (wbox.color.a > 0)
+        //     {
+        //         Color c = wbox.color;
+        //         c.a -= 0.005f;
+        //         wbox.color = c;
+        //     }
+        // }
     }
 
     private void OnEnable()
@@ -195,7 +198,6 @@ public class UIManager : MonoBehaviour
     {
         UpdateWaveUI();
         UpdatePlayerXPUI();
-        UpdateInventoryUI();
 
         // Only show gold count when the player has a harvester
         if (_playerLVL.currentLevel > 4)
@@ -504,21 +506,60 @@ public void ShowSelectGunTutorial()
         rewardMenu.GetComponent<RewardChoiceUI>().UpdateRewardChoices(reward_opt_1, reward_opt_2, reward_opt_3);
     }
 
-    public void UpdateInventoryUI()
-    {
-        for (int i = 0; i < InventoryManager.NUM_PLACEABLE_ITEMS; i++)
+    public void addInventoryToInventoryBar(int inventoryIDX, string inventoryName, int inventoryCount){
+        if (inventSlotMapping.ContainsKey(inventoryName))
         {
-            displayedInventoryCount[i].text = "";
-
-            // based on if inventory of single item - change text + change background color
-            if (inventoryManager.InventoryItemCount[i] > 0)
-            {
-                displayedInventoryCount[i].text = inventoryManager.InventoryItemCount[i].ToString();
-                inventoryGbox[i].enabled = false; // disable greyed out background
+            //update number directly
+            Debug.Log("try update number directly");
+            Image slot = inventorySlots[inventSlotMapping[inventoryName]];
+            TextMeshPro count = slot.GetComponentInChildren<TextMeshPro>();
+            count.text = inventoryCount.ToString();
+        }
+        else
+        {
+            //Find next empty slot
+            Debug.Log("try find empty slot");
+            for (int i = 0; i < inventorySlots.Length; i++){
+                Image slot = inventorySlots[i];
+                if(slot.transform.childCount == 0){
+                    Debug.Log("Found a slot");
+                    Image inventoryItemPrefab = inventoryItemPrefabs[inventoryIDX];
+                    Image instantiatedPrefab = Instantiate(inventoryItemPrefab, slot.transform);
+                    instantiatedPrefab.transform.SetParent(slot.transform);
+                    inventSlotMapping.Add(inventoryName, i);
+                    break;
+                }
             }
-            else inventoryGbox[i].enabled = true; // enable greyed out background
         }
     }
+
+    public void removeInventoryFromInventoryBar(String inventoryName){
+        Image slot = inventorySlots[inventSlotMapping[inventoryName]];
+        foreach (Transform child in slot.transform)
+        {
+            // Destroy the child GameObject
+            Destroy(child.gameObject);
+        }
+        inventSlotMapping.Remove(inventoryName);
+    }
+
+    public void UpdateInventoryUI()
+    {        
+        for (int i = 0; i < InventoryManager.NUM_PLACEABLE_ITEMS; i++)
+        {
+            // based on if inventory of single item - add to inventory bar
+            string inventoryName = inventoryManager.inventoryMapping.FirstOrDefault(x => x.Value == i).Key;
+            if (inventoryManager.InventoryItemCount[i] > 0)
+            {   
+                addInventoryToInventoryBar(i, inventoryName, inventoryManager.InventoryItemCount[i]);
+            }else if(inventoryManager.InventoryItemCount[i] == 0&&
+                        inventSlotMapping.ContainsKey(inventoryName)){
+                removeInventoryFromInventoryBar(inventoryName);
+            }
+            // else inventoryGbox[i].enabled = true; // enable greyed out background
+        }
+    }
+    
 
     public void updateUpgradeUI(string buildingName, int materialNum, int id)
     {
@@ -537,12 +578,12 @@ public void ShowSelectGunTutorial()
         damageEffect.color = color;
     }
 
-    public void FlashInventory(int itemIDX)
-    {   
-        Color c = inventoryWbox[itemIDX].color;
-        c.a = 1.0f;
-        inventoryWbox[itemIDX].color = c;
-    }
+    // public void FlashInventory(int itemIDX)
+    // {   
+    //     Color c = inventoryWbox[itemIDX].color;
+    //     c.a = 1.0f;
+    //     inventoryWbox[itemIDX].color = c;
+    // }
 
     public static bool FirstRewardScreenEnded()
     {
