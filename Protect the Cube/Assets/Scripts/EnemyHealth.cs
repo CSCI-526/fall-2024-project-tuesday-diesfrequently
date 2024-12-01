@@ -30,7 +30,8 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] public float upgradeChance = 0.01f;
     [SerializeField] public float upgradeHealth = 1.0f;
-    [SerializeField] public Color upgradeColor = Color.red;
+    [SerializeField] public Material upgradeColorMaterial;
+    private bool isUpgraded = false;
 
     private bool isTutorialEXPDrop = false;
     private int tutorialEXPAmt = 0; 
@@ -40,7 +41,6 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();    
-        
         if(hpCanvas)
         {
             hpCanvas.SetActive(showHPBar);
@@ -61,6 +61,12 @@ public class EnemyHealth : MonoBehaviour
         {
             UpdateHPBarTransform();
         }
+
+        
+        // if (animator.GetCurrentAnimatorStateInfo(0).IsName("DamageUpgradedEnemy") && animator.enabled && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f){
+        //     animator.enabled = false;
+        // }
+
     }
 
     public void LevelUp()
@@ -69,8 +75,10 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = upgradeHealth;
         //GetComponent<MeshRenderer>().material = upgradeColor;
         //GetComponent<Material>().color = upgradeColor;
-        GetComponent<Renderer>().material.color = upgradeColor;
+        GetComponent<Renderer>().material = upgradeColorMaterial;
+        isUpgraded = true;
         Debug.Log("Upgraded Enemy!");
+        animator.SetTrigger("UpgradedNormalState");
     }
 
     public void TakeDamage(float damage)
@@ -79,7 +87,14 @@ public class EnemyHealth : MonoBehaviour
         {
             if (animator != null)
             {
-                animator.SetTrigger("Damage");
+                // animator.enabled = true;
+                if (isUpgraded){
+                    animator.SetTrigger("UpgradedDamage");
+                }
+                else{
+                    animator.SetTrigger("Damage");
+
+                }
             }
             currentHealth -= damage;
             UpdateHPBar();
