@@ -60,6 +60,10 @@ public class UIManager : MonoBehaviour
     private int _currentHealth = 5;
     static private bool firstRewardScreenEnded = false;
     private bool goldActivated = false;
+    private bool showNexusBar = false;
+    private bool showPlayerBar = false;
+    private bool showExpBar = false;
+    private bool showInvenMini = false;
 
     private void Awake()
     {
@@ -201,30 +205,46 @@ public class UIManager : MonoBehaviour
     public void ActivateInventoryUI()
     {
         inventoryBar.SetActive(true);
+        showInvenMini = true;
     }
 
     public void DeactivateInventoryUI()
     {
         inventoryBar.SetActive(false);
+        showInvenMini = false;
     }
 
     public void ActivateEXPUI()
     {
         expUI.gameObject.SetActive(true);
         expSlider.gameObject.SetActive(true);
+        showExpBar = true;
     }
 
     public void DeactivateEXPUI()
     {
         expUI.gameObject.SetActive(false);
         expSlider.gameObject.SetActive(false);
+        showExpBar = false;
     }
 
-    public void ShowNexusHealthSlider() { nexusHPSlider.SetActive(true); }
-    public void HideNexusHealthSlider() { nexusHPSlider.SetActive(false); }
+    public void ShowNexusHealthSlider() { 
+        nexusHPSlider.SetActive(true);
+        showNexusBar = true;
+    }
+    public void HideNexusHealthSlider() { 
+        nexusHPSlider.SetActive(false); 
+        showNexusBar = false;
+    }
 
-    public void ShowPlayerHealthSlider() { playerHPSlider.SetActive(true); }
-    public void HidePlayerHealthSlider() { playerHPSlider.SetActive(false); }
+    public void ShowPlayerHealthSlider() { 
+        playerHPSlider.SetActive(true); 
+        showPlayerBar = true;
+    }
+    public void HidePlayerHealthSlider() { 
+        playerHPSlider.SetActive(false); 
+        showPlayerBar = false;
+    }
 
 
     public void ShowGameOverScreen()
@@ -261,19 +281,49 @@ public class UIManager : MonoBehaviour
     public void HidePauseScreen()
     {
         pauseButton.SetActive(true);
-        playerHPSlider.SetActive(true);
-        nexusHPSlider.SetActive(true);
         if (rewardMenuActive) {
             rewardMenu.SetActive(true);
-        }
-        else {
-            Time.timeScale = 1.0f;
-            minimap.SetActive(true);
-            inventoryBar.SetActive(true);
-            expBar.SetActive(true);
             if(goldActivated)
             {
                 gold.SetActive(true);
+            }
+            if(showNexusBar)
+            {
+                nexusHPSlider.SetActive(true);
+            }
+            if(showPlayerBar)
+            {
+                playerHPSlider.SetActive(true);
+            }
+            if(showExpBar)
+            {
+                expUI.gameObject.SetActive(true);
+                expSlider.gameObject.SetActive(true);
+            }
+            if(showInvenMini)
+            {
+                inventoryBar.SetActive(true);
+                minimap.SetActive(true);
+            }
+        }
+        else {
+            Time.timeScale = 1.0f;
+            if(goldActivated)
+            {
+                gold.SetActive(true);
+            }
+            if(showNexusBar)
+            {
+                nexusHPSlider.SetActive(true);
+            }
+            if(showPlayerBar)
+            {
+                playerHPSlider.SetActive(true);
+            }
+            if(showExpBar)
+            {
+                expUI.gameObject.SetActive(true);
+                expSlider.gameObject.SetActive(true);
             }
         }
         pauseMenuActive = false;
