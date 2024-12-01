@@ -286,10 +286,23 @@ public class UIManager : MonoBehaviour
     {
         pauseButton.SetActive(true);
         pauseButtonBackground.SetActive(true);
-        playerHPSlider.SetActive(true);
-        nexusHPSlider.SetActive(true);
         if (rewardMenuActive) {
             rewardMenu.SetActive(true);
+            if(goldActivated)
+            {
+                gold.SetActive(true);
+            }
+            if(showNexusBar)
+            {
+                nexusHPSlider.SetActive(true);
+            }
+            if(showPlayerBar)
+            {
+                playerHPSlider.SetActive(true);
+            }
+        }
+        else {
+            Time.timeScale = 1.0f;
             if(goldActivated)
             {
                 gold.SetActive(true);
@@ -311,26 +324,6 @@ public class UIManager : MonoBehaviour
             {
                 inventoryBar.SetActive(true);
                 minimap.SetActive(true);
-            }
-        }
-        else {
-            Time.timeScale = 1.0f;
-            if(goldActivated)
-            {
-                gold.SetActive(true);
-            }
-            if(showNexusBar)
-            {
-                nexusHPSlider.SetActive(true);
-            }
-            if(showPlayerBar)
-            {
-                playerHPSlider.SetActive(true);
-            }
-            if(showExpBar)
-            {
-                expUI.gameObject.SetActive(true);
-                expSlider.gameObject.SetActive(true);
             }
         }
         pauseMenuActive = false;
