@@ -12,7 +12,7 @@ public class Indicator : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
         {
-            if(target.GetComponent<Nexus>() != null)
+            if(target && target.GetComponent<Nexus>() != null)
             {
                 target.GetComponent<Nexus>().indicator = null;
             }

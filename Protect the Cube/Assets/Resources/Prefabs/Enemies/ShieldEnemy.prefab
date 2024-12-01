@@ -728,6 +728,7 @@ MonoBehaviour:
   upgradeChance: 0.01
   upgradeHealth: 90
   upgradeColorMaterial: {fileID: 2100000, guid: 23bc07b820072cf4394abc1889ecb0a7, type: 2}
+  needToUpgrade: 0
 --- !u!136 &8803482667701268275
 CapsuleCollider:
   m_ObjectHideFlags: 0

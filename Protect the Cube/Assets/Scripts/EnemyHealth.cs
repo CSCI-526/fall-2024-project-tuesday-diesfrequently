@@ -31,16 +31,28 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public float upgradeChance = 0.01f;
     [SerializeField] public float upgradeHealth = 1.0f;
     [SerializeField] public Material upgradeColorMaterial;
+    
+    [SerializeField] public bool needToUpgrade = false;
+
     private bool isUpgraded = false;
 
+    
     private bool isTutorialEXPDrop = false;
     private int tutorialEXPAmt = 0; 
 
     //[SerializeField] public float MoreXpDropBreakpoints = 10.0f;  
     void Start()
     {
+        if(needToUpgrade){
+            LevelUp();
+        }
         currentHealth = maxHealth;
-        animator = GetComponent<Animator>();    
+        animator = GetComponent<Animator>();  
+        if(isUpgraded && animator != null)
+        {
+            animator.SetTrigger("UpgradedNormalState");
+
+        }
         if(hpCanvas)
         {
             hpCanvas.SetActive(showHPBar);
@@ -78,7 +90,13 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<Renderer>().material = upgradeColorMaterial;
         isUpgraded = true;
         Debug.Log("Upgraded Enemy!");
-        animator.SetTrigger("UpgradedNormalState");
+        if (animator != null)
+        {
+            animator.SetTrigger("UpgradedNormalState");
+        }
+        this.gameObject.transform.localScale = new Vector3(1.5f * this.gameObject.transform.localScale.x, this.gameObject.transform.localScale.y, 1.5f * this.gameObject.transform.localScale.z);
+        
+        
     }
 
     public void TakeDamage(float damage)
@@ -130,8 +148,16 @@ public class EnemyHealth : MonoBehaviour
     }
 
     public void DropMagnet() {
-        GameObject magnetPowerUp = Instantiate(magnet);
-        magnetPowerUp.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
+        int wave = GameManager.Instance.WaveManager.wave_count;
+        int lastWaveMagnetSpawned = GameManager.Instance.WaveManager.lastWaveMagnetSpawned;
+        int wavesBetweenMagnetSpawns = GameManager.Instance.WaveManager.wavesBetweenMagnetSpawns;
+        if (wave >= lastWaveMagnetSpawned + wavesBetweenMagnetSpawns)
+        {
+            GameManager.Instance.WaveManager.lastWaveMagnetSpawned = wave;
+            GameObject magnetPowerUp = Instantiate(magnet);
+            magnetPowerUp.transform.position = new Vector3(transform.position.x + Random.Range(-1 * 1, 1), transform.position.y, transform.position.z + Random.Range(-1 * 1, 1)); ;
+        }
+        
     }
 
     public void DropExp(){
