@@ -40,7 +40,12 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        animator = GetComponent<Animator>();    
+        animator = GetComponent<Animator>();  
+        if(isUpgraded && animator != null)
+        {
+            animator.SetTrigger("UpgradedNormalState");
+
+        }
         if(hpCanvas)
         {
             hpCanvas.SetActive(showHPBar);
@@ -78,7 +83,11 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<Renderer>().material = upgradeColorMaterial;
         isUpgraded = true;
         Debug.Log("Upgraded Enemy!");
-        animator.SetTrigger("UpgradedNormalState");
+        if (animator != null)
+        {
+            animator.SetTrigger("UpgradedNormalState");
+        }
+        
     }
 
     public void TakeDamage(float damage)
