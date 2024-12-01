@@ -540,6 +540,9 @@ MonoBehaviour:
   hpBarOffset: {x: 0, y: 3, z: 0}
   countInWave: 1
   enemyName: SpawnerBossEnemy
+  upgradeChance: 0.01
+  upgradeHealth: 450
+  upgradeColor: {r: 0.13836467, g: 0, b: 0, a: 1}
 --- !u!114 &1853867677088179105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,7 +590,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6013629208632606210}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 86100d483c15cf04fa78c699fe9590d5, type: 2}
   m_CullingMode: 0

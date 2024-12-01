@@ -19,7 +19,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject nexusHPSlider;
     public GameObject gold;
     public GameObject pauseButton;
+    public GameObject pauseButtonBackground;
     public GameObject RewardUIMask;
+    public GameObject goldHighlight;
+    public GameObject goldCollect;  
 
     [SerializeField] protected TextMeshProUGUI scoreBoard;
     [SerializeField] protected TextMeshProUGUI expUI;
@@ -51,7 +54,7 @@ public class UIManager : MonoBehaviour
 
     private InventoryManager inventoryManager;
     [SerializeField] public GameObject minimap;
-    private GameObject uiObject;
+    public GameObject uiObject;
     private GameObject expBar;
 
     public bool pauseMenuActive = false;
@@ -108,7 +111,7 @@ public class UIManager : MonoBehaviour
         Cursor.visible = false;
 
         CustomCursor.SetActive(true);
-        CustomCursor.GetComponent<FollowMouse>().DeactivateTutorialShootingCursor();
+        CustomCursor.GetComponent<FollowMouse>().ActivateTutorialShootingCursor();
     }
 
     public void ActivateCustomPlacementCursor() // SetCursorHand
@@ -208,7 +211,7 @@ public class UIManager : MonoBehaviour
         showInvenMini = true;
     }
 
-    public void DeactivateInventoryUI()
+    public void HideInventoryUI()
     {
         inventoryBar.SetActive(false);
         showInvenMini = false;
@@ -221,7 +224,7 @@ public class UIManager : MonoBehaviour
         showExpBar = true;
     }
 
-    public void DeactivateEXPUI()
+    public void HideEXPSlider()
     {
         expUI.gameObject.SetActive(false);
         expSlider.gameObject.SetActive(false);
@@ -267,6 +270,7 @@ public class UIManager : MonoBehaviour
         nexusHPSlider.SetActive(false);
         gold.SetActive(false);
         pauseButton.SetActive(false);
+        pauseButtonBackground.SetActive(false);
         if (rewardMenuActive) {
             rewardMenu.SetActive(false);
         }
@@ -281,6 +285,9 @@ public class UIManager : MonoBehaviour
     public void HidePauseScreen()
     {
         pauseButton.SetActive(true);
+        pauseButtonBackground.SetActive(true);
+        playerHPSlider.SetActive(true);
+        nexusHPSlider.SetActive(true);
         if (rewardMenuActive) {
             rewardMenu.SetActive(true);
             if(goldActivated)
@@ -342,7 +349,7 @@ public class UIManager : MonoBehaviour
         XPLevelUp.SetActive(false);
         minimap.SetActive(false);
         rewardMenuActive = true;
-        DeactivateInventoryUI(); // tutorial
+        HideInventoryUI(); // tutorial
         rewardMenu.SetActive(true);
         Time.timeScale = 0.0f;
         inventoryBar.SetActive(false);
@@ -456,15 +463,31 @@ public void ShowSelectGunTutorial()
         xpArrow.SetActive(false);
     }
 
+    public void Tutorial_ShowGoldHighlight()
+    {
+        goldHighlight.SetActive(true);
+    }
+
+    public void Tutorial_HideGoldHighlight()
+    {
+        goldHighlight.SetActive(false);
+    } 
+    
+    public void Tutorial_ShowGoldCollect()
+    {
+        goldCollect.SetActive(true); 
+    }
+
     public void UpdateWaveUI()
     {
-        if ((_nexus && _playerHP) && ((GameManager.Instance.currentPhase == GameManager.GamePhase.HandCraftedWaves) || (GameManager.Instance.currentPhase == GameManager.GamePhase.DynamicWaves)))
-        {
-            //if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Wave Count: " + GameManager.Instance.WaveManager.wave_count);
-            if (GameManager.Instance.WaveManager.wave_count == 0) scoreBoard.text = "";
-            else { scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count; }
-        }
+        if (GameManager.Instance.WaveManager.wave_count == 0) scoreBoard.text = "";
+        else { scoreBoard.text = "Wave: " + GameManager.Instance.WaveManager.wave_count; }
     }
+
+    public void ShowWaveUI() { scoreBoard.gameObject.SetActive(true); }
+
+    public void HideWaveUI() { scoreBoard.gameObject.SetActive(false);  }
+
 
     public void UpdatePlayerXPUI()
     {

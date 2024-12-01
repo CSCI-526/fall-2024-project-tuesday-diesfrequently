@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 // using UnityEditor.PackageManager;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class ClickUpgrade : MonoBehaviour
 {   
@@ -11,6 +13,7 @@ public class ClickUpgrade : MonoBehaviour
     [SerializeField] public GameObject upgradeArrow;
     [SerializeField] public GameObject lvl2Appearance;
     [SerializeField] public GameObject lvl3Appearance;
+    [SerializeField] public GameObject upgradeText;
     private int id;
     private bool upgradeable = true;
     private PlayerLevels playerLevelObject;
@@ -79,7 +82,13 @@ public class ClickUpgrade : MonoBehaviour
         level++;
         goldRequired += level*3;
         GameObject indicate = Instantiate(indicator);
+        GameObject upgradetxt = Instantiate(upgradeText);
         indicate.transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f + level/5.0f, transform.position.z);
+        upgradetxt.transform.SetParent(GameObject.Find("UpgradeParent").transform);
+        upgradetxt.transform.localScale = Vector3.one;
+        upgradetxt.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        //upgradetxt.GetComponent<TMP_Text>().text = "-" + goldRequired.ToString();
+
         updateAppearance();
         gameObject.GetComponent<turretShoot>().upgrade(level, buildingName);
         if(level == 3){

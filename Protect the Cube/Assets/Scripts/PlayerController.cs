@@ -6,7 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,9 +25,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject projectile;
     [SerializeField] GameObject gunBarrel;
     [SerializeField] GameObject rangeIndicator;
+    [SerializeField] GameObject gun;
     private float timeSinceLastShot = 0.0f;
     private static bool hasPlayerShot = false;
-
+    private UnityEngine.Plane intersectPlane = new UnityEngine.Plane(UnityEngine.Vector3.up, new UnityEngine.Vector3(0,1,0));
 
 
     private void Update()
@@ -78,39 +81,6 @@ public class PlayerController : MonoBehaviour
         if (!isShootingLocked) timeSinceLastShot += Time.fixedDeltaTime;
     }
 
-    //private void Shoot()
-    //{
-    //    if (!isShootingLocked)
-    //    {
-    //        hasPlayerShot = true; // boolean flag for the first time
-    //        Debug.Log("hasPlayerShot is TRUE");
-    //        if ((timeSinceLastShot > 1 / fireRate) && projectile && gunBarrel)
-    //        {
-    //            if (GameManager.Instance.useBulletPool)
-    //            {
-    //                var bullet = BulletPool.Instance.GetBullet();
-
-    //                if (bullet == null)
-    //                {
-    //                    Debug.Log("All Bullets are Currently Being Used");
-    //                    return; // return early to indicate "stop shooting"
-    //                }
-    //                bullet.transform.position = gunBarrel.transform.position;
-    //                bullet.transform.rotation = gunBarrel.transform.rotation;
-    //                timeSinceLastShot = 0;
-    //            }
-    //            else
-    //            {
-    //                var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
-    //                bullet.transform.position = gunBarrel.transform.position;
-    //                bullet.transform.rotation = gunBarrel.transform.rotation;
-    //                timeSinceLastShot = 0;
-    //            }
-    //        }
-    //    }
-        
-    //}
-
     private void Shoot()
     {
         if (!isShootingLocked)
@@ -149,16 +119,34 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    intersectPlane = new UnityEngine.Plane(UnityEngine.Vector3.up, new UnityEngine.Vector3(0, gunBarrel.transform.position.y, 0));
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    //int layer_mask = LayerMask.GetMask("Ground");
+                    //RaycastHit hitInfo;
+                    float hitInfo;
+                    if (intersectPlane.Raycast(ray, out hitInfo)) //Physics.Raycast(ray, out hitInfo, 1000, layer_mask)) //point towards mouse
+                    {
+                        UnityEngine.Vector3 targetPos = ray.GetPoint(hitInfo);
+                        //targetPos.y = gunBarrel.transform.position.y;
+                        UnityEngine.Vector3 toTarget = targetPos - gunBarrel.transform.position;
+
+                        if((transform.position - targetPos).magnitude > 2.0f)
+                        {
+                            gun.transform.rotation = UnityEngine.Quaternion.LookRotation(toTarget);
+                        }
+                    }
+
                     var bullet = Instantiate(projectile, gunBarrel.transform.position, gunBarrel.transform.rotation);
                     bullet.transform.position = gunBarrel.transform.position;
                     bullet.transform.rotation = gunBarrel.transform.rotation;
+                    bullet.transform.Rotate(UnityEngine.Vector3.up, -90.0f);
                     timeSinceLastShot = 0;
                 }
             }
         } else { timeSinceLastShot = 0; }
     }
 
-    public void ActivatePlayerGun()
+public void ActivatePlayerGun()
     {
         Transform childTransform = transform.Find("Gun");
         if (childTransform != null) {

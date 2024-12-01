@@ -20,6 +20,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] public int wave_index;
     [SerializeField] public int wave_count;
     [SerializeField] public float TUTORIAL_SPAWN_DIST = 15.0f;
+    [SerializeField] public bool enableElites = false;
 
     private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>(); //stores the spawn point configuration
     private float _currentWaveLength;
@@ -178,7 +179,7 @@ public class WaveManager : MonoBehaviour
         else //normal behavior (uses custom waves)
         {
             WaveInfo waveInfo = Waves[wave_index];
-            Debug.Log("[[[Starting Wave " + wave_index + 1 + "]]]");
+            Debug.Log("[[[Starting Wave " + wave_index + "]]]");
 
             // output each wave event per wave
             foreach (EnemyInfo enemy in waveInfo.enemyList)
@@ -242,7 +243,7 @@ public class WaveManager : MonoBehaviour
         _currentWaveLength = 0;
 
         GameManager.Instance.UIManager.UpdateUI();
-        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave_index);// Send wave number to analytics
+        GameManager.Instance.AnalyticsManager.UpdateWaveNumber(wave_count);// Send wave number to analytics
 
     }
 
@@ -269,6 +270,20 @@ public class WaveManager : MonoBehaviour
             location = spawnConfigs[configID][spawnLocationID % (spawnConfigs[configID].Count - 1)];
         }
         enemyEntity.transform.position = location + new Vector3(UnityEngine.Random.Range(-spawnRange,spawnRange), 0, UnityEngine.Random.Range(-spawnRange, spawnRange));
+
+        if(enableElites)
+        {
+            EnemyHealth enemyHealth = enemyEntity.GetComponent<EnemyHealth>();
+            if(enemyHealth != null)
+            {
+                float upgrade = UnityEngine.Random.Range(0.0f, 1.0f);
+                if(upgrade < enemyHealth.upgradeChance * wave_count)
+                {
+                    enemyHealth.LevelUp();
+                }
+            }
+        }
+
         if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
     }
 

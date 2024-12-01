@@ -11,14 +11,17 @@ public class GameManager : MonoBehaviour
     public InventoryManager InventoryManager { get; private set; }
     public AnalyticsManager AnalyticsManager { get; private set; }
     public OreManager OreManager { get; private set; }
+    [SerializeField] private GameObject MainCamera;
 
     public GameObject Player {  get; private set; }
     public GameObject Nexus {  get; set; }
+    [SerializeField] public GameObject Barrier;
 
     public bool useBulletPool = false;
     public bool enableTutorial = true;
     private bool isPaused = false;
-    private bool modalAcknowleged = false; 
+    private bool modalAcknowleged = false;
+    private bool isCameraTransitionDone = false;
 
     // Set the field where TutorialStorageValue is stored
     private const string TutorialStorageKey = "IsTutorialEnabled";
@@ -83,10 +86,23 @@ public class GameManager : MonoBehaviour
     }
 
     private void StartInitialization() {
+        // do not show certain UI elements
         UIManager.HideModalWindow();
         UIManager.HideMinimap();
         UIManager.HideNexusHealthSlider();
         UIManager.HidePlayerHealthSlider();
+        UIManager.HideInventoryUI();
+        UIManager.HideEXPSlider();
+        UIManager.HideWaveUI();
+
+        // Activate Nexus + Player Animations
+        Player.SetActive(true);
+        Nexus.SetActive(true);
+        EnableBarrier();
+        SetSmallBarrier();
+        Nexus.GetComponent<SpawnAnimation>().TriggerSpawnSequence();
+
+
         SetGamePhase(GamePhase.BasicTutorial_Start);
         Debug.Log("Finished GamePhase.Initialization Phase");
     }
@@ -95,8 +111,7 @@ public class GameManager : MonoBehaviour
     {
         // Spawn the player and nexus on the map
         Debug.Log("Starting GamePhase.BasicTutorial_Start Phase");
-        Player.SetActive(true);
-        Nexus.SetActive(true);
+        
 
         Player.GetComponent<PlayerController>().LockShooting();
         Player.GetComponent<PlayerController>().LockMovement();
@@ -104,11 +119,7 @@ public class GameManager : MonoBehaviour
 
         WaveManager.LockAllEnemiesMovement();
 
-        UIManager.ActivateCustomCursor(); // sets CustomCursor
-        UIManager.DeactivateInventoryUI();
-        UIManager.DeactivateEXPUI();
-        UIManager.HideModalWindow();
-        UIManager.UpdateWaveUI();
+        UIManager.ActivateCustomCursor(); // sets CustomCursor        
 
         Debug.Log("Ending GamePhase.BasicTutorial_Start Phase");
         StartCoroutine(WaitForInitializationEnd());
@@ -174,27 +185,67 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         UIManager.HideModalWindow();
         WaveManager.UnlockAllEnemiesMovement();
+        yield return new WaitForSeconds(2.0f);
 
-        yield return new WaitForSeconds(1.0f);
         Player.GetComponent<PlayerController>().UnlockMovement();
 
         WaveManager.SpawnSingleEnemy(1);
-        StartCoroutine(WaitForShootingInput());
+        WaveManager.LockAllEnemiesMovement();
+        StartCoroutine(WaitForCameraTransition());
+    }
 
+    private IEnumerator WaitForCameraTransition()
+    {
         UIManager.ShowModalWindow("Touching enemies lowers your HP! (red)");
         UIManager.ShowPlayerHealthSlider();
         yield return new WaitForSeconds(1.0f);
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         UIManager.HideModalWindow();
-        modalAcknowleged = true;
+        modalAcknowleged = false;
+        //modalAcknowleged = true;
+        //yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+
+        //MoveCameraToTargetX(WaveManager.AllEnemyEntities[0], 1.5f);
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().LockMovement();
+        MainCamera.GetComponent<CameraFollow>().SetNewTarget(WaveManager.AllEnemyEntities[0], 1.5f, OnCameraTransitionComplete);
+        yield return new WaitUntil(() => isCameraTransitionDone);
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().UnlockMovement();
+
+        StartCoroutine(WaitForShootingInput());
     }
+
+    private void OnCameraTransitionComplete()
+    {
+        isCameraTransitionDone = true;
+        Debug.Log("Set isCameraTransitionDone to TRUE!");
+    }
+
+    private IEnumerator MoveCameraToTargetX(GameObject entity, float transition_time)
+    {
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().LockMovement();
+        MainCamera.GetComponent<CameraFollow>().SetNewTarget(entity, transition_time, OnCameraTransitionComplete);
+        yield return new WaitUntil(() => isCameraTransitionDone);
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().UnlockMovement();
+    }
+
 
     private IEnumerator WaitForShootingInput()
     {
+        WaveManager.UnlockAllEnemiesMovement();
         yield return new WaitForSeconds(4.5f); // delay 4.5 seconds for enemy to come close to nexus
         WaveManager.LockAllEnemiesMovement();
 
-        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+        //MoveCameraToTargetX(Player, 1.5f);
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().LockMovement();
+        MainCamera.GetComponent<CameraFollow>().SetNewTarget(Player, 1.0f, OnCameraTransitionComplete);
+        yield return new WaitUntil(() => isCameraTransitionDone);
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().UnlockMovement();
 
         UIManager.ActivateCustomShootingCursor(); // Show Custom Shooting Cursor
         Player.GetComponent<PlayerController>().ActivatePlayerGun(); // show player gun
@@ -237,6 +288,7 @@ public class GameManager : MonoBehaviour
     private void StartPlacementTutorial()
     {
         Debug.Log("Starting GamePhase.BasicTutorial_Placement Phase");
+        SetMediumBarrier();
         WaveManager.LockAllEnemiesMovement();
         StartCoroutine(WaitForLevelTwo());
     }
@@ -262,12 +314,6 @@ public class GameManager : MonoBehaviour
         SetGamePhase(GamePhase.HandCraftedWaves);
     }
 
-    private void DisableBarrier()
-    {
-        GameObject barrier = GameObject.Find("Barrier");
-        if(barrier != null) barrier.SetActive(false);
-    }
-
     private void StartHandCraftedWaves()
     {
         Debug.Log("ENTERING GamePhase.HandCraftedWaves Phase");
@@ -275,6 +321,7 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<PlayerController>().UnlockMovement();
         Player.GetComponent<PlayerController>().UnlockShooting();
         Player.GetComponent<PlayerController>().ActivatePlayerGun();
+        UIManager.ShowWaveUI();
         WaveManager.UnlockAllEnemiesMovement();
         UIManager.ShowMinimap();
     }
@@ -312,6 +359,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // find main camera
+        if (MainCamera == null)
+            MainCamera = GameObject.FindWithTag("Main Camera"); // Ensure the Main Camera tag is set
+
         // retrieve Tutorial Value
         bool TutorialStorageValue = PlayerPrefs.GetInt(TutorialStorageKey, 1) == 1;
         Time.timeScale = 1.0f;
@@ -368,5 +419,26 @@ public class GameManager : MonoBehaviour
     public void BackHome()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void SetSmallBarrier()
+    {
+        Barrier.transform.localScale = new Vector3(1.25f, 1.8f, 1.25f);
+    }
+
+    public void SetMediumBarrier()
+    {
+        Barrier.transform.localScale = new Vector3(1.5f, 1.8f, 1.5f);
+    }
+
+    private void EnableBarrier()
+    {
+        if (Barrier != null) Barrier.SetActive(true);
+        Barrier.transform.position = Nexus.transform.position + new Vector3(5.0f, 22.33f, -5.0f);
+    }
+
+    private void DisableBarrier()
+    {
+        if (Barrier != null) Barrier.SetActive(false);
     }
 }

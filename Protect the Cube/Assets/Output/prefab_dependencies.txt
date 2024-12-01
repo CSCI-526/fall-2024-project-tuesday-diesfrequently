@@ -1,3 +1,5 @@
+Prefab: Barrier
+
 Prefab: Wall
     - Wall
     - ProBuilderMesh
@@ -104,6 +106,12 @@ Prefab: TutorialArrow
     - Image
 
 Prefab: UpgradeArrow
+    - UpgradeArrow
+    - RotationLock
+    - CanvasScaler
+    - GraphicRaycaster
+    - Image
+    - Button
 
 Prefab: MinimapComponent
     - CanvasScaler
@@ -128,7 +136,8 @@ Prefab: RewardPanel
 
 Prefab: Terrain
     - UniversalAdditionalLightData
-    - Ore
+    - Tier1Ore
+    - SpawnAnimation
     - CanvasScaler
     - GraphicRaycaster
     - Slider
@@ -145,21 +154,27 @@ Prefab: TutorialCanvas
 Prefab: UI
     - CanvasScaler
     - GraphicRaycaster
-    - Image
     - TextMeshProUGUI
+    - Image
+    - upgradeUI
     - Button
-    - ResumeBtn
-    - GameSummaryUI
-    - RewardChoiceUI
-    - RewardPanel
+    - upgradeBtn
     - Slider
     - XPLevelUpAnim
+    - VerticalLayoutGroup
     - ClickAndDrop
-    - upgradeUI
-    - upgradeBtn
-    - PauseBtn
     - OffScreenIndicator
     - Indicator
+    - RewardChoiceUI
+    - RewardPanel
+    - InstructionPopup
+    - ContentSizeFitter
+    - ResumeBtn
+    - GameSummaryUI
+
+Prefab: UpgradeAnim
+    - TextMeshProUGUI
+    - UpgradeText
 
 Prefab: WASD
     - Image
@@ -168,6 +183,92 @@ Prefab: XPLevelUp
     - XPLevelUpAnim
     - Image
     - TextMeshProUGUI
+
+Prefab: Nexus
+    - Nexus
+    - Harvester
+    - HarvesterUI
+    - RewardInfo
+    - SpawnAnimation
+    - Rotate
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+    - TextMeshProUGUI
+
+Prefab: Player
+    - PlayerController
+    - PlayerHealth
+    - PlaceObject
+    - PlayerLevels
+    - RewardInfo
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+
+Prefab: BouncingBullet
+    - BouncingBullet
+
+Prefab: Bullet
+    - Bullet
+
+Prefab: BulletPool
+    - BulletPool
+
+Prefab: EnemyBullet
+    - EnemyBullet
+
+Prefab: FlamethrowerFire
+    - SniperBullet
+
+Prefab: Gatling Bullet
+    - Bullet
+
+Prefab: PlayerBullet 1
+    - Bullet
+
+Prefab: SniperBullet
+    - SniperBullet
+
+Prefab: 2dExperienceOrb
+    - Image
+
+Prefab: ExperienceOrb
+    - ExperiencePickup
+    - UniversalAdditionalLightData
+
+Prefab: ExpMagnet
+    - Magnet
+
+Prefab: GoldOrb
+    - ExperiencePickup
+    - UniversalAdditionalLightData
+
+Prefab: Tier1Ore
+    - Tier1Ore
+    - SpawnAnimation
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+
+Prefab: Tier2Ore
+    - SpawnAnimation
+    - Tier2Ore
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
+
+Prefab: Tier3Ore
+    - SpawnAnimation
+    - Tier3Ore
+    - CanvasScaler
+    - GraphicRaycaster
+    - Slider
+    - Image
 
 Prefab: Booster Turret
     - TurretBooster
@@ -182,6 +283,7 @@ Prefab: Flamethrower Turret
     - ClickUpgrade
     - MultiTag
     - RewardInfo
+    - RotationLock
 
 Prefab: Gatling Turret
     - turretShoot
@@ -189,6 +291,7 @@ Prefab: Gatling Turret
     - ClickUpgrade
     - MultiTag
     - RewardInfo
+    - RotationLock
 
 Prefab: Gun Turret
     - turretShoot
@@ -196,6 +299,7 @@ Prefab: Gun Turret
     - ClickUpgrade
     - RewardInfo
     - MultiTag
+    - RotationLock
 
 Prefab: Harvester
     - Nexus
@@ -234,68 +338,7 @@ Prefab: Sniper Turret
     - ClickUpgrade
     - MultiTag
     - RewardInfo
-
-Prefab: Nexus
-    - Nexus
-    - Harvester
-    - HarvesterUI
-    - RewardInfo
-    - CanvasScaler
-    - GraphicRaycaster
-    - Slider
-    - Image
-    - TextMeshProUGUI
-
-Prefab: Player
-    - PlayerController
-    - PlayerHealth
-    - PlaceObject
-    - PlayerLevels
-    - RewardInfo
-    - CanvasScaler
-    - GraphicRaycaster
-    - Slider
-    - Image
-
-Prefab: Bullet
-    - Bullet
-
-Prefab: BulletPool
-    - BulletPool
-
-Prefab: EnemyBullet
-    - EnemyBullet
-
-Prefab: FlamethrowerFire
-    - Bullet
-
-Prefab: Low-Caliber Bullet
-    - Bullet
-
-Prefab: SniperBullet
-    - Bullet
-
-Prefab: 2dExperienceOrb
-    - Image
-
-Prefab: ExperienceOrb
-    - ExperiencePickup
-    - UniversalAdditionalLightData
-
-Prefab: ExpMagnet
-    - UniversalAdditionalLightData
-    - Magnet
-
-Prefab: GoldOrb
-    - ExperiencePickup
-    - UniversalAdditionalLightData
-
-Prefab: Ore
-    - Ore
-    - CanvasScaler
-    - GraphicRaycaster
-    - Slider
-    - Image
+    - RotationLock
 
 Prefab: Text Popup
     - Image

@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b9962544223b2468ec3bce6d57981c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
+  maxHealth: 9
   invincibilityDuration: 0.01
   exp: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   magnet: {fileID: 6435648702068270667, guid: 2da496d4af282004891a3be51ef2f2ba, type: 3}
@@ -160,6 +160,9 @@ MonoBehaviour:
   hpBarOffset: {x: 0, y: 1.5, z: 0}
   countInWave: 1
   enemyName: FastEnemy
+  upgradeChance: 0.01
+  upgradeHealth: 9
+  upgradeColor: {r: 0.13836467, g: 0, b: 0, a: 1}
 --- !u!136 &8803482667701268275
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -191,7 +194,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6013629208632606210}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 86100d483c15cf04fa78c699fe9590d5, type: 2}
   m_CullingMode: 0

@@ -12,16 +12,15 @@ public class SpawnAnimation : MonoBehaviour
     public Vector3 offset = new Vector3(0.0f, -5.0f, 0.0f);
 
     private float t = 0.0f;
+    private bool isNexusAtFinalPosition;
 
     // Start is called before the first frame update
     void Start()
     {
+        isNexusAtFinalPosition = false; 
         endPosition = transform.position;
-        if(enableAnimation)
-        {
-            startPosition = endPosition + offset;
-            transform.position = startPosition;
-        }
+        startPosition = endPosition + offset;
+        transform.position = startPosition;
     }
 
     // Update is called once per frame
@@ -32,10 +31,11 @@ public class SpawnAnimation : MonoBehaviour
             t += Time.deltaTime;
             transform.position = Vector3.Lerp(startPosition, endPosition, t / duration);
         }
+
+        if (endPosition == transform.position) { isNexusAtFinalPosition = true; }
     }
 
-    void TriggerSpawnSequence()
-    {
-        enableAnimation = true;
-    }
+    public void TriggerSpawnSequence() { enableAnimation = true; }
+
+    public bool isNexusInSpawnPos() { return isNexusAtFinalPosition;  }
 }

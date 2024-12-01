@@ -15,7 +15,8 @@ public class Nexus : MonoBehaviour
     [SerializeField] private float xpSpawnInterval = 5f;
     [SerializeField] private GameObject xpPrefab;
     [SerializeField] private Vector3 xpSpawnOffset;
-    [SerializeField] private float offsetDistance = 5f;
+    [SerializeField] private float xpHorizontalOffsetDistance = 1.0f;
+    [SerializeField] private float xpVerticalOffsetDistance = 0.0f;
 
     [Header("UI References")]
     [SerializeField] private Slider hpBar;
@@ -32,6 +33,8 @@ public class Nexus : MonoBehaviour
     public delegate void NexusEvent();
     public event NexusEvent OnTakeDamage;
     public GameObject indicator = null;
+
+    public Animator healthbarAnim;
 
     private void Awake()
     {
@@ -83,6 +86,10 @@ public class Nexus : MonoBehaviour
     {
         // activate the animator
         animator.SetTrigger("Damage");
+        if(healthbarAnim != null)
+        {
+            healthbarAnim.SetTrigger("DamageBar");
+        }
 
         // reduce currentHP nexus
         currentHealth = Mathf.Max(currentHealth - dmg_amount, 0);
@@ -150,8 +157,9 @@ public class Nexus : MonoBehaviour
                 
                 Vector3 offset = new Vector3(randomX, 0.0f, randomZ);
                 offset.Normalize();
-                offset *= offsetDistance;
-                offset.y = transform.position.y;
+                offset *= xpHorizontalOffsetDistance;
+                //offset.y = transform.position.y;
+                offset.y = xpVerticalOffsetDistance;
                 /*
                 float randomX = UnityEngine.Random.Range(0, 2) == 0
                     ? UnityEngine.Random.Range(-max_offset, -min_offset)
@@ -162,7 +170,9 @@ public class Nexus : MonoBehaviour
                     : UnityEngine.Random.Range(min_offset, max_offset);
                 */
                 //Vector3 spawnPosition = transform.position + new Vector3(randomX, transform.position.y, randomZ);
+
                 Vector3 spawnPosition = transform.position + offset;
+                Debug.Log("[Nexus] Position: " + spawnPosition);
                 Instantiate(xpPrefab, spawnPosition + xpSpawnOffset, Quaternion.identity);
             }
         }

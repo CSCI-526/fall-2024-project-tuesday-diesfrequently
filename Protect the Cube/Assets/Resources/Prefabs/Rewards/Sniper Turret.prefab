@@ -49,6 +49,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3598094888286799798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
+      propertyPath: upgradeText
+      value: 
+      objectReference: {fileID: 5367874686638370608, guid: d7f0fb11758e0514b91077d7304f3207, type: 3}
+    - target: {fileID: 3598094888286799798, guid: d56f5be9feee34d67a7844a554b73dd6, type: 3}
       propertyPath: buildingName
       value: Sniper Turret
       objectReference: {fileID: 0}

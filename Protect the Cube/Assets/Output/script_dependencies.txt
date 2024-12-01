@@ -1,3 +1,9 @@
+Script: BouncingBullet
+    - Dependencies for BouncingBullet:
+        - Bullet
+        - EnemyHealth
+    - No Explicit GameObjects/Prefabs referenced in BouncingBullet
+
 Script: Building
     - Dependencies for Building:
         - RangeIndicator
@@ -8,7 +14,9 @@ Script: Bullet
         - GameManager
         - BulletPool
         - EnemyHealth
-        - Ore
+        - Tier1Ore
+        - Tier2Ore
+        - Tier3Ore
         - Wall
     - No Explicit GameObjects/Prefabs referenced in Bullet
 
@@ -36,14 +44,19 @@ Script: ClickUpgrade
         - GameManager
         - UIManager
         - AnalyticsManager
+        - UpgradeArrow
     - GameObjects/Prefabs referenced in ClickUpgrade:
         - indicator
         - upgradeArrow
+        - lvl2Appearance
+        - lvl3Appearance
+        - upgradeText
         - transform
 
 Script: CursorManager
     - No dependencies found for CursorManager
-    - No Explicit GameObjects/Prefabs referenced in CursorManager
+    - GameObjects/Prefabs referenced in CursorManager:
+        - HandTexture
 
 Script: DefensiveWallHealth
     - No dependencies found for DefensiveWallHealth
@@ -63,6 +76,7 @@ Script: EnemyHealth
         - Nexus
     - GameObjects/Prefabs referenced in EnemyHealth:
         - exp
+        - magnet
         - hpCanvas
 
 Script: EnemyMove
@@ -120,6 +134,10 @@ Script: Indicator
     - GameObjects/Prefabs referenced in Indicator:
         - target
 
+Script: InstructionPopup
+    - No dependencies found for InstructionPopup
+    - No Explicit GameObjects/Prefabs referenced in InstructionPopup
+
 Script: LockPlayerCircle
     - No dependencies found for LockPlayerCircle
     - No Explicit GameObjects/Prefabs referenced in LockPlayerCircle
@@ -153,8 +171,8 @@ Script: Nexus
     - Dependencies for Nexus:
         - InventoryManager
         - GameManager
-        - AnalyticsManager
         - UIManager
+        - AnalyticsManager
         - OffScreenIndicator
         - Indicator
     - GameObjects/Prefabs referenced in Nexus:
@@ -166,25 +184,6 @@ Script: OffScreenIndicator
         - Indicator
     - GameObjects/Prefabs referenced in OffScreenIndicator:
         - indicatorPrefab
-
-Script: Ore
-    - Dependencies for Ore:
-        - GameManager
-        - Nexus
-    - GameObjects/Prefabs referenced in Ore:
-        - exp
-        - hpCanvas
-
-Script: OreManager
-    - Dependencies for OreManager:
-        - WaveManager
-        - PlayerLevels
-        - GameManager
-        - Nexus
-    - GameObjects/Prefabs referenced in OreManager:
-        - _orePrefab
-        - _nexus
-        - identity
 
 Script: PauseBtn
     - Dependencies for PauseBtn:
@@ -200,6 +199,7 @@ Script: PlaceObject
         - InventoryManager
         - Harvester
         - Exclusion
+        - Rotate
     - GameObjects/Prefabs referenced in PlaceObject:
         - rangeIndicator
         - currentPlaceableObject
@@ -211,10 +211,12 @@ Script: PlayerController
         - PlaceObject
         - BulletPool
         - Bullet
+        - Rotate
     - GameObjects/Prefabs referenced in PlayerController:
         - projectile
         - gunBarrel
         - rangeIndicator
+        - gun
         - rotation
 
 Script: PlayerHealth
@@ -264,16 +266,34 @@ Script: RewardInfo
 Script: RewardPanel
     - Dependencies for RewardPanel:
         - RewardInfo
-        - Building
         - GameManager
+        - UIManager
         - InventoryManager
     - No Explicit GameObjects/Prefabs referenced in RewardPanel
+
+Script: Rotate
+    - No dependencies found for Rotate
+    - No Explicit GameObjects/Prefabs referenced in Rotate
+
+Script: RotationLock
+    - No dependencies found for RotationLock
+    - No Explicit GameObjects/Prefabs referenced in RotationLock
 
 Script: SlowTower
     - Dependencies for SlowTower:
         - Building
         - EnemyMove
     - No Explicit GameObjects/Prefabs referenced in SlowTower
+
+Script: SniperBullet
+    - Dependencies for SniperBullet:
+        - Bullet
+        - EnemyHealth
+    - No Explicit GameObjects/Prefabs referenced in SniperBullet
+
+Script: SpawnAnimation
+    - No dependencies found for SpawnAnimation
+    - No Explicit GameObjects/Prefabs referenced in SpawnAnimation
 
 Script: SpawnEvent
     - Dependencies for SpawnEvent:
@@ -313,9 +333,43 @@ Script: TankEnemyMove
     - GameObjects/Prefabs referenced in TankEnemyMove:
         - _target
 
+Script: Tier1Ore
+    - Dependencies for Tier1Ore:
+        - Nexus
+        - GameManager
+        - OreManager
+    - GameObjects/Prefabs referenced in Tier1Ore:
+        - ExpPrefab
+        - GoldPrefab
+        - hpCanvas
+        - _nexus
+
+Script: Tier2Ore
+    - Dependencies for Tier2Ore:
+        - Nexus
+        - GameManager
+        - OreManager
+    - GameObjects/Prefabs referenced in Tier2Ore:
+        - ExpPrefab
+        - GoldPrefab
+        - hpCanvas
+        - _nexus
+
+Script: Tier3Ore
+    - Dependencies for Tier3Ore:
+        - Nexus
+        - GameManager
+        - OreManager
+    - GameObjects/Prefabs referenced in Tier3Ore:
+        - ExpPrefab
+        - GoldPrefab
+        - hpCanvas
+        - _nexus
+
 Script: TurretBooster
     - Dependencies for TurretBooster:
         - Building
+        - Rotate
     - GameObjects/Prefabs referenced in TurretBooster:
         - antenna
 
@@ -326,6 +380,18 @@ Script: TurretBoosterVisual
 Script: TutorialToggle
     - No dependencies found for TutorialToggle
     - No Explicit GameObjects/Prefabs referenced in TutorialToggle
+
+Script: UpgradeArrow
+    - Dependencies for UpgradeArrow:
+        - ClickUpgrade
+        - RangeIndicator
+    - GameObjects/Prefabs referenced in UpgradeArrow:
+        - parentTurret
+        - clickableObject
+
+Script: UpgradeText
+    - No dependencies found for UpgradeText
+    - No Explicit GameObjects/Prefabs referenced in UpgradeText
 
 Script: Wave
     - Dependencies for Wave:
@@ -381,11 +447,14 @@ Script: GameManager
         - UIManager
         - InventoryManager
         - AnalyticsManager
+        - OreManager
         - Nexus
+        - SpawnAnimation
         - PlayerController
         - PlayerLevels
         - PlaceObject
-    - No Explicit GameObjects/Prefabs referenced in GameManager
+    - GameObjects/Prefabs referenced in GameManager:
+        - Barrier
 
 Script: InventoryManager
     - Dependencies for InventoryManager:
@@ -400,6 +469,19 @@ Script: InventoryManager
         - UIManager
     - No Explicit GameObjects/Prefabs referenced in InventoryManager
 
+Script: OreManager
+    - Dependencies for OreManager:
+        - PlayerLevels
+        - GameManager
+        - Nexus
+    - GameObjects/Prefabs referenced in OreManager:
+        - OrePrefabTier1
+        - OrePrefabTier2
+        - OrePrefabTier3
+        - _nexus
+        - oreEntity
+        - identity
+
 Script: UIManager
     - Dependencies for UIManager:
         - Nexus
@@ -407,27 +489,34 @@ Script: UIManager
         - PlayerLevels
         - InventoryManager
         - GameManager
-        - Wave
+        - FollowMouse
+        - InstructionPopup
         - WaveManager
+        - Wave
         - RewardChoiceUI
     - GameObjects/Prefabs referenced in UIManager:
         - WASD
         - inventoryArrow
         - xpArrow
-        - holdMouse
+        - TutorialShootingCursor
         - XPLevelUp
         - playerHPSlider
         - nexusHPSlider
         - gold
         - pauseButton
+        - pauseButtonBackground
+        - RewardUIMask
+        - goldHighlight
+        - goldCollect
         - gameOverScreen
         - SelectGunTutorialUI
         - rewardMenu
         - upgradePanel
         - pauseUI
         - inventoryBar
-        - crosshairTexture
-        - HandTexture
+        - InstructionModalWindow
+        - ShootingCursor
+        - CustomCursor
         - minimap
         - uiObject
         - expBar
@@ -436,10 +525,10 @@ Script: WaveManager
     - Dependencies for WaveManager:
         - WaveInfo
         - Nexus
+        - GameManager
         - Wave
         - EnemyMove
         - EnemyHealth
-        - GameManager
         - UIManager
         - AnalyticsManager
     - GameObjects/Prefabs referenced in WaveManager:
