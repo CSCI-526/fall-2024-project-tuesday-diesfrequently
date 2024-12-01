@@ -14,6 +14,7 @@ TagManager:
   - GoldOrb
   - Breakable
   - Ore
+  - Count
   layers:
   - Default
   - TransparentFX

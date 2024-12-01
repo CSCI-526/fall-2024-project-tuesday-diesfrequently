@@ -512,8 +512,15 @@ public void ShowSelectGunTutorial()
             //update number directly
             Debug.Log("try update number directly");
             Image slot = inventorySlots[inventSlotMapping[inventoryName]];
-            TextMeshPro count = slot.GetComponentInChildren<TextMeshPro>();
-            count.text = inventoryCount.ToString();
+            TextMeshProUGUI count = slot.GetComponentInChildren<TextMeshProUGUI>();
+            if (count != null)
+            {
+                count.text = inventoryCount.ToString();
+            }
+            else
+            {
+                Debug.LogError("Text component not found.");
+            }
         }
         else
         {

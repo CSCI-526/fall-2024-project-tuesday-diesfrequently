@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 4936660264403201919}
   m_Layer: 5
   m_Name: SniperCount
-  m_TagString: Untagged
+  m_TagString: Count
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

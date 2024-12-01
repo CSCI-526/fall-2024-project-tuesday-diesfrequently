@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 4035263132179999840}
   m_Layer: 5
   m_Name: HarvesterCount
-  m_TagString: Untagged
+  m_TagString: Count
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
