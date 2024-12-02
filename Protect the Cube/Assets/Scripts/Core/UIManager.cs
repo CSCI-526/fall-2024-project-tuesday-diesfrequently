@@ -512,10 +512,14 @@ public void ShowSelectGunTutorial()
         {
             //update number directly
             Image slot = inventorySlots[inventSlotMapping[inventoryName]];
-            TextMeshProUGUI count = slot.GetComponentInChildren<TextMeshProUGUI>();
-            if (count != null)
-            {
-                count.text = inventoryCount.ToString();
+            TextMeshProUGUI[] counts = slot.GetComponentsInChildren<TextMeshProUGUI>();
+            if (counts != null)
+            {   
+                for (int i = 0; i < counts.Length; i++){
+                    if(counts[i].gameObject.tag == "Count"){
+                        counts[i].text = inventoryCount.ToString();
+                    }
+                }
             }
             else
             {
