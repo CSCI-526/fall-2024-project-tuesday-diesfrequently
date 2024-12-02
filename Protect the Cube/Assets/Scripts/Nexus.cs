@@ -48,8 +48,8 @@ public class Nexus : MonoBehaviour
         // set Nexus GameObject to this scripts object (same reference)
         GameManager.Instance.Nexus = this.gameObject;
 
-        Debug.Log(xpPrefab != null ? "XP Prefab is assigned." : "XP Prefab is missing!");
-
+        //Debug.Log(xpPrefab != null ? "XP Prefab is assigned." : "XP Prefab is missing!");
+        
         // initialize HP Bar
         UpdateHPBar();
     }

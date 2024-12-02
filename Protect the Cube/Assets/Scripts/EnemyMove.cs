@@ -30,37 +30,44 @@ public class EnemyMove : MonoBehaviour
     }
     void Start()
     {
-        // SetTarget(GameManager.Instance.Nexus);
         UpdateTargetList();
     }
 
     protected void UpdateTargetList()
     {
-        if(!targetPlayerOnly)
-        {
-            targetList = GameObject.FindGameObjectsWithTag("Nexus").ToList();
-        }
-        if(!targetBuildingsOnly)
-        {
-            targetList.Add(GameObject.FindWithTag("Player"));
-        }
+        targetList.Clear();
+        if (!targetPlayerOnly) targetList.Add(GameObject.FindWithTag("Nexus"));
+        if (!targetBuildingsOnly) targetList.Add(GameObject.FindWithTag("Player"));
+    }
+
+    public void OnlyTargetPlayer()
+    {
+        targetPlayerOnly = true;
+        targetBuildingsOnly = false;
+        UpdateTargetList();
+    }
+
+    public void OnlyTargetNexus()
+    {
+        targetPlayerOnly = false;
+        targetBuildingsOnly = true;
+        UpdateTargetList();
+    }
+
+    public void TargetEverything()
+    {
+        targetPlayerOnly = false;
+        targetBuildingsOnly = false;
+        UpdateTargetList();
     }
 
     // Update is called once per frame
     void Update()
     {   
         SetTarget(targetList);
-        // Debug.Log("target list: "+_target.name);
         slowDebufTimer -= Time.deltaTime;
-        if (slowDebufTimer <= 0){
-            slowAmount = 0;
-        }
-
-        if (transform.position.y < -5)
-        {
-            Destroy(gameObject);
-        }
-
+        if (slowDebufTimer <= 0){ slowAmount = 0; } // no longer in slow!
+        if (transform.position.y < -5) Destroy(gameObject); // Edge Case: enemy falls off map
     }
 
     void FixedUpdate()
@@ -68,7 +75,6 @@ public class EnemyMove : MonoBehaviour
         if (!_target)
         {
             SetTarget(targetList);
-            // Debug.Log("target: "+_target.name);
         }
         if (_target.IsDestroyed() || !_target.activeSelf)
         {
@@ -86,7 +92,6 @@ public class EnemyMove : MonoBehaviour
             _rb.MovePosition(transform.position + dirToTarget * (moveSpeed * (1 - slowAmount)) * Time.fixedDeltaTime);
             transform.rotation = UnityEngine.Quaternion.LookRotation(dirToTarget, Vector3.up);
         }
-        
     }
 
     protected void SetTarget(List<GameObject> targetList)
@@ -128,8 +133,12 @@ public class EnemyMove : MonoBehaviour
     }
 
     // lock the enemy movement
-    public void LockMovement() { Debug.Log("[EnemyMove] isEnemyMovementLocked = true"); isEnemyMovementLocked = true; }
+    public void LockMovement() {
+        //Debug.Log("[EnemyMove] isEnemyMovementLocked = true");
+        isEnemyMovementLocked = true; }
 
     // unlock the enemy movement
-    public void UnlockMovement() { Debug.Log("[EnemyMove] isEnemyMovementLocked = false"); isEnemyMovementLocked = false; }
+    public void UnlockMovement() {
+        //Debug.Log("[EnemyMove] isEnemyMovementLocked = false");
+        isEnemyMovementLocked = false; }
 }

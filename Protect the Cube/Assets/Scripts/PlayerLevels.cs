@@ -11,6 +11,8 @@ public class PlayerLevels : MonoBehaviour
     [SerializeField] public int xpNeededBase = 2;
     [SerializeField] public int xpLinearScaler = 2;
 
+    public bool isXPOrbCollected { get; private set; } = false;
+
     [SerializeField] public List<GameObject> turretOptions = new List<GameObject>();
 
     [SerializeField] public int currentXP = 0;
@@ -47,8 +49,10 @@ public class PlayerLevels : MonoBehaviour
         if (isSelectingTurret){
             
         }
-        
     }
+
+    public void markXPNotCollected() { isXPOrbCollected = false; }
+    public void markXPCollected() { isXPOrbCollected = true; }
 
     public void add_exp(int resource_gained, GameObject Orb){
         if (Orb.tag == "ExperienceOrb"){
@@ -72,8 +76,8 @@ public class PlayerLevels : MonoBehaviour
                 Time.timeScale = 0.0f;
                 GameManager.Instance.InventoryManager.GenerateRewards();
             }
-
             GameManager.Instance.UIManager.Tutorial_HideXPUI(); // hide xp UI
+            //markXPNotCollected();
         }
         else if (Orb.tag == "GoldOrb"){
             currentGold += resource_gained;

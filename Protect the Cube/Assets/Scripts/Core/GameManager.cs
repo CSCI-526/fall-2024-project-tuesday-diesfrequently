@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,15 +14,35 @@ public class GameManager : MonoBehaviour
     public OreManager OreManager { get; private set; }
     [SerializeField] private GameObject MainCamera;
 
-    public GameObject Player {  get; private set; }
-    public GameObject Nexus {  get; set; }
+    [SerializeField] public GameObject Player;
+    [SerializeField] public GameObject Nexus;
     [SerializeField] public GameObject Barrier;
 
     public bool useBulletPool = false;
     public bool enableTutorial = true;
     private bool isPaused = false;
-    private bool modalAcknowleged = false;
+    public bool modalAcknowleged = false;
     private bool isCameraTransitionDone = false;
+    public bool inTutorialDeath = false;
+
+    // tracks current phase
+    [SerializeField] public GamePhase StartPhase;
+    //[SerializeField] public GamePhase currentPhase { get; private set; }
+
+    [SerializeField] private GamePhase CurrentPhase;
+
+    public GamePhase currentPhase
+    {
+        get { return CurrentPhase; }
+        private set { CurrentPhase = value; }
+    }
+
+    [SerializeField] public bool DEBUG_WAVE_MANAGER;
+    [SerializeField] public bool DEBUG_ORE_MANAGER;
+    [SerializeField] public bool DEBUG_INVENTORY_MANAGER;
+    [SerializeField] public bool DEBUG_REWARD_PANEL;
+    [SerializeField] public bool DEBUG_GAME_MANAGER;
+    [SerializeField] public bool DEBUG_CAMERA_FOLLOW;
 
     // Set the field where TutorialStorageValue is stored
     private const string TutorialStorageKey = "IsTutorialEnabled";
@@ -29,24 +50,20 @@ public class GameManager : MonoBehaviour
     public enum GamePhase
     {
         Initialization,
-        BasicTutorial_Start,
-        BasicTutorial_Movement,
-        BasicTutorial_Shooting,
-        BasicTutorial_XP,
+        P1_Setup_Tutorial,
+        P1_TakeDamage_Tutorial,
+        P1_Movement_Tutorial,
+        P1_Dodging_Tutorial,
+        P1_Shooting_Tutorial,
+        P1_XP_Collection_Tutorial,
+        P2_Setup_Tutorial,
         BasicTutorial_Reward,
         BasicTutorial_Placement,
         HandCraftedWaves,
         AdvancedTutorial,
-        DynamicWaves
+        DynamicWaves,
+        P1_Tutorial_Death
     }
-
-    // tracks current phase
-    [SerializeField] public GamePhase StartPhase;
-    public GamePhase currentPhase { get; private set; }
-    [SerializeField] public bool DEBUG_WAVE_MANAGER;
-    [SerializeField] public bool DEBUG_ORE_MANAGER;
-    [SerializeField] public bool DEBUG_INVENTORY_MANAGER;
-    [SerializeField] public bool DEBUG_REWARD_PANEL;
 
     public void SetGamePhase(GamePhase newPhase)
     {
@@ -56,17 +73,26 @@ public class GameManager : MonoBehaviour
             case GamePhase.Initialization:
                 StartUIInitialization();
                 break;
-            case GamePhase.BasicTutorial_Start:
+            case GamePhase.P1_Setup_Tutorial:
                 SetupTutorial();
                 break;
-            case GamePhase.BasicTutorial_Movement:
+            case GamePhase.P1_TakeDamage_Tutorial:
+                StartTakeDamageTutorial();
+                break;
+            case GamePhase.P1_Movement_Tutorial:
                 StartMovementTutorial();
                 break;
-            case GamePhase.BasicTutorial_Shooting:
+            case GamePhase.P1_Dodging_Tutorial:
+                StartDodgingTutorial();
+                break;
+            case GamePhase.P1_Shooting_Tutorial:
                 StartShootingTutorial();
                 break;
-            case GamePhase.BasicTutorial_XP:
+            case GamePhase.P1_XP_Collection_Tutorial:
                 StartXPTutorial();
+                break;
+            case GamePhase.P2_Setup_Tutorial:
+                SetupTutorialPart2();
                 break;
             case GamePhase.BasicTutorial_Reward:
                 StartRewardTutorial();
@@ -85,188 +111,428 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void StartUIInitialization() {
-
-        // Hide Certain UI Elements
-        UIManager.HideModalWindow();
+    private void HideExtraUIComponents()
+    {
         UIManager.HideMinimap();
         UIManager.HideNexusHealthSlider();
         UIManager.HidePlayerHealthSlider();
         UIManager.HideInventoryUI();
         UIManager.HideEXPSlider();
         UIManager.HideWaveUI();
+        UIManager.Tutorial_HideMovementUI();
+    }
+
+    public void RespawnPlayer(GamePhase death_phase, bool isPauseMenuRestart = false)
+    {
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Respawning Player");
+        modalAcknowleged = false;
+
+        HideExtraUIComponents();
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Respawn] Hiding UI Components");
+        UIManager.HideModalWindow();
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Respawn] Hiding Modal Window");
+        WaveManager.KillAllEnemyEntities();
+
+        Player.GetComponent<PlayerController>().LockShooting();
+        Player.GetComponent<PlayerController>().LockMovement();
+
+        // MATCHA: Set Nexus to Original Position
+        // MATCHA: reset rest of tutorial booleans in other files here
+        PlayerController.SetShotOnceFalse();
+
+        if (isPauseMenuRestart)
+        {
+            if (DEBUG_GAME_MANAGER) Debug.Log("[Respawn] Starting RESTART from Init Phase");
+            StartCoroutine(BufferNextPhaseStart(GamePhase.Initialization, "[RESTART] " + death_phase, "Initialization", 1.0f));
+        }
+        else
+        {
+            if (DEBUG_GAME_MANAGER) Debug.Log("[Respawn] Starting DIED from Init Phase");
+            StartCoroutine(BufferNextPhaseStart(GamePhase.Initialization, "[DIED] " + death_phase, "Initialization", 1.0f));
+        }
+    }
+
+    private void createArrowforXPOrb()
+    {
+        GameObject[] experienceOrbs = GameObject.FindGameObjectsWithTag("ExperienceOrb");
+
+        foreach (GameObject exp_orb in experienceOrbs)
+        {
+            if (exp_orb == null) break;
+            Player.GetComponent<PlayerLevels>().markXPNotCollected();
+            Vector3 exp_orb_pos = exp_orb.transform.position;
+            UIManager.Tutorial_ShowXPUI(exp_orb_pos); // show xp UI Arrow
+            break;
+        }
+    }
+
+    // Helper Re-Usables CoRoutines
+    private IEnumerator BufferNextPhaseStart(GamePhase new_phase, string curr_phase, string next_phase, float buffer_amt = 0.5f)
+    {
+        yield return new WaitForSeconds(buffer_amt); // 0.5s buffer
+        if (DEBUG_GAME_MANAGER) Debug.Log($"[PHASE] {curr_phase} (END)");
+        Debug.Log("[Tutorial Death Value in Buffer]: " + inTutorialDeath);
+        if (inTutorialDeath) yield break;
+        else
+        {
+            SetGamePhase(new_phase);
+            if (DEBUG_GAME_MANAGER) Debug.Log($"[PHASE] {next_phase} (START)");
+        }
+    }
+        
+    public IEnumerator WaitForModalAcknowlegement(int modal_type, string msg, bool isRespawnScreen = false)
+    {
+        modalAcknowleged = false;
+        //if (DEBUG_GAME_MANAGER) Debug.Log("[Modal Window] In Modal CoRoutine");
+        if (inTutorialDeath && !isRespawnScreen) yield break;
+        else
+        {
+            //if (DEBUG_GAME_MANAGER) Debug.Log("[Modal Window] Setting Up Modal Window");
+            UIManager.ConfigModalWindow(modal_type);
+            //if (DEBUG_GAME_MANAGER) Debug.Log("[Modal Window] CONFIG Done");
+            UIManager.ShowModalWindow(msg);
+            //if (DEBUG_GAME_MANAGER) Debug.Log("[Modal Window] Instruction Message Set");
+            yield return new WaitForSeconds(1.0f);
+            //if (DEBUG_GAME_MANAGER) Debug.Log("[Modal Window] Rudimentary Wait Time Complete");
+        }
+
+        //if (DEBUG_GAME_MANAGER) Debug.Log("[inTutorialDeath] " + inTutorialDeath + " and [isRespawnScreen] " + isRespawnScreen);
+
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Modal Window] Waiting for Acknowledgement for msg: " + msg);
+
+        if (inTutorialDeath && !isRespawnScreen) yield break;
+        //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+
+        while (!Input.GetKeyDown(KeyCode.Space))
+        {
+            if (inTutorialDeath && !isRespawnScreen) {
+                if (DEBUG_GAME_MANAGER) Debug.Log("[Wait for Modal] Skipped due to Tutorial Death");
+                yield break;
+            }
+            yield return null; // Wait for the next frame
+        }
+
+        modalAcknowleged = true;
+        UIManager.HideModalWindow();
+        if (inTutorialDeath && !isRespawnScreen) yield break;
+    }
+
+    private IEnumerator MoveCameraToTargetX(GameObject entity, float transition_time, IEnumerator NextCoroutine)
+    {
+        isCameraTransitionDone = false;
+        Player.GetComponent<PlayerController>().LockMovement();
+        MainCamera.GetComponent<CameraFollow>().SetNewTarget(entity, transition_time, OnCameraTransitionComplete);
+        Debug.Log("[Game Manager] CAMERA: Waiting for transition...");
+        yield return new WaitUntil(() => isCameraTransitionDone);
+        Debug.Log("[Game Manager] CAMERA: Transition complete!");
+        StartCoroutine(NextCoroutine);
+    }
+
+    private void OnCameraTransitionComplete()
+    {
+        Debug.Log("[Game Manager] CAMERA: Transition completed!");
+        isCameraTransitionDone = true;
+        Debug.Log("[Game Manager] CAMERA: Set isCameraTransitionDone to TRUE");
+    }
+
+    ////////////////////////
+    // TUTORIAL FUCNTIONS //
+    ////////////////////////
+    
+    private void StartUIInitialization()
+    {
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Start UI] Initialization Tasks");
+        UIManager.HideModalWindow();
+        HideExtraUIComponents();
+        WaveManager.KillAllEnemyEntities();
 
         // Activate Correct Cursor to use
-        UIManager.ActivateCustomCursor();      
+        UIManager.ActivateCustomCursor();
 
-        SetGamePhase(GamePhase.BasicTutorial_Start);
-        Debug.Log("Finished GamePhase.Initialization Phase");
+        // State Change only if in appropriate state
+        if (currentPhase == GamePhase.Initialization && !inTutorialDeath)
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.P1_Setup_Tutorial, "Initialization", "P1_Setup_Tutorial"));
+        } else return;
     }
 
     private void SetupTutorial()
     {
-        // Spawn the player and nexus on the map
-        Debug.Log("Starting GamePhase.BasicTutorial_Start Phase");
-
+        // Setup Small Barrier
         EnableBarrier();
         SetSmallBarrier();
 
-        // Player State 1
+        // Activate Player State 1
         Player.SetActive(true);
         Player.GetComponent<PlayerController>().LockMovement();
         Player.GetComponent<PlayerController>().LockShooting();
-        Player.GetComponent<PlayerController>().DeactivatePlayerGun();
-        
+        Player.transform.position = new Vector3(1.5f, 1.0f, 1.5f);
 
-        Nexus.SetActive(true);
-        Nexus.GetComponent<SpawnAnimation>().TriggerSpawnSequence();
+        // State Change 
+        if (currentPhase == GamePhase.P1_Setup_Tutorial && !inTutorialDeath) 
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.P1_TakeDamage_Tutorial, "P1_Setup_Tutorial", "P1_TakeDamage_Tutorial"));
+        } else return;
 
-        Debug.Log("Ending GamePhase.BasicTutorial_Start Phase");
-        StartCoroutine(WaitForTutorialSetupEnd());
     }
 
-    private IEnumerator WaitForTutorialSetupEnd()
+    private void StartTakeDamageTutorial()
     {
-        yield return new WaitForSeconds(0.5f); // wait 1s before state change
-        SetGamePhase(GamePhase.BasicTutorial_Movement);
+        WaveManager.SpawnSingleEnemy("tutorial", Player.transform.position, 6.0f);
+        WaveManager.LockAllEnemiesMovement();
+
+        string modal_msg = "Touching <color=red>ENEMIES</color> will lower <color=#90d5ff>YOUR HP</color>!";
+        StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
+        StartCoroutine(ContinueTakeDamageTutorial());
+    }  
+
+    private IEnumerator ContinueTakeDamageTutorial()
+    {
+        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+        if (inTutorialDeath) yield break;
+        modalAcknowleged = false; // set messageAck to false agains
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Modal Acknowledged");
+
+        UIManager.ShowPlayerHealthSlider();
+        WaveManager.UnlockAllEnemiesMovement();
+
+        yield return new WaitForSeconds(3.0f); // player takes 3 hits of dmg
+
+        WaveManager.LockAllEnemiesMovement();
+
+        Player.GetComponent<PlayerController>().OffsetPlayerPos(new Vector3(-2.0f, 0.0f, -2.0f));// offset player slightly
+        yield return new WaitForSeconds(0.1f); // player takes 3 hits of dmg
+        // State Change
+        if (currentPhase == GamePhase.P1_TakeDamage_Tutorial && !inTutorialDeath)
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.P1_Movement_Tutorial, "P1_TakeDamage_Tutorial", "P1_Movement_Tutorial"));
+        } else yield break;
+
     }
 
     private void StartMovementTutorial()
-    {
-        Debug.Log("Starting GamePhase.BasicTutorial_Movement Phase");
+    { 
         UIManager.Tutorial_ShowMovementUI(); // Shows the Animated 4 WASD Keys
-        Player.GetComponent<PlayerController>().UnlockMovement();
         StartCoroutine(WaitForMovementInput());
     }
 
     private IEnumerator WaitForMovementInput()
     {
+        if (inTutorialDeath) yield break;
+        Player.GetComponent<PlayerController>().UnlockMovement();
+
+        yield return new WaitForSeconds(1.0f); // buffer 1s (no accidental press)
+        if (inTutorialDeath) yield break;
         yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys());
-        StartCoroutine(WaitForMovementTutorialEnd()); 
+        if (inTutorialDeath) yield break;
+        yield return new WaitForSeconds(1.0f); // buffer 1s (no accidental press)
+        if (inTutorialDeath) yield break;
+        yield return new WaitUntil(() => PlayerController.HasPressedMovementKeys()); // double check they moved!
+        if (inTutorialDeath) yield break;
+        else StartCoroutine(ContinueMovementTutorial());
     }
 
-    private IEnumerator WaitForMovementTutorialEnd()
+    private IEnumerator ContinueMovementTutorial()
     {
-        yield return new WaitForSeconds(3.0f); // free movement for 3 seconds
+        yield return new WaitForSeconds(2.0f); // free movement for 3 seconds 
         UIManager.Tutorial_HideMovementUI(); // hide WASD movement keys
-        UIManager.ConfigModalWindow(1);
-        UIManager.ShowModalWindow("Defend your Nexus!");
-        StartCoroutine(WaitForNexusMessageAcknowlegement());
+
+        // State Change
+        if (currentPhase == GamePhase.P1_Movement_Tutorial && !inTutorialDeath)
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.P1_Dodging_Tutorial, "P1_Movement_Tutorial", "P1_Dodging_Tutorial"));
+        } else yield break;
     }
 
-    private IEnumerator WaitForNexusMessageAcknowlegement()
+    private void StartDodgingTutorial()
     {
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-        UIManager.HideModalWindow();
+        string modal_msg = "Avoid touching <color=red>ENEMIES</color>!";
+        StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
+        StartCoroutine(ContinueDodgingTutorial());
+    }
 
-        Debug.Log("Ending GamePhase.BasicTutorial_Movement Phase");
-        SetGamePhase(GamePhase.BasicTutorial_Shooting);
+    private IEnumerator ContinueDodgingTutorial()
+    {
+        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+        if (inTutorialDeath) yield break;
+        modalAcknowleged = false; // set messageAck to false agains
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Modal Acknowledged");
 
+        if (inTutorialDeath) yield break;
+        WaveManager.UnlockAllEnemiesMovement();
+        WaveManager.EnablePlayerTargetOnly();
+        yield return new WaitForSeconds(3.0f);
+
+        if (inTutorialDeath) yield break;
+        WaveManager.SpawnSingleEnemy("tutorial", Player.transform.position, 6.0f);
+        WaveManager.EnablePlayerTargetOnly();
+        yield return new WaitForSeconds(4.0f);
+
+        if (inTutorialDeath) yield break;
+        WaveManager.SpawnSingleEnemy("tutorial", Player.transform.position, 6.0f);
+        WaveManager.EnablePlayerTargetOnly();
+        yield return new WaitForSeconds(5.0f);
+
+        if (inTutorialDeath) yield break;
+        WaveManager.SpawnSingleEnemy("tutorial", Player.transform.position, 3.0f);
+        WaveManager.EnablePlayerTargetOnly();
+        yield return new WaitForSeconds(2.0f);
+
+        if (inTutorialDeath) yield break;
+
+        // Clean Up Current Enemies
+        WaveManager.LockAllEnemiesMovement();
+        WaveManager.KillAllEnemyEntities(true); // kill the enemies that we were dodging
+        yield return new WaitUntil(() => WaveManager.AllEnemiesKilled()); // wait for all enemies to die before moving on
+        if (inTutorialDeath) yield break;
+
+        Player.GetComponent<PlayerController>().LockMovement();
+
+        // State Change
+        if (currentPhase == GamePhase.P1_Dodging_Tutorial && !inTutorialDeath)
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.P1_Shooting_Tutorial, "P1_Dodging_Tutorial", "P1_Shooting_Tutorial", 2.0f));
+        }
+        else yield break;
+        
     }
 
     private void StartShootingTutorial()
     {
-        Debug.Log("Starting GamePhase.BasicTutorial_Shooting Phase");
-
-        WaveManager.SpawnSingleEnemy(2);
-        WaveManager.SetConstantXPDrops(0);
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 12.0f, 1);
         WaveManager.LockAllEnemiesMovement();
-        Player.GetComponent<PlayerController>().LockMovement();
-
-        UIManager.ShowModalWindow("Enemies deal damage to your nexus (blue)");
-        UIManager.ShowNexusHealthSlider();
-
-        StartCoroutine(WaitForNexusHPAcknowledgement());
+        WaveManager.EnablePlayerTargetOnly();
+        StartCoroutine(MoveCameraToTargetX(WaveManager.AllEnemyEntities[0], 1.5f, PlayEnemyWalkAnimation()));
+        //StartCoroutine(PlayEnemyWalkAnimation());
     }
 
-    private IEnumerator WaitForNexusHPAcknowledgement()
-    {
-        yield return new WaitForSeconds(1.0f);
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-        UIManager.HideModalWindow();
-        WaveManager.UnlockAllEnemiesMovement();
-        yield return new WaitForSeconds(2.0f);
-
-        Player.GetComponent<PlayerController>().UnlockMovement();
-
-        WaveManager.SpawnSingleEnemy(1);
-        WaveManager.LockAllEnemiesMovement();
-        StartCoroutine(WaitForCameraTransition());
-    }
-
-    private IEnumerator WaitForCameraTransition()
-    {
-        UIManager.ShowModalWindow("Touching enemies lowers your HP! (red)");
-        UIManager.ShowPlayerHealthSlider();
-        yield return new WaitForSeconds(1.0f);
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-        UIManager.HideModalWindow();
-        modalAcknowleged = false;
-        //modalAcknowleged = true;
-        //yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
-
-        //MoveCameraToTargetX(WaveManager.AllEnemyEntities[0], 1.5f);
-        isCameraTransitionDone = false;
-        Player.GetComponent<PlayerController>().LockMovement();
-        MainCamera.GetComponent<CameraFollow>().SetNewTarget(WaveManager.AllEnemyEntities[0], 1.5f, OnCameraTransitionComplete);
-        yield return new WaitUntil(() => isCameraTransitionDone);
-        isCameraTransitionDone = false;
-        Player.GetComponent<PlayerController>().UnlockMovement();
-
-        StartCoroutine(WaitForShootingInput());
-    }
-
-    private void OnCameraTransitionComplete()
-    {
-        isCameraTransitionDone = true;
-        Debug.Log("Set isCameraTransitionDone to TRUE!");
-    }
-
-    private IEnumerator MoveCameraToTargetX(GameObject entity, float transition_time)
-    {
-        isCameraTransitionDone = false;
-        Player.GetComponent<PlayerController>().LockMovement();
-        MainCamera.GetComponent<CameraFollow>().SetNewTarget(entity, transition_time, OnCameraTransitionComplete);
-        yield return new WaitUntil(() => isCameraTransitionDone);
-        isCameraTransitionDone = false;
-        Player.GetComponent<PlayerController>().UnlockMovement();
-    }
-
-
-    private IEnumerator WaitForShootingInput()
+    private IEnumerator PlayEnemyWalkAnimation()
     {
         WaveManager.UnlockAllEnemiesMovement();
         yield return new WaitForSeconds(4.5f); // delay 4.5 seconds for enemy to come close to nexus
+        if (inTutorialDeath) yield break;
         WaveManager.LockAllEnemiesMovement();
 
-        //MoveCameraToTargetX(Player, 1.5f);
-        isCameraTransitionDone = false;
-        Player.GetComponent<PlayerController>().LockMovement();
-        MainCamera.GetComponent<CameraFollow>().SetNewTarget(Player, 1.0f, OnCameraTransitionComplete);
-        yield return new WaitUntil(() => isCameraTransitionDone);
-        isCameraTransitionDone = false;
+        StartCoroutine(MoveCameraToTargetX(Player, 1.5f, ContinueShootingTutorial()));
+    }
+
+    private IEnumerator ContinueShootingTutorial()
+    {
+        Debug.Log("[Shooting Tutorial] Entered ContinueShootingTutorial");
+        if (inTutorialDeath) yield break;
         Player.GetComponent<PlayerController>().UnlockMovement();
 
         UIManager.ActivateCustomShootingCursor(); // Show Custom Shooting Cursor
-        Player.GetComponent<PlayerController>().ActivatePlayerGun(); // show player gun
-        WaveManager.SetConstantXPDrops(4);
         Player.GetComponent<PlayerController>().UnlockShooting();
-        
-        // continue when player has shot + all enemies are dead
-        yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
 
-        UIManager.ActivateShootingCursor(); // show shooting Crosshair
-        Debug.Log("Ending GamePhase.BasicTutorial_Shooting Phase");
-        SetGamePhase(GamePhase.BasicTutorial_XP);
+        yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
+        Debug.Log("[Shooting Tutorial] Broke Shooting Flag");
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+
+        // State Change
+        if (currentPhase == GamePhase.P1_Shooting_Tutorial && !inTutorialDeath)
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.P1_XP_Collection_Tutorial, "P1_Shooting_Tutorial", "P1_XP_Collection_Tutorial"));
+        }
+        else yield break;
     }
 
     private void StartXPTutorial()
     {
-        Debug.Log("Starting GamePhase.BasicTutorial_XP Phase");
         UIManager.ActivateEXPUI();
-        UIManager.Tutorial_ShowXPUI(new Vector3(-5.0f, 1.0f, 5.0f)); // show xp UI
-        Debug.Log("Ending GamePhase.BasicTutorial_XP Phase");
-        SetGamePhase(GamePhase.BasicTutorial_Reward);
+        StartCoroutine(ContinueShootingTutorial2());
+    }
+
+    private IEnumerator ContinueShootingTutorial2()
+    {
+        createArrowforXPOrb();
+        yield return new WaitUntil(() => Player.GetComponent<PlayerLevels>().isXPOrbCollected);
+
+        Debug.Log("[Shooting Tutorial] Entered ContinueShootingTutorial_2");
+        yield return new WaitForSeconds(2.0f);
+        if (inTutorialDeath) yield break;
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 8.0f, 1);
+        WaveManager.EnablePlayerTargetOnly();
+        PlayerController.SetShotOnceFalse(); // reset flag for next WaitUntil()
+        yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
+        createArrowforXPOrb();
+        yield return new WaitUntil(() => Player.GetComponent<PlayerLevels>().isXPOrbCollected);
+        Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+
+        Debug.Log("[Shooting Tutorial] Entered ContinueShootingTutorial_2");
+        yield return new WaitForSeconds(3.0f);
+        if (inTutorialDeath) yield break;
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 6.0f, 1);
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 4.0f, 0);
+        WaveManager.EnablePlayerTargetOnly();
+        PlayerController.SetShotOnceFalse(); // reset flag for next WaitUntil()
+        yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
+        Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+
+        UIManager.ActivateShootingCursor(); // show shooting Crosshair
+        Debug.Log("[Shooting Tutorial] Activating Shooting Cursor");
+
+        // State Change
+        if (currentPhase == GamePhase.P1_XP_Collection_Tutorial && !inTutorialDeath)
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.P2_Setup_Tutorial, "P1_XP_Collection_Tutorial", "P2_Setup_Tutorial", 2.0f));
+        }
+        else yield break;
+        
+    }
+
+    private void SetupTutorialPart2()
+    {
+        // Spawn Nexus!
+        // reset player pos
+        // spawn nexus
+
+        StartCoroutine(SpawnNexus());
+    }
+
+    private IEnumerator SpawnNexus()
+    {
+        // Reset Player Pos + Lock Movement
+        Player.transform.position = new Vector3(-3.0f, 1.0f, -3.0f);
+        Player.GetComponent<PlayerController>().LockMovement();
+        Player.GetComponent<PlayerController>().LockShooting();
+
+        // Set Barrier Medium Size
+        SetMediumBarrier();
+
+        // Show Nexus Animation
+        Nexus.GetComponent<SpawnAnimation>().TriggerSpawnSequence();
+        yield return new WaitUntil(() => Nexus.GetComponent<SpawnAnimation>().isNexusInSpawnPos());
+
+        // PAUSE
+
+        string modal_msg = "Don't let <color=red>ENEMIES</color> destroy <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
+        StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
+        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+        if (inTutorialDeath) yield break;
+        modalAcknowleged = false; // set messageAck to false again
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Modal Acknowledged");
+        UIManager.ShowNexusHealthSlider();
+
+        if (inTutorialDeath) yield break;
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 10.0f, 1);
+        //WaveManager.EnablePlayerTargetOnly();
+        PlayerController.SetShotOnceFalse(); // reset flag for next WaitUntil()
+        yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
+        Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+
+        Player.GetComponent<PlayerController>().UnlockMovement();
+        Player.GetComponent<PlayerController>().UnlockShooting();
+
+        // State Change
+        if (currentPhase == GamePhase.P2_Setup_Tutorial && !inTutorialDeath)
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.BasicTutorial_Reward, "P2_Setup_Tutorial", "BasicTutorial_Reward", 2.0f));
+        }
+        else yield break;
     }
 
     private void StartRewardTutorial()
@@ -288,7 +554,6 @@ public class GameManager : MonoBehaviour
     private void StartPlacementTutorial()
     {
         Debug.Log("Starting GamePhase.BasicTutorial_Placement Phase");
-        SetMediumBarrier();
         WaveManager.LockAllEnemiesMovement();
         StartCoroutine(WaitForLevelTwo());
     }
@@ -298,7 +563,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Player.GetComponent<PlayerLevels>().isLevelTwo());
         Player.GetComponent<PlayerController>().LockMovement();
         Player.GetComponent<PlayerController>().LockShooting();
-        Player.GetComponent<PlayerController>().DeactivatePlayerGun();
         UIManager.ActivateCustomCursor(); // sets CustomCursor
         StartCoroutine(WaitForPlacementInput());
     }
@@ -308,7 +572,6 @@ public class GameManager : MonoBehaviour
         // wait until player has "PLACED" turret
         yield return new WaitUntil(() => PlaceObject.firstTurretPlaced());
         WaveManager.UnlockAllEnemiesMovement();
-        Player.GetComponent<PlayerController>().ActivatePlayerGun();
 
         Debug.Log("Ending GamePhase.BasicTutorial_Placement Phase");
         SetGamePhase(GamePhase.HandCraftedWaves);
@@ -320,7 +583,6 @@ public class GameManager : MonoBehaviour
         DisableBarrier();
         Player.GetComponent<PlayerController>().UnlockMovement();
         Player.GetComponent<PlayerController>().UnlockShooting();
-        Player.GetComponent<PlayerController>().ActivatePlayerGun();
         UIManager.ShowWaveUI();
         WaveManager.UnlockAllEnemiesMovement();
         UIManager.ShowMinimap();
@@ -343,18 +605,85 @@ public class GameManager : MonoBehaviour
         if (Instance != null && Instance != this) Destroy(this.gameObject);
         else Instance = this;
 
-        Instance.Player = GameObject.FindGameObjectWithTag("Player");
-        Instance.Nexus = GameObject.FindGameObjectWithTag("Nexus");
+        // Instance.Player = GameObject.FindGameObjectWithTag("Player");
+        // Instance.Nexus = GameObject.FindGameObjectWithTag("Nexus");
+
+        // Serialized Game Objects
+        if (Instance.Player == null) Debug.LogError("ERROER EREORORER PLAYER");
+        if (Instance.Nexus == null) Debug.LogError("ERROER EREORORER NEXUS");
+
+        // Script Components
         Instance.WaveManager = GetComponent<WaveManager>();
         Instance.UIManager = GetComponent<UIManager>();
         Instance.InventoryManager = GetComponent<InventoryManager>();
         Instance.AnalyticsManager = GetComponent<AnalyticsManager>();
         Instance.OreManager = GetComponent<OreManager>();
 
-        DEBUG_WAVE_MANAGER = false;
-        DEBUG_ORE_MANAGER = false;
-        DEBUG_INVENTORY_MANAGER = true;
-        DEBUG_REWARD_PANEL = false;
+        // Activate "Hidden Nexus"
+        Nexus.SetActive(true);
+
+        //// Global DEBUG Values
+        //DEBUG_WAVE_MANAGER = false;
+        //DEBUG_ORE_MANAGER = false;
+        //DEBUG_INVENTORY_MANAGER = true;
+        //DEBUG_REWARD_PANEL = false;
+        //DEBUG_GAME_MANAGER = true; 
+    }
+
+    private void OnEnable()
+    {
+        Player.GetComponent<PlayerHealth>().Tutorial_OnDeath += OnPlayerTutorialDeath;
+    }
+
+    private void OnDisable()
+    {
+        Player.GetComponent<PlayerHealth>().Tutorial_OnDeath -= OnPlayerTutorialDeath;
+    }
+
+    private void OnPlayerTutorialDeath(GamePhase death_phase)
+    {
+        StartCoroutine(OnTutorialDeath(death_phase));
+    }
+
+    private IEnumerator OnTutorialDeath(GamePhase death_phase)
+    {
+        if (inTutorialDeath)
+        {
+            Debug.Log("[Tutorial Death] Already in tutorial death state. Ignoring player death.");
+            yield break; // in tutorial death, shouldnt be in here twice
+        }
+
+        StartCoroutine(BufferNextPhaseStart(GamePhase.P1_Tutorial_Death, death_phase.ToString(), "P1_Tutorial_Death", 0.0f));
+
+        yield return new WaitUntil(() => currentPhase == GamePhase.P1_Tutorial_Death); // wait for state change
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Entering Tutorial Death");
+        inTutorialDeath = true;
+        UIManager.ActivateCustomCursor();
+
+        // Code to End all other WaitUntil()
+        WaveManager.LockAllEnemiesMovement();
+        Player.GetComponent<PlayerController>().LockShooting();
+        WaveManager.KillAllEnemyEntities(true);
+        PlayerController.SetShotOnceTrue();
+        HideExtraUIComponents();
+
+        yield return new WaitForSeconds(2.0f);
+        Player.GetComponent<PlayerController>().LockMovement();
+
+        modalAcknowleged = false; 
+        string modal_msg = "<color=red>YOU DIED</color> :(\n<color=#90d5ff>Respawning...</color>";
+        StartCoroutine(WaitForModalAcknowlegement(2, modal_msg, true));
+
+        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+        modalAcknowleged = false; // set messageAck to false against
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Tutorial Death] Modal Acknowledged for : " + modal_msg);
+
+        Player.GetComponent<PlayerHealth>().ResetPlayerHealth();
+
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Exiting Tutorial Death");
+        inTutorialDeath = false;
+
+        RespawnPlayer(death_phase);
     }
 
     void Start()
@@ -429,6 +758,7 @@ public class GameManager : MonoBehaviour
     public void SetMediumBarrier()
     {
         Barrier.transform.localScale = new Vector3(1.5f, 1.8f, 1.5f);
+        Barrier.transform.position = Nexus.transform.position + new Vector3(6.0f, 22.33f, -6.0f);
     }
 
     private void EnableBarrier()

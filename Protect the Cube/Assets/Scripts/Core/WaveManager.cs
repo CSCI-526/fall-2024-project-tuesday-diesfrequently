@@ -102,18 +102,46 @@ public class WaveManager : MonoBehaviour
         return temp_spawn_points;
     }
 
-    public void SpawnSingleEnemy(int step)
+    public void SpawnSingleEnemy(string spawn_type, Vector3 player_pos, float distance_from_player, int num_xp_spawned = 0)
     {
-        Vector3 spawnPosition = spawnConfigs[0][UnityEngine.Random.Range(0, spawnConfigs[0].Count)];
-
         // Instantiate the enemy at the selected spawn point
         string enemyName = "Enemy";
         GameObject enemyPrefab = GetEnemyPrefab(enemyName);
         GameObject enemyEntity = Instantiate(enemyPrefab);
         AddEnemyEntity(enemyEntity, GetEnemyIDX(enemyName));
 
-        if (step == 1) enemyEntity.transform.position = new Vector3(-TUTORIAL_SPAWN_DIST, 0, TUTORIAL_SPAWN_DIST);
-        if (step == 2) enemyEntity.transform.position = new Vector3(TUTORIAL_SPAWN_DIST / 4, 0, TUTORIAL_SPAWN_DIST / 4); // match dynamically determine this
+        if (spawn_type == "tutorial")
+        {
+            Vector2 projected_player_pos = new Vector2(player_pos.x, player_pos.z); // Map Player Pos to 2D Plane
+            float player_magnitude = projected_player_pos.magnitude; // Determine Mag of Position Vector
+            if (player_magnitude == 0) enemyEntity.transform.position = player_pos; // check for division by 0
+            else {
+                Vector2 player_direction = projected_player_pos / player_magnitude; // Get projected unit direction vector
+                Vector2 enemy_projected_pos = projected_player_pos + (player_direction * distance_from_player); // calculate new enemy projected pos vector
+                Vector3 enemy_pos = new Vector3(enemy_projected_pos.x, player_pos.y, enemy_projected_pos.y); // map to 3D enemy pos vector
+                enemyEntity.transform.position = enemy_pos; // set enemy spawn location
+            }
+        }
+
+        if (spawn_type == "shoot_tutorial")
+        {
+            Vector2 projected_player_pos = new Vector2(player_pos.x, player_pos.z); // Map Player Pos to 2D Plane
+            float player_magnitude = projected_player_pos.magnitude; // Determine Mag of Position Vector
+            if (player_magnitude == 0) enemyEntity.transform.position = player_pos; // check for division by 0
+            else
+            {
+                Vector2 player_direction = projected_player_pos / player_magnitude; // Get projected unit direction vector
+                Vector2 enemy_projected_pos = projected_player_pos + (player_direction * distance_from_player); // calculate new enemy projected pos vector
+                Vector3 enemy_pos = new Vector3(-enemy_projected_pos.x, player_pos.y, -enemy_projected_pos.y); // map to 3D enemy pos vector
+                enemyEntity.transform.position = enemy_pos; // set enemy spawn location
+            }
+        }
+
+        if (spawn_type == "1") enemyEntity.transform.position = new Vector3(-TUTORIAL_SPAWN_DIST, 0, TUTORIAL_SPAWN_DIST);
+        if (spawn_type == "2") enemyEntity.transform.position = new Vector3(TUTORIAL_SPAWN_DIST / 4, 0, TUTORIAL_SPAWN_DIST / 4); // match dynamically determine this
+
+        enemyEntity.GetComponent<EnemyHealth>().ActivateTutorialEXPDrop(num_xp_spawned);
+
         if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Update] EnemyCount: [" + string.Join(", ", EnemyCounter) + "]");
     }
 
@@ -130,6 +158,32 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    public void EnablePlayerTargetOnly()
+    {
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Enemies only Target Player");
+        foreach (var enemy in AllEnemyEntities)
+        {
+            if (enemy != null)
+            {
+                EnemyMove enemyMove = enemy.GetComponent<EnemyMove>();
+                if (enemyMove != null) enemyMove.OnlyTargetPlayer();
+            }
+        }
+    }
+
+    public void DisablePlayerTargetOnly()
+    {
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Enemies Target Everything");
+        foreach (var enemy in AllEnemyEntities)
+        {
+            if (enemy != null)
+            {
+                EnemyMove enemyMove = enemy.GetComponent<EnemyMove>();
+                if (enemyMove != null) enemyMove.TargetEverything();
+            }
+        }
+    }
+
     public void UnlockAllEnemiesMovement()
     {
         if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Unlocking All Enemies Movement");
@@ -140,6 +194,51 @@ public class WaveManager : MonoBehaviour
                 EnemyMove enemyMove = enemy.GetComponent<EnemyMove>();
                 if (enemyMove != null) enemyMove.UnlockMovement();
             }
+        }
+    }
+
+    public void KillAllEnemyEntities(bool activateAnimation = false)
+    {
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Killing ALL Enemy Entities ... ");
+
+        SetConstantXPDrops(0);
+
+        var enemiesToKill = new List<GameObject>(AllEnemyEntities);
+
+        // Reset Entity List + Counter
+        foreach (var enemy in enemiesToKill)
+        {
+            if (enemy != null && activateAnimation) StartCoroutine(SinkAndKillEnemy(enemy));
+            else if (enemy != null) enemy.GetComponent<EnemyHealth>().Die();
+        }
+
+        AllEnemyEntities.Clear();
+        for (int i = 0; i < EnemyCounter.Count; i++) { EnemyCounter[i] = 0; }
+
+    }
+
+    private IEnumerator SinkAndKillEnemy(GameObject enemy)
+    {
+        if (enemy != null)
+        {
+            float sinkDuration = 2.0f; 
+
+            Vector3 originalPosition = enemy.transform.position;
+            Vector3 targetPosition = new Vector3(originalPosition.x, -2.0f, originalPosition.z); 
+
+            float elapsedTime = 0f;
+
+            // Sinking Animation
+            while (elapsedTime < sinkDuration)
+            {
+                float newY = Mathf.Lerp(originalPosition.y, targetPosition.y, elapsedTime / sinkDuration);
+                enemy.transform.position = new Vector3(originalPosition.x, newY, originalPosition.z);
+
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            enemy.GetComponent<EnemyHealth>().Die(); // kill enemy once disappeared
         }
     }
 
@@ -339,14 +438,14 @@ public class WaveManager : MonoBehaviour
 
     public void AddEnemyEntity(GameObject enemy_entity, int enemyIDX)
     {
-        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Adding Enemy Entity ... ");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Adding Enemy Entity ... ");
         AllEnemyEntities.Add(enemy_entity);
         EnemyCounter[enemyIDX] += 1;
     }
 
     public void KillEnemyEntity(GameObject enemy_entity, int enemyIDX)
     {
-        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("Removing Enemy Entity ... ");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Wave Manager] Removing Enemy Entity ... ");
         AllEnemyEntities.Remove(enemy_entity);
         if (EnemyCounter[enemyIDX] > 0)
         {

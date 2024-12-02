@@ -25,12 +25,13 @@ public class CameraFollow : MonoBehaviour
 
     public void SetNewTarget(GameObject new_target, float transition_time, System.Action onComplete)
     {
+        if (GameManager.Instance.DEBUG_CAMERA_FOLLOW) Debug.Log("[Follow Camera - SetNewTarget] CAMERA: Starting transition to new target...");
         StartCoroutine(SetNewTargetCoroutine(new_target, transition_time, onComplete));
     }
 
     public IEnumerator SetNewTargetCoroutine(GameObject new_target, float transition_time, System.Action onComplete)
     {
-        Debug.Log("Locked onto new target!");
+        if (GameManager.Instance.DEBUG_CAMERA_FOLLOW) Debug.Log("[Camera Follow - CoRoutine] CAMERA: Transition started!");
         isCameraTransitioning = true; // Lock on regular update
 
         float elapsed = 0.0f;
@@ -49,7 +50,7 @@ public class CameraFollow : MonoBehaviour
         currTarget = new_target;
 
         isCameraTransitioning = false; // Resume normal updates
-        Debug.Log("Camera transition complete!");
+        if (GameManager.Instance.DEBUG_CAMERA_FOLLOW) Debug.Log("[Camera Follow - CoRoutine] CAMERA: Transition complete!");
 
         onComplete?.Invoke(); // callback
     }

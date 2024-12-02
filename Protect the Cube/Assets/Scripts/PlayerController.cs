@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         if (!isMovementLocked) rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
 
         // look at mouse
-        if (!isShootingLocked || !isMovementLocked) LookAtMouse();
+        LookAtMouse();
 
         //update shot time
         if (!isShootingLocked) timeSinceLastShot += Time.fixedDeltaTime;
@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
         if (!isShootingLocked)
         {
             hasPlayerShot = true; // boolean flag for the first time
-            //Debug.Log("hasPlayerShot is TRUE");
 
             // Check if projectile and gunBarrel are assigned
             if (projectile == null || gunBarrel == null)
@@ -146,7 +145,7 @@ public class PlayerController : MonoBehaviour
         } else { timeSinceLastShot = 0; }
     }
 
-public void ActivatePlayerGun()
+    public void ActivatePlayerGun()
     {
         Transform childTransform = transform.Find("Gun");
         if (childTransform != null) {
@@ -164,6 +163,16 @@ public void ActivatePlayerGun()
             playerGun.SetActive(false);
         }
         else Debug.LogError("[Player Controller] Player Gun Component not found!");
+    }
+
+    public void SetPlayerPos(UnityEngine.Vector3 pos)
+    {
+        this.transform.position = pos;
+    }
+
+    public void OffsetPlayerPos(UnityEngine.Vector3 offset)
+    {
+        this.transform.position = this.transform.position + offset;
     }
 
 
@@ -197,19 +206,24 @@ public void ActivatePlayerGun()
     // lock the player movement
     public void LockMovement()
     {
-        Debug.Log("[PlayerController] isMovementLocked = true");
         isMovementLocked = true;
         direction = UnityEngine.Vector3.zero; // Reset direction to prevent continued movement
     }
 
     // unlock the player movement
-    public void UnlockMovement() { Debug.Log("[PlayerController] isMovementLocked = false");  isMovementLocked = false; }
+    public void UnlockMovement() { isMovementLocked = false; }
 
     // lock the player movement
-    public void LockShooting() { Debug.Log("[PlayerController] isShootingLocked = true"); isShootingLocked = true; }
+    public void LockShooting() {
+        isShootingLocked = true;
+        DeactivatePlayerGun();
+    }
 
     // unlock the player movement
-    public void UnlockShooting() { Debug.Log("[PlayerController] isShootingLocked = false"); isShootingLocked = false; }
+    public void UnlockShooting() {
+        isShootingLocked = false;
+        ActivatePlayerGun();
+    }
 
     // check if player has pressed a movement key
     public static bool HasPressedMovementKeys()
@@ -219,4 +233,8 @@ public void ActivatePlayerGun()
 
     // check if player has "shot" yet
     public static bool HasShotOnce() { return hasPlayerShot; }
+
+    public static void SetShotOnceTrue() { hasPlayerShot = true; }
+    public static void SetShotOnceFalse() { hasPlayerShot = false;  }
+
 }

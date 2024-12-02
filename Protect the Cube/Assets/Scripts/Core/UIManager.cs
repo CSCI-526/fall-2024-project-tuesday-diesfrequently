@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] protected TextMeshProUGUI goldUI;
     [SerializeField] protected GameObject gameOverScreen;
-    [SerializeField] protected GameObject SelectGunTutorialUI;
+    //[SerializeField] protected GameObject SelectGunTutorialUI;
 
     [SerializeField] public GameObject rewardMenu;
     [SerializeField] public GameObject upgradePanel;
@@ -160,13 +160,13 @@ public class UIManager : MonoBehaviour
             else ShowPauseScreen();
         }
 
-        // code for UI Screen Flash on Dmg Taken
-        float atarget = (5 - _currentHealth) / 10.0f;
-        if (damageEffect.color.a > atarget) {
-            var color = damageEffect.color;
-            color.a -= 0.01f;
-            damageEffect.color = color;
-        }
+        //// code for UI Screen Flash on Dmg Taken
+        //float atarget = (5 - _currentHealth) / 10.0f;
+        //if (damageEffect.color.a > atarget) {
+        //    var color = damageEffect.color;
+        //    color.a -= 0.01f;
+        //    damageEffect.color = color;
+        //}
 
         // Displays the Inventory Panel
         foreach (Image wbox in inventoryWbox)
@@ -395,6 +395,11 @@ public class UIManager : MonoBehaviour
         InstructionModalWindow.GetComponent<InstructionPopup>().ShowInstruction(msg);
     }
 
+    public bool IsModalActive()
+    {
+        return InstructionModalWindow.activeInHierarchy;
+    }
+
     public void HideModalWindow()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -411,27 +416,27 @@ public class UIManager : MonoBehaviour
             InstructionModalWindow.GetComponent<InstructionPopup>().ConfigureModal(InstructionPopup.ModalType.FullScreen);
         } else if (modal_type == 1) {
             InstructionModalWindow.GetComponent<InstructionPopup>().ConfigureModal(InstructionPopup.ModalType.BottomBar);
+        } else if (modal_type == 2) {
+            InstructionModalWindow.GetComponent<InstructionPopup>().ConfigureModal(InstructionPopup.ModalType.WindowRect);
         } else { Debug.LogError("[UI Manager] Error! Incorrect Modal_Type."); }
     }
 
 
 public void ShowSelectGunTutorial()
     {
-        //SelectGunTutorialUI.SetActive(true);
         inventoryArrow.SetActive(true);
     }
 
     public void HideSelectGunTutorial()
     {
-        //SelectGunTutorialUI.SetActive(false);
         inventoryArrow.SetActive(false);
     }
 
-    public void ShowXPTutorial()
-    {
-        SelectGunTutorialUI.SetActive(true);
+    //public void ShowXPTutorial()
+    //{
+    //    SelectGunTutorialUI.SetActive(true);
 
-    }
+    //}
 
     // Author: Isabel --> Tutorial Functions
     public void Tutorial_ShowMovementUI()
@@ -528,14 +533,14 @@ public void ShowSelectGunTutorial()
 
     public void DamageEffect(int health)
     {   
-        Color color = damageEffect.color;
-        if (health > _currentHealth){
-            color.a = (5 - _currentHealth)/10.0f;
-        } else {
-            color.a = 0.8f;
-        }
-        _currentHealth = health;
-        damageEffect.color = color;
+        //Color color = damageEffect.color;
+        //if (health > _currentHealth){
+        //    color.a = (5 - _currentHealth)/10.0f;
+        //} else {
+        //    color.a = 0.8f;
+        //}
+        //_currentHealth = health;
+        //damageEffect.color = color;
     }
 
     public void FlashInventory(int itemIDX)

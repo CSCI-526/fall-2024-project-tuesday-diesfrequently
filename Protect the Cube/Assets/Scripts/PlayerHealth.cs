@@ -7,16 +7,27 @@ using UnityEngine.Animations;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] public int PLAYER_MAX_HEALTH = 5;
-
     [SerializeField] private float invincibilityDuration = 0.01f;
 
     [Header("UI References")]
     [SerializeField] private Slider hpBar;
     [SerializeField] private Slider playerHpBar;
 
+    public event Action<GameManager.GamePhase> Tutorial_OnDeath;
+
     private Animator animator;
     public int maxHealth { get; private set; }
-    public int currentHealth { get; private set; }
+
+    //public int currentHealth { get; private set; }
+    [SerializeField] private int CurrentHealth;
+
+    public int currentHealth
+    {
+        get { return CurrentHealth; }
+        private set { CurrentHealth = value; }
+    }
+
+
     private bool isInvincible = false;
 
     private InventoryManager inventoryManager;
@@ -34,7 +45,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        //SetupHealthUI();
         UpdateHPBar();
     }
 
@@ -51,11 +61,17 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator DelayedSubscribeToEvents()
     {
         // Wait until GameManager instance and InventoryManager are initialized
-        // yield return new WaitUntil(() => GameManager.Instance != null && GameManager.Instance.InventoryManager != null);
         yield return new WaitUntil(() => GameManager.Instance?.InventoryManager != null);
 
         inventoryManager = GameManager.Instance.InventoryManager;
         inventoryManager.PlayerHealth_OnPlayerHealthUpdate += AddPlayerHealth;
+    }
+
+    public void ResetPlayerHealth()
+    {
+        Debug.Log("[PlayerHealth] Resetting Player Death");
+        currentHealth = PLAYER_MAX_HEALTH;
+        UpdateHPBar();
     }
 
     public void TakeDamage(int amount = 1)
@@ -73,8 +89,29 @@ public class PlayerHealth : MonoBehaviour
         UpdateHPBar();
         GameManager.Instance.UIManager.DamageEffect(currentHealth);
         // Die() if below 0 hp, Momentary Invincibility otherwise
-        if (currentHealth <= 0) Die();
-        else StartCoroutine(InvincibilityCoroutine());
+        if (currentHealth <= 0)
+        {
+            Debug.Log("[PlayerHealth] Player has DIED (currentHealth <= 0)");
+            if (GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Dodging_Tutorial ||
+                GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Movement_Tutorial ||
+                GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Shooting_Tutorial)
+            {
+                StartCoroutine(InvincibilityCoroutine());
+                
+                if (!GameManager.Instance.inTutorialDeath) {
+                    Debug.Log("[PlayerHealth] Invoking Tutorial Death");
+                    Tutorial_OnDeath?.Invoke(GameManager.Instance.currentPhase);
+                }
+                else { }
+
+            }
+            else { Die(); }
+
+        }
+        else
+        {
+            StartCoroutine(InvincibilityCoroutine());
+        }
 
         // Update Analytics
         Analytics_OnPlayerHPLoss?.Invoke(AnalyticsManager.TYPE_PLAYER_LOSS_HP);

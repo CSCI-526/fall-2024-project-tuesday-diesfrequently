@@ -43,6 +43,7 @@ public class ExperiencePickup : MonoBehaviour
     {
         if (other.tag == "Player"){
             other.GetComponent<PlayerLevels>().add_exp(exp_value, gameObject);
+            other.GetComponent<PlayerLevels>().markXPCollected();
             Destroy(gameObject);
             // CreateUIOrbAtCenter();
         }
