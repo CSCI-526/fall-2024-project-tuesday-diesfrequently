@@ -55,7 +55,7 @@ public class ClickUpgrade : MonoBehaviour
 
     public void AttemptUpgrade()
     {
-        if (upgradeable && PayCostIfPossible(goldRequired) && turretShootScript.placed && turretShootScript.ugpradeCooldown > 0.10f)
+        if (upgradeable && turretShootScript.placed && turretShootScript.ugpradeCooldown > 0.10f && PayCostIfPossible(goldRequired) )
         {
             // GameManager.Instance.UIManager.ShowUpgradeScreen();
             upgrade();
