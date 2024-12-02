@@ -54,10 +54,10 @@ public class GameManager : MonoBehaviour
         switch (currentPhase)
         {
             case GamePhase.Initialization:
-                StartInitialization();
+                StartUIInitialization();
                 break;
             case GamePhase.BasicTutorial_Start:
-                StartBasicTutorialStart();
+                SetupTutorial();
                 break;
             case GamePhase.BasicTutorial_Movement:
                 StartMovementTutorial();
@@ -85,8 +85,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void StartInitialization() {
-        // do not show certain UI elements
+    private void StartUIInitialization() {
+
+        // Hide Certain UI Elements
         UIManager.HideModalWindow();
         UIManager.HideMinimap();
         UIManager.HideNexusHealthSlider();
@@ -95,37 +96,36 @@ public class GameManager : MonoBehaviour
         UIManager.HideEXPSlider();
         UIManager.HideWaveUI();
 
-        // Activate Nexus + Player Animations
-        Player.SetActive(true);
-        Nexus.SetActive(true);
-        EnableBarrier();
-        SetSmallBarrier();
-        Nexus.GetComponent<SpawnAnimation>().TriggerSpawnSequence();
-
+        // Activate Correct Cursor to use
+        UIManager.ActivateCustomCursor();      
 
         SetGamePhase(GamePhase.BasicTutorial_Start);
         Debug.Log("Finished GamePhase.Initialization Phase");
     }
 
-    private void StartBasicTutorialStart()
+    private void SetupTutorial()
     {
         // Spawn the player and nexus on the map
         Debug.Log("Starting GamePhase.BasicTutorial_Start Phase");
+
+        EnableBarrier();
+        SetSmallBarrier();
+
+        // Player State 1
+        Player.SetActive(true);
+        Player.GetComponent<PlayerController>().LockMovement();
+        Player.GetComponent<PlayerController>().LockShooting();
+        Player.GetComponent<PlayerController>().DeactivatePlayerGun();
         
 
-        Player.GetComponent<PlayerController>().LockShooting();
-        Player.GetComponent<PlayerController>().LockMovement();
-        Player.GetComponent<PlayerController>().DeactivatePlayerGun();
-
-        WaveManager.LockAllEnemiesMovement();
-
-        UIManager.ActivateCustomCursor(); // sets CustomCursor        
+        Nexus.SetActive(true);
+        Nexus.GetComponent<SpawnAnimation>().TriggerSpawnSequence();
 
         Debug.Log("Ending GamePhase.BasicTutorial_Start Phase");
-        StartCoroutine(WaitForInitializationEnd());
+        StartCoroutine(WaitForTutorialSetupEnd());
     }
 
-    private IEnumerator WaitForInitializationEnd()
+    private IEnumerator WaitForTutorialSetupEnd()
     {
         yield return new WaitForSeconds(0.5f); // wait 1s before state change
         SetGamePhase(GamePhase.BasicTutorial_Movement);
