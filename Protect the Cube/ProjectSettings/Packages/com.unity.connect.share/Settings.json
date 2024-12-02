@@ -19,7 +19,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"/Users/amy/Desktop/csci526/fall-2024-project-tuesday-diesfrequently/Protect the Cube/WebGL Builds;;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/CSCI-526/Builds/Gold WebGL;/Users/amy/Desktop/csci526/fall-2024-project-tuesday-diesfrequently/Protect the Cube/WebGL Builds;;;;;;;;\"}"
             }
         ]
     }

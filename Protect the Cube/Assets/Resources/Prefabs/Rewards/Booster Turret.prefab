@@ -534,7 +534,7 @@ MonoBehaviour:
   colorDiffAfterPlace: 50
   antenna: {fileID: 6931359815143944211}
   rotationSpeed: 45
-  radius: 3
+  radius: 4
 --- !u!65 &5651775863001095746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -800,7 +800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5863192677435403827, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5863192677435403827, guid: d70f3e1e342769245bf50f75a6843496, type: 3}
       propertyPath: m_Materials.Array.data[0]
