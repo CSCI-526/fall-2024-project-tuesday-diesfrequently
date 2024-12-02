@@ -105,7 +105,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         UpdateHPBar();
-        GameManager.Instance.UIManager.DamageEffect(currentHealth);
+        //GameManager.Instance.UIManager.DamageEffect(currentHealth);
     }
 
     private void UpdateHPBar()
