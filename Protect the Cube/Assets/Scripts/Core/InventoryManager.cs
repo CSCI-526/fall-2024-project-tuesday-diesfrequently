@@ -119,6 +119,13 @@ public class InventoryManager : MonoBehaviour
         if (playerHealthSnapshot < _playerHP.PLAYER_MAX_HEALTH && playerLevelSnapshot >= 2) { AddPotentialReward("Player HP", ref forcedReward, ref forcedRewardCount); }
         else { RemovePotentialReward("Player HP"); }
         // post level 10, give nexus health regen as an option for players
+        if (GameManager.Instance.DEBUG_INVENTORY_MANAGER){
+            Debug.Log("weeee nexus gameobject: " + GameManager.Instance.Nexus+ "nexus component" + GameManager.Instance.Nexus.GetComponent<Nexus>());
+            Debug.Log("nexus health snapshot: " + nexusHealthSnapshot + "max health: " + GameManager.Instance.Nexus.GetComponent<Nexus>().maxHealth);
+            Debug.Log("player level snapshot: " + playerLevelSnapshot);
+            Debug.Log("forced reward: " + forcedReward + "forced reward count: " + forcedRewardCount);
+        }
+        
         if (nexusHealthSnapshot < GameManager.Instance.Nexus.GetComponent<Nexus>().maxHealth && playerLevelSnapshot >= 5) { AddPotentialReward("Nexus HP", ref forcedReward, ref forcedRewardCount); }
         else { RemovePotentialReward("Nexus HP"); }
 

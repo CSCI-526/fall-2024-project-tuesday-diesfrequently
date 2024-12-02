@@ -72,6 +72,8 @@ public class UIManager : MonoBehaviour
     {
         // References to Managers
         inventoryManager = GameManager.Instance.InventoryManager;
+        inventSlotMapping = new Dictionary<string, int>();
+
     }
 
     // Start is called before the first frame update
@@ -87,8 +89,8 @@ public class UIManager : MonoBehaviour
         expBar = uiObject.transform.Find("EXP").gameObject;
 
         RewardUIMask.SetActive(false);
-
         ActivateCustomCursor();
+
         UpdateUI();
     }
 
@@ -111,7 +113,7 @@ public class UIManager : MonoBehaviour
         Cursor.visible = false;
 
         CustomCursor.SetActive(true);
-        CustomCursor.GetComponent<FollowMouse>().ActivateTutorialShootingCursor();
+        CustomCursor.GetComponent<FollowMouse>().DeactivateTutorialShootingCursor();
     }
 
     public void ActivateCustomPlacementCursor() // SetCursorHand
@@ -151,7 +153,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         // prevent "esc" error in WebGL builds
-        //if (Input.GetMouseButtonDown(0)) Cursor.visible = false;
+        if (Cursor.visible == true) Cursor.visible = false;
 
         if (Input.GetKeyDown(KeyCode.P) && canPause)
         {
@@ -502,6 +504,47 @@ public void ShowSelectGunTutorial()
     public void UpdateRewardsUI(GameObject reward_opt_1, GameObject reward_opt_2, GameObject reward_opt_3)
     {
         rewardMenu.GetComponent<RewardChoiceUI>().UpdateRewardChoices(reward_opt_1, reward_opt_2, reward_opt_3);
+    }
+
+    public void addInventoryToInventoryBar(int inventoryIDX, string inventoryName, int inventoryCount){
+        if (inventSlotMapping.ContainsKey(inventoryName))
+        {
+            //update number directly
+            Image slot = inventorySlots[inventSlotMapping[inventoryName]];
+            TextMeshProUGUI count = slot.GetComponentInChildren<TextMeshProUGUI>();
+            if (count != null)
+            {
+                count.text = inventoryCount.ToString();
+            }
+            else
+            {
+                Debug.Log("Text component not found.");
+            }
+        }
+        else
+        {
+            //Find next empty slot
+            for (int i = 0; i < inventorySlots.Length; i++){
+                Image slot = inventorySlots[i];
+                if(slot.transform.childCount == 0){
+                    Image inventoryItemPrefab = inventoryItemPrefabs[inventoryIDX];
+                    Image instantiatedPrefab = Instantiate(inventoryItemPrefab, slot.transform);
+                    instantiatedPrefab.transform.SetParent(slot.transform);
+                    inventSlotMapping.Add(inventoryName, i);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void removeInventoryFromInventoryBar(String inventoryName){
+        Image slot = inventorySlots[inventSlotMapping[inventoryName]];
+        foreach (Transform child in slot.transform)
+        {
+            // Destroy the child GameObject
+            Destroy(child.gameObject);
+        }
+        inventSlotMapping.Remove(inventoryName);
     }
 
     public void UpdateInventoryUI()
