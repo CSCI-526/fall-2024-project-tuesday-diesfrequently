@@ -534,7 +534,7 @@ MonoBehaviour:
   colorDiffAfterPlace: 50
   antenna: {fileID: 6931359815143944211}
   rotationSpeed: 45
-  radius: 3
+  radius: 4
 --- !u!65 &5651775863001095746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6852214484739291977}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81f0530667ca7ee429a3bcea978d4d73, type: 3}
   m_Name: 
@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 71639038946376711}
-  radius: 3
+  radius: 4
   useTurretRange: 1
   alwaysShow: 0
 --- !u!114 &5425998045623633816

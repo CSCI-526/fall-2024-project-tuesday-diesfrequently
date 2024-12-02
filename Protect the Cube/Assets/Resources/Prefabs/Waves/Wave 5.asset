@@ -15,15 +15,15 @@ MonoBehaviour:
   spawnConfig: 1
   enemyList:
   - type: 0
-    amount: 6
+    amount: 4
     spawnRate: 0
     spawnDelay: 0
   - type: 1
-    amount: 6
+    amount: 3
     spawnRate: 0
     spawnDelay: 0
   - type: 5
-    amount: 4
+    amount: 3
     spawnRate: 0
     spawnDelay: 0
   - type: 4
