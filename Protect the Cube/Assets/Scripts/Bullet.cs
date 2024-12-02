@@ -56,40 +56,34 @@ public class Bullet : MonoBehaviour
     {
         KillBullet();
     }
-    // protected virtual void HitOre(Collider other) 
-    // {
-    //     other.GetComponent<Ore>().TakeDamage(damage);
-    //     KillBullet();
-    // }
+    protected virtual void HitOre(Collider other) 
+    {
+        bool damageTaken = false;
+
+        Tier1Ore ore_t1 = other.GetComponent<Tier1Ore>();
+        if (ore_t1 != null) { ore_t1.TakeDamage(damage); damageTaken = true; }
+
+        if (!damageTaken)
+        {
+            Tier2Ore ore_t2 = other.GetComponent<Tier2Ore>();
+            if (ore_t2 != null) { ore_t2.TakeDamage(damage); damageTaken = true; }
+        }
+
+        if (!damageTaken)
+        {
+            Tier3Ore ore_t3 = other.GetComponent<Tier3Ore>();
+            if (ore_t3 != null) { ore_t3.TakeDamage(damage); damageTaken = true; }
+        }
+
+        if (GameManager.Instance.useBulletPool) BulletPool.Instance.ReturnBullet(gameObject);
+        else Destroy(gameObject);
+    }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             HitEnemy(other);
-        }
-        else if (other.CompareTag("Ore"))
-        {
-            bool damageTaken = false;
-
-            Tier1Ore ore_t1 = other.GetComponent<Tier1Ore>();
-            if (ore_t1 != null) { ore_t1.TakeDamage(damage); damageTaken = true; }
-
-            if (!damageTaken)
-            {
-                Tier2Ore ore_t2 = other.GetComponent<Tier2Ore>();
-                if (ore_t2 != null) { ore_t2.TakeDamage(damage); damageTaken = true; }
-            }
-
-            if (!damageTaken)
-            {
-                Tier3Ore ore_t3 = other.GetComponent<Tier3Ore>();
-                if (ore_t3 != null) { ore_t3.TakeDamage(damage); damageTaken = true; }
-            }
-
-            if (GameManager.Instance.useBulletPool) BulletPool.Instance.ReturnBullet(gameObject);
-            else Destroy(gameObject);
-            // HitOre(other);
         }
         else if (other.CompareTag("Wall"))
         {

@@ -15,7 +15,7 @@ MonoBehaviour:
   spawnConfig: 1
   enemyList:
   - type: 0
-    amount: 6
+    amount: 5
     spawnRate: 0
     spawnDelay: 0
   - type: 4
@@ -23,11 +23,11 @@ MonoBehaviour:
     spawnRate: 0
     spawnDelay: 0
   - type: 5
-    amount: 4
+    amount: 3
     spawnRate: 0
     spawnDelay: 0
   - type: 1
-    amount: 4
+    amount: 3
     spawnRate: 0
     spawnDelay: 0
   spawnDelay: 1

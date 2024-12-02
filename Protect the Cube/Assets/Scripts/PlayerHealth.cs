@@ -138,11 +138,18 @@ public class PlayerHealth : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void AddPlayerHealth()
+    public void AddPlayerHealth()
     {
         currentHealth = Mathf.Min(currentHealth + InventoryManager.PLAYER_HEALTH_INCREASE, maxHealth);
         UpdateHPBar();
         GameManager.Instance.UIManager.DamageEffect(currentHealth);
+    }
+
+    public void AddPlayerHealth(int amount)
+    {
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        UpdateHPBar();
+        //GameManager.Instance.UIManager.DamageEffect(currentHealth);
     }
 
     private void UpdateHPBar()

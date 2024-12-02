@@ -8125,6 +8125,14 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 35.8
       objectReference: {fileID: 0}
+    - target: {fileID: 4867235699884587657, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867235699884587657, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.0995178
+      objectReference: {fileID: 0}
     - target: {fileID: 5288455270019461155, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -8188,6 +8196,18 @@ PrefabInstance:
     - target: {fileID: 7659804913446454785, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_SizeDelta.y
       value: -7.5550003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659804913446454785, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3584281
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659804913446454785, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3584281
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659804913446454785, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3584281
       objectReference: {fileID: 0}
     - target: {fileID: 7659804913446454785, guid: af07e4bbd1e5f1a429a0dfff817ef0f4, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8357,13 +8377,17 @@ PrefabInstance:
       propertyPath: healthbarAnim
       value: 
       objectReference: {fileID: 741020247}
+    - target: {fileID: 1267738778565106773, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
+      propertyPath: PLAYER_MAX_HEALTH
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3771889541316447260, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.86602557
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: 3771889541316447260, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.4999997
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_Name
@@ -8472,7 +8496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2676073696104446126, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
       propertyPath: enableAnimation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6716108328489607673, guid: e4084860b2d36c2468145aa8edc4c065, type: 3}
       propertyPath: m_AnchorMax.x
