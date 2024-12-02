@@ -12,10 +12,27 @@ public class turretShoot : Building
     [SerializeField] public float fireRate = 5.0f;
     public float maxRange = 50.0f;
     [SerializeField] float turnSpeed = 15.0f;
+    [SerializeField] float upgradeExponentPerLevel = 2;
+    [SerializeField] float boostMultiplier = 1.3f;
 
     [SerializeField] GameObject projectile;
     [SerializeField] GameObject gunBarrel;
     protected GameObject target;
+
+    private float originalFireRate;
+    private float originalMaxRange;
+    private float originalTurnSpeed;
+    public bool canUpgrade = false;
+    public float ugpradeCooldown = 0.0f;
+
+    void Awake()
+    {
+        originalFireRate = fireRate;
+        originalMaxRange = maxRange;
+        originalTurnSpeed = turnSpeed;
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +48,8 @@ public class turretShoot : Building
             FindTarget();
             Aim();
             Shoot();
+            ugpradeCooldown += Time.deltaTime;
+            
         }
     }
     public override void OnPlace()
@@ -118,9 +137,13 @@ public class turretShoot : Building
 
     override public void Boost()
     {
-        ++turnSpeed;
-        ++fireRate;
-        ++maxRange;
+        turnSpeed *= boostMultiplier;
+        fireRate *= boostMultiplier;
+        maxRange *= boostMultiplier;
+        originalFireRate *= boostMultiplier;
+        originalMaxRange *= boostMultiplier;
+        originalTurnSpeed *= boostMultiplier;  
+
     }
     void CheckForBoost(float radius = 3.0f)
     {
@@ -138,22 +161,24 @@ public class turretShoot : Building
     internal void upgrade(int level, string buildingName)
     {
         Debug.Log("[Analytics][Prio] Level: " + level + " and buildingName: " + buildingName);
+        int multiplier = (int)Math.Pow(level, upgradeExponentPerLevel);
+        maxRange += originalMaxRange/5;
+        turnSpeed += originalTurnSpeed/2 * multiplier;
+        fireRate += originalFireRate/4 * multiplier;
+        Debug.Log($"[Upgrade] Multiplier: {multiplier}");
+        Debug.Log($"[Upgrade] Before - Max Range: {originalMaxRange}, Turn Speed: {originalTurnSpeed}, Fire Rate: {originalFireRate}");
+        Debug.Log($"[Upgrade] After - Max Range: {maxRange}, Turn Speed: {turnSpeed}, Fire Rate: {fireRate}");
         if (buildingName == "Flamethrower Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 3);
-            maxRange += maxRange/5;
-            turnSpeed += 2;
+            
         }else if (buildingName == "Gatling Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 2);
-            turnSpeed += 2;
-            fireRate += 3;
+           
         }else if (buildingName == "Gun Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 1);
-            fireRate += 3;
-            turnSpeed += 3; 
+          
         }else if (buildingName == "Sniper Turret"){
             GameManager.Instance.AnalyticsManager.UpdateTurretLevels(level, 4);
-            fireRate += 0.5f;
-            turnSpeed += 3;
         }
         RangeIndicator[] indicators = GetComponents<RangeIndicator>();
         foreach (RangeIndicator i in indicators)

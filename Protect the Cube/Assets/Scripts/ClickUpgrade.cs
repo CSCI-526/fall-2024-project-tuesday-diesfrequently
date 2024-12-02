@@ -18,6 +18,7 @@ public class ClickUpgrade : MonoBehaviour
     private bool upgradeable = true;
     private PlayerLevels playerLevelObject;
     public List<GameObject> turrets;
+    private turretShoot turretShootScript;
 
     public int level = 0;
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class ClickUpgrade : MonoBehaviour
     {
         id  = gameObject.GetInstanceID();
         playerLevelObject = GameObject.FindWithTag("Player").GetComponent<PlayerLevels>();
-
+        turretShootScript = gameObject.GetComponent<turretShoot>();
     }
 
     // Update is called once per frame
@@ -54,7 +55,7 @@ public class ClickUpgrade : MonoBehaviour
 
     public void AttemptUpgrade()
     {
-        if (upgradeable && PayCostIfPossible(goldRequired))
+        if (upgradeable && PayCostIfPossible(goldRequired) && turretShootScript.placed && turretShootScript.ugpradeCooldown > 0.10f)
         {
             // GameManager.Instance.UIManager.ShowUpgradeScreen();
             upgrade();
