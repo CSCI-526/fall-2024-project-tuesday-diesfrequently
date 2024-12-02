@@ -61,6 +61,7 @@ public class PlayerLevels : MonoBehaviour
                 while (currentXP >= xpNeededForLevel)
                 {
                     currentLevel += 1;
+                    GetComponent<PlayerHealth>().AddPlayerHealth(1); // heal 1hp
                     if (currentLevel == 1) isPlayerLevelTwo = true; // starts at lvl 0
                     GameManager.Instance.AnalyticsManager.UpdatePlayerLevel(currentLevel); 
 
