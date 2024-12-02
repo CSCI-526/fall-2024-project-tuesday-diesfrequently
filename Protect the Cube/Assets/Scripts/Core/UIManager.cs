@@ -232,6 +232,13 @@ public class UIManager : MonoBehaviour
         showExpBar = false;
     }
 
+    public void ShowEXPSlider()
+    {
+        expUI.gameObject.SetActive(true);
+        expSlider.gameObject.SetActive(true);
+        showExpBar = true;
+    }
+
     public void ShowNexusHealthSlider() { 
         nexusHPSlider.SetActive(true);
         showNexusBar = true;

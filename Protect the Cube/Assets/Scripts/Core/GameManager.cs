@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         P2_Setup_Tutorial,
         BasicTutorial_Reward,
         BasicTutorial_Placement,
+        HandCraftedWaveSetup,
         HandCraftedWaves,
         AdvancedTutorial,
         DynamicWaves,
@@ -101,6 +102,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GamePhase.BasicTutorial_Placement:
                 StartPlacementTutorial();
+                break;
+            case GamePhase.HandCraftedWaveSetup:
+                SetupHandCraftedWaves();
                 break;
             case GamePhase.HandCraftedWaves:
                 StartHandCraftedWaves();
@@ -576,14 +580,41 @@ public class GameManager : MonoBehaviour
         else yield break;
     }
 
+    private void SetupHandCraftedWaves()
+    {
+        UIManager.ShowNexusHealthSlider();
+        UIManager.ShowPlayerHealthSlider();
+        UIManager.ActivateInventoryUI();
+        UIManager.ShowEXPSlider();
+        UIManager.ShowWaveUI();
+        UIManager.Tutorial_HideMovementUI();
+
+        Nexus.transform.position = Nexus.GetComponent<SpawnAnimation>().endPosition;
+
+        UIManager.HideModalWindow();
+        WaveManager.KillAllEnemyEntities();
+
+        // Activate Correct Cursor to use
+        UIManager.ActivateShootingCursor();
+
+        ResetGlobalTutorialFlags();    
+
+        // State Change
+        if (currentPhase == GamePhase.HandCraftedWaveSetup && !inTutorialDeath)
+        {
+            StartCoroutine(BufferNextPhaseStart(GamePhase.HandCraftedWaves, "HandCraftedWaveSetup", "HandCraftedWaves", 0.50f));
+        }
+        else Debug.Log("Problem with Hand Crafted Wave Setup"); return;
+    }
+
     private void StartHandCraftedWaves()
     {
-        Debug.Log("ENTERING GamePhase.HandCraftedWaves Phase");
         DisableBarrier();
         Player.GetComponent<PlayerController>().UnlockMovement();
         Player.GetComponent<PlayerController>().UnlockShooting();
         Player.GetComponent<PlayerHealth>().ResetPlayerHealth();
         Nexus.GetComponent<Nexus>().ResetNexusHealth();
+
         UIManager.ShowWaveUI();
         WaveManager.UnlockAllEnemiesMovement();
         UIManager.ShowMinimap();

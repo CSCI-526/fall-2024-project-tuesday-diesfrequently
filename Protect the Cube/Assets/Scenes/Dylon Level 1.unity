@@ -7842,7 +7842,7 @@ PrefabInstance:
       objectReference: {fileID: 963194225}
     - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: StartPhase
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: CurrentPhase
