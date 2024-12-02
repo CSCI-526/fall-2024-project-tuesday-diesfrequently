@@ -508,6 +508,9 @@ public class GameManager : MonoBehaviour
 
         // PAUSE
 
+        
+        
+
         string modal_msg = "Don't let <color=red>ENEMIES</color> destroy <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
@@ -520,7 +523,8 @@ public class GameManager : MonoBehaviour
         WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 10.0f, 1);
         //WaveManager.EnablePlayerTargetOnly();
         PlayerController.SetShotOnceFalse(); // reset flag for next WaitUntil()
-        yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
+        Player.GetComponent<PlayerController>().UnlockMovement();
+        yield return new WaitUntil(() => WaveManager.AllEnemiesKilled());
         Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
         if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
 
