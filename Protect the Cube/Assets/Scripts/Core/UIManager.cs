@@ -511,7 +511,6 @@ public void ShowSelectGunTutorial()
         if (inventSlotMapping.ContainsKey(inventoryName))
         {
             //update number directly
-            Debug.Log("try update number directly");
             Image slot = inventorySlots[inventSlotMapping[inventoryName]];
             TextMeshProUGUI count = slot.GetComponentInChildren<TextMeshProUGUI>();
             if (count != null)
@@ -520,17 +519,15 @@ public void ShowSelectGunTutorial()
             }
             else
             {
-                Debug.LogError("Text component not found.");
+                Debug.Log("Text component not found.");
             }
         }
         else
         {
             //Find next empty slot
-            Debug.Log("try find empty slot");
             for (int i = 0; i < inventorySlots.Length; i++){
                 Image slot = inventorySlots[i];
                 if(slot.transform.childCount == 0){
-                    Debug.Log("Found a slot");
                     Image inventoryItemPrefab = inventoryItemPrefabs[inventoryIDX];
                     Image instantiatedPrefab = Instantiate(inventoryItemPrefab, slot.transform);
                     instantiatedPrefab.transform.SetParent(slot.transform);
