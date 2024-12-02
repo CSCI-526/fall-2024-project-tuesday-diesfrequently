@@ -75,6 +75,13 @@ public class Nexus : MonoBehaviour
          HandleXPSpawn();
     }
 
+    public void ResetNexusHealth()
+    {
+        Debug.Log("[NexusHealth] Resetting Nexus Health");
+        currentHealth = NEXUS_MAX_HEALTH;
+        UpdateHPBar();
+    }
+
     private void AddNexusHealth()
     {
         currentHealth = Mathf.Min(currentHealth + InventoryManager.NEXUS_HEALTH_INCREASE, maxHealth);

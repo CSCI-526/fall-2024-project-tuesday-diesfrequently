@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnAnimation : MonoBehaviour
 {
     public bool enableAnimation = false;
-    protected Vector3 startPosition;
+    public Vector3 startPosition;
     protected Vector3 endPosition;
     [SerializeField] float duration = 2.0f;
     public Vector3 offset = new Vector3(0.0f, -5.0f, 0.0f);
@@ -15,9 +15,9 @@ public class SpawnAnimation : MonoBehaviour
     private bool isNexusAtFinalPosition;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        isNexusAtFinalPosition = false; 
+        isNexusAtFinalPosition = false;
         endPosition = transform.position;
         startPosition = endPosition + offset;
         transform.position = startPosition;
@@ -38,4 +38,5 @@ public class SpawnAnimation : MonoBehaviour
     public void TriggerSpawnSequence() { enableAnimation = true; }
 
     public bool isNexusInSpawnPos() { return isNexusAtFinalPosition;  }
+    public void ResetIsNexusInSpawnPos() { isNexusAtFinalPosition = false;  }
 }

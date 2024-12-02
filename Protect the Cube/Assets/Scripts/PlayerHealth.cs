@@ -92,9 +92,16 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("[PlayerHealth] Player has DIED (currentHealth <= 0)");
-            if (GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Dodging_Tutorial ||
+            if (GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Setup_Tutorial ||
+                GameManager.Instance.currentPhase == GameManager.GamePhase.P1_TakeDamage_Tutorial ||
                 GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Movement_Tutorial ||
-                GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Shooting_Tutorial)
+                GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Dodging_Tutorial ||
+                GameManager.Instance.currentPhase == GameManager.GamePhase.P1_Shooting_Tutorial ||
+                GameManager.Instance.currentPhase == GameManager.GamePhase.P1_XP_Collection_Tutorial ||
+                GameManager.Instance.currentPhase == GameManager.GamePhase.P2_Setup_Tutorial ||
+                GameManager.Instance.currentPhase == GameManager.GamePhase.BasicTutorial_Reward ||
+                GameManager.Instance.currentPhase == GameManager.GamePhase.BasicTutorial_Placement
+                )
             {
                 StartCoroutine(InvincibilityCoroutine());
                 

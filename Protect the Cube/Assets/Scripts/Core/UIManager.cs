@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
     private bool canPause = true;
     public bool rewardMenuActive = false;
     private int _currentHealth = 5;
-    static private bool firstRewardScreenEnded = false;
+    [SerializeField] static private bool firstRewardScreenEnded = false;
     private bool goldActivated = false;
     private bool showNexusBar = false;
     private bool showPlayerBar = false;
@@ -371,10 +371,12 @@ public class UIManager : MonoBehaviour
         ActivateInventoryUI(); // tutorial
         Time.timeScale = 1.0f;
         inventoryBar.SetActive(true);
+        Debug.Log("[UI Manager] (outside) firstRewardScreenEnded: " + firstRewardScreenEnded);
         if (!firstRewardScreenEnded)
         {
             ShowSelectGunTutorial(); // show tutorial text (first time only
             firstRewardScreenEnded = true;
+            Debug.Log("[UI Manager] (inside) firstRewardScreenEnded: " + firstRewardScreenEnded);
         }
         expBar.SetActive(true);
     }
@@ -552,6 +554,13 @@ public void ShowSelectGunTutorial()
 
     public static bool FirstRewardScreenEnded()
     {
+        Debug.Log("[UI Manager] (gettig) firstRewardScreenEnded: " + firstRewardScreenEnded);
         return firstRewardScreenEnded;
+    }
+
+    public static void ResetFirstRewardsScreenEnded()
+    {
+        firstRewardScreenEnded = false;
+        Debug.Log("[UI Manager] (resetting) firstRewardScreenEnded: " + firstRewardScreenEnded);
     }
 }

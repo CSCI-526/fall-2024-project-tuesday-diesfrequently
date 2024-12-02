@@ -173,5 +173,6 @@ public class PlaceObject : MonoBehaviour
 
     static public bool turretPickedUp() { return isItemPickedUp; }
     static public bool firstTurretPlaced() { return isFirstTurretPlaced; }
+    static public void ResetFirstTurretPlaced() { isFirstTurretPlaced = false;  }
 
 }

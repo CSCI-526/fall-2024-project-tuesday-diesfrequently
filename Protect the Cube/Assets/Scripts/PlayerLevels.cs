@@ -91,5 +91,6 @@ public class PlayerLevels : MonoBehaviour
     }
 
     public bool isLevelTwo() { return isPlayerLevelTwo; }
+    public void ResetIsLevelTwo() { isPlayerLevelTwo = false; }
 
 }
