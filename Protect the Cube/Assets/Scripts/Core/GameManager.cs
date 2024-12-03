@@ -282,6 +282,8 @@ public class GameManager : MonoBehaviour
 
         ResetGlobalTutorialFlags();
 
+        UIManager.ResetDamageEffect();
+
         if (currentPhase == GamePhase.Initialization && !inTutorialDeath)
         {
             if (isPauseMenuRestart)

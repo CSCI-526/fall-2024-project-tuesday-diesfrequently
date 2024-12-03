@@ -640,6 +640,12 @@ public void ShowSelectGunTutorial()
         damageEffect.color = color;
     }
 
+    public void ResetDamageEffect()
+    {
+        Color color = damageEffect.color;
+        color.a = 0.0f;
+        damageEffect.color = color;
+    }
     // public void FlashInventory(int itemIDX)
     // {   
     //     Color c = inventoryWbox[itemIDX].color;
