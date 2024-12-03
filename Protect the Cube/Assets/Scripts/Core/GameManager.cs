@@ -843,7 +843,7 @@ public class GameManager : MonoBehaviour
         WaveManager.LockAllEnemiesMovement();
         Player.GetComponent<PlayerController>().LockShooting();
         yield return new WaitForSeconds(0.5f);
-        Player.GetComponent<PlayerController>().LockMovement();
+        //Player.GetComponent<PlayerController>().LockMovement();
 
         UIManager.ShowSelectGunTutorial();
 
