@@ -273,11 +273,11 @@ public class WaveManager : MonoBehaviour
 
     private void PruneMissingEntities()
     {
-        if(AllEnemyEntities.Count > 0)
+        if(AllEnemyEntities.Count == 1)
         {
             foreach (var enemy in AllEnemyEntities)
             {
-                if (enemy.GetComponent<EnemyHealth>() == null)
+                if (enemy == null)
                 {
                     AllEnemyEntities.Remove(enemy);
                     Debug.Log("Removed Missing Entity");
@@ -449,7 +449,16 @@ public class WaveManager : MonoBehaviour
 
     public bool AllEnemiesKilled()
     {
-        return AllEnemyEntities.Count == 0;
+        bool result = true;
+        foreach(var count in EnemyCounter)
+        {
+            if (count > 0)
+            {
+                result = false;
+            }
+        }
+
+        return AllEnemyEntities.Count == 0 || result;
     }
 
     public void AddEnemyEntity(GameObject enemy_entity, int enemyIDX)
