@@ -81,8 +81,16 @@ public class PlayerLevels : MonoBehaviour
             //markXPNotCollected();
         }
         else if (Orb.tag == "GoldOrb"){
+            if (!GameManager.Instance.InventoryManager.isFirstGoldCollected() && GameManager.Instance.IsTutorialEnabled)
+            {
+                GameManager.Instance.InventoryManager.setFirstGoldCollected(); // set to true
+                GameManager.Instance.UIManager.Tutorial_HideXPUI(); // hide xp UI
+                GameManager.Instance.UIManager.Tutorial_ShowGoldCollect(); // doesn't repeat
+            }
+            
             currentGold += resource_gained;
             GameManager.Instance.AnalyticsManager.UpdatePlayerAcquiredGold(resource_gained);
+
             if(currentGold > 4){
                 clickUpgrade = FindObjectOfType<ClickUpgrade>();
                 clickUpgrade.CheckForUpgradeableTurrets();

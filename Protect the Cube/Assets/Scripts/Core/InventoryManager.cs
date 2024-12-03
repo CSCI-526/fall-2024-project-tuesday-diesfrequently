@@ -42,6 +42,10 @@ public class InventoryManager : MonoBehaviour
     public event Action Nexus_OnNexusHealthUpdate;
 
     public event Action Tutorial_OnFirstHarvester;
+    public event Action<GameObject> Tutorial_OnFirstGold;
+
+    private bool isFirstGoldCoinCollected;
+    private bool isFirstGoldCoinScouted;
     //private bool isFirstHarvester = false;
     //public void ResetFirstHarvester() { isFirstHarvester = false; }
     //public bool IsFirstHarvesterPlaced() { return isFirstHarvester;  }
@@ -73,8 +77,6 @@ public class InventoryManager : MonoBehaviour
             inventoryPrefabs.Add(null);
             InventoryItemCount.Add(0);
         }
-
-        //ResetFirstHarvester();
     }
 
     private void Start()
@@ -82,8 +84,37 @@ public class InventoryManager : MonoBehaviour
         _nexus = GameManager.Instance.Nexus.GetComponent<Nexus>();
         _playerHP = GameManager.Instance.Player.GetComponent<PlayerHealth>();
         _playerLevel = GameManager.Instance.Player.GetComponent<PlayerLevels>();
+        isFirstGoldCoinCollected = false;
+        isFirstGoldCoinScouted = false;
+
         InitializeInventoryPrefabs();
     }
+
+    private void Update()
+    {
+        //if (GameManager.Instance.IsTutorialEnabled == null) Debug.LogError("[Error] IsTutorialEnabled");
+        if (GameManager.Instance.IsTutorialEnabled && (!(isFirstGoldCollected()) && !(isFirstGoldScouted()))) { CheckForGoldCoin(); }
+    }
+
+    private void CheckForGoldCoin()
+    {
+        GameObject[] goldOrbs = GameObject.FindGameObjectsWithTag("GoldOrb");
+        if (goldOrbs == null || goldOrbs.Length == 0) { return; }
+        else {
+            setFirstGoldScouted();
+            Tutorial_OnFirstGold?.Invoke(goldOrbs[0]);
+        }
+    }
+
+    public void setFirstGoldCollected() { isFirstGoldCoinCollected = true; }
+    public void setFirstGoldScouted() { isFirstGoldCoinScouted = true; }
+
+    public bool isFirstGoldCollected() { return isFirstGoldCoinCollected; }
+    public bool isFirstGoldScouted() { return isFirstGoldCoinScouted; }
+
+    public void ResetFirstGoldCollected() { isFirstGoldCoinCollected = false; }
+    public void ResetFirstGoldScouted() { isFirstGoldCoinScouted = false; }
+
 
     private void InitializeInventoryPrefabs()
     {

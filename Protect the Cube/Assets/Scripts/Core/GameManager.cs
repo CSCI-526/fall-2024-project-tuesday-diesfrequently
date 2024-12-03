@@ -212,7 +212,15 @@ public class GameManager : MonoBehaviour
 
         modalAcknowleged = true;
         UIManager.HideModalWindow();
-        UIManager.ShowMinimap();
+        if (currentPhase == GamePhase.Initialization ||
+            currentPhase == GamePhase.P1_Setup_Tutorial ||
+            currentPhase == GamePhase.P1_TakeDamage_Tutorial ||
+            currentPhase == GamePhase.P1_Movement_Tutorial ||
+            currentPhase == GamePhase.P1_Dodging_Tutorial)
+        {
+            UIManager.HideMinimap();
+        } else { UIManager.ShowMinimap(); }
+        
         if (inTutorialDeath && !isRespawnScreen) yield break;
     }
 
@@ -246,7 +254,10 @@ public class GameManager : MonoBehaviour
         if (DEBUG_GAME_MANAGER) Debug.Log("[Start UI] Initialization Tasks");
 
         RespawnPlayer(origin_phase);
+        
     }
+
+    
 
     public void RespawnPlayer(GamePhase death_phase, bool isPauseMenuRestart = false)
     {
@@ -284,7 +295,6 @@ public class GameManager : MonoBehaviour
             }
         }
         else return;
-
     }
 
     private void SetupTutorial()
@@ -299,13 +309,22 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<PlayerController>().LockShooting();
         Player.transform.position = new Vector3(1.5f, 1.0f, 1.5f);
 
+        string modal_msg = "Welcome to the tutorial for\n<color=red>Interstellar Pest Control</color>!";
+        StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
+        StartCoroutine(OriginMessage());
+    }
+
+    private IEnumerator OriginMessage()
+    {
+        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+        modalAcknowleged = false; // set messageAck to false again
+
         // State Change 
         if (currentPhase == GamePhase.P1_Setup_Tutorial && !inTutorialDeath)
         {
             StartCoroutine(BufferNextPhaseStart(GamePhase.P1_TakeDamage_Tutorial, "P1_Setup_Tutorial", "P1_TakeDamage_Tutorial"));
         }
-        else return;
-
+        else yield break;
     }
 
     private void StartTakeDamageTutorial()
@@ -313,7 +332,7 @@ public class GameManager : MonoBehaviour
         WaveManager.SpawnSingleEnemy("tutorial", Player.transform.position, 6.0f);
         WaveManager.LockAllEnemiesMovement();
 
-        string modal_msg = "<color=red>ENEMIES</color> are dangerous! Touching them will damage <color=#90d5ff>YOUR HEALTH</color>!";
+        string modal_msg = "<color=red>ENEMIES</color> are dangerous!\nTouching them will damage <color=#90d5ff>YOUR HEALTH</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueTakeDamageTutorial());
     }
@@ -376,7 +395,7 @@ public class GameManager : MonoBehaviour
 
     private void StartDodgingTutorial()
     {
-        string modal_msg = "Dodge & Avoid touching <color=red>ENEMIES</color>!";
+        string modal_msg = "Dodge & Avoid <color=red>ENEMIES</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueDodgingTutorial());
     }
@@ -532,7 +551,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Nexus.GetComponent<SpawnAnimation>().isNexusInSpawnPos());
         if (inTutorialDeath) yield break;
 
-        string modal_msg = "This is <color=#90d5ff>YOUR NEXUS</color>! Defend it from <color=red>ENEMIES</color> at all costs!";
+        string modal_msg = "This is <color=#90d5ff>YOUR NEXUS</color>! CAREFUL!\n<color=red>ENEMIES</color> also damage <color=#90d5ff>NEXUS HEALTH</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
         if (inTutorialDeath) yield break;
@@ -735,12 +754,53 @@ public class GameManager : MonoBehaviour
     {
         Player.GetComponent<PlayerHealth>().Tutorial_OnDeath += OnPlayerTutorialDeath;
         InventoryManager.Tutorial_OnFirstHarvester += OnFirstHarvesterAquirement;
+        InventoryManager.Tutorial_OnFirstGold += OnGoldCoinDiscovery;
     }
 
     private void OnDisable()
     {
         Player.GetComponent<PlayerHealth>().Tutorial_OnDeath -= OnPlayerTutorialDeath;
         InventoryManager.Tutorial_OnFirstHarvester -= OnFirstHarvesterAquirement;
+        InventoryManager.Tutorial_OnFirstGold -= OnGoldCoinDiscovery;
+    }
+
+    private void OnGoldCoinDiscovery(GameObject gold_orb)
+    {
+        StartCoroutine(OnGoldDiscovery(gold_orb));
+    }
+
+    private IEnumerator OnGoldDiscovery(GameObject gold_orb)
+    {
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] First Gold Coin has Spawned");
+
+        Vector3 orb_pos = gold_orb.transform.position;
+        UIManager.Tutorial_ShowXPUI(orb_pos);
+
+        // Stop All Actions
+        LockAllTurretShooting();
+        WaveManager.LockAllEnemiesMovement();
+        Player.GetComponent<PlayerController>().LockShooting();
+        Player.GetComponent<PlayerController>().UnlockMovement();
+        //yield return new WaitForSeconds(0.5f);
+        //Player.GetComponent<PlayerController>().LockMovement();
+
+        modalAcknowleged = false;
+        string modal_msg = "Collect <color=yellow>GOLD</color> to upgrade your turrets!";
+        StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
+
+        
+        // wait till gold ore collected 
+        yield return new WaitUntil(() => modalAcknowleged && InventoryManager.isFirstGoldCollected()); // wait for modal windows to be acknowledged
+
+        modalAcknowleged = false; // set messageAck to false against
+        Debug.Log("[Tutorial Gold] Modal Acknowledged for : " + modal_msg);
+        Debug.Log("[Tutorial Gold] Gold Collection Acknowledged FOR");
+
+        Player.GetComponent<PlayerController>().UnlockShooting();
+        Player.GetComponent<PlayerController>().UnlockMovement();
+        WaveManager.UnlockAllEnemiesMovement();
+        UnlockAllTurretShooting();
+        UIManager.ActivateShootingCursor();
     }
 
     private void OnPlayerTutorialDeath(GamePhase death_phase)
