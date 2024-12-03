@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Nexus : MonoBehaviour
 {
-    [SerializeField] public  int NEXUS_MAX_HEALTH = 20;
+    [SerializeField] public int NEXUS_MAX_HEALTH = 20;
 
     public int maxHealth { get; private set; }
     public int currentHealth { get; private set; }
@@ -182,7 +182,7 @@ public class Nexus : MonoBehaviour
                 //Vector3 spawnPosition = transform.position + new Vector3(randomX, transform.position.y, randomZ);
 
                 Vector3 spawnPosition = transform.position + offset;
-                Debug.Log("[Nexus] Position: " + spawnPosition);
+                //Debug.Log("[Nexus] Position: " + spawnPosition);
                 Instantiate(xpPrefab, spawnPosition + xpSpawnOffset, Quaternion.identity);
             }
         }

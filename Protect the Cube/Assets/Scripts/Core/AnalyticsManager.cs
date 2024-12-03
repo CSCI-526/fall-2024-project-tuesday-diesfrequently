@@ -142,7 +142,7 @@ public class AnalyticsManager : MonoBehaviour
     // Description: Logs the initial game spawn event and sends analytics data.
     public void SendSessionStartAnalytics()
     {
-        Debug.Log("Game Spawn: Sending Session Start Analytics for Session ID " + _sessionID);
+        if (GameManager.Instance.DEBUG_ANALYTICS_MANAGER) Debug.Log("Game Spawn: Sending Session Start Analytics for Session ID " + _sessionID);
         PostAnalytics();  // Log the event to Google Forms
     }
 
@@ -216,7 +216,7 @@ public class AnalyticsManager : MonoBehaviour
     // Parameters: playerSpentGold - The total gold spent by the player
     public void UpdatePlayerSpentGold(int playerSpentGold)
     {
-        Debug.Log("[Analytics] UpdatePlayerSpentGold: " + playerSpentGold);
+        if (GameManager.Instance.DEBUG_ANALYTICS_MANAGER) Debug.Log("[Analytics] UpdatePlayerSpentGold: " + playerSpentGold);
         lock (_lockObject)
         {
             _playerSpentGold += playerSpentGold;
@@ -232,7 +232,7 @@ public class AnalyticsManager : MonoBehaviour
     // Parameters: itemIDX - The index of the inventory acquired
     public void UpdateTotalAcquiredInventory(int itemIDX)
     {
-        Debug.Log("[Analytics] UpdateTotalAcquiredInventory: " + itemIDX);
+        if (GameManager.Instance.DEBUG_ANALYTICS_MANAGER) Debug.Log("[Analytics] UpdateTotalAcquiredInventory: " + itemIDX);
         lock (_lockObject)
         {
             _totalAcquiredInventory[itemIDX] += 1;      // indicate which specific inventory was obtained
@@ -255,7 +255,7 @@ public class AnalyticsManager : MonoBehaviour
     // Parameters: turretIDX - The index of the turret type upgraded
     public void UpdateTurretLevels(int level, int turretIDX)
     {
-        Debug.Log("[Analytics] UpdateTurretLevels Level " + level + " && Turret IDX " + turretIDX);
+        if (GameManager.Instance.DEBUG_ANALYTICS_MANAGER) Debug.Log("[Analytics] UpdateTurretLevels Level " + level + " && Turret IDX " + turretIDX);
         lock (_lockObject)
         {
             if (level == 1) // upgrading to lvl 2
@@ -293,7 +293,7 @@ public class AnalyticsManager : MonoBehaviour
     // Description: Logs the session end (death, force quit, etc.) and sends analytics data.
     public void SendSessionEndAnalytics()
     {
-        Debug.Log("Game Spawn: Sending Session End Analytics for Session ID " + _sessionID);
+        if (GameManager.Instance.DEBUG_ANALYTICS_MANAGER) Debug.Log("Game Spawn: Sending Session End Analytics for Session ID " + _sessionID);
         PostAnalytics();  // Log the session ends to Google Forms
     }
 
@@ -342,7 +342,7 @@ public class AnalyticsManager : MonoBehaviour
         // Prepare the form data
         WWWForm form = new WWWForm();
 
-        Debug.Log("metadata_sessionID " + metadata_sessionID);
+        if (GameManager.Instance.DEBUG_ANALYTICS_MANAGER) Debug.Log("metadata_sessionID " + metadata_sessionID);
         Debug.Log("metadata_timestamp " + metadata_timestamp);
 
         Debug.Log("m1_hitpointLossWaves " + m1_hitpointLossWaves);
@@ -396,7 +396,7 @@ public class AnalyticsManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Analytics sent successfully!");
+                if (GameManager.Instance.DEBUG_ANALYTICS_MANAGER) Debug.Log("Analytics sent successfully!");
             }
         }
     }

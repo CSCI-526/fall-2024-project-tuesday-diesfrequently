@@ -27,6 +27,7 @@ public class WaveManager : MonoBehaviour
 
     private List<List<Vector3>> spawnConfigs = new List<List<Vector3>>(); //stores the spawn point configuration
     private float _currentWaveLength;
+    //public bool shouldLockMovement;
 
     [Header("PRIVATE Members")]
     [SerializeField] private Transform nexus; // reference to Nexus position
@@ -46,6 +47,7 @@ public class WaveManager : MonoBehaviour
         spawnConfigs = new List<List<Vector3>>();
         wave_index = 0;
         wave_count = 0;
+        //shouldLockMovement = false;
     }
 
     // Start is called before the first frame update
@@ -154,6 +156,9 @@ public class WaveManager : MonoBehaviour
             {
                 EnemyMove enemyMove = enemy.GetComponent<EnemyMove>();
                 if (enemyMove != null) enemyMove.LockMovement();
+
+                RangedEnemyMove rangedEnemyMove = enemy.GetComponent<RangedEnemyMove>();
+                if (rangedEnemyMove != null) rangedEnemyMove.LockMovement();
             }
         }
     }
@@ -193,6 +198,9 @@ public class WaveManager : MonoBehaviour
             {
                 EnemyMove enemyMove = enemy.GetComponent<EnemyMove>();
                 if (enemyMove != null) enemyMove.UnlockMovement();
+
+                RangedEnemyMove rangedEnemyMove = enemy.GetComponent<RangedEnemyMove>();
+                if (rangedEnemyMove != null) rangedEnemyMove.UnlockMovement();
             }
         }
     }
@@ -388,6 +396,12 @@ public class WaveManager : MonoBehaviour
             location = spawnConfigs[configID][spawnLocationID % (spawnConfigs[configID].Count - 1)];
         }
         enemyEntity.transform.position = location + new Vector3(UnityEngine.Random.Range(-spawnRange,spawnRange), 0, UnityEngine.Random.Range(-spawnRange, spawnRange));
+
+        //if (shouldLockMovement && GameManager.Instance.IsTutorialEnabled)
+        //{
+        //    if (enemyEntity.GetComponent<EnemyMove>() != null) enemyEntity.GetComponent<EnemyMove>().LockMovement();
+        //    if (enemyEntity.GetComponent<RangedEnemyMove>() != null) enemyEntity.GetComponent<RangedEnemyMove>().LockMovement();
+        //} 
 
         if(enableElites)
         {

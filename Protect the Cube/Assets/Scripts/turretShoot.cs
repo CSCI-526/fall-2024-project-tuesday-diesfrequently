@@ -24,34 +24,31 @@ public class turretShoot : Building
     private float originalTurnSpeed;
     public bool canUpgrade = false;
     public float ugpradeCooldown = 0.0f;
+    private bool canShoot;
 
     void Awake()
     {
+        canShoot = true;
         originalFireRate = fireRate;
         originalMaxRange = maxRange;
         originalTurnSpeed = turnSpeed;
     }
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public void DisableShooting() { canShoot = false; }
+    public void EnableShooting() { canShoot = true; }
 
     // Update is called once per frame
     void Update()
     {
-        if(placed)
+        if(placed && canShoot)
         {
             FindTarget();
             Aim();
             Shoot();
             ugpradeCooldown += Time.deltaTime;
-            
         }
     }
+
     public override void OnPlace()
     {
         base.OnPlace();

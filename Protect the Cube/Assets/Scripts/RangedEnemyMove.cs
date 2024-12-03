@@ -13,6 +13,8 @@ public class RangedEnemyMove : EnemyMove
     [SerializeField] protected Transform _muzzle;
     private float _timeSinceLastShot = 0.0f;
 
+    private bool isRangedEnemyMovementLocked = false; // controls enemy "movement" lock
+
     void FixedUpdate()
     {
         _timeSinceLastShot += Time.fixedDeltaTime;
@@ -28,28 +30,43 @@ public class RangedEnemyMove : EnemyMove
             SetTarget(targetList);
         }
 
-        Vector3 dirToTarget = _target.transform.position - _rb.transform.position;
-        dirToTarget.y = 0.0f;
-        dirToTarget.Normalize();
-
-        _rb.MovePosition(transform.position + dirToTarget * (moveSpeed * (1 - slowAmount)) * Time.fixedDeltaTime);
-
-        Vector3 toPlayer = GameManager.Instance.Player.transform.position - _rb.transform.position;
-        toPlayer.y = 0.0f;
-
-        if(toPlayer.magnitude <= _range) //look and shoot at player if in range
+        if (!isRangedEnemyMovementLocked)
         {
-            transform.rotation = UnityEngine.Quaternion.LookRotation(toPlayer, Vector3.up);
+            Vector3 dirToTarget = _target.transform.position - _rb.transform.position;
+            dirToTarget.y = 0.0f;
+            dirToTarget.Normalize();
 
-            if(_timeSinceLastShot > _shotInterval)  //shoot at player
+            _rb.MovePosition(transform.position + dirToTarget * (moveSpeed * (1 - slowAmount)) * Time.fixedDeltaTime);
+
+            Vector3 toPlayer = GameManager.Instance.Player.transform.position - _rb.transform.position;
+            toPlayer.y = 0.0f;
+
+            if (toPlayer.magnitude <= _range) //look and shoot at player if in range
             {
-                Instantiate(_projectilePrefab, _muzzle.position, _muzzle.rotation);
-                _timeSinceLastShot = 0.0f;
+                transform.rotation = UnityEngine.Quaternion.LookRotation(toPlayer, Vector3.up);
+
+                if (_timeSinceLastShot > _shotInterval)  //shoot at player
+                {
+                    Instantiate(_projectilePrefab, _muzzle.position, _muzzle.rotation);
+                    _timeSinceLastShot = 0.0f;
+                }
+            }
+            else
+            {
+                transform.rotation = UnityEngine.Quaternion.LookRotation(dirToTarget, Vector3.up);
             }
         }
-        else
-        {
-            transform.rotation = UnityEngine.Quaternion.LookRotation(dirToTarget, Vector3.up);
-        }
+    }
+
+    // lock the enemy movement
+    public new void LockMovement()
+    {
+        isRangedEnemyMovementLocked = true;
+    }
+
+    // unlock the enemy movement
+    public new void UnlockMovement()
+    {
+        isRangedEnemyMovementLocked = false;
     }
 }

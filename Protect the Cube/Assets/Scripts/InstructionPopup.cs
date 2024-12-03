@@ -125,8 +125,8 @@ public class InstructionPopup : MonoBehaviour
 
         escapeText.rectTransform.anchorMin = new Vector2(0.5f, 0f);
         escapeText.rectTransform.anchorMax = new Vector2(0.5f, 0f);
-        escapeText.rectTransform.offsetMin = new Vector2(-100, 20); // horizontal padding from the bottom
-        escapeText.rectTransform.offsetMax = new Vector2(100, 50);  // width / height of text box
+        escapeText.rectTransform.offsetMin = new Vector2(-100, 10); // horizontal padding from the bottom
+        escapeText.rectTransform.offsetMax = new Vector2(100, 40);  // width / height of text box
         escapeText.rectTransform.pivot = new Vector2(0.5f, 0f);
     }
 

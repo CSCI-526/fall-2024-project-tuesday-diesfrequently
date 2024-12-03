@@ -60,11 +60,11 @@ public class ClickUpgrade : MonoBehaviour
             // GameManager.Instance.UIManager.ShowUpgradeScreen();
             upgrade();
             GameManager.Instance.UIManager.updateUpgradeUI(buildingName, goldRequired, id);
-            Debug.Log("upgrade");
+            //Debug.Log("upgrade");
         }
         else
         {
-            Debug.Log("no enough resources");
+            //Debug.Log("no enough resources");
         }
     }
 
