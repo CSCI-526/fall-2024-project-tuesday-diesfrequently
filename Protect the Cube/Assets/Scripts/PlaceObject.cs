@@ -129,11 +129,12 @@ public class PlaceObject : MonoBehaviour
             currentPlaceableObject = null;
 
             Debug.Log("[PlaceObject] turret has been created");
-            if (placedFirstTurret == false)
-            {
-                placedFirstTurret = true;
-                GameManager.Instance.UIManager.HideSelectGunTutorial();
-            }
+            GameManager.Instance.UIManager.HideSelectGunTutorial(); // hides even if not active
+            //if (placedFirstTurret == false)
+            //{
+            //    placedFirstTurret = true;
+                
+            //}
 
             GameManager.Instance.UIManager.ActivateShootingCursor();
 

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     // tracks current phase
     [SerializeField] public GamePhase StartPhase;
-    //[SerializeField] public GamePhase currentPhase { get; private set; }
+    [SerializeField] public bool IsTutorialEnabled = false;
 
     [SerializeField] private GamePhase CurrentPhase;
 
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     private void ResetGlobalTutorialFlags()
     {
         PlayerController.SetShotOnceFalse();
-        UIManager.ResetFirstRewardsScreenEnded();
+        UIManager.ResetRewardsScreenEnded();
         PlaceObject.ResetFirstTurretPlaced();
         Player.GetComponent<PlayerLevels>().ResetIsLevelTwo();
         Nexus.GetComponent<SpawnAnimation>().ResetIsNexusInSpawnPos();
@@ -778,12 +778,14 @@ public class GameManager : MonoBehaviour
         if (TutorialStorageValue && enableTutorial)
         {
             Debug.Log("Tutorial is Enabled");
+            IsTutorialEnabled = true;
             currentPhase = GamePhase.Initialization;
             SetGamePhase(currentPhase);
         }
         else
         {
             currentPhase = StartPhase;
+            IsTutorialEnabled = false;
             SetGamePhase(currentPhase);
             Debug.Log("Tutorial is SKIPPED");
         }
@@ -810,6 +812,7 @@ public class GameManager : MonoBehaviour
     public void ReloadLevel()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single); // ??
+        IsTutorialEnabled = false;
         SceneManager.LoadScene("Main menu", LoadSceneMode.Single);
     }
 

@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
     private bool canPause = true;
     public bool rewardMenuActive = false;
     private int _currentHealth = 5;
-    [SerializeField] static private bool firstRewardScreenEnded = false;
+    [SerializeField] static private int firstRewardScreenEnded = 0;
     private bool goldActivated = false;
     private bool showNexusBar = false;
     private bool showPlayerBar = false;
@@ -411,12 +411,10 @@ public class UIManager : MonoBehaviour
         ActivateInventoryUI(); // tutorial
         Time.timeScale = 1.0f;
         inventoryBar.SetActive(true);
-        Debug.Log("[UI Manager] (outside) firstRewardScreenEnded: " + firstRewardScreenEnded);
-        if (!firstRewardScreenEnded)
+        if (firstRewardScreenEnded < 3 && GameManager.Instance.IsTutorialEnabled)
         {
             ShowSelectGunTutorial(); // show tutorial text (first time only
-            firstRewardScreenEnded = true;
-            Debug.Log("[UI Manager] (inside) firstRewardScreenEnded: " + firstRewardScreenEnded);
+            firstRewardScreenEnded += 1;
         }
         expBar.SetActive(true);
     }
@@ -649,15 +647,9 @@ public void ShowSelectGunTutorial()
     //     inventoryWbox[itemIDX].color = c;
     // }
 
-    public static bool FirstRewardScreenEnded()
+    public static void ResetRewardsScreenEnded()
     {
-        Debug.Log("[UI Manager] (gettig) firstRewardScreenEnded: " + firstRewardScreenEnded);
-        return firstRewardScreenEnded;
-    }
-
-    public static void ResetFirstRewardsScreenEnded()
-    {
-        firstRewardScreenEnded = false;
+        firstRewardScreenEnded = 0;
         Debug.Log("[UI Manager] (resetting) firstRewardScreenEnded: " + firstRewardScreenEnded);
     }
 }
