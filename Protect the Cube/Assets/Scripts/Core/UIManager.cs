@@ -9,6 +9,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] protected GameObject gameOverScreen;
     public GameObject WASD;
     public GameObject inventoryArrow;
     public GameObject xpArrow;
@@ -32,7 +33,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public List<TextMeshProUGUI> displayedInventoryCount = new List<TextMeshProUGUI>();
 
     [SerializeField] protected TextMeshProUGUI goldUI;
-    [SerializeField] protected GameObject gameOverScreen;
     //[SerializeField] protected GameObject SelectGunTutorialUI;
 
     [SerializeField] public GameObject rewardMenu;
@@ -68,6 +68,9 @@ public class UIManager : MonoBehaviour
     private bool showPlayerBar = false;
     private bool showExpBar = false;
     private bool showInvenMini = false;
+    private bool showWASD = false;
+    private bool showXPArrow = false;
+    private bool showArrow = false;
     public Dictionary<string, int> inventSlotMapping;
 
     private void Awake()
@@ -272,6 +275,9 @@ public class UIManager : MonoBehaviour
         inventoryBar.SetActive(false);
         expBar.SetActive(false);
         gameOverScreen.SetActive(true);
+        WASD.SetActive(false);
+        xpArrow.SetActive(false);
+        inventoryArrow.SetActive(false);
         Time.timeScale = 0.0f;
     }
 
@@ -284,6 +290,18 @@ public class UIManager : MonoBehaviour
         pauseButtonBackground.SetActive(false);
         if (rewardMenuActive) {
             rewardMenu.SetActive(false);
+        }
+        if(showWASD)
+        {
+            WASD.SetActive(false);
+        }
+        if(showXPArrow)
+        {
+            xpArrow.SetActive(false);
+        }
+        if(showArrow)
+        {
+            inventoryArrow.SetActive(false);
         }
         pauseMenuActive = true;
         pauseUI.SetActive(true);
@@ -336,6 +354,18 @@ public class UIManager : MonoBehaviour
                 inventoryBar.SetActive(true);
                 minimap.SetActive(true);
             }
+        }
+        if (showWASD)
+        {
+            WASD.SetActive(true);
+        }
+        if (showXPArrow)
+        {
+            xpArrow.SetActive(true);
+        }
+        if (showArrow)
+        {
+            inventoryArrow.SetActive(true);
         }
         pauseMenuActive = false;
         pauseUI.SetActive(false);
@@ -437,11 +467,13 @@ public class UIManager : MonoBehaviour
 public void ShowSelectGunTutorial()
     {
         inventoryArrow.SetActive(true);
+        showArrow = true;
     }
 
     public void HideSelectGunTutorial()
     {
         inventoryArrow.SetActive(false);
+        showArrow = false;
     }
 
     //public void ShowXPTutorial()
@@ -454,11 +486,13 @@ public void ShowSelectGunTutorial()
     public void Tutorial_ShowMovementUI()
     {
         WASD.SetActive(true);
+        showWASD = true;
     }
 
     public void Tutorial_HideMovementUI()
     {
         WASD.SetActive(false);
+        showWASD = false;
     }
 
     public void Tutorial_ShowXPUI(Vector3 pos)
@@ -472,11 +506,13 @@ public void ShowSelectGunTutorial()
         {
             arrowStay.gamePos = pos;
         }
+        showXPArrow = true;
     }
 
     public void Tutorial_HideXPUI()
     {
         xpArrow.SetActive(false);
+        showXPArrow = false;
     }
 
     public void Tutorial_ShowGoldHighlight()
