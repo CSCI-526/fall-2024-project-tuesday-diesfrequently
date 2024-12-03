@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b9962544223b2468ec3bce6d57981c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
+  maxHealth: 45
   invincibilityDuration: 0.01
   exp: {fileID: 6435648702068270667, guid: 08541f6d46a47df46ba546e927cd8967, type: 3}
   magnet: {fileID: 6435648702068270667, guid: 2da496d4af282004891a3be51ef2f2ba, type: 3}
@@ -726,7 +726,7 @@ MonoBehaviour:
   countInWave: 1
   enemyName: ShieldEnemy
   upgradeChance: 0.01
-  upgradeHealth: 90
+  upgradeHealth: 65
   upgradeColorMaterial: {fileID: 2100000, guid: 23bc07b820072cf4394abc1889ecb0a7, type: 2}
   needToUpgrade: 0
 --- !u!136 &8803482667701268275

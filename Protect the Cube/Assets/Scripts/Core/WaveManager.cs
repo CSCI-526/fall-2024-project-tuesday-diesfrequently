@@ -281,7 +281,7 @@ public class WaveManager : MonoBehaviour
         else //normal behavior (uses custom waves)
         {
             WaveInfo waveInfo = Waves[wave_index];
-            Debug.Log("[[[Starting Wave " + wave_index + "]]]");
+            if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[[[Starting Wave " + wave_index + "]]]");
 
             // output each wave event per wave
             foreach (EnemyInfo enemy in waveInfo.enemyList)
@@ -319,7 +319,7 @@ public class WaveManager : MonoBehaviour
         {
             waveInfo = Waves[Waves.Count - 1]; //use last wave as base stats if missing
         }
-        Debug.Log("[Starting Dynamic Wave " + wave_index + " ]...");
+        if (GameManager.Instance.DEBUG_WAVE_MANAGER) Debug.Log("[Starting Dynamic Wave " + wave_index + " ]...");
 
         // output each wave event per wave
         foreach (EnemyInfo enemy in waveInfo.enemyList)
