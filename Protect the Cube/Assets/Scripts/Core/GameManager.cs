@@ -298,7 +298,7 @@ public class GameManager : MonoBehaviour
         WaveManager.SpawnSingleEnemy("tutorial", Player.transform.position, 6.0f);
         WaveManager.LockAllEnemiesMovement();
 
-        string modal_msg = "Touching <color=red>ENEMIES</color> will lower <color=#90d5ff>YOUR HEALTH</color>!";
+        string modal_msg = "<color=red>ENEMIES</color> are dangerous! Touching them will damage <color=#90d5ff>YOUR HEALTH</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueTakeDamageTutorial());
     }  
@@ -363,7 +363,7 @@ public class GameManager : MonoBehaviour
 
     private void StartDodgingTutorial()
     {
-        string modal_msg = "Avoid touching the <color=red>ENEMIES</color>!";
+        string modal_msg = "Use WASD to move and avoid <color=red>ENEMIES</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueDodgingTutorial());
     }
@@ -519,7 +519,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Nexus.GetComponent<SpawnAnimation>().isNexusInSpawnPos());
         if (inTutorialDeath) yield break;
 
-        string modal_msg = "<color=red>ENEMIES</color> will destroy <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
+        string modal_msg = "This is <color=#90d5ff>YOUR NEXUS</color>! Defend it at all costs!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
         if (inTutorialDeath) yield break;
@@ -541,7 +541,7 @@ public class GameManager : MonoBehaviour
         if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
         Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
 
-        modal_msg = "Shoot <color=red>ENEMIES</color> destroying <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
+        modal_msg = "Shoot <color=red>ENEMIES</color> to protect <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
         if (inTutorialDeath) yield break;
