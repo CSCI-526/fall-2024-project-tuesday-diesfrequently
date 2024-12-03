@@ -140,7 +140,6 @@ public class EnemyHealth : MonoBehaviour
         if (enemyName == "SpawnerBossEnemy") { DropMagnet(); }
         else { DropExp(); }
         
-
         Destroy(gameObject);
     }
 
