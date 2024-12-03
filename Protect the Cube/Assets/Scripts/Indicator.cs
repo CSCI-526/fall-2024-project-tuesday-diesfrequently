@@ -25,22 +25,25 @@ public class Indicator : MonoBehaviour
 
     private void HandlePosition()
     {
-        Vector3 screenpos = Camera.main.WorldToScreenPoint(target.transform.position);
-        transform.localScale = Vector3.one;
-
-        if (screenpos.z > 0 && screenpos.x > 0 && screenpos.y > 0 && screenpos.x < Screen.width && screenpos.y < Screen.height) // on screen
+        if(target != null)
         {
-            target.GetComponent<Nexus>().indicator = null;
-            OffScreenIndicator.Instance.ReturnIndicator(gameObject);
-            return;
+            Vector3 screenpos = Camera.main.WorldToScreenPoint(target.transform.position);
+            transform.localScale = Vector3.one;
+
+            if (screenpos.z > 0 && screenpos.x > 0 && screenpos.y > 0 && screenpos.x < Screen.width && screenpos.y < Screen.height) // on screen
+            {
+                target.GetComponent<Nexus>().indicator = null;
+                OffScreenIndicator.Instance.ReturnIndicator(gameObject);
+                return;
+            }
+
+            Vector3 clampedPos = screenpos;
+            clampedPos.x = Mathf.Clamp(clampedPos.x, offset, Screen.width - offset);
+            clampedPos.y = Mathf.Clamp(clampedPos.y, offset, Screen.height - offset);
+            clampedPos.z = 0;
+
+            transform.position = clampedPos;
         }
-
-        Vector3 clampedPos = screenpos;
-        clampedPos.x = Mathf.Clamp(clampedPos.x, offset, Screen.width - offset);
-        clampedPos.y = Mathf.Clamp(clampedPos.y, offset, Screen.height - offset);
-        clampedPos.z = 0;
-
-        transform.position = clampedPos;
 
 
         /*if (screenpos.z < 0)
