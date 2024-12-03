@@ -46,7 +46,10 @@ public class Nexus : MonoBehaviour
     private void Start()
     {
         // set Nexus GameObject to this scripts object (same reference)
-        GameManager.Instance.Nexus = this.gameObject;
+        if(triggerGameOver)
+        {
+            GameManager.Instance.Nexus = this.gameObject;
+        }
 
         //Debug.Log(xpPrefab != null ? "XP Prefab is assigned." : "XP Prefab is missing!");
         

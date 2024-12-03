@@ -13,6 +13,7 @@ public class TurretBooster : Building
     {
         base.OnPlace();
         BoostNeighbors(radius);
+        GetComponent<RangeIndicator>().HideIndicator();
     }
 
     private void Update()
