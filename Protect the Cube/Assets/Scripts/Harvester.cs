@@ -27,14 +27,14 @@ public class Harvester : Building
             if (other.gameObject.GetComponent<Harvester>() != null || other.transform.root.gameObject.GetComponent<Harvester>() != null)
             {
                 // other.gameObject.GetComponent<RangeIndicator>().ShowIndicator();
-                Debug.Log("Invalid Placement: too close to existing harvester");
+                //Debug.Log("Invalid Placement: too close to existing harvester");
                 anim.SetTrigger("Damage");
                 return false;
             } else if (other.gameObject.GetComponent<turretShoot>() != null)
             {
                 // other.gameObject.GetComponent<RangeIndicator>().ShowIndicator();
                 anim.SetTrigger("Damage");
-                Debug.Log("Invalid Placement: too close to turret");
+                //Debug.Log("Invalid Placement: too close to turret");
                 return false;
             } 
         }

@@ -7759,7 +7759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6482716643340797134, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: DEBUG_GAME_MANAGER
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8626850916652475655, guid: 6a6d8e0ee0d8a4241a6ccbd70a38569f, type: 3}
       propertyPath: enableElites
@@ -8477,11 +8477,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3771889541316447260, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.86602557
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: 3771889541316447260, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.4999997
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4880232203954208577, guid: 6561429c4d31bfb49a0c25b646a528f4, type: 3}
       propertyPath: m_Name

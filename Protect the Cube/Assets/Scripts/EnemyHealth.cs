@@ -89,7 +89,7 @@ public class EnemyHealth : MonoBehaviour
         //GetComponent<Material>().color = upgradeColor;
         GetComponent<Renderer>().material = upgradeColorMaterial;
         isUpgraded = true;
-        Debug.Log("Upgraded Enemy!");
+        //Debug.Log("Upgraded Enemy!");
         if (animator != null)
         {
             animator.SetTrigger("UpgradedNormalState");

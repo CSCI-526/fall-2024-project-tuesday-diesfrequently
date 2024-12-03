@@ -19,15 +19,11 @@ MonoBehaviour:
     spawnRate: 0
     spawnDelay: 0
   - type: 4
-    amount: 4
+    amount: 3
     spawnRate: 0
     spawnDelay: 0
   - type: 5
     amount: 4
-    spawnRate: 0
-    spawnDelay: 0
-  - type: 2
-    amount: 1
     spawnRate: 0
     spawnDelay: 0
   - type: 1
