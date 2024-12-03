@@ -464,9 +464,14 @@ public void ShowSelectGunTutorial()
     public void Tutorial_ShowXPUI(Vector3 pos)
     {
         xpArrow.SetActive(true);
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+        /*Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
         screenPos.y += xpArrowOffset;
-        xpArrow.transform.position = screenPos;
+        xpArrow.transform.position = screenPos;*/
+        ArrowStay arrowStay = xpArrow.GetComponent<ArrowStay>();
+        if (arrowStay != null)
+        {
+            arrowStay.gamePos = pos;
+        }
     }
 
     public void Tutorial_HideXPUI()
