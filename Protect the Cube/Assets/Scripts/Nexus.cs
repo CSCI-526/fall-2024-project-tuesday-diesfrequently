@@ -182,7 +182,7 @@ public class Nexus : MonoBehaviour
                 //Vector3 spawnPosition = transform.position + new Vector3(randomX, transform.position.y, randomZ);
 
                 Vector3 spawnPosition = transform.position + offset;
-                Debug.Log("[Nexus] Position: " + spawnPosition);
+                //Debug.Log("[Nexus] Position: " + spawnPosition);
                 Instantiate(xpPrefab, spawnPosition + xpSpawnOffset, Quaternion.identity);
             }
         }

@@ -650,6 +650,6 @@ public void ShowSelectGunTutorial()
     public static void ResetRewardsScreenEnded()
     {
         firstRewardScreenEnded = 0;
-        Debug.Log("[UI Manager] (resetting) firstRewardScreenEnded: " + firstRewardScreenEnded);
+        if (GameManager.Instance.DEBUG_UI_MANAGER) Debug.Log("[UI Manager] (resetting) firstRewardScreenEnded: " + firstRewardScreenEnded);
     }
 }

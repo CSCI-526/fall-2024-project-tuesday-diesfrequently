@@ -11,8 +11,7 @@ public class PlaceObject : MonoBehaviour
     public GameObject currentPlaceableObject;
     private float buildingRotation;
     [SerializeField] protected float rotateIncrement = 10.0f;
-    private bool placedFirstTurret = false;
-    static private bool isItemPickedUp = false;
+    static private bool placedFirstHarvester = false;
     static private bool isFirstTurretPlaced = false;
 
 
@@ -22,7 +21,6 @@ public class PlaceObject : MonoBehaviour
 
         if (currentPlaceableObject != null)
         {
-            isItemPickedUp = true;
             //rangeIndicator.SetActive(true);
             //rangeIndicator.transform.localScale = new Vector3(currentPlaceableObject.GetComponent<turretShoot>().maxRange, rangeIndicator.transform.localScale.y, currentPlaceableObject.GetComponent<turretShoot>().maxRange)
             MoveCurrentObjectToMouse();
@@ -34,7 +32,6 @@ public class PlaceObject : MonoBehaviour
 
     public void CancelPlace()
     {
-        isItemPickedUp = false;
         if (currentPlaceableObject == null) return;
         Destroy(currentPlaceableObject);
         GameManager.Instance.UIManager.ActivateShootingCursor();
@@ -125,16 +122,21 @@ public class PlaceObject : MonoBehaviour
         {
             GameManager.Instance.InventoryManager.TryUseInventoryItem(b.buildingName);
             b.OnPlace();
+
+            //Debug.Log("[PlaceObject] turret has been created");
+            GameManager.Instance.UIManager.HideSelectGunTutorial(); // hides even if not active
+            Debug.Log("[PlaceObject] Hiding Inventory Arrow Select Tutorial!!!");
+            if ((GameManager.Instance.IsTutorialEnabled && placedFirstHarvester == false) && (b.gameObject.GetComponent<Harvester>() != null))
+            {
+                placedFirstHarvester = true;
+                Debug.Log("[PlaceObject] First Harvestor has been placed!");
+            }
+            else {
+                Debug.Log("[PlaceObject] Regular Building has been placed!");
+            }
+
             isFirstTurretPlaced = true;
             currentPlaceableObject = null;
-
-            Debug.Log("[PlaceObject] turret has been created");
-            GameManager.Instance.UIManager.HideSelectGunTutorial(); // hides even if not active
-            //if (placedFirstTurret == false)
-            //{
-            //    placedFirstTurret = true;
-                
-            //}
 
             GameManager.Instance.UIManager.ActivateShootingCursor();
 
@@ -172,8 +174,9 @@ public class PlaceObject : MonoBehaviour
         }
     }
 
-    static public bool turretPickedUp() { return isItemPickedUp; }
     static public bool firstTurretPlaced() { return isFirstTurretPlaced; }
+    static public bool firstHarvesterPlaced() { return placedFirstHarvester; }
+    static public void ResetFirstHarvesterPlaced() { placedFirstHarvester = false; }
     static public void ResetFirstTurretPlaced() { isFirstTurretPlaced = false;  }
 
 }

@@ -41,6 +41,11 @@ public class InventoryManager : MonoBehaviour
     public event Action PlayerHealth_OnPlayerHealthUpdate;
     public event Action Nexus_OnNexusHealthUpdate;
 
+    public event Action Tutorial_OnFirstHarvester;
+    //private bool isFirstHarvester = false;
+    //public void ResetFirstHarvester() { isFirstHarvester = false; }
+    //public bool IsFirstHarvesterPlaced() { return isFirstHarvester;  }
+
     private void Awake()
     {
         _potentialRewards = new HashSet<GameObject>();
@@ -68,6 +73,8 @@ public class InventoryManager : MonoBehaviour
             inventoryPrefabs.Add(null);
             InventoryItemCount.Add(0);
         }
+
+        //ResetFirstHarvester();
     }
 
     private void Start()
@@ -277,6 +284,11 @@ public class InventoryManager : MonoBehaviour
 
         // Update Inventory Analytics
         Analytics_OnInventoryAdded?.Invoke(itemIDX);
+
+        if ((item_name == "Harvester" && GameManager.Instance.IsTutorialEnabled) && (!PlaceObject.firstHarvesterPlaced()))
+        {
+            Tutorial_OnFirstHarvester?.Invoke(); // only in tutorial, if 1st harvester not placed
+        }
     }
 
     // try to use an inventory item, use if item is available
