@@ -587,7 +587,7 @@ MonoBehaviour:
   indicator: {fileID: 71639038946376711}
   radius: 4
   useTurretRange: 1
-  alwaysShow: 0
+  alwaysShow: 1
 --- !u!114 &5425998045623633816
 MonoBehaviour:
   m_ObjectHideFlags: 0
