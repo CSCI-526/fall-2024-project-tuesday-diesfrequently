@@ -258,6 +258,8 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PruneMissingEntities();
+
         if (GameManager.Instance.currentPhase == GameManager.GamePhase.HandCraftedWaves || 
             GameManager.Instance.currentPhase == GameManager.GamePhase.DynamicWaves)
         {
@@ -267,7 +269,21 @@ public class WaveManager : MonoBehaviour
                 SpawnNextWave();
             }
         }
-        
+    }
+
+    private void PruneMissingEntities()
+    {
+        if(AllEnemyEntities.Count > 0)
+        {
+            foreach (var enemy in AllEnemyEntities)
+            {
+                if (enemy.GetComponent<EnemyHealth>() == null)
+                {
+                    AllEnemyEntities.Remove(enemy);
+                    Debug.Log("Removed Missing Entity");
+                }
+            }
+        }
     }
 
     private void UpdateGlobalWaveTimer() { _currentWaveLength += Time.deltaTime; }
