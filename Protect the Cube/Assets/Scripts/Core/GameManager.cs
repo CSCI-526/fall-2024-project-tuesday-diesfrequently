@@ -395,7 +395,7 @@ public class GameManager : MonoBehaviour
 
     private void StartDodgingTutorial()
     {
-        string modal_msg = "Dodge & Avoid <color=red>ENEMIES</color>!";
+        string modal_msg = "Avoid <color=red>ENEMIES</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueDodgingTutorial());
     }
@@ -551,7 +551,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Nexus.GetComponent<SpawnAnimation>().isNexusInSpawnPos());
         if (inTutorialDeath) yield break;
 
-        string modal_msg = "This is <color=#90d5ff>YOUR NEXUS</color>! CAREFUL!\n<color=red>ENEMIES</color> also damage <color=#90d5ff>NEXUS HEALTH</color>!";
+        string modal_msg = "This is <color=#90d5ff>YOUR NEXUS</color>! CAREFUL...\n<color=red>ENEMIES</color> also damage <color=#90d5ff>NEXUS HEALTH</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
         if (inTutorialDeath) yield break;
@@ -651,7 +651,7 @@ public class GameManager : MonoBehaviour
         if (inTutorialDeath) yield break;
         WaveManager.UnlockAllEnemiesMovement();
 
-        string modal_msg = "GOOD LUCK!\nStarting <color=red>Wave 1...</color>!";
+        string modal_msg = "GOOD LUCK!\nStarting <color=red>[Wave 1]</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
         if (inTutorialDeath) yield break;

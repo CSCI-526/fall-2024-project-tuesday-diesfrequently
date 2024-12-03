@@ -4452,9 +4452,9 @@ MonoBehaviour:
   OrePrefabTier1: {fileID: 3085768726303237568, guid: d6d19834c918a5b49b504624914e8024, type: 3}
   OrePrefabTier2: {fileID: 8053327629888195560, guid: ce47e5e1f81e24b7188a613019a3cd66, type: 3}
   OrePrefabTier3: {fileID: 5961231977043227133, guid: 984ea20d880ba4dccb1a0436d5f6486f, type: 3}
-  OreTier1StartingSpawnLevel: 2
-  OreTier2StartingSpawnLevel: 4
-  OreTier3StartingSpawnLevel: 6
+  OreTier1StartingSpawnLevel: 3
+  OreTier2StartingSpawnLevel: 6
+  OreTier3StartingSpawnLevel: 9
   ORE_MIN_DIST_THRESHOLD: 10
   ORE_T1_DIST_THRESHOLD: 20
   ORE_T2_DIST_THRESHOLD: 28

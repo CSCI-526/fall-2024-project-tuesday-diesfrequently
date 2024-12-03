@@ -22,6 +22,7 @@ public class PlayerLevels : MonoBehaviour
     private int levels_to_process = 0;
     private int accumulated_xp = 0;
     private bool isPlayerLevelTwo = false;
+    private bool isFirstUpgrade = false;
 
     private bool isSelectingTurret = false;
     private List<GameObject> selectedTurrets = new List<GameObject>();
@@ -92,6 +93,11 @@ public class PlayerLevels : MonoBehaviour
             GameManager.Instance.AnalyticsManager.UpdatePlayerAcquiredGold(resource_gained);
 
             if(currentGold > 4){
+                if (GameManager.Instance.IsTutorialEnabled && isTurretFirstUpgrade())
+                {
+                    GameManager.Instance.UIManager.Tutorial_ShowGoldHighlight();
+                }
+                
                 clickUpgrade = FindObjectOfType<ClickUpgrade>();
                 clickUpgrade.CheckForUpgradeableTurrets();
             }
@@ -101,5 +107,9 @@ public class PlayerLevels : MonoBehaviour
 
     public bool isLevelTwo() { return isPlayerLevelTwo; }
     public void ResetIsLevelTwo() { isPlayerLevelTwo = false; }
+
+    public bool isTurretFirstUpgrade() { return isFirstUpgrade; }
+    public void setTurretFirstUpgrade() { isFirstUpgrade = true; }
+    public void ResetTurretFirstUpgrade() { isFirstUpgrade = false; }
 
 }
