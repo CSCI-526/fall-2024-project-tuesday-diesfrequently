@@ -79,8 +79,6 @@ public class ClickUpgrade : MonoBehaviour
     }
 
     public void upgrade(){
-
-        
         GameObject indicate = Instantiate(indicator);
         GameObject upgradetxt = Instantiate(upgradeText);
         indicate.transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f + level/5.0f, transform.position.z);
@@ -91,13 +89,14 @@ public class ClickUpgrade : MonoBehaviour
         level++;
         goldRequired += level*3;
         updateAppearance();
+        GameManager.Instance.UIManager.Tutorial_HideGoldHighlight();
+        GameManager.Instance.Player.GetComponent<PlayerLevels>().setTurretFirstUpgrade();
         gameObject.GetComponent<turretShoot>().upgrade(level, buildingName);
         if(level == 3){
             upgradeable = false;
         }
         GameManager.Instance.UIManager.UpdateUI();
         CheckForUpgradeableTurrets();
-
     }
 
     public void updateAppearance()
