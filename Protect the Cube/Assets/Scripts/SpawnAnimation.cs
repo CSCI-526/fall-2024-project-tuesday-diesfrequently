@@ -32,11 +32,10 @@ public class SpawnAnimation : MonoBehaviour
             transform.position = Vector3.Lerp(startPosition, endPosition, t / duration);
         }
 
-        if (endPosition == transform.position) { isNexusAtFinalPosition = true; }
+        if (endPosition == transform.position) { isNexusAtFinalPosition = true; enableAnimation = false;  }
     }
 
     public void TriggerSpawnSequence() { enableAnimation = true; }
-
     public bool isNexusInSpawnPos() { return isNexusAtFinalPosition;  }
     public void ResetIsNexusInSpawnPos() { isNexusAtFinalPosition = false;  }
 }

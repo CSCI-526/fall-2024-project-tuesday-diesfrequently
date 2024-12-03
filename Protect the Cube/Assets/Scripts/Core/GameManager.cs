@@ -298,7 +298,7 @@ public class GameManager : MonoBehaviour
         WaveManager.SpawnSingleEnemy("tutorial", Player.transform.position, 6.0f);
         WaveManager.LockAllEnemiesMovement();
 
-        string modal_msg = "Touching <color=red>ENEMIES</color> will lower <color=#90d5ff>YOUR HP</color>!";
+        string modal_msg = "Touching <color=red>ENEMIES</color> will lower <color=#90d5ff>YOUR HEALTH</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueTakeDamageTutorial());
     }  
@@ -363,7 +363,7 @@ public class GameManager : MonoBehaviour
 
     private void StartDodgingTutorial()
     {
-        string modal_msg = "Avoid touching <color=red>ENEMIES</color>!";
+        string modal_msg = "Avoid touching the <color=red>ENEMIES</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueDodgingTutorial());
     }
@@ -411,6 +411,7 @@ public class GameManager : MonoBehaviour
 
     private void StartShootingTutorial()
     {
+        UIManager.ShowMinimap();
         WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 12.0f, 1);
         WaveManager.LockAllEnemiesMovement();
         WaveManager.EnablePlayerTargetOnly();
@@ -468,7 +469,7 @@ public class GameManager : MonoBehaviour
         PlayerController.SetShotOnceFalse(); // reset flag for next WaitUntil()
         yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
         createArrowforXPOrb();
-        yield return new WaitUntil(() => Player.GetComponent<PlayerLevels>().isXPOrbCollected);
+        
         Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
         if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
 
@@ -482,9 +483,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => PlayerController.HasShotOnce() && WaveManager.AllEnemiesKilled());
         Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
         if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+        createArrowforXPOrb();
+        yield return new WaitUntil(() => Player.GetComponent<PlayerLevels>().isXPOrbCollected);
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
 
-        UIManager.ActivateShootingCursor(); // show shooting Crosshair
-        Debug.Log("[Shooting Tutorial] Activating Shooting Cursor");
+        UIManager.ActivateCustomCursor(); // show shooting Crosshair
 
         // State Change
         if (currentPhase == GamePhase.P1_XP_Collection_Tutorial && !inTutorialDeath)
@@ -516,25 +519,56 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Nexus.GetComponent<SpawnAnimation>().isNexusInSpawnPos());
         if (inTutorialDeath) yield break;
 
-        string modal_msg = "Don't let <color=red>ENEMIES</color> destroy <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
+        string modal_msg = "<color=red>ENEMIES</color> will destroy <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
         if (inTutorialDeath) yield break;
         modalAcknowleged = false; // set messageAck to false again
         if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Modal Acknowledged");
+
         UIManager.ShowNexusHealthSlider();
 
         if (inTutorialDeath) yield break;
-        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 10.0f, 1);
-        PlayerController.SetShotOnceFalse(); // reset flag for next WaitUntil()
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 5.0f, 0);
         yield return new WaitUntil(() => WaveManager.AllEnemiesKilled());
         if (inTutorialDeath) yield break;
-        WaveManager.KillAllEnemyEntities();
         Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
         if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
 
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 7.0f, 0);
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 8.0f, 0);
+        yield return new WaitUntil(() => WaveManager.AllEnemiesKilled());
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+        Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
+
+        modal_msg = "Shoot <color=red>ENEMIES</color> destroying <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
+        StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
+        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+        if (inTutorialDeath) yield break;
+        modalAcknowleged = false; // set messageAck to false again
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Modal Acknowledged");
+        UIManager.ActivateCustomShootingCursor(); // sets CustomCursor
         Player.GetComponent<PlayerController>().UnlockMovement();
         Player.GetComponent<PlayerController>().UnlockShooting();
+
+        yield return new WaitForSeconds(1.0f);
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 10.0f, 0);
+        yield return new WaitForSeconds(1.0f);
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 11.0f, 0);
+        yield return new WaitForSeconds(1.0f);
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+        WaveManager.SpawnSingleEnemy("shoot_tutorial", Player.transform.position, 12.0f, 1);
+        yield return new WaitUntil(() => WaveManager.AllEnemiesKilled());
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+        Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
+
+        createArrowforXPOrb();
+        yield return new WaitUntil(() => Player.GetComponent<PlayerLevels>().isXPOrbCollected);
+        Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
+        if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
 
         // State Change
         if (currentPhase == GamePhase.P2_Setup_Tutorial && !inTutorialDeath)
@@ -572,6 +606,13 @@ public class GameManager : MonoBehaviour
         if (inTutorialDeath) yield break;
         WaveManager.UnlockAllEnemiesMovement();
 
+        string modal_msg = "GOOD LUCK!\nStarting <color=red>Wave 1...</color>!";
+        StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
+        yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
+        if (inTutorialDeath) yield break;
+        modalAcknowleged = false; // set messageAck to false again
+        if (DEBUG_GAME_MANAGER) Debug.Log("[Game Manager] Modal Acknowledged");
+
         // State Change
         if (currentPhase == GamePhase.BasicTutorial_Placement && !inTutorialDeath)
         {
@@ -588,6 +629,7 @@ public class GameManager : MonoBehaviour
         UIManager.ShowEXPSlider();
         UIManager.ShowWaveUI();
         UIManager.Tutorial_HideMovementUI();
+        UIManager.ShowMinimap();
 
         Nexus.transform.position = Nexus.GetComponent<SpawnAnimation>().endPosition;
 
@@ -617,7 +659,6 @@ public class GameManager : MonoBehaviour
 
         UIManager.ShowWaveUI();
         WaveManager.UnlockAllEnemiesMovement();
-        UIManager.ShowMinimap();
     }
 
     private void StartDynamicWaves()
