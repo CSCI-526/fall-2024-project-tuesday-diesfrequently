@@ -332,7 +332,7 @@ public class GameManager : MonoBehaviour
         WaveManager.SpawnSingleEnemy("tutorial", Player.transform.position, 6.0f);
         WaveManager.LockAllEnemiesMovement();
 
-        string modal_msg = "<color=red>ENEMIES</color> are dangerous!\nTouching them will damage <color=#90d5ff>YOUR HEALTH</color>!";
+        string modal_msg = "<color=red>ENEMIES</color> are dangerous!\nTouching them will damage your <color=#90d5ff>HEALTH</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueTakeDamageTutorial());
     }
@@ -395,7 +395,7 @@ public class GameManager : MonoBehaviour
 
     private void StartDodgingTutorial()
     {
-        string modal_msg = "Avoid <color=red>ENEMIES</color>!";
+        string modal_msg = "Avoid the <color=red>ENEMIES</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         StartCoroutine(ContinueDodgingTutorial());
     }
@@ -551,7 +551,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Nexus.GetComponent<SpawnAnimation>().isNexusInSpawnPos());
         if (inTutorialDeath) yield break;
 
-        string modal_msg = "This is <color=#90d5ff>YOUR NEXUS</color>! CAREFUL...\n<color=red>ENEMIES</color> also damage <color=#90d5ff>NEXUS HEALTH</color>!";
+        string modal_msg = "This is your <color=#90d5ff>NEXUS</color>! CAREFUL...\n<color=red>ENEMIES</color> will attack & damage your <color=#90d5ff>NEXUS</color>!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
         if (inTutorialDeath) yield break;
@@ -578,7 +578,6 @@ public class GameManager : MonoBehaviour
         WaveManager.LockAllEnemiesMovement();
         StartCoroutine(MoveCameraToTargetX(WaveManager.AllEnemyEntities[0], 1.0f, SpawnKamikazeEnemies2()));
     }
-
     private IEnumerator SpawnKamikazeEnemies2()
     {
         WaveManager.UnlockAllEnemiesMovement();
@@ -586,7 +585,7 @@ public class GameManager : MonoBehaviour
         if (inTutorialDeath) { WaveManager.SetConstantXPDrops(0); WaveManager.KillAllEnemyEntities(); yield break; }
         Debug.Log("[Shooting Tutorial] Broke Shooting Flag 2");
 
-        string modal_msg = "Shoot <color=red>ENEMIES</color> to protect <color=#90d5ff>YOUR NEXUS<color=#90d5ff>!";
+        string modal_msg = "Shoot the <color=red>ENEMIES</color> to protect <color=#90d5ff>YOUR NEXUS</color>!\n Collect the <color=#00FF15>experience</color> orbs they drop to level up!";
         StartCoroutine(WaitForModalAcknowlegement(1, modal_msg));
         yield return new WaitUntil(() => modalAcknowleged); // wait for modal windows to be acknowledged
         if (inTutorialDeath) yield break;
