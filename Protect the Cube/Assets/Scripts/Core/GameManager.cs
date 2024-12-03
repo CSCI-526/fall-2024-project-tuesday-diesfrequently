@@ -135,12 +135,13 @@ public class GameManager : MonoBehaviour
     {
         PlayerController.SetShotOnceFalse();
         UIManager.ResetRewardsScreenEnded();
-        //InventoryManager.ResetFirstHarvester();
+        InventoryManager.ResetFirstGoldCollected();
+        InventoryManager.ResetFirstGoldScouted();
         PlaceObject.ResetFirstTurretPlaced();
         PlaceObject.ResetFirstHarvesterPlaced();
         Player.GetComponent<PlayerLevels>().ResetIsLevelTwo();
+        Player.GetComponent<PlayerLevels>().ResetTurretFirstUpgrade();
         Nexus.GetComponent<SpawnAnimation>().ResetIsNexusInSpawnPos();
-
 
         modalAcknowleged = false;
         isCameraTransitionDone = false;
