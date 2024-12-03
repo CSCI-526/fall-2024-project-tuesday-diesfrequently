@@ -25,7 +25,7 @@ public class InventoryManager : MonoBehaviour
     private PlayerLevels _playerLevel;
 
     // stores reward-related and inventory-related information
-    private Dictionary<string, int> _inventoryMapping; // Dictionary for Rewards String - Int Mapping
+    public Dictionary<string, int> _inventoryMapping; // Dictionary for Rewards String - Int Mapping
     private HashSet<GameObject> _potentialRewards; // stores (increasing) list of valid rewards player can choose from
     public List<int> InventoryItemCount { get; private set; } // old: buildingCount, stores # of reward in inventory
 
@@ -267,10 +267,10 @@ public class InventoryManager : MonoBehaviour
         InventoryItemCount[itemIDX]++;
 
         //flash reward inventory box
-        if (!item_name.Contains("HP"))
-        {
-            GameManager.Instance.UIManager.FlashInventory(itemIDX);
-        }
+        // if (!item_name.Contains("HP"))
+        // {
+        //     GameManager.Instance.UIManager.FlashInventory(itemIDX);
+        // }
 
         // Update Inventory UI
         UI_OnInventoryUpdated?.Invoke();
