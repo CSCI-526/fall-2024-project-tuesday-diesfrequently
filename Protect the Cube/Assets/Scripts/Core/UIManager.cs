@@ -167,12 +167,12 @@ public class UIManager : MonoBehaviour
         }
 
         //// code for UI Screen Flash on Dmg Taken
-        //float atarget = (5 - _currentHealth) / 10.0f;
-        //if (damageEffect.color.a > atarget) {
-        //    var color = damageEffect.color;
-        //    color.a -= 0.01f;
-        //    damageEffect.color = color;
-        //}
+        float atarget = (5 - _currentHealth) / 10.0f;
+        if (damageEffect.color.a > atarget) {
+            var color = damageEffect.color;
+            color.a -= 1.0f * Time.deltaTime;
+            damageEffect.color = color;
+        }
 
         // Displays the Inventory Panel
         // foreach (Image wbox in inventoryWbox)
@@ -632,14 +632,14 @@ public void ShowSelectGunTutorial()
 
     public void DamageEffect(int health)
     {   
-        //Color color = damageEffect.color;
-        //if (health > _currentHealth){
-        //    color.a = (5 - _currentHealth)/10.0f;
-        //} else {
-        //    color.a = 0.8f;
-        //}
-        //_currentHealth = health;
-        //damageEffect.color = color;
+        Color color = damageEffect.color;
+        if (health > _currentHealth){
+            color.a = (GameManager.Instance.Player.GetComponent<PlayerHealth>().maxHealth - _currentHealth)/10.0f;
+        } else {
+            color.a = 0.8f;
+        }
+        _currentHealth = health;
+        damageEffect.color = color;
     }
 
     // public void FlashInventory(int itemIDX)
