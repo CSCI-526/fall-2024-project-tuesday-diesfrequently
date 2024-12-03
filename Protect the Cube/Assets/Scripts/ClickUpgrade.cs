@@ -80,16 +80,16 @@ public class ClickUpgrade : MonoBehaviour
 
     public void upgrade(){
 
-        level++;
-        goldRequired += level*3;
+        
         GameObject indicate = Instantiate(indicator);
         GameObject upgradetxt = Instantiate(upgradeText);
         indicate.transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f + level/5.0f, transform.position.z);
         upgradetxt.transform.SetParent(GameObject.Find("UpgradeParent").transform);
         upgradetxt.transform.localScale = Vector3.one;
         upgradetxt.transform.position = Camera.main.WorldToScreenPoint(transform.position);
-        //upgradetxt.GetComponent<TMP_Text>().text = "-" + goldRequired.ToString();
-
+        upgradetxt.GetComponent<TMP_Text>().text = "-" + goldRequired.ToString();
+        level++;
+        goldRequired += level*3;
         updateAppearance();
         gameObject.GetComponent<turretShoot>().upgrade(level, buildingName);
         if(level == 3){
